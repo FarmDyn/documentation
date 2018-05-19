@@ -1,0 +1,66 @@
+site_name: FarmDyn Documentation
+site_description: FarmDyn - A highly detailed template model for dynamic optimization of farms
+site_author: ILR - Economic Modelling of Agricultural Systems
+site_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
+
+copyright: 'Copyright &copy; 2010 - 2018 Universität Bonn - ILR - Economic Modelling of Agricultural Systems Group'
+
+repo_name: Universität Bonn - ILR - FarmDyn
+repo_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
+
+pages:
+    - FarmDyn: index.md
+    - About: about.md
+    - Introduction: introduction.md
+    - The Template Model:
+       - Introduction: template/introduction.md
+       - Herd Module: template/herd_module.md
+       - Feeding module: template/feeding_module.md
+       - Cropping, Land and Land Use: template/cropping__land_and_land_use.md
+       - Labour: template/labour.md
+       - Stables: template/stables.md
+       - Other Type of Buildings: template/other_type_of_buildings.md
+       - Farm Machinery: template/farm_machinery.md
+       - Investments, Financing and Cash Flow Definition: template/investments__financing_and_cash_flow_definition.md
+       - Manure: template/manure.md
+       - Synthetic Fertilizers: template/synthetic_fertilizers.md
+       - Plant Nutrition: template/plant_nutrition.md
+       - Environmental Accounting Module: template/environmental_accounting_module.md
+       - Biogas Module: template/biogas_module.md
+    - Dynamic Character: dynamics.md
+    - Risk and Risk behavior: risk.md
+    - GHG Accounting: ghgAcc.md
+    - Coefficient Generator: coeffGen.md
+    - Technical Realization: technical.md
+    - Graphical User Interface: gui.md
+    - References: References.md
+    - Appendix: appendix.md
+
+extra:
+  social:
+    - type: globe
+      link: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
+
+extra_css:
+    - 'css/farmdyn.css'
+    - 'css/github-gist.css'
+
+extra_javascript:
+    - 'javascripts/highlight.pack.js'
+    - 'javascripts/init.js'
+    - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML'
+
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - toc:
+        permalink: True
+    - mdx_math:
+        enable_dollar_delimiter: True #for use of inline $..$
+    - footnotes
+
+theme:
+  name: 'material'
+  logo:  media/icon.png
+  feature:
+    tabs: true
