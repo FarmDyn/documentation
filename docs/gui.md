@@ -41,13 +41,13 @@ experiment, a single farm run is solved. These single farm runs are
 typically solved in parallel. After they are finalized, their results
 are combined into one result set.
 
-![](/media/image282.png)
+![](media/image282.png)
 
-![](/media/image283.png)
+![](media/image283.png)
 
 ### General Settings
 
-![](/media/image284.png)
+![](media/image284.png)
 
 The first tab in *General settings* defines the name of the scenario
 under which the results are stored. Further on, the user chooses general
@@ -64,30 +64,30 @@ investment / farm labour and feeding decisions.
 The model allows to choose between the following four mode to describe
 dynamics (or not):
 
-![](/media/image285.png)
+![](media/image285.png)
 
 The stochastic programming extension can only be switched on *Fully
 dynamic without prolongation mode.* For details on these settings, see
 section 3.3 above:
 
-![](/media/image286.png)
+![](media/image286.png)
 
 In experiment mode, upper and lower ranges for certain settings can be
 set, as well as the number of experiments and some further algorithmic
 details:
 
-![](/media/image287.png)
+![](media/image287.png)
 
 ### Farm Settings
 
-![](/media/image288.png)
+![](media/image288.png)
 
 The farm settings panel carries general information about the
 farm-household and general price increases as shown in the following:
 
 ### Animals
 
-![](/media/image289.png)
+![](media/image289.png)
 
 The tab "animals" allows setting the initial herd sizes and other
 attributes related to animal husbandry. The herd size will be used to
@@ -97,14 +97,14 @@ can be set depend on the active farm branches.
 
 In the experiment mode, ranges can be defined:
 
-![](/media/image290.png)
+![](media/image290.png)
 
 ### Cropping
 
 The tab "Crops and yields" comprises the selection of the crops and the
 yields and their growth rates (if arable farming is active).
 
-![](/media/image291.png)
+![](media/image291.png)
 
 A further tab "Crop management" comprises the steering options related
 to land use: if different tillage type, cropping intensities and crop
@@ -112,12 +112,12 @@ rotations are used. Moreover, the average plot size, mechanization level
 and the climate zone as well as the distribution of the soil type can be
 chosen.
 
-![](/media/image292.png)
+![](media/image292.png)
 
 ### Biogas
 
 ![GUI -
-Biogas.jpg](media/media/image293.jpeg)
+Biogas.jpg](media/image293.jpeg)
 
 The biogas tab includes different Renewable Energy Acts (EEGs) choices
 for the investment options as well as available biogas plant sizes.
@@ -133,22 +133,22 @@ scenario premiums are included.
 That panel *Output prices* allows to set the price of the outputs
 present in the model.
 
-![](/media/image294.png)
+![](media/image294.png)
 
 ### Input Prices
 
-![](/media/image295.png)
+![](media/image295.png)
 
 That table *Input prices* allows to set the price of the outputs present
 in the model.
 
 ### Prices in Experiments
 
-![](/media/image296.png)
+![](media/image296.png)
 
 ### Environmental Impacts
 
-![](/media/image297.png)
+![](media/image297.png)
 
 ### MACs
 
@@ -161,11 +161,11 @@ simulation runs and the percentage reduction per step (compared to
 baseline emissions) has to be defined to define the maximal emission
 reduction (GHG reduction steps time reduction per step).
 
-![](/media/image298.png)
+![](media/image298.png)
 
 ### Algorithm and Debugging Options
 
-![](/media/image299.png)
+![](media/image299.png)
 
 The last tab of the GUI which is shown here defines the chosen solver to
 optimize the fully dynamic MIP problem and further precision
@@ -176,7 +176,7 @@ In general it is recommended to use CPLEX as the MIP solver, see section
 
 ### GAMS
 
-![](/media/image300.png)
+![](media/image300.png)
 
 ## Visualizing and analysing results
 
@@ -343,20 +343,20 @@ grouped by themes. Currently, the following reports are available:
 In the interface, the "exploit results" button will open a selection
 dialog to choose results from parallel runs:
 
-![](/media/image301.png)
+![](media/image301.png)
 
-![](/media/image302.png)
+![](media/image302.png)
 
 When *show results* are clicked the interface the results in tables:
 
-![](/media/image303.png)
+![](media/image303.png)
 
 There are views necessary to use the machine learning package:
 
 1.  A view with the variable to estimate, in our case provide by the
     table *Meta analysis, MACs*
 
-![](/media/image304.png)
+![](media/image304.png)
 
 2.  A view with the explanatory attributes, in our chase provided by the
     table *Meta analysis, explanatory vars*.
@@ -364,7 +364,7 @@ There are views necessary to use the machine learning package:
 In the first view, a click in the table will open a pop-up menu from
 which "Classify, Classify current view" should be chosen:
 
-![](/media/image305.png)
+![](media/image305.png)
 
 Similarly, in the second view, "Classify, Use current view to provide
 explanatory attributes for numeric classification should be chosen". The
@@ -374,7 +374,7 @@ application of the multiple regression model with automatic variable
 transformation (automatically builds logs, square roots and inverses of
 the variable values) and variable selection [^16]:
 
-![](/media/image306.png)
+![](media/image306.png)
 
 Additionally, the user has the possibility to view Figures, histograms
 or graphs of the interesting output values for graphical visualization.
@@ -382,7 +382,7 @@ Statistical characteristics like minimum, maximum or median values are
 automatically generated as well as mean value of the selected results
 and the standard deviation.
 
-![](/media/image307.png)
+![](media/image307.png)
 
 [^16]: The problem here arises, that the simple WEKA regression routines
     are not prepared for two stage regressions (like e.g. Heckman two

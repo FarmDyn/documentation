@@ -75,7 +75,7 @@ again. The main statements (see *exp\_starter.gms* for details) are
 shown below:
 
 ![P:\\Hiwi\\Schaub\\Schäfer\\Documentation\\Equation
-ScreenS\\1.png](media/media/image236.png)
+ScreenS\\1.png](media/image236.png)
 
 The relaxed (RMIP) solution defines the upper cut-off -- forcing certain
 variables to only take on integer values can only reduce the objective
@@ -125,7 +125,7 @@ indivisibilities in machine investments are taken into account.
 
 The relevant code section (*exp\_starter.gms*) is shown below:
 
-![](/media/image237.png)
+![](media/image237.png)
 
 ### Heuristic reduction of binaries
 
@@ -145,7 +145,7 @@ maximal size or smaller then 2/3 of the maximal size are removed from
 the MIP. Equally, investment in stables is set to zero if there was no
 investment in the RMIP solution.
 
-![](/media/image238.png)
+![](media/image238.png)
 
 Similar statements are available for investments into manure silos,
 buildings and machinery. These heuristics are defined in
@@ -184,20 +184,20 @@ The first two prescribes that a farm respectively a cow herd in t+1
 implies that a farm respectively a cow herd in the previous year
 existed:
 
-![](/media/image239.png)
+![](media/image239.png)
 
-![](/media/image240.png)
+![](media/image240.png)
 
 The second one implies that working off-farm in an year t implies also
 working off-farm
-afterwards:![](/media/image241.png)
+afterwards:![](media/image241.png)
 
 Another tactic followed is to define logical high level binaries which
 dominate other. These *general binaries* are partly already shown above:
 the *v\_hasFarm* and *v\_workOffB* variables. The later one is linked to
 the individual off-farm working possibilities:
 
-![](/media/image242.png)
+![](media/image242.png)
 
 In order to support the solving process, *w\_workOff* is defined as a
 *SOS1* variable, which implies that at most one of the *workType*
@@ -205,7 +205,7 @@ options is greater than zero in any year.
 
 The *v\_hasFarm* variables dominates the *v\_hasBranch* variables:
 
-![](/media/image243.png)
+![](media/image243.png)
 
 That equation is additionally linked to the logic of the model as
 *v\_hasFarm* implies working hours for general farm management.
@@ -215,19 +215,19 @@ in any year, *v\_hasAlwaysHerd*. If it is switched on, it will imply a
 dairy herd in any year.This is based on the equation *hasAlwaysLast\_*
 together with the order equation *hasHerdOrder\_* shown below.
 
-![](/media/image244.png)
+![](media/image244.png)
 
 The equations which support the MIP solution process by linking
 fractional variables to binary ones relate to investment decisions.
 Firstly, investments in machinery are only possible if there is matching
 machinery need:
 
-![](/media/image245.png)Secondly, two equations link the dairy
+![](media/image245.png)Secondly, two equations link the dairy
 herd to investment decisions into stables and manure storage silos:
 
-![](/media/image246.png)
+![](media/image246.png)
 
-![](/media/image247.png)
+![](media/image247.png)
 
 These supporting restrictions can be switched off from the model via the
 interface, to check if they unnecessarily restrict the solution domain
@@ -245,11 +245,11 @@ defines such priorities.
 The model is instructed to branch first on the decision to have a herd
 in any year, next on having a farm and the individual branches:
 
-![](/media/image248.png)
+![](media/image248.png)
 
 Generally, early years are given precedence:
 
-![](/media/image249.png)
+![](media/image249.png)
 
 The *p\_priorMax* is the maximal priorities assigned to stables, which
 is defined by a heuristic rule: large stables are tried before smaller
@@ -257,17 +257,17 @@ ones, cow stable before young cattle and calves stables, and finally
 long term investment in the whole building done before maintenance
 investments:
 
-![](/media/image250.png)
+![](media/image250.png)
 
 Off-farm work decisions currently receive a lower priority compared to
 investments into stables:
 
-![](/media/image251.png)
+![](media/image251.png)
 
 For other investment decisions, the investment sum is used for priority
 ordering:
 
-![](/media/image252.png)
+![](media/image252.png)
 
 The SOS1 variables should have all the same priorities. Therefore, no
 distinction is introduced for the v\_workOff and v\_siCovComb variables,
@@ -285,7 +285,7 @@ that all results are stored in one multi-dimensional cube. Accordingly,
 after the model is solved, its variables are copied to a result
 parameter, as shown in the following example:
 
-![](/media/image253.png)
+![](media/image253.png)
 
 ## Systematic sensitivity analysis based on Design of Experiments
 
@@ -384,26 +384,26 @@ permutation area.
 
 The GAMS side of the technical implementation is shown in the following:
 
-![](/media/image254.png)
+![](media/image254.png)
 
 The maximal run time for finding a sample can be defined, *maxRunTime.*
 If correlations between variables are known and should be recognized
 within the sampling prodedure, the command *useCorr has to be set to
 "true"*. Then the correlation matrix can be defined specifically.
 
-![](/media/image255.png)
+![](media/image255.png)
 
 The names of the set of varying factors, the factor names, the scenario
 name, the desired number of draws and, if activated, also the
 correlation matrix are send to R. Then the R file "*rbridge\\lhs.r*" is
 executed.
 
-![](/media/image256.png)
+![](media/image256.png)
 
 The R-bridge is hence activated (R side). Therefore several packages are
 installed in R from the R library to be able to do LHS sampling:
 
-![](/media/image257.png)
+![](media/image257.png)
 
 *p\_n* denotes the number of draws defined via the graphical user
 interface, which is equivalent to the number of scenarios resulting from
@@ -411,14 +411,14 @@ the sampling routine. *Sys.getenv(....)* asks for commands or
 information given by the environment (for example if correlations have
 to be recognized or not).
 
-![](/media/image258.png)
+![](media/image258.png)
 
 We decided to use the "*improvedLHS"* type for randomization [^15] which
 produces a sample matrix of *n* rows and *k* columns (n = number of
 draws, k = number of factors). This leads to a quite efficient sample
 generation in R:
 
-![](/media/image259.png)
+![](media/image259.png)
 
 Usually, input variables for sensitivity analysis in computer models are
 assumed to be independent from each other (Iman et al., 1981a;b). Also
@@ -441,7 +441,7 @@ which shuffles observations for single factors between the draws to
 mimic given *k\*k* correlation matrix (therefore the R package *MC2d*
 including the routine *cornode* is necessary).
 
-![](/media/image260.png)
+![](media/image260.png)
 
 To increase the possibility to randomize a sample which offers a
 correlation matrix of factors near the proposed one, the routine allows
@@ -456,13 +456,13 @@ will be stopped by a threshold value (*if meanDev \< 1*) for the
 deviation between the assumed and the randomized sample correlation
 matrix.
 
-![](/media/image261.png)
+![](media/image261.png)
 
 For the case that the correlations between factors are given by the
 user, it leads to an undefined correlation matrix, the program adjusts
 the correlation matrix to the nearest one possible:
 
-![](/media/image262.png)
+![](media/image262.png)
 
 As mentioned above the LHS sampling defines random value combinations
 between all factors in each single draw. Therefore uniform distributed
@@ -487,7 +487,7 @@ also information about average percentage bias of the randomized
 correlation matrix as well as the number of total draws which define the
 number of resulting sample experiments:
 
-![](/media/image263.png)
+![](media/image263.png)
 
 12.Scatterplot matrices for different LHS
     samples. With and without the recognition of factor correlations
@@ -514,16 +514,16 @@ assumed. These are easily to define by the minimal value *a* and the
 maximum value *b*. A uniform distribution function can be defined by the
 following density function (left graph):
 
-(1) $f\left( x \right) = \frac,a \leq b$
+(1) $f(x) = \frac{1}{b-a},a \leq b$
 
 Values below *a*, or above *b* have a probability of 0. The
 antiderivative expresses the cumulative distribution function of the
-random variable whose values lie within the interval \[0; 1\] (right
+random variable whose values lie within the interval $[0; 1]$ (right
 graph):
 
-(2) $F\left( x \right) = \frac,\ a \leq x \leq b$
+(2) $f(x) = \frac{x-a}{b-a},a \leq x \leq b$
 
-![](/media/image264.png)
+![](media/image264.png)
 
 13.Density function and cumulative
     distribution function of an uniform distributed variable
@@ -531,7 +531,7 @@ graph):
 From the left hand side density function one can easily derive the right
 hand side cumulative distribution function. The *y* value of the
 distribution function equals the integral
-$\int_^$ below the density function (cumulative
+$\int_a^x f(x)$ below the density function (cumulative
 probabilities below x).
 
 The given random values of the R-routine (*F(x)*) enable the allocation
@@ -549,7 +549,7 @@ known population has to be simulated).
 For an assumed uniform distribution function of factor levels this is
 done following the formula:
 
-(3) $F\left( x \right)*\left( b - a \right) + a = x$
+(3) $f(x) \cdot (b-a) + a = x$
 
 The randomized value *y* is transformed to the factor level room
 concerning the given distribution function of the factor. Hence for each
@@ -566,7 +566,7 @@ value *(%factorMin%)* has to be added to the product to yield the factor
 level *x* for the specific factor and scenario. This is illustrated for
 some parameters in the following.
 
-![](/media/image265.png)
+![](media/image265.png)
 
 p\_scenParam(draws,factor) gives the scenario parameter of one factor
 defined by the random values given by the LHS sampling routine. The
@@ -576,7 +576,7 @@ draw defines one single sensitivity scenario.
 The set *scenItems* defines which settings are (possibly) defined
 specific for each scenario:
 
-![](/media/image266.png)
+![](media/image266.png)
 
 Nevertheless correlations between factors are able to be recognized
 during the sample generation to avoid factor level combinations within
@@ -586,24 +586,24 @@ that seem to be implausible. For example high labor input per cow and
 low milk yield levels or high numbers of cows per farm and only very low
 yielding phenotypes.
 
-![](/media/image267.png)
+![](media/image267.png)
 
 These scenario settings must be stored in a GAMS file which is then
 picked up by the child processes. In order to keep the system
 extendable, firstly, all settings inputted via the Graphical User
 Interface are copied over to the specific scenario:
 
-![](/media/image268.png)
+![](media/image268.png)
 
 Secondly, the modifications defining the specific sensitivity
 experiment, i.e. the scenario, are appended with GAMS file output
 commands (see scenGen\\gen\_inc\_file.gms):
 
-![](/media/image269.png)
+![](media/image269.png)
 
 Finally, the content is copied to a specific scenario input file:
 
-![](/media/image270.png)
+![](media/image270.png)
 
 The code to build and optimize the single farm model itself is realized
 in GAMS and uses CPLEX 12.6 in parallel mode as the MIP solver.
@@ -616,7 +616,7 @@ multi-core machine it seems promising to execute several such processes
 in parallel. That is realized by a GAMS program which starts each model
 on its own set of input parameters:
 
-![](/media/image271.png)
+![](media/image271.png)
 
 The name of the scenario, *allScen.tl* is passed as an argument to the
 process which will lead a specific include file comprises the definition
@@ -628,15 +628,15 @@ mother process has to wait until all child processes have terminated.
 That is achieved by generating a child process specific flag file before
 starting the child process:
 
-![](/media/image272.png)
+![](media/image272.png)
 
 This flag file will be deleted by the child process when it finalizes:
 
-![](/media/image273.png)
+![](media/image273.png)
 
 A simple DOS script waits until all flags are deleted:
 
-![](/media/image274.png)
+![](media/image274.png)
 
 Using that set-up would spawn for each scenario a GAMS process which
 would then execute all in parallel. The mother process would wait until
@@ -650,13 +650,13 @@ that only a pre-defined number of child processes is active in parallel.
 That is established by a second simple DOS script which waits until the
 number of flag files drops below a predefined threshold:
 
-![](/media/image275.png)
+![](media/image275.png)
 
 Finally, the results from individual runs are collected and stored. A
 GAMS facility is used to define the name of a GDX file to read at run
 time:
 
-![](/media/image276.png)
+![](media/image276.png)
 
 And load from there the results of interest:
 
@@ -667,18 +667,18 @@ documentation: "R routine to estimate Heckman two stage regression
 procedure on marginal abatement costs of dairy farms, based on large
 scale outputs of the model DAIRYDYN" by Britz and Lengers (2012)).
 
-![](/media/image277.png)
+![](media/image277.png)
 
-![](/media/image278.png)
+![](media/image278.png)
 
 Further on, the scenario specific settings which can be used as
 explanatory variables for later regressions are stored:
 
-![](/media/image279.png)
+![](media/image279.png)
 
 In a next step, the results are stored in a GDX container
 
-![](/media/image280.png)
+![](media/image280.png)
 
 The major challenge consists in ensuring that the child processes do not
 execute write operation on shared files. In the given example, that
@@ -689,7 +689,7 @@ option files into it and use the *optdir* setting in GAMS, or (2) label
 the option files accordingly. That latter option was chosen which
 restricts the number of scenarios to 450:
 
-![](/media/image281.png)
+![](media/image281.png)
 
 In the case of normal single farm run, the standard option files will be
 used.

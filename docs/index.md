@@ -29,7 +29,7 @@ combination with MIP industry solvers and a graphical user interface
 allows for efficient analysis. FARMDYN consists of several interacting
 modules (Figure 1).
 
-![](/media/image2.png)
+![](media/image2.png)
 
 Figure 1.  Overview of template model
 

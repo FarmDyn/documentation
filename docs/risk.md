@@ -100,7 +100,7 @@ i.e. the cow herd, machinery, land are sold and loans are paid back. Any
 remaining equity is discounted to its net present value; therefore, a
 definition close to the flow-to-equity approach is used:
 
-![](/media/image173.png)
+![](media/image173.png)
 
 Further on, fully dynamic optimization assumes that the decision maker
 is fully informed about the future states of nature such that the
@@ -139,34 +139,34 @@ The revised objective function maximizes the probability weighted
 average of the final liquidity for each final leave in the decision
 tree:
 
-![](/media/image174.png)
+![](media/image174.png)
 
 The number of uncompressed scenarios to start with and the desired
 number of leaves in the final reduced tree are defined via the interface
 if the SP module is switched on:
 
-![](/media/image175.png)
+![](media/image175.png)
 
-![](/media/image176.png)
+![](media/image176.png)
 
 That information enters the declarations in *model\\templ\_decl.gms.* If
 the stochastic programming extension is switched off, there is only one
 node (which is indicated by a blank space, " ") and the model collapses
 to a deterministic one:
 
-![](/media/image177.png)
+![](media/image177.png)
 
 The changes in the listing are minimal compared to the previous version
 without the SP extension, only one point more in each variable or
 equation name is included, which indicates the blank common node
 (between the dots), for example as following:
 
-![](/media/image178.png)
+![](media/image178.png)
 
 With the SP extension, information is needed about ancestor nodes and
 nodes before the current one:
 
-![](/media/image179.png)
+![](media/image179.png)
 
 ### Generating Random Variable(s) and the decision tree
 
@@ -197,7 +197,7 @@ The Java program is called from GAMS to pass the information on the
 number of decision nodes (= simulated time points) and the desired
 number of scenarios to the program:
 
-![](/media/image180.png)
+![](media/image180.png)
 
 The Java process stores the generated random developments along with the
 ancestor matrix in a GDX file. The following Figure shows an example of
@@ -276,31 +276,31 @@ In the current implementation, the tree size which also determines the
 overall model size is steered by setting exogenously the number of final
 nodes.
 
-![](/media/image181.png)
+![](media/image181.png)
 
 Based on the information returned from the scenario reduction utility,
 the set of active nodes, *nCur,* is determined:
 
-![](/media/image182.png)
+![](media/image182.png)
 
 A little bit trickier is to efficiently find *all* nodes that are before
 a given node in the same scenario (these are often nodes shared with
 other scenarios such as the root node, see Figure 9 above). This is
 achieved by an implicit backward recursion over a year loop:
 
-![](/media/image183.png)
+![](media/image183.png)
 
 As indicated above, the set *anc (nCur, nCur1)* indicates that decision
 node *nCur1* is the node before the node *nCur*, i.e. they belong to the
 same scenario. That is used in lag and lead operators, e.g.:
 
-![](/media/image184.png)
+![](media/image184.png)
 
 The *isNodeBefore(nCur,nCur1)* relation depicts all nodes, *nCur1,*
 before node *nCur* in the same scenario, including the node *nCur*
 itself. An example gives:
 
-![](/media/image185.png)
+![](media/image185.png)
 
 +| > **Important Aspects to remember!**                                    |
 |                                                                         |
@@ -334,7 +334,7 @@ The interface allows to define the parameters of the logarithmic Mean
 Reverting processes (MRP) with an expected mean and start value of
 log(1):
 
-![](/media/image186.png)
+![](media/image186.png)
 
 ### Introduction of the Random Variable(s)
 
@@ -354,23 +354,23 @@ The random variable can impact either revenue, *salRev\_*, by
 introducing state specific output price(s) and/or cost for buying
 inputs, *buyCost\_*, by state specific input price(s):
 
-![](/media/image187.png)
+![](media/image187.png)
 
-![](/media/image188.png)
+![](media/image188.png)
 
 The decision in which prices are treated as random variables is steered
 via the interface:
 
-![](/media/image189.png)
+![](media/image189.png)
 
-![](/media/image190.png)
+![](media/image190.png)
 
 In the case neither input nor output prices are random a run time error
 will occur.
 
 The core branches are defined in *coeffgen\\stochprog.gms*:
 
-![](/media/image191.png)
+![](media/image191.png)
 
 That means that dairy production takes precedence over other branches
 and pigs over arable cropping, assuming that arable crops are typically
@@ -383,7 +383,7 @@ The model allows introducing four different risk behaviour options in
 the stochastic programming version in addition to risk neutral behaviour
 (None):
 
-![](/media/image192.png)
+![](media/image192.png)
 
 All risk measures relate to the distribution of the NPV, i.e. changes in
 expected returns aggregated over the full simulation horizon, and do not
@@ -404,7 +404,7 @@ The first and simplest risk model modifies the objective function: it
 maximizes a linear combination of the expected NPV and the expected mean
 negative deviation from the NPV.
 
-![](/media/image193.png)
+![](media/image193.png)
 
 The formulation builds on MOTAD (Minimization of Total Absolute
 Deviations) as a linear approximation of the quadratic E-V model
@@ -420,7 +420,7 @@ Our approach builds on an often used modification by only considering
 down-side risk, i.e. only negative deviations from the simulated mean
 are taken into account:
 
-![](/media/image194.png)
+![](media/image194.png)
 
 This approach is especially relevant if the deviation above and below
 the objective function are not by definition symmetric. However, as the
@@ -428,11 +428,11 @@ distribution itself is determined in our stage contingent approach
 endogenously, symmetry makes limited sense. The expected mean deviation
 is calculated as:
 
-![](/media/image195.png)
+![](media/image195.png)
 
 And subtracted from the objective function (see equation *OBJE\_*),
 
-![](/media/image196.png)
+![](media/image196.png)
 
 The reader should note that the standard MOTAD approach by Hazell and
 described in text books is based on expected gross margins and deviation
@@ -448,7 +448,7 @@ number when other types of risk behaviour are simulated.
 
 ### MOTAD for Negative Deviations against Target
 
-![](/media/image197.png)
+![](media/image197.png)
 
 The only difference to the *MOTAD against NPV* option described before
 is that negative deviations are defined against a target set by the
@@ -459,19 +459,19 @@ interest. This income level is used as the absolute benchmark level
 which can be modified by the user with the percentage multiplier entered
 in the graphical user interface. This effects the following equation:
 
-![](/media/image198.png)
+![](media/image198.png)
 
 Using this information the expected shortfall is defined:
 
-![](/media/image199.png)
+![](media/image199.png)
 
 The expected shortfall enters then the objective function:
 
-![](/media/image200.png)
+![](media/image200.png)
 
 ### Target MOTAD
 
-![](/media/image201.png)
+![](media/image201.png)
 
 The second option is what is called *Target MOTAD* in programming
 modelling. It has some relation to *MOTAD* as it also takes negative
@@ -482,7 +482,7 @@ below the predefined threshold does not enter the objective function,
 but acts as an upper bound. Hence, the shortfall of NPV cannot be lower
 than certain level:
 
-![](/media/image202.png)
+![](media/image202.png)
 
 ### Value at Risk Approach
 
@@ -496,7 +496,7 @@ The value (NPV) at risk approach introduces a fixed lower quantile
 as shown in following illustration. It requires the following user
 input:
 
-![](/media/image203.png)
+![](media/image203.png)
 
 The second parameter defines the maximal allowed probability for
 simulated objective values to fall below the resulting threshold. The
@@ -512,7 +512,7 @@ constraints. The first one drives a binary indicator variable,
 v\_*npvAtRisk,* which is equal to one if the objective value at a final
 leaf falls below the threshold:
 
-![](/media/image204.png)
+![](media/image204.png)
 
 If v\_*npvAtRisk* is zero, the objective value (LHS) fo r each final
 leave must exceed the given threshold *p\_npvAtRiskLim*. The second
@@ -520,7 +520,7 @@ constraint, shown below, adds up the probabilities for those final nodes
 which undercut the threshold (LHS) and ensures that their sum is below
 the given maximal probability:
 
-![](/media/image205.png)
+![](media/image205.png)
 
 As long as off-farm income is considered deterministic and the relative
 threshold is below 100%, a solution where only off-farm income is
@@ -538,14 +538,14 @@ shortfall for the lowest 10% of the scenarios. The objective function in
 the model maximizes a linear combination of the expected NPV and the
 endogenous mean shortfall, subject to a predefined lower quantile:
 
-![](/media/image206.png)
+![](media/image206.png)
 
 A first constraint, which is also used for the VaR option, ensures that
 the sum of the considered cases does not fall below the now endogenously
 defined limit (equation was already shown above in the section on the
 Value at Risk Approach):
 
-![](/media/image205.png)
+![](media/image205.png)
 
 Additionally, the expected shortfall for any of the final nodes which do
 not contribute to active lower quantile must be zero, based on a
@@ -559,30 +559,30 @@ leave can consider any number determined by the model as the RHS value
 of 1.E+7 in the case of *v\_npvAtRisk* equal unity never becomes
 binding.
 
-![](/media/image207.png)
+![](media/image207.png)
 
 Besides this, any leaves which is not in worst cases set (*v\_npvAtRisk*
 = 0) must at least generate a NPV which exceeds the best shortfall.
 
-![](/media/image208.png)
+![](media/image208.png)
 
 For cases at or below the quantile which contributed towards the
 expected mean shortfall, both the own expected NPV and the best NPV act
 simultaneously as lower bounds:
 
-![](/media/image209.png)
+![](media/image209.png)
 
 Accordingly, the *v\_bestShortFall* splits the expected NPVs in those
 below and above the relevant quantile.
 
 The cases below that bound define the expected shortfall:
 
-![](/media/image199.png)
+![](media/image199.png)
 
 The expected shortfall adds to the objective (in opposite to target
 MOTAD):
 
-![](/media/image210.png)
+![](media/image210.png)
 
 The objective function is hence a trade-off between a higher expected
 mean NPV and the expected shortfall of cases x% relative to that

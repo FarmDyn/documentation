@@ -147,7 +147,7 @@ digestion load (*Faulraumbelastung*). The digestion load, *p\_digLoad,*
 restricts the amount of organic dry matter within the fermenter to
 ensure a healthy bacteria culture. The recommended digestion load of the
 three different fermenter sizes ranges from 2.5 to 3
-$\frac}*d}$ [^7] and is converted into a monthly
+$\frac{\text{kg oDM}}{m^3 \cdot d}$ [^7] and is converted into a monthly
 limit.
 
 ![](../media/image169.png)
@@ -187,7 +187,7 @@ in the model yet.
     Nawaro-Bonus, KWK-Bonus **or** NawaRo-Bonus, KWK-Bonus and
     Manure-Bonus
 
- [^6]: Biogas is a mixture of methane (CH<sub>4</sub>), carbon dioxide (CO<sub>2</sup>),
+ [^6]: Biogas is a mixture of methane (CH<sub>4</sub>), carbon dioxide (CO<sub>2</sub>),
     water vapor (H<sub>2</sub>O) and other minor gases. The gas component
     containing the energy content of biogas is methane. Thus, the code
     with respect to production refers to the methane production rather

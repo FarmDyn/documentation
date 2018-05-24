@@ -11,7 +11,7 @@ are accordingly also important sources for environmental externalities
 such nutrient surpluses, ammonia and greenhouse gas (GHG) emissions or
 bio-diversity, but also contribute to the livelihood of rural areas.
 With regard to GHGs, dairy farming accounts for a great percentage of
-the worlds GHG emissions of CO<sub>2</sup>, N<sub>2</sub>O and CH<sub>4</sub> (FAO 2006, 2009), and
+the worlds GHG emissions of CO<sub>2</sub>, N<sub>2</sub>O and CH<sub>4</sub> (FAO 2006, 2009), and
 is hence the most important single farm system with regard to GHG
 emissions. Given the envisaged rather dramatic reduction of GHGs,
 postulated by the recent climate agreement, it is therefore highly
@@ -97,12 +97,12 @@ some basic parameters and scale definitions for later emission
 calculation formulas are explained. The information is derived from IPCC
 (2006) (chapter 10 and 11), Dämmgen (2009),
 Velthof and Oenema (1997) and the RAINS
-model definition (for changes in NO~x~ and NH<sub>3</sub> fluxes concerning
+model definition (for changes in NO<sub>x</sub> and NH<sub>3</sub> fluxes concerning
 manure application type) (Alcamo et al., 1990).
 
-![](/media/image211.png)
+![](media/image211.png)
 
-![](/media/image212.png)
+![](media/image212.png)
 
 The parameters and scalars shown above are described by the statements
 within the model code excerpt. These are basic emission factors which
@@ -123,7 +123,7 @@ calculation the indicators *actBased*, *prodBased* and *genProdBased*.
 Calculation procedures for the *NBased* and *refInd* indicator schemes
 are explained later.
 
-![](/media/image213.png)
+![](media/image213.png)
 
 For each indicator scheme different parameters per head, hectare or per
 production quantity are defined in the indicator module and will be
@@ -184,13 +184,13 @@ parameters, *p\_GHGEmissions(prods,\...),* the calculated total GHG
 amount per hectare is divided by the output quantity per hectare,
 *p\_OCoeff(crops,prods,t).*
 
-![](/media/image214.png)
+![](media/image214.png)
 
 For dairy cows the GHG emission factor per kg of milk,
 *p\_GHGEmissions("milk",\...)*is derived by taking default emission
 factors from IPCC (2006) from enteric fermentation (117 kg CH<sub>4</sub>) and
 manure management (21 kg CH<sub>4</sub>, 1.4 kg N<sub>2</sub>O) per animal and year and
-dividing the resulting CO<sub>2</sup>-equ. by an average yearly milk yield per
+dividing the resulting CO<sub>2</sub>-equ. by an average yearly milk yield per
 cow (6000 kg).
 
 For emission from heifers and calves, per head default emission factors
@@ -201,7 +201,7 @@ from herds, calculation functions 10.25, 10.26 and 10.30 of IPCC (2006)
 are filled with average weights (e.g. cow: 650kg) and excretion rates of
 the different herd categories taken from KTBL (2010).
 
-![](/media/image215.png)
+![](media/image215.png)
 
 No differentiation in GHG emission rates of the farm are made concerning
 storage and application techniques of manure and synthetic fertilizers.
@@ -223,7 +223,7 @@ and heifers the default emission indicators are the same as for
 by the derivation scheme of the *prodBased* indicator taking average
 yield levels and fertilizer application rates.
 
-![](/media/image216.png)
+![](media/image216.png)
 
 Furthermore, no differentiation concerning emission rates of different
 intensity levels for grassland (different pasture types) is made.
@@ -245,7 +245,7 @@ maintenance, activity, gross and lactation. GE demands used are
 calculated following equation from IPCC (2006) and taking
 a default digestibility of feed from IPCC of 60%.
 
-![](/media/image217.png)
+![](media/image217.png)
 
 In case of emission calculations from dairy cows genetic potential is
 considered. Therefore, the gross energy demand of each different genetic
@@ -257,8 +257,8 @@ in GHG per kg milk for higher yield levels. For the calculation of
 emissions by dairy cows, a table with intensity dependent emission
 factors per kg milk is inserted into the module, displaying the
 parameter *p\_GHGEmissionsCowsYield(cows,emittors,gases)*. The parameter
-value of whole emissions per kg milk diminishes from 0.74 CO<sub>2</sup>eq/kg for
-a cow with 4000 kg milk yield per year to 0.46 CO<sub>2</sup>eq/kg for a cow with
+value of whole emissions per kg milk diminishes from 0.74 CO<sub>2</sub>eq/kg for
+a cow with 4000 kg milk yield per year to 0.46 CO<sub>2</sub>eq/kg for a cow with
 10000 kg. This decline in emissions per kg of milk with increasing milk
 yield is not linear as illustrated in the following Figure 9.
 
@@ -296,7 +296,7 @@ equation 10.21 of IPCC (2006) guidelines, which takes the gross energy
 intake of each livestock category, *p\_grossEnergyPhase(\...),* as basic
 variable to multiply it with the level, *v\_herdsize,* of each category
 and a specific methane conversion factor, *p\_YM*. By multiplying it
-with factor 21 CH<sub>4</sub> emission are converted to CO<sub>2</sup>-equivalents.
+with factor 21 CH<sub>4</sub> emission are converted to CO<sub>2</sub>-equivalents.
 
 For the accounting of methane from manure storage, the manure amount,
 storage period and differences in methane conversion factors,
@@ -316,11 +316,11 @@ multiplying a crop specific emission parameter, *p\_backCH4soil,* (taken
 from Dämmgen, 2009:p.315) with the activity level,
 *v\_cropHa(crops,t,s).*
 
-![](/media/image219.png)
+![](media/image219.png)
 
 With the statement *\$(sameas (emitters,"entFerm"))* the calculated
 CH<sub>4</sub> emissions are assigned to the source enteric fermentation. The
-same is done for all other gases (N<sub>2</sub>O, CO<sub>2</sup>) and sources
+same is done for all other gases (N<sub>2</sub>O, CO<sub>2</sub>) and sources
 *(manStorage, backSoil, manApplic, syntApplic)* to be able to analyse
 source specific emission developments during the simulation runs.
 
@@ -335,7 +335,7 @@ indirect nitrous oxide emissions are considered following IPCC (2006)
 equations 10.27 and 10.29 to account for outgassing of NO<sub>x</sub> and NH3,
 *p\_FracGasMS(manStorage),* and leaching *,p\_FracLeachMS.*
 
-![](/media/image220.png)
+![](media/image220.png)
 
 The next excerpt of the model code represents the detailed N<sub>2</sub>O
 derivation concerning manure and synthetic fertilizer application on
@@ -358,7 +358,7 @@ The calculation of indirect N<sub>2</sub>O emissions from atmospheric deposition
 leaching and runoff is corresponding to equations 11.9 and 11.10 from
 IPCC (2006) guidelines.
 
-![](/media/image221.png)
+![](media/image221.png)
 
 The emission factor for background emissions of N<sub>2</sub>O from soils are not
 taken from IPCC (2006) methodology because these are valued to high, as
@@ -369,12 +369,12 @@ Oenema (1997:p.351) is used. They investigated an emission
 factor of 0.9 kg N<sub>2</sub>O-N per ha, as it was already shown in the
 declaration of basic emission parameters.
 
-![](/media/image222.png)
+![](media/image222.png)
 
 The parameters 44/28 and 310 which are multiplied with the calculated
 N<sub>2</sub>O-N amounts by each source are on the one hand the conversion factor
 from N<sub>2</sub>O-N to N<sub>2</sub>O (44/28) and the global warming potential (310) of
-nitrous oxide to calculate the corresponding CO<sub>2</sup>-equ.
+nitrous oxide to calculate the corresponding CO<sub>2</sub>-equ.
 
 ### refInd Indicator
 
@@ -397,7 +397,7 @@ Methane calculations only differ between animals due to different
 enteric fermentation. The CH<sub>4</sub> emissions from intestine processes are
 calculated by the following:
 
-![](/media/image223.png)
+![](media/image223.png)
 
 The feed use for each animal, *v\_feeding(herds,phase,\...)*, is
 multiplied by a specific emission parameter per kg of feed compound,
@@ -409,7 +409,7 @@ calculated following the below stated routine. Per kg feed emission
 parameters are derived from IPCC (2006) equations based on GE of
 specific feedstuff, *p\_feedAttr(feeds,"GE")*.
 
-![](/media/image224.png)
+![](media/image224.png)
 
 ### Source Specific Accounting of Emissions
 
@@ -423,11 +423,11 @@ possible. Consequently, farm management changes can be analysed also
 with respect to GHG mitigation efforts on the whole or part of the farm.
 
 So far land use change, afforestation or change of tillage practices is
-not implemented in the overall model approach. This is why no CO<sub>2</sup>
+not implemented in the overall model approach. This is why no CO<sub>2</sub>
 accounting is implemented into the indicator schemes. For a higher
 resolution of land use practices and tillage procedures this has to be
 expanded due to potentials of carbon sequestration or release from
-soils. Additionally, intensity and production depending CO<sub>2</sup> emissions
+soils. Additionally, intensity and production depending CO<sub>2</sub> emissions
 from fuel use could be implemented.
 
 ## Overview on calculation of Marginal Abatement Costs (MAC)
@@ -436,7 +436,7 @@ from fuel use could be implemented.
 Marginal abatement costs (MAC) are defined in the model as the marginal
 loss of profits of a farm due to a marginal reduction of an emission
 amount (Decara & Jayet, 2001). In the model GHG emissions
-are measured in CO<sub>2</sup> equivalents. For our highly detailed template
+are measured in CO<sub>2</sub> equivalents. For our highly detailed template
 model, no closed form representation of the abatement costs exist, thus,
 the MAC can only be simulated parametrically. Specifically, in a first
 step the MAC is derived by introducing a step-wise reduced constraint on
@@ -456,53 +456,48 @@ indicator.
 Under a given indicator a stepwise reduction of the emission constraint
 leads to a stepwise reduction in farm profits. Relating the change in
 emissions to the changes in profits allows calculating the total and
-marginal abatement cost. Henceforth $\varepsilon_$ stands for
+marginal abatement cost. Henceforth $\varepsilon_{0j}$ stands for
 emissions emitted measured with indicator $j$ under the profit maximal
 farm plan without any emission target and the zero characterizes the
 reduction level. To derive marginal abatement cost curves $n$ reduction
 steps, each with the same reduction relative to the base
-$\varepsilon_$, are done, which leads to the objective values from
-$\pi_$ to $\pi_}$. Moreover, $\alpha_$ denotes the
+$\varepsilon_{0j}$, are done, which leads to the objective values from
+$\pi_{0j}$ to $\pi_{0j}$. Moreover, $\alpha_i$ denotes the
 relative reduction in step $i$ compared to the baseline emissions. The
 maximal profit under reduction level of step $i$ and indicator $j$ is
 restricted by accounted emissions for the $k$ decision variables
 according to:
 
-(1)
-$\sum_^_}x_ \leq \left( 1 - \alpha_ \right)\varepsilon_}$
+$$\sum_k ef_{j,k} x_k \leq \left( 1 - \alpha_i \right)\varepsilon_{0j}$$
 
-In this equation $\text_}$ represents the emission factor
-attached to decision variable $k$ under indicator$\text$, i.e. the
-CO<sub>2</sup> equivalent emission accounted per unit of variable$\text$.
-The difference between $\pi_$ -- the profit without GHG restrictions
--- and $\pi_}$ measures the profit foregone due to the
+In this equation $ef_{jk}$ represents the emission factor
+attached to decision variable $k$ under indicator$j$, i.e. the
+CO<sub>2</sub> equivalent emission accounted per unit of variable$j$.
+The difference between $\pi_{0j}$ - the profit without GHG restrictions
+- and $\pi_{0j}$ measures the profit foregone due to the
 specific emission ceiling for the combination of reduction level of step
-$i$ and indicator$\text$. Therefore, the total *abatement
-costs*$(AC$) for the abatement of $\alpha_\varepsilon_$ emissions
+$i$ and indicator $j$. Therefore, the total *abatement
+costs* $(AC$) for the abatement of $\alpha_i\varepsilon_{0j}$ emissions
 are defined as:
 
-\(2) $\text_} = \pi_ - \pi_}$
+$$AC_{i,j} = \pi_{0j} - \pi_{0j}$$
 
 The change in profits from step $i - 1$ to $i$ is divided by the
 emission reduction from step to step to derive *marginal abatement
 costs*:
 
-(2.1)
-$\text_} = \frac - \pi_} - \varepsilon_}$
+$$MAC_{i,j} = \frac{\pi_{i -1} - \pi_{i,j}}{\varepsilon{i -1} - \varepsilon{i,j}}$$
 
-$\text_ = marginal\ abatement\ costs\ for\ the\ reduction\ step\ from\ \left( i - 1 \right)\ to\ i,\ using\ the\ indicator\ j$
-
-$$\pi_ = value\ of\ objective\ function\ in\ simulation\ step\ i,\ using\ indicator\ j\ $$
-
-$$\varepsilon_ = \text\ \text\ \text\ \text\ \text\ i,\ \text\ \texth\ \text\ \text$$
-
-$$i = step\ of\ simulation$$
-
-$$\alpha_ = amount\ of\ total\ percentage\ reduction\ of\ emission\ \ in\ step\ i\ compared\ to\ baseline$$
-
-$$\varepsilon_ = baseline\ emission\ of\ th\texth\text$$
-
-$$\text_} = total\ amount\ of\ GHG\ emissions\ related\ to\ one\ unit\ of\ activity\ k$$
+where  
+<small>
+$MAC_{ij} = \text{marginal abatement costs for the reduction step from } \left( i - 1 \right) \text{to } i \text{, using the indicator } j$
+$\pi_{ij} = \text{value of objective function in simulation step } i \text{, using the indicator } j$  
+$\varepsilon_{ij} = \text{emission amount in simulation step } i \text{, calculated with the indicator } j$  
+$i = \text{step of simulation}$  
+$\alpha_i = \text{amount of total percentage reduction of emission in step } i\text{ compared to baseline}$  
+$\varepsilon_{0j} = \text{baseline emission of the farm without emission restriction}$  
+$ef_{jk} = \text{total amount of GHG emissions related to one unit of activity } k$  
+</small>
 
 A stepwise reduction of the emission constraint leads to a sequence of
 changes in the farm program and related loss of profits. Using this
@@ -510,7 +505,6 @@ information a farm specific MAC curves can be generated, which plot
 changes in profits against the GHG reduction.
 
 ## Normalization of MACs
-
 
 As shown above, the GHG calculation schemes have significant differences
 in detail of emission accounting. Consequently, the marginal abatement
@@ -549,14 +543,14 @@ abatement under the reference indicator $r$ at the simulated farm
 program allows deriving normalized, comparable marginal abatement cost
 curves:
 
-(2.2)
-$\text_^} = \frac - \pi_} - \varepsilon_}$
+$$MAC_{i,j}^{norm} = \frac{\pi_{i - 1,j} - \pi_{i,j}}{\varepsilon{i -1,r} - \varepsilon{i,r}}$$
 
-$$\varepsilon_ = \text\ \text\ \text\ \text\ \text\ i,\ \text\ \texth\ \text\ \text\ r$$
-
-$$r = index\ for\ reference\ indicator$$
-
-$$j = index\ for\ \ other\ specific\ indicator$$
+where  
+<small>
+$\varepsilon_{i,j} = \text{emission amount in simulation step } i \text{, calculated with reference indicator } r$  
+$r = \text{index for reference indicator}$  
+$j = \text{index for  other specific indicator}$  
+</small>
 
 Normalized MACs show under which indicator the highest efficiency is
 obtained, meaning that *real* abated emissions of the optimized
