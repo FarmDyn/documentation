@@ -433,7 +433,7 @@ period. The model differentiates 5 lactations period with different
 lengths (30 -- 70 -- 100 -- 105 -- 60 days, where the last 60 days are
 the dry period). The periods are labelled according to their last day,
 e.g. *LC200* is the period from day 101 to day 200, *LC305* is the
-period from the 201^st^ to the 305^th^ day and *dry* denotes the last 60
+period from the 201<sup>st</sup> to the 305<sup>th</sup> day and *dry* denotes the last 60
 days of lactation.
 
 

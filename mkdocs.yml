@@ -58,6 +58,7 @@ markdown_extensions:
     - mdx_math:
         enable_dollar_delimiter: True #for use of inline $..$
     - footnotes
+    - mdx_figcaption
 
 theme:
   name: 'material'

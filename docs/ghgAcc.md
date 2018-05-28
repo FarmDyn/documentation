@@ -260,12 +260,12 @@ parameter *p\_GHGEmissionsCowsYield(cows,emittors,gases)*. The parameter
 value of whole emissions per kg milk diminishes from 0.74 CO<sub>2</sub>eq/kg for
 a cow with 4000 kg milk yield per year to 0.46 CO<sub>2</sub>eq/kg for a cow with
 10000 kg. This decline in emissions per kg of milk with increasing milk
-yield is not linear as illustrated in the following Figure 9.
+yield is not linear as illustrated in the following Figure 10.
 
-10.GHG emissions per cow and per kg of milk
-    depending on milk yield potential
-
-Source: Own illustration based on Kirchgessner (2004) and IPCC (2006)
+![](media/figure9.png)
+:   Figure 10: GHG emissions per cow and per kg of milk
+    depending on milk yield potential.
+    Source: Own illustration based on Kirchgessner (2004) and IPCC (2006)
 
 In contrast to the simple *prodBased* indicator, the emissions from
 herds are now based on real, output depending energy requirements. Thus,

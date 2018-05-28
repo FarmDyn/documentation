@@ -29,11 +29,8 @@ combination with MIP industry solvers and a graphical user interface
 allows for efficient analysis. FARMDYN consists of several interacting
 modules (Figure 1).
 
-![](media/image2.png)
-
-Figure 1.  Overview of template model
-
-Source: Own illustration
+![](media/figure2.png)
+:   Figure 1.  Overview of template model.
 
 The **herd module** captures the intra-temporal demographic relations
 between different herds (number of animals born, replacement rates,

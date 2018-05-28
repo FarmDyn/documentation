@@ -197,18 +197,11 @@ raised to a heifer or young bulls, respectively. The heifer process,
 starting with a female calf raised for one year is available in three
 intensity levels, leading to different process lengths (12, 21, 27
 month) and thus first calving ages (12, 33 and 40 months) for the
-remonte. In Figure 2 the general concept of the cattle module and its
+remonte. In Figure 3 the general concept of the cattle module and its
 decision points are illustrated.
 
-![](../media/image5.png)
-
-3. Cattle herd module management decisions
-
-Remark: represents reproduction processes\
-represents animal life development\
-: being slaughtered or sold
-
-Source: Own illustration
+![](../media/figure3.png)
+:    Figure 3: Cattle herd module management decisions
 
 The number of new calves *v\_herdStart* are differentiated by gender and
 breed, in a year *t*, and specific month *m*, and depend on the herd
@@ -291,9 +284,10 @@ results in the equation listing.
 The pig module, similar to the cattle module, is closely linked with the
 general herd module. It distinguishes between a fattening branch and a
 piglet production branch with sows. The herd dynamics of the pig module
-are shown in Figure 3.
+are shown in Figure 4.
 
 ![](../media/figure4.png)
+:   Figure 4: Pig module management decisions.
 
 The piglet production process starts with the production of young
 piglets born to sows, shown in the following equation.

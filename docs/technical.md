@@ -14,9 +14,9 @@ is declared once, and from there different model instances can be
 generated. GAMS supports scripting for data transformation, extensively
 used by the coefficient generator and by the post-model reporting.
 
-11.Overview of technical realization
-
-Source: Own illustration
+![](media/Figure11.png)
+:   Figure 11: Overview of technical realization.
+    Source: Own illustration
 
 Additionally, as an extension of the experiment exploiter, *machine
 learning* (for detailed description see Britz, 2011) can
@@ -71,11 +71,7 @@ that variant takes less than a second. The solution is used to define
 the lower cut-off for MIP solver. Next, the model is solved as RMIP with
 only one state-of-nature, and afterwards, the state contingent variables
 are copied to all other states-of-natures, before the RMIP is solved
-again. The main statements (see *exp\_starter.gms* for details) are
-shown below:
-
-![P:\\Hiwi\\Schaub\\Schäfer\\Documentation\\Equation
-ScreenS\\1.png](media/image236.png)
+again. The main statements are given in the *exp\_starter.gms* file.
 
 The relaxed (RMIP) solution defines the upper cut-off -- forcing certain
 variables to only take on integer values can only reduce the objective
@@ -487,9 +483,8 @@ also information about average percentage bias of the randomized
 correlation matrix as well as the number of total draws which define the
 number of resulting sample experiments:
 
-![](media/image263.png)
-
-12.Scatterplot matrices for different LHS
+![](media/Figure12.png)
+:   Figure 12: Scatterplot matrices for different LHS
     samples. With and without the recognition of factor correlations
 
 On the left hand side one can see the scatter plot matrix without any
@@ -523,9 +518,8 @@ graph):
 
 (2) $f(x) = \frac{x-a}{b-a},a \leq x \leq b$
 
-![](media/image264.png)
-
-13.Density function and cumulative
+![](media/Figure13.png)
+:   Figure 13: Density function and cumulative
     distribution function of an uniform distributed variable
 
 From the left hand side density function one can easily derive the right

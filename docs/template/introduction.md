@@ -59,16 +59,8 @@ and on externalities such as nutrient surpluses or GHG emissions. Figure
 module interactions.
 
 ![](../media/image2.png)
+:   Figure 1: Overview of template model
 
-2. Overview of template model
-
-Remark: represents mass transfers from one module to another
-
-represents monetary transfers
-
-represents environmental and related transfers.
-
-Source: Own illustration
 
 In the following, the GAMS code is directly used to document the
 equations in the different modules to avoid a second layer of mnemonics.

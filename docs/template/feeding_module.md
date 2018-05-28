@@ -22,7 +22,7 @@ period. The model differentiates 5 lactations period with different
 lengths (30 -- 70 -- 100 -- 105 -- 60 days, where the last 60 days are
 the dry period). The periods are labelled according to their last day,
 e.g. *LC200* is the period from day 101 to day 200, *LC305* is the
-period from the 201^st^ to the 305^th^ day and *dry* denotes the last 60
+period from the 201<sup>st</sup> to the 305<sup>th</sup> day and *dry* denotes the last 60
 days of lactation.
 
 
@@ -33,28 +33,25 @@ days of lactation.
     produced by each cow on one day.
 
     ![](../media/image14.png)
-
-    5. Lactation curves of different yearly
-         milk yield potentials and average milk yield in different
-         lactation phases (30-70-100-105-60)
-
-    Remark: Calculation based on Huth (1995:pp.224-226)
-
-    Source: own illustration
+    :   Figure 6: Lactation curves of different yearly
+        milk yield potentials and average milk yield in different
+        lactation phases (30-70-100-105-60).
+        Remark: Calculation based on Huth (1995:pp.224-226)
+        Source: own illustration
 
     Using the above shown lactation functions, the daily fraction of the
     yearly milk yield in each lactation phase can be derived. The mean
     over the four milk yield potentials of the coefficients are shown in
-    table 1.
+    Table 1.
 
-    6. Daily fraction of whole lactation milk
-         yield in different lactation phases
 
        |                |  LC30   | LC100  |  LC200  | LC3005  | Dry |
        |----------------|---------|--------|---------|---------|-----|
        |Daily fraction  | 0.00356 |0.0043  | 0.00333 | 0.00233 |  0  |
 
-    Remark: Own calculation based on Huth (1995, pp.224-226)
+    :   Figure 7. Daily fraction of whole lactation milk
+        yield in different lactation phases
+        Remark: Own calculation based on Huth (1995, pp.224-226)
 
     Following these outputs, e.g. on each of the first 30 days of
     lactation, the cow produces 0.356% of the yearly milk yield (e.g. 28

@@ -207,10 +207,9 @@ the first year, is on the left side of the Figure. The nodes 2, 5, 8,
 11, 14 are in the second year. Each second year node has its own set of
 followers, and all nodes besides *1* have the same probability of 20%.
 
-8. Example of an input decision tree
-    organized as a fan
-
-Source: Own illustration
+![](media/figure8.png)
+:   Figure 8: Example of an input decision tree organized as a fan.
+    Source: Own illustration
 
 Increasing the number of years leads to a proportional increase in the
 number of nodes. For complex stochastic processes such as MRPs, many
