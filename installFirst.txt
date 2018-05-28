@@ -1,0 +1,13 @@
+what you need to install
+
+mkdocs
+mkdocs-material
+
+python markdown extensions:
+
+pip install https://github.com/helderco/markdown-figures/zipball/master
+admonition
+pymdownx.details
+footnotes
+mdx_figcaption
+mdx_math
