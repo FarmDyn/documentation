@@ -1,6 +1,7 @@
 what you need to install
 
 mkdocs
+pandoc
 mkdocs-material
 
 python markdown extensions:
