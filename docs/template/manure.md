@@ -13,7 +13,17 @@ monthly volume in cubic meter of manure produced. It is computed by
 summing the monthly manure for the herd with considering the amount
 excreted while grazing, shown in the following equation:
 
-![](../media/image89.png)
+[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /manQuantM_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+manQuantM_(curManChain(manChain),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+         v_manQuantM(manChain,t,nCur,m) =e=
+               sum( actherds(herds,breeds,feedRegime,t,m1) $ manChain_herd(manChain,herds),
+                   p_manQuantMonth(herds) * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
+                                                - 0.5 $ sameas(feedRegime,"partGraz"))
+
+                    * sum(m_to_herdm(m,m1), v_herdSize(herds,breeds,feedRegime,t,nCur,m1)));
+```
 
 Furthermore, the monthly excretion of nutrients, NTAN, Norg and P is
 calculated, multiplying *v\_herdsize* and *p\_nut2ManMonth*. For cows,
@@ -181,7 +191,7 @@ equation, *p\_nut2inMan* is calculated when the environmental accounting
 is not active. In this case, only a fixed factor for NH<sub>3</sub> emissions is
 subtracted from NTAN contained in the manure. The parameter is
 calculated for the types of manure from different herds, *mantype.* The
-herds and types of manure are liked via the cross set *herds\_mantype*.
+herds and types of manure are linked via the cross set *herds\_mantype*.
 This calculation implies that there is one type of manure for every herd
 activated in FARMDYN.
 
@@ -245,4 +255,3 @@ according to the fertilizer directive is always calculated in FARMDYN.
 The restrictive threshold can be switched on and off in the GUI.
 
 ![](../media/image114.png)
-

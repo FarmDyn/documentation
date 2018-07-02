@@ -81,4 +81,4 @@ Those are linked to the existence of stables, i.e. stables cannot be
 used if machinery is not present:
 
 ![](../media/image79.png)
-
+

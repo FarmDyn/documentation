@@ -35,6 +35,8 @@ pages:
     - Graphical User Interface: gui.md
     - References: References.md
     - Appendix: appendix.md
+    - Staff:
+       - Development: staff/development.md
 
 extra:
   social:

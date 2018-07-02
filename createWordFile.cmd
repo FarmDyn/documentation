@@ -32,7 +32,7 @@ set SECTIONS=
 for /f %%i In (%SECTIONS_FILEPATH%) DO set SECTIONS=!SECTIONS! %%i
 
 
-\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\bin\Scripts\pandoc.exe --toc %sections% -o print/FarmDyn_Documentation.docx
+.\bin\Scripts\pandoc.exe --toc %sections% -o print/FarmDyn_Documentation.docx
 
 @REM media directory
 rmdir \\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media /s /q

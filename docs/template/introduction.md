@@ -77,4 +77,4 @@ parameters and sets also used outside of the model equations can be
 found in *model\\templ\_decl.gms*.
 
  [^1]: International Food Policy Research Institute
-
+

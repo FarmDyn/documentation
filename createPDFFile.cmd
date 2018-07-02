@@ -31,7 +31,7 @@ setlocal enabledelayedexpansion
 set SECTIONS=
 for /f %%i In (%SECTIONS_FILEPATH%) DO set SECTIONS=!SECTIONS! %%i
 
-\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\bin\Scripts\pandoc.exe --listings --toc %sections% -o print/FarmDyn_Documentation.pdf -H print/gams.tex
+.\bin\Scripts\pandoc.exe --listings --toc %sections% -o print/FarmDyn_Documentation.pdf -H print/gams.tex
 
 @REM media directory
 rmdir \\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media /s /q

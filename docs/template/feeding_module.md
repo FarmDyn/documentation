@@ -216,4 +216,4 @@ allows certain flexibility in the feeding mix.
 
 [^3]: Grass and maize silage and grass from pasture, which are own
    produced, and three type of concentrates
-
+

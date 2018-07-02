@@ -14,4 +14,4 @@ manure, e.g. fertilizing short before harvest for baking wheat cannot be
 done with manure.
 
 ![](../media/image115.png)
-
+

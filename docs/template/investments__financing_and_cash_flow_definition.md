@@ -77,4 +77,4 @@ potential of different herds are very high, but price combinations of
 in- and output lead to an economic optimal intensity level that is below
 the maximum milk yield potential. Without this variable, cows would have
 always to be milked at the maximum level.
-
+

@@ -72,4 +72,4 @@ for the threshold under the fertilizer directive (see chapter 2.11.4).
 For the environmental accounting, the estimated losses from storage,
 stable etc. are modelled precisely whereas fixed, prescribed values are
 used for the fertilizer directive.
-
+

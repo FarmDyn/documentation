@@ -25,6 +25,6 @@ start http://127.0.0.1:8000/
 echo The documentation server will now build the documentation, 
 echo please wait until you read 'Serving on http:...' below and then reload the page.
 
-\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\bin\python.exe -m mkdocs serve
+.\bin\python.exe -m mkdocs serve
 
 

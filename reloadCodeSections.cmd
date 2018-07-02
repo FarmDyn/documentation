@@ -18,19 +18,9 @@ echo University of Bonn
 echo[
 echo[  
 
-echo The documentation website is build from the Markdown files 
-echo and copied to the agpserv2 server once completed.
+@REM get all .md files in the docs folder (and subfolders)
+@REM and do the code completion on every file in the folder
 
-.\bin\python.exe -m mkdocs build
-
-
-@REM go to website directory
-pushd \\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku
-
-echo Cleaning website directory
-@REM remove all existing files
-del *.*
-
-echo Copying new files to website directory
-@REM copy everything from the docs site directory to the website
-xcopy "\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\site" "\\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku" /s/h/e/k/f/c
+cd .\docs
+for /R %%f in (*.md) do ..\bin\Go\bin\embedmd.exe -w %%f
+cd ..

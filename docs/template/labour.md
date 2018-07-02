@@ -149,4 +149,4 @@ are inputted in each month) and can be adjusted to the state of nature.
 The total number of hours worked off-farm is defined as:
 
 ![](../media/image56.png)
-
+

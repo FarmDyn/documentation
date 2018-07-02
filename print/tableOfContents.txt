@@ -1,5 +1,5 @@
 print/frontMatter.yaml
-docs/index.md
+docs/index_print.md
 docs/introduction.md
 docs/template/introduction.md
 docs/template/herd_module.md

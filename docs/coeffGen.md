@@ -15,7 +15,7 @@ parameters for a specific region.
 The coefficient generator is divided in:
 
 -   **Buildings:** includes bunker silos for silage maize and
-    potatoes**.**
+    potatoes.
 
 -   **Cows**: cows, heifers and calves are defined that have different
     milk yield potentials. Additionally, a maximum number of lactation

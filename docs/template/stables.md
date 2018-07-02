@@ -60,4 +60,4 @@ of the maintenance costs can be saved when the stable is not fully used:
 
 The different stable attributes are defined in
 "*coeffgen\\stables.gms*".
-
+

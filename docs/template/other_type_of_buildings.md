@@ -28,4 +28,4 @@ The inventory of the buildings is linked to building needs of certain
 activities:
 
 ![](../media/image68.png)
-
+

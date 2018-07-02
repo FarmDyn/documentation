@@ -106,4 +106,4 @@ next year based on the rotations grown in these years.
 
 The rotations restrict the combination of crops and enter into the
 optional soil pool balancing approach.
-
+
