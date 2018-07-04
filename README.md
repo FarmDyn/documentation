@@ -4,12 +4,15 @@ In this document the process on how a) to work on the documentation and b) build
 
 Please feel encouraged to play around with the documentation: There's nothing that can go broken (everything is under version control), and you'll see that writing Markdown is a breeze!
 
+The latest version of the documentation will be available on
+[http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/FarmDynDoku/index.html](http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/FarmDynDoku/index.html)
+
 ## Installation
 
 ### University of Bonn users
 No need to install. Just head to
 
-[\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn](\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn)
+`\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn`
 
 ### External users
 In the long run the documentation will be part of the FarmDyn SVN checkout. Until then, please write me a mail (or \@slack) if you would like to contribute.
@@ -21,6 +24,8 @@ Every chapter of the documentation is in it's own file with the file extension `
 
 ### Starting a development version of the website with live updates
 When working on the documentation, it is helpful to see the changes in realtime. This way you can also check if your formulas were typeset correctly or if images appear the way they should.
+
+You can get a quick and nice preview by pressing `ctrl-shift-m` when you have a Markdown file open in Atom. However, this will not show you exactly how the website will look like.
 
 In order to start the development website simply double-click the `startDevServer.cmd` file. 
 
@@ -174,14 +179,215 @@ Combined emphasis with **asterisks and _underscores_**.
 Strikethrough uses two tildes. ~~Scratch this.~~
 
 ### Lists
+(In this example, leading and trailing spaces are shown with with dots: ⋅)
+
+```no-highlight
+1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+```
+
+1. First ordered list item
+2. Another item
+  * Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+  1. Ordered sub-list
+4. And another item.
+
+   You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+   To have a line break without a paragraph, you will need to use two trailing spaces.  
+   Note that this line is separate, but within the same paragraph.  
+   (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
 
 ### Tables
+Tables aren't part of the core Markdown spec, but they are part of GFM and *Markdown Here* supports them. They are an easy way of adding tables to your email -- a task that would otherwise require copy-pasting from another application.
 
-### Figures
+```no-highlight
+Colons can be used to align columns.
+
+| Tables        |      Are      |  Cool |
+|:--------------|:-------------:|------:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the 
+raw Markdown line up prettily. You can also use inline Markdown.
+
+| Markdown | Less      | Pretty     |
+|:---------|:----------|:-----------|
+| *Still*  | `renders` | **nicely** |
+| 1        | 2         | 3          |
+```
+
+Colons can be used to align columns.
+
+| Tables        |      Are      |  Cool |
+|:--------------|:-------------:|------:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
+
+There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
+
+| Markdown | Less      | Pretty     |
+|:---------|:----------|:-----------|
+| *Still*  | `renders` | **nicely** |
+| 1        | 2         | 3          |
+
+
+### Images
+```no-highlight
+Images can be placed just like links, but they have an ! at the beginning.
+
+Inline-style: 
+![alt text](docs/media/image1.png "Logo Title Text 1")
+
+Reference-style: 
+![alt text][logo]
+
+[logo]: docs/media/image1.png "Logo Title Text 2"
+```
+
+Images can be placed just like links, but they have an ! at the beginning.
+
+Inline-style: 
+![alt text](docs/media/image1.png "Logo Title Text 1")
+
+Reference-style: 
+![alt text][logo]
+
+[logo]: docs/media/image1.png "Logo Title Text 2"
 
 ### Code blocks
 
+```no-highlight
+Inline `code` has `back-ticks around` it.
+```
+
+Inline `code` has `back-ticks around` it.
+
+Blocks of code on the other hand can be inserted as follows:
+
+<pre lang="no-highlight"><code>```GAMS
+p_test = 2;
+```
+</code></pre>
+
+which will result in:
+
+```GAMS
+p_test = 2;
+```
+
+When referencing code from the FarmDyn model, we use a small program that automatically pulls the code from the files. This way the documentation stays in sync with the latest model updates.
+
+The syntax for pulling in the code blocks is as follows:
+
+<pre lang="no-highlight"><code>
+[embedmd]:# (N:/path/to/gamsFile.gms GAMS /startingPoint/ /endPoint/)
+</code></pre>
+
+Where the startingPoint and endPoint need to be [regular expressions](https://docs.microsoft.com/de-de/dotnet/standard/base-types/regular-expression-language-quick-reference). Don't worry, you can copy the most common regular expressions that you will need down below.
+
+Let's say we want to insert the `herdSize_` equation from the `general_herd_module.gms` file in our documentation. In order to do so, we would insert the following markdown
+
+<pre lang="no-highlight"><code>
+[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdSize_[\S\s][^;]*?\.\./ /;/)
+</code></pre>
+
+Once you added such a markdown statement, make sure to double click the `reloadCodeSections.cmd` file as described above. The program will then pull in the code block and update all other ones.
+
+#### Most common code blocks
+Keep in mind that the regular expression will always return the FIRST entry it found in the file. That said, your regular expression needs to be precise enough that it is matched only once in the file. Otherwise a code block will be pulled in which you did not want to see at the desired position. In that case, just delete it and try again! It is sometimes even helpful to copy the content of the file to [regex101](https://regex101.com/) and try your regular expression there.
+
+##### A whole function
+
+<pre lang="no-highlight"><code>
+[embedmd]:# (N:/path/to/gamsFile.gms GAMS /EquationName_[\S\s][^;]*?\.\./ /;/)
+</code></pre>
+
+##### Parameter value assignment
+
+<pre lang="no-highlight"><code>
+[embedmd]:# (N:/path/to/gamsFile.gms GAMS /p_someParam("domain1","domain2",domain3)  = 1/ /;/)
+</code></pre>
+
+##### Sets or Tables
+<pre lang="no-highlight"><code>
+[embedmd]:# (N:/path/to/gamsFile.gms GAMS /set setName/ /;/)
+[embedmd]:# (N:/path/to/gamsFile.gms GAMS /table tableName/ /;/)
+</code></pre>
+
 ### Footnotes
+
+#### Inserting the reference
+The footnote reference is enclosed in square brackets and starts with a caret, followed by an arbitrary label which may contain numeric identifiers [1, 2, 3, ...] or names [Granovetter et al. 1998]. The rendered references are always consecutive superscripted numbers.
+
+Example:
+
+```md
+Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit.[^2]
+```
+
+Result:
+
+Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit.[^2]
+
+#### Inserting the content
+The footnote content is also declared with a label, which must match the label used for the footnote reference. It can be inserted at an arbitrary position in the document and is always rendered at the bottom of the page. Furthermore, a backlink is automatically added to the footnote reference.
+
+**on a single line¶**
+Short statements can be written on the same line.
+
+Example:
+
+```md
+[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+```
+
+Result:
+See at the bottom of the page
+[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+**on multiple lines**
+Paragraphs should be written on the next line. As with all Markdown blocks, the content must be indented by four spaces.
+
+Example:
+
+```md
+[^2]:
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+```
+
+Result:
+see at the bottom of the page
+[^2]:
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
 
 ### Equations
 Typesetting equations in Markdown is done using the powerful LaTeX notation. Already know LaTeX? Then directly go to Step 2. If not, no worries, just keep on reading.
@@ -194,6 +400,10 @@ Typesetting equations in Markdown is done using the powerful LaTeX notation. Alr
 this will be some inline math $2+2=4$ and it will look really pretty
 ```
 
+outputs: 
+
+this will be some inline math $2+2=4$ and it will look really pretty
+
 Equation blocks (on a new line and centered), will be surrounded by two dollars:
 
 ```md
@@ -203,9 +413,32 @@ $$2+2=4$$
 
 and it will look really pretty
 ```
+outputs:
 
+this will be a block equation 
+
+$$2+2=4$$
+
+and it will look really pretty
 
 
 ### Admonition blocks
+Admonition is an extension included in the standard Markdown library that makes it possible to add block-styled side content to your documentation, for example summaries, notes, hints or warnings.
 
+Admonition blocks follow a simple syntax: every block is started with !!!, followed by a single keyword which is used as the type qualifier of the block. The content of the block then follows on the next line, indented by four spaces.
+
+```md
+!!! note
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+```
+
+will result in
+
+![An admonition block](assets/admonition.png)
+
+Beware that these blocks won't appear in the printable documents (at least at the time of writing).
+
+You can read more about how to set up admonition blocks [here](https://squidfunk.github.io/mkdocs-material/extensions/admonition/).
 
