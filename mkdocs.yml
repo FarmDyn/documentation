@@ -12,6 +12,14 @@ pages:
     - FarmDyn: index.md
     - About: about.md
     - Introduction: introduction.md
+    - Dynamic Character: dynamics.md
+    - Risk and Risk behavior: risk.md
+    - GHG Accounting: ghgAcc.md
+    - Coefficient Generator: coeffGen.md
+    - Technical Realization: technical.md
+    - Graphical User Interface: gui.md
+    - References: References.md
+    - Appendix: appendix.md
     - The Template Model:
        - Introduction: template/introduction.md
        - Herd Module: template/herd_module.md
@@ -27,14 +35,6 @@ pages:
        - Plant Nutrition: template/plant_nutrition.md
        - Environmental Accounting Module: template/environmental_accounting_module.md
        - Biogas Module: template/biogas_module.md
-    - Dynamic Character: dynamics.md
-    - Risk and Risk behavior: risk.md
-    - GHG Accounting: ghgAcc.md
-    - Coefficient Generator: coeffGen.md
-    - Technical Realization: technical.md
-    - Graphical User Interface: gui.md
-    - References: References.md
-    - Appendix: appendix.md
     - Staff:
        - Development: staff/development.md
 

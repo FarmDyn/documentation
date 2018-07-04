@@ -384,6 +384,11 @@ and the standard deviation.
 
 ![](media/image307.png)
 
+## Working with Projects
+When applying FarmDyn to a set of different case studies, keeping track of the individual case study settings in the `.ini` files may become tedious.
+
+In order to ease the handling 
+
 [^16]: The problem here arises, that the simple WEKA regression routines
     are not prepared for two stage regressions (like e.g. Heckman two
     stage regression (Heckman, 1979)) like in some cases demanded for
