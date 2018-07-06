@@ -4,7 +4,7 @@
 
 As described in earlier sections, the model template optimizes the farm
 production process over time in a fully dynamic setting. Connecting
-different modules over time (t~1~-t~n~) allows for a reproduction of
+different modules over time (t<sub>1</sub>-t<sub>n</sub>) allows for a reproduction of
 biologic and economic path dependencies.
 
 As can be seen from Figure 6, the temporal resolution varies across

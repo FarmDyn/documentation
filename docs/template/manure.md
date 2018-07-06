@@ -17,11 +17,12 @@ excreted while grazing, shown in the following equation:
 ```GAMS
 manQuantM_(curManChain(manChain),tCur(t),nCur,m) $ t_n(t,nCur) ..
 
-         v_manQuantM(manChain,t,nCur,m) =e=
-               sum( actherds(herds,breeds,feedRegime,t,m1) $ manChain_herd(manChain,herds),
-                   p_manQuantMonth(herds) * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
-                                                - 0.5 $ sameas(feedRegime,"partGraz"))
+        v_manQuantM(manChain,t,nCur,m)
 
+          =e=
+               sum( actherds(herds,breeds,feedRegime,t,m1) $ manChain_herd(curManChain,herds),
+                   p_manQuantMonth(herds,curManChain) * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
+                                                            - 0.5 $ sameas(feedRegime,"partGraz"))
                     * sum(m_to_herdm(m,m1), v_herdSize(herds,breeds,feedRegime,t,nCur,m1)));
 ```
 
@@ -38,11 +39,15 @@ pasture is subtracted.
 nut2ManureM_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
 
     v_nut2ManureM(manChain,nut2,t,nCur,m) =e=
-          sum((manChain_herd(manChain,possHerds),actherds(possHerds,breeds,feedRegime,t,m1))
-             $ (not sameas(feedRegime,"fullGraz")),
+          sum(actherds(possHerds,breeds,feedRegime,t,m1)
+             $ ( (not sameas(feedRegime,"fullGraz"))
+             $ manChain_herd(curManChain,possHerds)),
                    p_nut2ManMonth(possHerds,feedRegime,nut2)
                         * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
                               - 0.5 $ sameas(feedRegime,"partGraz"))
+                    * sum(herd_stableStyle(possHerds,stableStyles), p_nutShare(manChain,stableStyles,nut2))
+*   --- if we add the correction for the quantity here, we might not have to do it in the manure.gms for each herd seperately  
+                    * sum(herd_stableStyle(possHerds,stableStyles), p_nutShare(manChain,stableStyles,"m3"))
                     * sum(m_to_herdm(m,m1), v_herdSize(possHerds,breeds,feedRegime,t,nCur,m1)))
     ;
 ```
@@ -358,7 +363,8 @@ m³.
 ```GAMS
 subManStorCap_(curManChain(manChain),tCur(t),nCur) $ t_n(t,nCur) ..
 
-       v_SubManStorCap(manChain,t,nCur) =e= sum(stables $ (      sum( (t_n(t1,nCur1),hor) $ isNodeBefore(nCur,nCur1),
+       v_SubManStorCap(manChain,t,nCur) =e=
+       sum(stables $ (      sum( (t_n(t1,nCur1),hor) $ isNodeBefore(nCur,nCur1),
                                                              v_buyStables.up(stables,hor,t1,nCur1))
                                                     or (sum( (tOld,hor), p_iniStables(stables,hor,tOld)))),
 
@@ -526,37 +532,37 @@ complete emptying of the storage in a linear programming setting.
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NTAN"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
 ```GAMS
-p_nut2inMan("NTAN",manType)  $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("NTAN",manType,manChain)  $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("NTAN","highRedNP",mantype) * (1 - p_lossFactorSto("low",mantype,"NTAN")  );
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NOrg"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
 ```GAMS
-p_nut2inMan("NOrg",manType)  $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("NOrg",manType,manChain)  $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("NOrg","highRedNP",mantype) * (1 -  p_lossFactorSto("low",mantype,"Norg") );
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("P"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
 ```GAMS
-p_nut2inMan("P",manType)     $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("P",manType,manChain)     $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("P","highRedNP",mantype);
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NTAN"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
 ```GAMS
-p_nut2inMan("NTAN",manType)  $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("NTAN",manType,manChain)  $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("NTAN","highRedNP",mantype) * (1 - p_lossFactorSto("low",mantype,"NTAN")  );
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NOrg"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
 ```GAMS
-p_nut2inMan("NOrg",manType)  $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("NOrg",manType,manChain)  $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("NOrg","highRedNP",mantype) * (1 -  p_lossFactorSto("low",mantype,"Norg") );
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("P"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
 ```GAMS
-p_nut2inMan("P",manType)     $ manuretype_nutConMan("low",mantype)
+p_nut2inMan("P",manType,manChain)     $ manuretype_nutConMan("low",mantype)
                                  =  p_nut2inManNoLoss("P","highRedNP",mantype);
 ```
 
@@ -573,7 +579,7 @@ nut2ManApplied_(curManChain(manChain),nut2,tCur(t),nCur,m) $ ((v_volManApplied.u
                                           $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)),
 
                                          v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
-                                                  * p_nut2inMan(nut2,curManType));
+                                                  * p_nut2inMan(nut2,curManType,manChain));
 ```
 
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/manure_module.gms GAMS /volManApplied_[\S\s][^;]*?\.\./ /;/)

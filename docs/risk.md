@@ -1,7 +1,7 @@
 # Dealing with risk and risk behavior: deterministic versus stochastic model versions
 
 !!! danger "Prototype feature"
-    This feature has'nt been thoroughly tested and should be used with caution.
+    This feature has not been thoroughly tested and should be used with caution.
 
 !!!abstract
     The default layout of the model maximizes the net present value over the simulation horizon in a deterministic setting. The stochastic programming extensions introduces decision trees based on mean reverting processes for the output and input price levels and renders all variable state contingents, calculating the option value of full flexibility in management and investment decision over the simulation horizon. A tree reduction algorithm allows exploiting the outcome of large-scale Monte-Carlo simulations while avoiding the curse of dimensionality. Besides risk neutral maximization of the expected net present value, different types of risk behavior such as MOTAD, Target MOTAD or value at risk can be used in conjunction with the stochastic programming extension.
@@ -42,7 +42,7 @@ scenario trees and renders all variables in the model stage contingent
 to yield a fully dynamic stochastic approach. That is only feasible in
 conjunction with a tree reduction approach: even if we would only allow
 for two different states in each year (= decision nodes), we would end
-up after twenty years with 2\^10 \~ 1 Million leaves in the trees. Given
+up after twenty years with 2<sup>10</sup> \~ 1 Million leaves in the trees. Given
 the number of variables and equations in any year, the resulting model
 would be impossible to generate and solve. In the following, we briefly
 discuss the changes to model structure and how the decision tree and the
@@ -75,9 +75,7 @@ differentiation between SON specific decisions (cropping, feeding) and
 annual decisions in the otherwise deterministic version of the model is
 depicted in the following Figure:
 
-7. Figure 6: Systematic view on the model
-    approach
-
+![Figure 6: Systematic view on the model approach](media/risk-8aae95a4.png)
 Source: Own illustration
 
 The first two blocks of variables shown above labelled investments and
@@ -111,20 +109,8 @@ simulations).
 ## The Stochastic Programming version with full stage contingency
 
 
-As opposed to the deterministic or partly stochastic version, in the
-stochastic programming version all variables are state contingent. The
-stochastic version considers different future developments over time,
-currently implemented for selected output and input prices, i.e. price
-paths. These paths do not need to have equal probability. The stochastic
-programming (SP) approach includes a decision tree that reflects
-decision nodes where each node has leaves with probability of
-occurrence. All decisions are contingent on the state of nature in the
-current year, and decisions in subsequent years depend on decisions made
-on previous nodes (=stages) on the path to a final leave. In the SP, all
-production and investment decisions in any year are hence depicted as
-state-contingent, i.e. they reflect at that time point the different
-futures which lay ahead, including future management flexibility. Also
-the timing of investments is hence state contingent.
+As opposed to the deterministic or partly stochastic version, in the stochastic programming version all variables are state contingent. The stochastic version considers different future developments over time, currently implemented for selected output and input prices, i.e. price paths. These paths do not need to have equal probability. The stochastic programming (SP) approach includes a decision tree that reflects decision nodes where each node has leaves with probability of occurrence. All decisions are contingent on the state of nature in the current year, and decisions in subsequent years depend on decisions made on previous nodes (=stages) on the path to a final leave. In the SP, all production and investment decisions in any year are hence depicted as
+state-contingent, i.e. they reflect at that time point the different futures which lay ahead, including future management flexibility. Also the timing of investments is hence state contingent.
 
 All variables and equations carry the index *nCur*, which indicates the
 current node in the decision tree. Equally, the node needs to be linked

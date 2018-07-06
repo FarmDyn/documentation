@@ -328,10 +328,10 @@ $$iftheni.sows "%farmBranchSows%" == "on"
       herds_from_herds("piglets","youngPiglets","")    = yes;
       bought_to_herds("youngSows","","sows")           = yes;
 
-      actHerds("piglets","",feedRegime,t,m)            = yes;
-      actHerds("sows","",feedRegime,t,m)               = yes;
-      actHerds("youngPiglets","",feedRegime,t,m)       = yes;
-      actHerds("youngSows","",feedRegime,t,m)          = yes;
+      actHerds("piglets","",feedRegime,t,m)       = yes;
+      actHerds("sows","",feedRegime,t,m)          = yes;
+      actHerds("youngPiglets","",feedRegime,t,m)  = yes;
+      actHerds("youngSows","",feedRegime,t,m)     = yes;
    $$endif.sows
 ```
 

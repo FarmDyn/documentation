@@ -50,11 +50,10 @@ Johanna Budde, a first version of the pig module was developed
     as the German Fertilizer Directive
 -   [David Schäfer](/em/staff/schaefer/schaefer_e.htm), biogas module,
     improved pig module, link to ABM
--   [Thomas Böcker](/em/staff/boecker/boecker_e.htm), plant protection
+-   Thomas Böcker, plant protection
     strategies
--   [Christoph Pahmeyer](/em/staff/boecker/boecker_e.htm), plant protection
+-   [Christoph Pahmeyer](/em/staff/pahmeyer/pahmeyer_e.htm), beef fattening module, solid manure
     strategies
--   Rienne Wilts
 
 -   Bernd Lengers (2011-2014), main contributor of original model
     version, GHG indicators

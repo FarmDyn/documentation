@@ -387,7 +387,63 @@ and the standard deviation.
 ## Working with Projects
 When applying FarmDyn to a set of different case studies, keeping track of the individual case study settings in the `.ini` files may become tedious.
 
-In order to ease the handling 
+In order to ease the handling, you can define so called projects. These projects can be managed from the user interface. The concept of projects is similar for any model using [GGIG](http://www.ilr.uni-bonn.de/em/staff/britz/ggig_e.htm) (FarmDyn, Capri etc.), so one can also refer to the official [user guide](http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf).
+
+### Setting up a new project
+
+In order to create a new project, you need to be logged in with the user type **Administrator**. You can see your current user type in the status bar at the bottom left of the GUI window.
+
+![The current user type is displayed in the status bar](media/statusBarUser.png)
+
+You can change your user type by clicking on **Settings** -> **Edit Settings**, where you will be presented with the following window:
+
+![The user type can be changed in the "Edit settings" menu item under the "Settings" menu](media/editSettings.png)
+
+Choosing **File** -> **New Project**
+
+![Creating a new project](media/newProject.png)
+
+then opens the project dialog box:
+
+![Creating a new project](media/projectDialog.png)
+
+The dialog comprises four tabs. The first tab “Core info” shown above comprises information on the project itself. The entries “Pdf”, “Mailto” and “Webpage” generate new items in the top menu bar and provide information on the application context to the user.
+
+The second tab “Defaults” comprises a list of GUI controls of the tool with their title and its default setting:
+
+![](media/gui-275637d1.png)
+
+The left hand size shows the title of the control, the right hand comprises a text field with the default settings as stored in the XML-definition file for the GUI. That general default can be overwritten with a project specific one. Only these differences are stored 
+
+Similarly, the two remaining tables show under “System settings” the location of system directories, and under the SVN tab optional project specific SVN settings.
+
+Once you press the **Generate project** button, a a new file called `project_Your Project Name_default.ini`, where `Your Project Name` will be replaced by the name you entered for the project, will be created in your FarmDyn `GUI`folder. 
+
+### Switching projects
+You can switch between projects by choosing **File** -> **Set Project** -> **Project Name**, where **Project Name** refers to the name of the project you want to switch to.
+
+![](media/gui-bc5acb96.PNG)
+
+The currently selected project will be displayed in the status bar at the bottom left corner of the user-interface window.
+
+![](media/gui-ef48cd89.png)
+
+### Editing projects
+Make sure your current user type is set to **Administrator** first (see [here](#setting-up-a-new-project) for details).
+
+You can edit an existing project by choosing **File** -> **Edit Project** -> **Project Name**, where **Project Name** refers to the name of the project you want to edit.
+
+![](media/gui-868a2504.PNG)
+
+The project dialog as described under [*Setting up a new Project*](#setting-up-a-new-project) will be opened where the necessary changes can be done.
+
+When you are done changing the project's default settings, make sure to press the **Update project** Button. Notice that the dialog window will not close automatically after the changes were saved. 
+
+### Important information on the project workflow
+Please notice that you **cannot** change the projects default settings from the general user-interace tabs. The idea is as follows: In the project settings, the default values displayed in the user-interface tabs are stored. However, changing these settings in the user-interface will not affect the project defaults. This way you can do sensitivty analysis or test certain settings without losing your default project values or breaking any important project specifics. If the tests turn out to be working fine, you may update the project defaults as described [*above*](#editing-projects).
+
+
+
 
 [^16]: The problem here arises, that the simple WEKA regression routines
     are not prepared for two stage regressions (like e.g. Heckman two
