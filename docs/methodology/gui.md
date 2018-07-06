@@ -1,4 +1,6 @@
-# Graphical User Interface
+# The Graphical User Interface
+
+![](../media/installation-25c60479.png)
 
 The Graphical User Interface (GUI) is based on GGIG (GAMS Graphical
 Interface Generator, Britz 2014). It serves two main purposes: to steer
@@ -41,13 +43,13 @@ experiment, a single farm run is solved. These single farm runs are
 typically solved in parallel. After they are finalized, their results
 are combined into one result set.
 
-![](media/image282.png)
+![](../media/image282.png)
 
-![](media/image283.png)
+![](../media/image283.png)
 
 ### General Settings
 
-![](media/image284.png)
+![](../media/image284.png)
 
 The first tab in *General settings* defines the name of the scenario
 under which the results are stored. Further on, the user chooses general
@@ -64,30 +66,30 @@ investment / farm labour and feeding decisions.
 The model allows to choose between the following four mode to describe
 dynamics (or not):
 
-![](media/image285.png)
+![](../media/image285.png)
 
 The stochastic programming extension can only be switched on *Fully
 dynamic without prolongation mode.* For details on these settings, see
 section 3.3 above:
 
-![](media/image286.png)
+![](../media/image286.png)
 
 In experiment mode, upper and lower ranges for certain settings can be
 set, as well as the number of experiments and some further algorithmic
 details:
 
-![](media/image287.png)
+![](../media/image287.png)
 
 ### Farm Settings
 
-![](media/image288.png)
+![](../media/image288.png)
 
 The farm settings panel carries general information about the
 farm-household and general price increases as shown in the following:
 
 ### Animals
 
-![](media/image289.png)
+![](../media/image289.png)
 
 The tab "animals" allows setting the initial herd sizes and other
 attributes related to animal husbandry. The herd size will be used to
@@ -97,14 +99,14 @@ can be set depend on the active farm branches.
 
 In the experiment mode, ranges can be defined:
 
-![](media/image290.png)
+![](../media/image290.png)
 
 ### Cropping
 
 The tab "Crops and yields" comprises the selection of the crops and the
 yields and their growth rates (if arable farming is active).
 
-![](media/image291.png)
+![](../media/image291.png)
 
 A further tab "Crop management" comprises the steering options related
 to land use: if different tillage type, cropping intensities and crop
@@ -112,12 +114,12 @@ rotations are used. Moreover, the average plot size, mechanization level
 and the climate zone as well as the distribution of the soil type can be
 chosen.
 
-![](media/image292.png)
+![](../media/image292.png)
 
 ### Biogas
 
 ![GUI -
-Biogas.jpg](media/image293.jpeg)
+Biogas.jpg](../media/image293.jpeg)
 
 The biogas tab includes different Renewable Energy Acts (EEGs) choices
 for the investment options as well as available biogas plant sizes.
@@ -133,22 +135,22 @@ scenario premiums are included.
 That panel *Output prices* allows to set the price of the outputs
 present in the model.
 
-![](media/image294.png)
+![](../media/image294.png)
 
 ### Input Prices
 
-![](media/image295.png)
+![](../media/image295.png)
 
 That table *Input prices* allows to set the price of the outputs present
 in the model.
 
 ### Prices in Experiments
 
-![](media/image296.png)
+![](../media/image296.png)
 
 ### Environmental Impacts
 
-![](media/image297.png)
+![](../media/image297.png)
 
 ### MACs
 
@@ -161,11 +163,11 @@ simulation runs and the percentage reduction per step (compared to
 baseline emissions) has to be defined to define the maximal emission
 reduction (GHG reduction steps time reduction per step).
 
-![](media/image298.png)
+![](../media/image298.png)
 
 ### Algorithm and Debugging Options
 
-![](media/image299.png)
+![](../media/image299.png)
 
 The last tab of the GUI which is shown here defines the chosen solver to
 optimize the fully dynamic MIP problem and further precision
@@ -176,7 +178,7 @@ In general it is recommended to use CPLEX as the MIP solver, see section
 
 ### GAMS
 
-![](media/image300.png)
+![](../media/image300.png)
 
 ## Visualizing and analysing results
 
@@ -343,20 +345,20 @@ grouped by themes. Currently, the following reports are available:
 In the interface, the "exploit results" button will open a selection
 dialog to choose results from parallel runs:
 
-![](media/image301.png)
+![](../media/image301.png)
 
-![](media/image302.png)
+![](../media/image302.png)
 
 When *show results* are clicked the interface the results in tables:
 
-![](media/image303.png)
+![](../media/image303.png)
 
 There are views necessary to use the machine learning package:
 
 1.  A view with the variable to estimate, in our case provide by the
     table *Meta analysis, MACs*
 
-![](media/image304.png)
+![](../media/image304.png)
 
 2.  A view with the explanatory attributes, in our chase provided by the
     table *Meta analysis, explanatory vars*.
@@ -364,7 +366,7 @@ There are views necessary to use the machine learning package:
 In the first view, a click in the table will open a pop-up menu from
 which "Classify, Classify current view" should be chosen:
 
-![](media/image305.png)
+![](../media/image305.png)
 
 Similarly, in the second view, "Classify, Use current view to provide
 explanatory attributes for numeric classification should be chosen". The
@@ -374,7 +376,7 @@ application of the multiple regression model with automatic variable
 transformation (automatically builds logs, square roots and inverses of
 the variable values) and variable selection [^16]:
 
-![](media/image306.png)
+![](../media/image306.png)
 
 Additionally, the user has the possibility to view Figures, histograms
 or graphs of the interesting output values for graphical visualization.
@@ -382,7 +384,7 @@ Statistical characteristics like minimum, maximum or median values are
 automatically generated as well as mean value of the selected results
 and the standard deviation.
 
-![](media/image307.png)
+![](../media/image307.png)
 
 ## Working with Projects
 When applying FarmDyn to a set of different case studies, keeping track of the individual case study settings in the `.ini` files may become tedious.
@@ -393,25 +395,25 @@ In order to ease the handling, you can define so called projects. These projects
 
 In order to create a new project, you need to be logged in with the user type **Administrator**. You can see your current user type in the status bar at the bottom left of the GUI window.
 
-![The current user type is displayed in the status bar](media/statusBarUser.png)
+![The current user type is displayed in the status bar](../media/statusBarUser.png)
 
 You can change your user type by clicking on **Settings** -> **Edit Settings**, where you will be presented with the following window:
 
-![The user type can be changed in the "Edit settings" menu item under the "Settings" menu](media/editSettings.png)
+![The user type can be changed in the "Edit settings" menu item under the "Settings" menu](../media/editSettings.png)
 
 Choosing **File** -> **New Project**
 
-![Creating a new project](media/newProject.png)
+![Creating a new project](../media/newProject.png)
 
 then opens the project dialog box:
 
-![Creating a new project](media/projectDialog.png)
+![Creating a new project](../media/projectDialog.png)
 
 The dialog comprises four tabs. The first tab “Core info” shown above comprises information on the project itself. The entries “Pdf”, “Mailto” and “Webpage” generate new items in the top menu bar and provide information on the application context to the user.
 
 The second tab “Defaults” comprises a list of GUI controls of the tool with their title and its default setting:
 
-![](media/gui-275637d1.png)
+![](../media/gui-275637d1.png)
 
 The left hand size shows the title of the control, the right hand comprises a text field with the default settings as stored in the XML-definition file for the GUI. That general default can be overwritten with a project specific one. Only these differences are stored 
 
@@ -422,18 +424,18 @@ Once you press the **Generate project** button, a a new file called `project_You
 ### Switching projects
 You can switch between projects by choosing **File** -> **Set Project** -> **Project Name**, where **Project Name** refers to the name of the project you want to switch to.
 
-![](media/gui-bc5acb96.PNG)
+![](../media/gui-bc5acb96.PNG)
 
 The currently selected project will be displayed in the status bar at the bottom left corner of the user-interface window.
 
-![](media/gui-ef48cd89.png)
+![](../media/gui-ef48cd89.png)
 
 ### Editing projects
 Make sure your current user type is set to **Administrator** first (see [here](#setting-up-a-new-project) for details).
 
 You can edit an existing project by choosing **File** -> **Edit Project** -> **Project Name**, where **Project Name** refers to the name of the project you want to edit.
 
-![](media/gui-868a2504.PNG)
+![](../media/gui-868a2504.PNG)
 
 The project dialog as described under [*Setting up a new Project*](#setting-up-a-new-project) will be opened where the necessary changes can be done.
 
