@@ -13,7 +13,18 @@ paid to the electricity producer per kWh, *p\_priceElec*, and underlying
 the revenues, is constructed as a sliding scale price and is exemplary
 shown in the next equation.
 
-![](../media/image159.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/prices_eeg.gms GAMS /p_priceElec.*?\$.*?=.*?/ /;/)
+```GAMS
+p_priceElec(bhkw,eeg,tCur(t))$(eegRated(eeg)) = (p_priceElecBase("150kW",eeg) * (150/p_powRate(bhkw,eeg))
+                                                          + p_priceElecBase(bhkw,eeg) * ((p_powRate(bhkw,eeg) - 150)/p_powRate(bhkw,eeg)))
+                                                         ;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/prices_eeg.gms GAMS /p_priceElec.*?"E2004".*?= / /;/)
+```GAMS
+p_priceElecE2004("150kW","E2004")= 0.08;
+```
+
 
 *p\_priceElecBase*, used to calculate the guaranteed feed-in tariff
 differentiated by size, includes the base rate and additional
@@ -28,6 +39,40 @@ of the EEG 2012 payment, the biogas module differentiates the
 electricity output by input source *v\_prodElecCrop* and
 *v\_prodElecManure* and multiplies it with its respective bonus tariffs
 *p\_priceElecInputclass* which are added to the base rate.
+
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /bioGasObje_\(tCur[\S\s]*?\.\./ /;/)
+```GAMS
+bioGasObje_(tCur(t),nCur) $ t_n(t,nCur) ..
+       v_salRevBioGas(t,nCur)
+
+        =e=
+
+*            --- Revenue stemming from electricity production with degression depending on EEG (excluding direct marketing)
+                 sum( (curBhkw(bhkw),curEeg(eeg),m) $ (not(eegDM(eeg))),
+                                    v_prodElec(bhkw,eeg,t,nCur,m) *  p_priceElec(bhkw,eeg,t)   )
+
+*            --- Revenue stemming from electricity production for EEG E2012 differentiated by input class
+               + sum( (curBhkw(bhkw),curEeg(eeg),m) $ (eegDif(eeg)) ,
+                                        v_prodElecCrop(bhkw,eeg,t,nCur,m)   * p_priceElecInputclass(bhkw,eeg,"inputCl1")
+                                      + v_prodElecManure(bhkw,eeg,t,nCur,m) * p_priceElecInputclass(bhkw,eeg,"inputCl2") )
+
+*            --- Revenue stemming from heat
+               + sum( curEeg(eeg),  v_sellHeat(eeg,t,nCur) * p_priceHeat(t) )
+
+*            --- Revenue specification for EEG with direct marketing and flexible biogas production
+               + sum( (curBhkw(bhkw),curEeg(eeg),m)$(eegDM(eeg)),
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * p_shareEPEX(bhkw) )
+                                       * (p_dmMP(bhkw,eeg,t,m) + p_dmsellPriceHigh(m) )
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * (1 - p_shareEPEX(bhkw) ) )
+                                       * (p_dmMP(bhkw,eeg,t,m) + p_dmsellPriceLow(m) )
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * p_flexPrem(bhkw,eeg) ) )
+
+*            --- Revenue stemming from scenario premium
+               + sum( (curBhkw(bhkw), curEeg(eeg),m)$(eegScen(eeg)),
+                                      v_prodElec(bhkw,eeg,t,nCur,m) * p_scenPremium(eeg)$(eegScen(eeg)))
+;
+```
 
 In addition to the *traditional* guaranteed-feed in tariff, the biogas
 module comprises the payment structure for the so-called *direct
@@ -53,15 +98,30 @@ The biogas plant inventory differentiates biogas plants by size (set
 *bhkw*), which determines the engine capacity, the investment costs and
 the labour use. Three size classes are currently depicted.
 
-![](../media/image160.png)
 
-![](../media/image161.png)Moreover, in order to use a biogas plant
-different components need to be present which differ by lifetime
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ_decl.gms GAMS /set bhkw/ /;/)
+```GAMS
+set bhkw "different bhkw sizes" /
+                                 150KW       "150kW engine"
+                                 250kW       "250kW engine"
+                                 500KW       "500kW engine"
+                                /;
+```
+
+
+Moreover, in order to use a biogas plant different components need to be present which differ by lifetime
 (investment horizon *ih*). For example, in order to use the original
 plant, the decision maker has to re-invest every seventh year in a new
 engine but only every twentieth year in a new fermenter.
 
-![](../media/image162.png)
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ_decl.gms GAMS /iH              "investment/ /twenty years"/)
+```GAMS
+iH              "investment horizon"       /
+                                                  iH7      "reinvestment after seven years",
+                                                  iH10     "reinvestment after ten years",
+                                                  iH20     "reinvestment after twenty years"
+```
 
 The biogas plant and their respective parts can either be bought,
 *v\_buyBiogasPlant(Parts)*, or an already existing biogas plant can be
@@ -69,8 +129,37 @@ used, *p\_iniBioGas*. Both define the size of the inventory of the
 biogas plant, *v\_invBioGas(Parts).* The model currently limits the
 number of biogas plants present on farm to unity.
 
-![](../media/image163.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /invBioGasTot_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+invBioGasTot_(tCur(t),nCur) $ t_n(t,nCur) ..
 
+       sum( (curBhkw(bhkw),curEeg(eeg)), v_invBioGas(bhkw,eeg,t,nCur)) =L=  1;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /invBioGas_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+invBioGas_(curBhkw(bhkw),curEeg(eeg),ih,tFull(t),nCur) $ (ih20(ih) $ t_n(t,nCur))   ..
+
+       v_invBioGas(bhkw,eeg,t,nCur)
+
+           =L=
+                 sum( (tCur(t1),n1)  $ (t_n(t1,n1) $ isNodeBefore(nCur,n1)
+                       $  (p_year(t1) + p_ih(ih)+1 ge p_year(t)+1 )
+                      and (p_year(t1)+1 le p_year(t)+1 ) ),
+
+                                       v_buyBioGasPlant(bhkw,eeg,ih,t1,n1) )
+
+                 + sum( tOld $ ( (p_year(tOld) + p_ih(ih) ge p_year(t) ) and (p_year(tOld) le p_year(t) ) ),
+
+                                       p_iniBioGas(bhkw,eeg,ih,tOld) );
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /invBioGasTotParts_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+invBioGasTotParts_(curBhkw(bhkw),ih,tCur(t),nCur) $ (t_n(t,nCur) $ (not ih20(ih)))..
+
+           v_invBioGasParts(bhkw,ih,t,nCur) =G= sum(curEeg(eeg), v_invBioGas(bhkw,eeg,t,nCur));
+```
 Furthermore, the inventory *v\_invBioGas* stores the information under
 which EEG the plant was original erected, either by externally setting
 the EEG for an existing biogas plant or the initial EEG is endogenously
@@ -85,7 +174,24 @@ inventory while *v\_useBioGasPlant* is used to determine the actual EEG
 under which a plant is used, i.e. payment structures and feedstock
 restrictions.
 
-![](../media/image164.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /switchBioGas_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+switchBioGas_(curBhkw(bhkw),curEeg(eeg1),tCur(t),nCur) $ t_n(t,nCur) ..
+
+       v_invBioGas(bhkw,eeg1,t,nCur)
+
+          =G= sum(newEeg_oldEeg(eeg,eeg1) $ curEeg(eeg), v_switchBioGas(bhkw,eeg1,eeg,t,nCur));
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /useBioGas_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+useBioGas_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur) $ t_n(t,nCur) ..
+
+       v_useBioGasPlant(bhkw,eeg,t,nCur)
+
+          =L= sum(newEeg_oldEeg(eeg,eeg1) $ curEeg(eeg1), v_switchBioGas(bhkw,eeg1,eeg,t,nCur));
+```
+
 
 ## Production Technology
 
@@ -103,19 +209,72 @@ at 8.000 operating hours per year, as it is assumed that the biogas
 plant is not operating for 9% of the available time due to maintenance,
 etc.
 
-![](../media/image165.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /fixkWel_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+fixkWel_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) and (v_prodElec.up(bhkw,eeg,t,nCur,m) ne 0)) ..
+
+       v_prodElec(bhkw,eeg,t,nCur,m)
+
+          =l= v_useBioGasPlant(bhkw,eeg,t,nCur) * p_fixElecMonth(bhkw,m) * p_scenRed(eeg);
+```
+
 
 The production process of electricity, *v\_prodElec,* is constructed in
 a two-stage procedure. First, biogas [^6], *v\_methCrop*/*Manure,* is
 produced in the fermenter as the product of crops and manure,
-*v\_usedCrop/Man,* and the amount of methane content per ton fresh
+*v\_usedCrop/Manure,* and the amount of methane content per ton fresh
 matter of the respective input. Second, the produced methane is
 combusted in the engine in which the electricity--output,
 *v\_prodElecCrop/Manure,* is calculated by the energy content of
 methane, *p\_ch4Con,* and the conversion efficiency of the respective
 engine, *p\_bhkwEffic*.
 
-![](../media/image166.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /methCrop_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+methCrop_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_methCrop(bhkw,eeg,t,nCur,m)
+
+          =e= sum(crM(biogasFeedM), v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m) * p_crop(crM) );
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /methManure_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+methManure_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_methManure(bhkw,eeg,t,nCur,m)
+
+          =e= sum(curmaM,     v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m) * p_manure(curmaM) );
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /kWel_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+kWel_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) and (v_prodElec.up(bhkw,eeg,t,nCur,m) ne 0)) ..
+
+       v_prodElec(bhkw,eeg,t,nCur,m)
+
+          =l= v_useBioGasPlant(bhkw,eeg,t,nCur) * p_fixElecMonth(bhkw,m) * p_scenRed(eeg);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /kWelCrop_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+kWelCrop_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_prodElecCrop(bhkw,eeg,t,nCur,m)
+
+         =e= v_methCrop(bhkw,eeg,t,nCur,m) * p_ch4Con * p_bhkwEffic(bhkw,"el") * p_transLosses;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /kWelManure_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+kWelManure_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_prodElecManure(bhkw,eeg,t,nCur,m)
+
+         =e= v_methManure(bhkw,eeg,t,nCur,m) * p_ch4Con * p_bhkwEffic(bhkw,"el") * p_transLosses;
+```
+
+
 
 The bonus structure of the EEG 2012 requires a differentiation between
 the two input classes: crop and manure. Thus, the production process is
@@ -130,8 +289,25 @@ hydraulic retention time and an input mix of 70 percent maize silage and
 *v\_usedCropBiogas,* and manure, *v\_usedManBiogas,* is bound by the
 fermenter size, *v\_totVolFermMonthly.*
 
-![](../media/image167.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /fixKW_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+fixKW_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
 
+       v_totVolFermMonthly(bhkw,eeg,t,nCur,m)
+
+         =l= v_useBioGasPlant(bhkw,eeg,t,nCur) *  p_volFermMonthly(bhkw) * p_scenred(eeg);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /totVolFerm_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+totVolFerm_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_totVolFermMonthly(bhkw,eeg,t,nCur,m)  =g=
+
+                                          sum(crM(biogasFeedM), v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m))
+
+                                        + sum(curmaM, v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m) );
+```
 The inputs for the fermentation process can be either externally
 purchased, *v\_purchCrop/Manure,* or produced on farm,
 *v\_feedBiogas/v\_volManBiogas*. Additionally, the module accounts for
@@ -140,7 +316,36 @@ includes silage losses in the production pattern of the farm. Currently,
 the model includes only cattle manure, maize silage and grass silage as
 possible inputs.
 
-![](../media/image168.png)
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /usedCropBioGas_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+usedCropBioGas_(curBhkw(bhkw),curEeg(eeg),crM(biogasFeedM),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m)
+
+          =e= (    v_purchCrop(bhkw,eeg,crM,t,nCur,m)  $ selPurchInputs(crM) * p_silageLoss)
+                 + v_feedBioGas(bhkw,eeg,crM,t,nCur,m) $ SUM(sameas(curProds,crM),1);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /manureTot_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+manureTot_(curBhkw(bhkw), curEeg(eeg),curmaM,tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m)
+          =e=
+               v_purchManure(bhkw,eeg,curmaM,t,nCur,m) $ selPurchInputs(curmaM)
+$ifi %herd%==true            + sum(curmanchain $ (not sameas (curmanChain,"LiquidBiogas")) , v_volManBiogas(curmanchain,bhkw,eeg,curmaM,t,nCur,m))
+    ;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /volManBioGas_\(curma[\S\s]*?\.\./ /;/)
+```GAMS
+volManBioGas_(curmanchain, tCur(t),nCur) $ (t_n(t,nCur) $ (not sameas (curmanchain,"LiquidBiogas"))) ..
+
+      v_manQuant(curManChain,t,nCur) $ (not sameas (curmanchain,"LiquidBiogas"))
+
+          =G= sum( (manchain_mam(curmanchain,curmam),curbhkw(bhkw),curEeg(eeg),m) $(not sameas (curmanchain,"liquidBiogas")), v_volManBiogas(curmanchain,bhkw,eeg,curmaM,t,nCur,m)) ;
+```
 
 The third bound imposed by the production technology is the so called
 digestion load (*Faulraumbelastung*). The digestion load, *p\_digLoad,*
@@ -150,7 +355,19 @@ three different fermenter sizes ranges from 2.5 to 3
 $\frac{\text{kg oDM}}{m^3 \cdot d}$ [^7] and is converted into a monthly
 limit.
 
-![](../media/image169.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /fixdigLoad_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+fixdigLoad_(curBhkw(bhkw),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+      v_digLoad(bhkw,t,nCur,m)   =l= sum(curEeg(eeg),  v_useBioGasPlant(bhkw,eeg,t,nCur) * p_digLoad(bhkw,m))  ;
+```
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /digLoad_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+digLoad_(curBhkw(bhkw),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+      v_digLoad(bhkw,t,nCur,m)   =l= sum(curEeg(eeg),  v_useBioGasPlant(bhkw,eeg,t,nCur) * p_digLoad(bhkw,m))  ;
+```
+
 
 The data used for the fermenter technology can be seen in
 *\\coeffgen\\fermenter\_tech.gms*
@@ -167,7 +384,12 @@ Additionally, the biogas operator has the option to receive the
 Manure-Bonus, if he ensures that 30 percent of his input quantity is
 manure based, as can be seen in the following code.
 
-![](../media/image170.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /manureRes_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+manureRes_(curBhkw(bhkw),eegMan(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) $ curEeg(eeg)) ..
+
+       sum(curmaM,  v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m)) =g= v_totVolFermMonthly(bhkw,eeg,t,nCur,m)*0.3 ;
+```
 
 Furthermore, the EEG 2012 imposes two requirements which have to be met
 by the plant operator to receive any statutory payment at all. First,
@@ -177,7 +399,19 @@ under the assumption that the operator uses 25 percent of the heat
 emitted by the combustion engine for the fermenter itself, he has to
 sell at least 35 percent of the generated heat externally;
 
-![](../media/image171.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /maizeRes_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+maizeRes_(curBhkw(bhkw),eegDif(eeg),biogasFeedM,tCur(t),nCur,m) $ (curEeg(eeg) $ t_n(t,nCur)) ..
+
+       v_usedCropBiogas(bhkw,eeg,"maizSil",t,nCur,m) =l=  0.6 * v_totVolFermMonthly(bhkw,eeg,t,nCur,m);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /heatRes_\(curBhkw[\S\s]*?\.\./ /;/)
+```GAMS
+heatRes_(curBhkw(bhkw),eegDif(eeg),tCur(t),nCur,m) $ (curEeg(eeg) $ t_n(t,nCur)) ..
+
+       v_sellHeat(eeg,t,nCur) =g= p_minHeatSold * v_prodHeat(eeg,t,nCur);
+```
 
 Changes made in EEG 2014 and the amendment of 2016 has not been included
 in the model yet.

@@ -12,7 +12,7 @@ The latest version of the documentation will be available on
 ### University of Bonn users
 No need to install. Just head to
 
-`\\agpserv7\agpo\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn`
+`\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn`
 
 ### External users
 In the long run the documentation will be part of the FarmDyn SVN checkout. Until then, please write me a mail (or \@slack) if you would like to contribute.

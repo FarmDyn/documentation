@@ -29,7 +29,7 @@ parameter *p\_mDist* in the equation describes the difference in months
 between two time points defined by year, *t,t1*, and month, *m,m1*,
 *p\_prodLength* depicts the length of the production process in months.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdSize_[\S\s][^;]*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdSize_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 herdSize_(herds,breeds,tCur(t),nCur,m) $ (sum(FeedRegime,actHerds(herds,breeds,feedRegime,t,m))
 
@@ -119,7 +119,7 @@ expression in the equation.
 In comparative-static mode *p\_compStatHerd*, all lags are removed such
 that a steady-state herd model is described.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdsBal_[\S\s][^;]*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdsBal_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 herdsBal_(balHerds,breeds,tCur(t),nCur,m) $ (  sum(feedRegime,actherds(balHerds,breeds,feedRegime,t,m)) $ t_n(t,nCur)
 *
@@ -204,7 +204,7 @@ size of cows of each breed and a specific calving coefficients.
 *ActHerds* is a flag set to define which herds might enter the solution
 for a specific year.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/cattle_module.gms GAMS /newCalves_[\S\s][^;]*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /newCalves_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 newCalves_("%basBreed%",t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,"%basBreed%",feedRegime,t,m))
                         $ (p_Year(t) le p_year("%lastYear%")) $ t_n(t,nCur)) ..
@@ -239,12 +239,12 @@ Here, the amount of births per lactation, living calves per birth, calf losses, 
 
 The amount of living calves per year is then calculated from these values as follows (from *coeffgen\\ini\_herds.gms*)
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /p_livingCalvesPerYear.*?/ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /p_livingCalvesPerYear.*?/ /;/)
 ```GAMS
 p_livingCalvesPerYear(cows,allBreeds);
 ```
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /parameter p_livingCalvesPerYear.*?/ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /parameter p_livingCalvesPerYear.*?/ /;/)
 ```GAMS
 parameter p_livingCalvesPerYear(cows,allBreeds);
 ```
@@ -285,7 +285,7 @@ are shown in Figure 4.
 The piglet production process starts with the production of young
 piglets born to sows, shown in the following equation.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/pig_module.gms GAMS /newPiglets_[\S\s][^;]*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/pig_module.gms GAMS /newPiglets_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 newPiglets_(tCur(t),nCur,herdm) $  (sum(feedRegime,actHerds("sows","",feedRegime,t,herdm)) $ t_n(t,nCur)) ..
 
@@ -321,24 +321,24 @@ balance *herdsBal\_* and herd size, *herdSize\_* are used for the herd
 dynamic in the pig module. The following model code shows the elements
 of the herd used in the farm branch for sows.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /\$\$iftheni.sows "%farmBranchSows%" == "on"/ /\$\$endif.sows/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /\$\$iftheni.sows "%farmBranchSows%" == "on"/ /\$\$endif.sows/)
 ```GAMS
 $$iftheni.sows "%farmBranchSows%" == "on"
 
       herds_from_herds("piglets","youngPiglets","")    = yes;
       bought_to_herds("youngSows","","sows")           = yes;
 
-      actHerds("piglets","",feedRegime,t,m)       = yes;
-      actHerds("sows","",feedRegime,t,m)          = yes;
-      actHerds("youngPiglets","",feedRegime,t,m)  = yes;
-      actHerds("youngSows","",feedRegime,t,m)     = yes;
+      actHerds("piglets","",feedRegime,t,m)            = yes;
+      actHerds("sows","",feedRegime,t,m)               = yes;
+      actHerds("youngPiglets","",feedRegime,t,m)       = yes;
+      actHerds("youngSows","",feedRegime,t,m)          = yes;
    $$endif.sows
 ```
 
 The statements below show the elements of the herd used in the farm
 branch for fatteners.
 
-[embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /\$iftheni.pigHerd %pigHerd% == true/ /\$\$endif.fattners/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /\$iftheni.pigHerd %pigHerd% == true/ /\$\$endif.fattners/)
 ```GAMS
 $iftheni.pigHerd %pigHerd% == true
    $$iftheni.fattners "%farmBranchFattners%" == "on"
@@ -358,4 +358,3 @@ $iftheni.pigHerd %pigHerd% == true
 
    $$endif.fattners
 ```
-
