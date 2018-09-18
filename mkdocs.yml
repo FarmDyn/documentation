@@ -9,25 +9,28 @@ repo_name: Universität Bonn - ILR - FarmDyn
 repo_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
 
 pages:
-    - FarmDyn: index.md
-    - About: about.md
-    - Introduction: introduction.md
-    - Dynamic Character: dynamics.md
-    - Risk and Risk behavior: risk.md
-    - GHG Accounting: ghgAcc.md
-    - Coefficient Generator: coeffGen.md
-    - Technical Realization: technical.md
-    - Graphical User Interface: gui.md
-    - References: References.md
-    - Appendix: appendix.md
-    - The Template Model:
+    - FarmDyn:
+      - FarmDyn: index.md
+      - About: about.md
+      - Getting Started: installation.md
+      - Working with the model: methodology/gui.md
+    - Methodology:
+       - Introduction: methodology/introduction.md
+       - Dynamic Character: methodology/dynamics.md
+       - Risk and Risk behavior: methodology/risk.md
+       - GHG Accounting: methodology/ghgAcc.md
+       - Coefficient Generator: methodology/coeffGen.md
+       - Technical Realization: methodology/technical.md
+       - References: methodology/References.md
+       - Appendix: methodology/appendix.md
+    - Modules:
        - Introduction: template/introduction.md
        - Herd Module: template/herd_module.md
        - Feeding module: template/feeding_module.md
        - Cropping, Land and Land Use: template/cropping__land_and_land_use.md
        - Labour: template/labour.md
        - Stables: template/stables.md
-       - Other Type of Buildings: template/other_type_of_buildings.md
+       - Other Types of Buildings: template/other_type_of_buildings.md
        - Farm Machinery: template/farm_machinery.md
        - Investments, Financing and Cash Flow Definition: template/investments__financing_and_cash_flow_definition.md
        - Manure: template/manure.md
@@ -35,8 +38,15 @@ pages:
        - Plant Nutrition: template/plant_nutrition.md
        - Environmental Accounting Module: template/environmental_accounting_module.md
        - Biogas Module: template/biogas_module.md
-    - Staff:
-       - Development: staff/development.md
+    - Publications:
+       - Publications: publications/publications.md
+    - Training Videos:
+       - Training Videos: training/videos.md
+    - Programming:
+       - Choosing an editor: programming/editor.md
+    - Others:
+       - Model Development: staff/development.md
+       - Downloads: others/downloads.md
 
 extra:
   social:

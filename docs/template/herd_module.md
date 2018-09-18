@@ -232,10 +232,9 @@ newCalves_("%basBreed%",t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,"%
 ```
 
 
-The calving coefficients are defined in the *Cows* tab of the Graphical User Interface (see Fig. @fig:calvingCoeff).
+The calving coefficients are defined in the *Cows* tab of the Graphical User Interface.
 Here, the amount of births per lactation, living calves per birth, calf losses, and days between births can be set for the different breeds Holstein-Friesian (HF), Simmental (SI, which stands a placeholder for the individual breed defined in the GUI), and mother cows (MC). The values are stored in the parameter ```p_calvAttr```.
 
-![The calving coefficient table in the *Cows* tab of the GUI.](..media/media/calvingCoeff.png){#fig:calvingCoeff}
 
 The amount of living calves per year is then calculated from these values as follows (from *coeffgen\\ini\_herds.gms*)
 
@@ -267,7 +266,17 @@ used in other equations where differentiation by genetic potential is
 not needed. Additionally, this provides a better overview on model
 results in the equation listing.
 
-![](../media/image10.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /sumHerds_.*?\$/ /;/)
+```GAMS
+sumHerds_(sumHerds,breeds,feedRegime,t,nCur,m) $ (t_n(t,nCur)
+*                       $ sum(sum_herds(sumHerds,PossHerds) $ (p_prodLength(possHerds,breeds) gt 1),1)
+                       $  sum(sum_herds(sumHerds,possHerds) $ actHerds(possHerds,breeds,feedRegime,t,m),1)) ..
+
+       v_herdSize(sumHerds,breeds,feedRegime,t,nCur,m)
+          =e= sum(sum_herds(sumHerds,possHerds) $ actHerds(possHerds,breeds,feedRegime,t,m) ,
+                 v_herdSize(possHerds,breeds,feedRegime,t,nCur,m) $ (p_prodLength(possHerds,breeds) gt 1)
+              +  v_herdStart(possHerds,breeds,t,nCur,m) $ (p_prodLength(possHerds,breeds) eq 1));
+```
 
 ## Pig Module
 
