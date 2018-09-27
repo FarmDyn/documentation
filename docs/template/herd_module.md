@@ -337,10 +337,10 @@ $$iftheni.sows "%farmBranchSows%" == "on"
       herds_from_herds("piglets","youngPiglets","")    = yes;
       bought_to_herds("youngSows","","sows")           = yes;
 
-      actHerds("piglets","",feedRegime,t,m)            = yes;
-      actHerds("sows","",feedRegime,t,m)               = yes;
-      actHerds("youngPiglets","",feedRegime,t,m)       = yes;
-      actHerds("youngSows","",feedRegime,t,m)          = yes;
+      actHerds("piglets","",feedRegimePigs,t,m)            = yes;
+      actHerds("sows","",feedRegimePigs,t,m)               = yes;
+      actHerds("youngPiglets","",feedRegimePigs,t,m)       = yes;
+      actHerds("youngSows","",feedRegimePigs,t,m)          = yes;
    $$endif.sows
 ```
 
@@ -352,11 +352,11 @@ branch for fatteners.
 $iftheni.pigHerd %pigHerd% == true
    $$iftheni.fattners "%farmBranchFattners%" == "on"
 
-       actHerds("Fattners","",feedRegime,t,m)        = yes;
-       actHerds("earlyFattners","",feedRegime,t,m)   = yes;
-       actHerds("midFattners","",feedRegime,t,m)     = yes;
-       actHerds("lateFattners","",feedRegime,t,m)    = yes;
-       actHerds("pigletsBought","",feedRegime,t,m)   = yes;
+       actHerds("Fattners","",feedRegimePigs,t,m)        = yes;
+       actHerds("earlyFattners","",feedRegimePigs,t,m)   = yes;
+       actHerds("midFattners","",feedRegimePigs,t,m)     = yes;
+       actHerds("lateFattners","",feedRegimePigs,t,m)    = yes;
+       actHerds("pigletsBought","",feedRegimePigs,t,m)   = yes;
        bought_to_herds("pigletsBought","","earlyFattners")   = yes;
 
 

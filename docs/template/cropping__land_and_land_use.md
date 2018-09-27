@@ -168,50 +168,50 @@ shown).
 ```GAMS
 set rot_cropTypes(rot,cropTypes,cropTypes,cropTypes)  "Rotation, first / second / third year crop type"
                                          /
-                                           WC_WC_PO.winterWheat.winterWheat.potatoes
-                                           WC_PO_WC.winterWheat.potatoes.winterWheat
-                                           PO_WC_WC.potatoes.winterWheat.winterWheat
+                                           WC_WC_PO.WinterCere.WinterCere.potatoes
+                                           WC_PO_WC.WinterCere.potatoes.WinterCere
+                                           PO_WC_WC.potatoes.WinterCere.WinterCere
 
-                                           WC_WC_OT.winterWheat.winterWheat.other
-                                           WC_OT_WC.winterWheat.other.winterWheat
-                                           OT_WC_WC.other.winterWheat.winterWheat
+                                           WC_WC_OT.WinterCere.WinterCere.other
+                                           WC_OT_WC.WinterCere.other.WinterCere
+                                           OT_WC_WC.other.WinterCere.WinterCere
 
-                                           WC_WC_ID.winterWheat.winterWheat.idle
-                                           WC_ID_WC.winterWheat.idle.winterWheat
-                                           ID_WC_WC.idle.winterWheat.winterWheat
+                                           WC_WC_ID.WinterCere.WinterCere.idle
+                                           WC_ID_WC.WinterCere.idle.WinterCere
+                                           ID_WC_WC.idle.WinterCere.WinterCere
 
-                                           WC_WC_SU.winterWheat.winterWheat.sugarBeet
-                                           WC_SU_WC.winterWheat.sugarBeet.winterWheat
-                                           SU_WC_WC.sugarBeet.winterWheat.winterWheat
+                                           WC_WC_SU.WinterCere.WinterCere.sugarBeet
+                                           WC_SU_WC.WinterCere.sugarBeet.WinterCere
+                                           SU_WC_WC.sugarBeet.WinterCere.WinterCere
 
-                                           WC_WC_SC.winterWheat.winterWheat.summerCere
-                                           WC_SC_WC.winterWheat.summerCere.winterWheat
-                                           SC_WC_WC.summerCere.winterWheat.winterWheat
+                                           WC_WC_SC.WinterCere.WinterCere.summerCere
+                                           WC_SC_WC.WinterCere.summerCere.WinterCere
+                                           SC_WC_WC.summerCere.WinterCere.WinterCere
 
-                                           WC_SC_PO.winterWheat.summerCere.potatoes
-                                           SC_PO_WC.summerCere.potatoes.winterWheat
-                                           PO_WC_SC.potatoes.winterWheat.summerCere
+                                           WC_SC_PO.WinterCere.summerCere.potatoes
+                                           SC_PO_WC.summerCere.potatoes.WinterCere
+                                           PO_WC_SC.potatoes.WinterCere.summerCere
 
-                                           WC_SC_SU.winterWheat.summerCere.sugarBeet
-                                           SC_SU_WC.summerCere.sugarBeet.winterWheat
-                                           SU_WC_SC.sugarBeet.winterWheat.summerCere
+                                           WC_SC_SU.WinterCere.summerCere.sugarBeet
+                                           SC_SU_WC.summerCere.sugarBeet.WinterCere
+                                           SU_WC_SC.sugarBeet.WinterCere.summerCere
 
-                                           WC_SC_ID.winterWheat.summerCere.idle
-                                           SC_ID_WC.summerCere.idle.winterWheat
-                                           ID_WC_SC.idle.winterWheat.summerCere
+                                           WC_SC_ID.WinterCere.summerCere.idle
+                                           SC_ID_WC.summerCere.idle.WinterCere
+                                           ID_WC_SC.idle.WinterCere.summerCere
 
-                                           WC_SC_OT.winterWheat.summerCere.other
-                                           SC_OT_WC.summerCere.other.winterWheat
-                                           OT_WC_SC.other.winterWheat.summerCere
+                                           WC_SC_OT.WinterCere.summerCere.other
+                                           SC_OT_WC.summerCere.other.WinterCere
+                                           OT_WC_SC.other.WinterCere.summerCere
 
 
-                                           SC_WC_SC.summerCere.winterWheat.summerCere
-                                           WC_SC_SC.winterWheat.summerCere.summerCere
-                                           SC_SC_WC.summerCere.summerCere.winterWheat
+                                           SC_WC_SC.summerCere.WinterCere.summerCere
+                                           WC_SC_SC.WinterCere.summerCere.summerCere
+                                           SC_SC_WC.summerCere.summerCere.WinterCere
 
-                                           WC_ID_ID.winterWheat.idle.idle
-                                           ID_WC_ID.idle.winterWheat.idle
-                                           ID_ID_WC.idle.idle.winterWheat
+                                           WC_ID_ID.WinterCere.idle.idle
+                                           ID_WC_ID.idle.WinterCere.idle
+                                           ID_ID_WC.idle.idle.WinterCere
 
                                            SC_ID_ID.summerCere.idle.idle
                                            ID_SC_ID.idle.summerCere.idle
@@ -222,31 +222,31 @@ set rot_cropTypes(rot,cropTypes,cropTypes,cropTypes)  "Rotation, first / second 
                                            ID_SC_SC.idle.summerCere.summerCere
 
                                            SC_SC_PO.summerCere.summerCere.potatoes
-                                           WC_PO_ID.winterWheat.potatoes.idle
+                                           WC_PO_ID.WinterCere.potatoes.idle
                                            SC_PO_ID.summerCere.potatoes.idle
                                            ID_ID_ID.idle.idle.idle
                                            PO_ID_ID.potatoes.idle.idle
 
                                            SC_SC_SU.summerCere.summerCere.sugarBeet
-                                           WC_SU_ID.winterWheat.sugarBeet.idle
+                                           WC_SU_ID.WinterCere.sugarBeet.idle
                                            SC_SU_ID.summerCere.SugarBeet.idle
                                            SU_ID_ID.sugarBeet.idle.idle
 
 
 
                                            SC_SC_OT.summerCere.summerCere.other
-                                           WC_OT_ID.winterWheat.other.idle
+                                           WC_OT_ID.WinterCere.other.idle
                                            SC_OT_ID.summerCere.other.idle
                                            OT_ID_ID.other.idle.idle
 
-                                           PO_OT_WC.potatoes.other.winterWheat
-                                           OT_WC_PO.other.winterWheat.potatoes
-                                           WC_PO_OT.winterWheat.potatoes.other
+                                           PO_OT_WC.potatoes.other.WinterCere
+                                           OT_WC_PO.other.WinterCere.potatoes
+                                           WC_PO_OT.WinterCere.potatoes.other
 
                                            PO_OT_SC.potatoes.other.summerCere
-                                           SU_OT_WC.SugarBeet.other.winterWheat
-                                           OT_WC_SU.other.winterWheat.SugarBeet
-                                           WC_SU_OT.winterWheat.SugarBeet.other
+                                           SU_OT_WC.SugarBeet.other.WinterCere
+                                           OT_WC_SU.other.WinterCere.SugarBeet
+                                           WC_SU_OT.WinterCere.SugarBeet.other
 
                                            SU_OT_SC.SugarBeet.other.summerCere
                                            OT_SC_SU.other.summerCere.SugarBeet
