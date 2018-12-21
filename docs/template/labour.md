@@ -100,7 +100,7 @@ $ifi %biogas%== true + sum((curBhkw(bhkw)), v_labBioGas(bhkw,t,nCur,m))
 
 ## Labour Need for Farm Branches
 
-Farmdyn comprises currently five different farm branches: cropping,
+FarmDyn comprises currently five different farm branches: cropping,
 cattle, fatteners, sows and biogas. The (management) labour needs for
 the biogas branch is accounted for in the biogas module. For the other
 branches, their size *v\_branchSize*, is endogenously defined from

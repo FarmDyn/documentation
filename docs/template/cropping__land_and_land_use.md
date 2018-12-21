@@ -30,7 +30,7 @@ The total land endowment is calculated in the equation *totPlotLand\_*
 as the sum of the initial endowment, *p\_plotSize(plot)*, and land
 purchased, *v\_buyLand*, in the past or current year.
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /totPlotLand_\(.*?\$.*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /totPlotLand_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 totPlotLand_(plot,tCur(t),nCur) $ (p_plotSize(plot) $ t_n(t,nCur)) ..
 
@@ -52,7 +52,7 @@ Total cropped land is defined by the land occupied by the different
 crops, *v\_cropH*a. The *c\_s\_t\_i* set defines the active possible
 combinations of crops, soil type, tillage type and management intensity.
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /croppedLand_\(.*?\$.*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /croppedLand_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 croppedLand_(landType,soil,tCur(t),nCur)  $ t_n(t,nCur) ..
 
@@ -67,7 +67,7 @@ The total land *v\_totPlotLand* can be either used for cropping
 v*\_rentOutLand*, on a yearly basis. The option to rent out land can be
 activated in the GUI:
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /\splotland_\(.*?\$.*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /\splotland_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
  plotland_(plot,tCur(t),nCur) $ (p_plotSize(plot) $ t_n(t,nCur)) ..
 *
@@ -78,26 +78,11 @@ $ifi %landLease% == true + v_rentOutPlot(plot,t,nCur)*p_plotSize(plot)
               =L= v_totPlotLand(plot,t,nCur);
 ```
 
-Maximum rotational shares, *p\_maxRotShare*, enter *cropRot\_*, which is
-only active if no crop rotations are used (see chapter 2.3.2).
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /cropRot_\(.*?,nCur/ /;/)
-```GAMS
-cropRot_(landType,curCrops(crops),plot,tCur(t),nCur)
-        $ (  sum(c_s_t_i(crops,plot,till,intens)
-                                 $ (v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0),1)
-                        $ (sum(plot_soil(plot,soil), p_maxRotShare(Crops,soil)) lt 1)
-                        $  crops_t_landType(crops,landType)
-                        $ t_n(t,nCur)  ) ..
-          sum( c_s_t_i(crops,plot,till,intens), v_cropHa(crops,plot,till,intens,t,nCur))
-               =l= v_croppedPlotLand(plot,t,nCur) * sum(plot_soil(plot,soil),p_maxRotShare(crops,soil));
-```
-
 That a farm stays within a maximum stocking rate ceiling, expressed in
 livestock units per ha, is ensured by the following equation. The
 maximal allowed stocking rate can be adjusted in the GUI:
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /luLand_.*?\.\./ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /luLand_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
 luLand_(tCur(t),nCur) $ t_n(t,nCur)    ..
 

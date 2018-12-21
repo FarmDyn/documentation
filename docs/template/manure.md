@@ -9,21 +9,21 @@
 
 With regard to excretion of animals, relevant equations and variables
 can be found in the *general\_herd\_module.gms*. *v\_manQuantM* is the
-monthly volume in cubic meter of manure produced. It is computed by
-summing the monthly manure for the herd with considering the amount
-excreted while grazing, shown in the following equation:
+monthly volume in cubic meter of manure produced. As a default, liquid manure is considered in the model.
+If a herd is utilising a straw stable, semi-solid and solid manure are excreted additionally.
+The monthly manure excretion, *v\_manQuantM*, is computed in the following equation:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /manQuantM_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-manQuantM_(curManChain(manChain),tCur(t),nCur,m) $ t_n(t,nCur) ..
+manQuantM_(curManChain(manChain),tCur(t),nCur,m) $(t_n(t,nCur)$(not sameas(curManChain,"LiquidBiogas"))) ..
 
         v_manQuantM(manChain,t,nCur,m)
 
           =e=
-               sum( actherds(herds,breeds,feedRegime,t,m1) $ manChain_herd(curManChain,herds),
-                   p_manQuantMonth(herds,curManChain) * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
+               sum( actherds(possHerds,breeds,feedRegime,t,m1) $ manChain_herd(curManChain,possHerds),
+                   p_manQuantMonth(possHerds,curManChain) * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
                                                             - 0.5 $ sameas(feedRegime,"partGraz"))
-                    * sum(m_to_herdm(m,m1), v_herdSize(herds,breeds,feedRegime,t,nCur,m1)));
+                    * sum(m_to_herdm(m,m1), v_herdSize(possHerds,breeds,feedRegime,t,nCur,m1)));
 ```
 
 Furthermore, the monthly excretion of nutrients, NTAN, Norg and P is
@@ -32,11 +32,11 @@ excretion rate depends on animal category, feeding regime and yield
 level. For fatteners and sows, excretion depends on animal category and
 feeding regime. Corresponding parameters can be found in
 *coeffgen\\manure.gms* (not shown here). For dairy cows, excretion on
-pasture is subtracted.
+pasture is subtracted. Depending on the stable inventory of a herd, manure excretion can be differentiated by liquid, semi-solid, and solid manure. If a herd is set on a straw stables, the manure excretion is split among the different manure types accordingly.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /nut2ManureM_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nut2ManureM_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
+nut2ManureM_(curManChain(manChain),nut2,tCur(t),nCur,m) $(t_n(t,nCur)$(not sameas(curManChain,"LiquidBiogas"))) ..
 
     v_nut2ManureM(manChain,nut2,t,nCur,m) =e=
           sum(actherds(possHerds,breeds,feedRegime,t,m1)
@@ -46,8 +46,6 @@ nut2ManureM_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
                         * ( 1 - 1   $ sameas(feedRegime,"fullGraz")
                               - 0.5 $ sameas(feedRegime,"partGraz"))
                     * sum(herd_stableStyle(possHerds,stableStyles), p_nutShare(manChain,stableStyles,nut2))
-*   --- if we add the correction for the quantity here, we might not have to do it in the manure.gms for each herd seperately  
-                    * sum(herd_stableStyle(possHerds,stableStyles), p_nutShare(manChain,stableStyles,"m3"))
                     * sum(m_to_herdm(m,m1), v_herdSize(possHerds,breeds,feedRegime,t,nCur,m1)))
     ;
 ```
@@ -77,8 +75,8 @@ biogasVolCropDigestate_(crm(biogasfeedM),tCur(t),nCur,m) $ t_n(t,nCur) ..
 ```GAMS
 biogasVolManDigestate_(tCur(t),nCur,m) $ t_n(t,nCur) ..
 
-        v_volDigMan(t,nCur,m) =E= sum( (curBhkw(bhkw), curEeg(eeg), maM) ,
-                                        v_purchManure(bhkw,eeg,maM,t,nCur,m) $ selPurchInputs(maM)   * p_fugMan);
+        v_volDigMan(t,nCur,m) =E= sum( (curBhkw(bhkw), curEeg(eeg), curmaM) ,
+                                        v_purchManure(bhkw,eeg,curmaM,t,nCur,m) $ selPurchInputs(curmaM)   * p_fugMan);
 ```
 
 
@@ -90,28 +88,28 @@ calculated as an annual average since no short term changes are common.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /nutCropBiogasY_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nutCropBiogasY_(nut2,tCur(t),nCur) $ t_n(t,nCur) ..
+nutCropBiogasY_(curmanchain,nut2,tCur(t),nCur) $ (t_n(t,nCur) $ sameas(curmanchain,"LiquidBiogas")) ..
 
-        v_nutCropBiogasY(nut2,t,nCur) =E=
+        v_nutCropBiogasY(curmanchain,nut2,t,nCur) =E=
              sum( ( crM(biogasFeedM),m,curBhkw(bhkw), curEeg(eeg) ),
                                          v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m)
-                                               * p_nutDigCrop(nut2,crM));
+                                               * p_nutDigCrop(curmanchain,nut2,crM));
 ```
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /nutCropBiogasM_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nutCropBiogasM_(nut2,tCur(t),nCur,m) $ t_n(t,nCur)..
+nutCropBiogasM_(curmanchain,nut2,tCur(t),nCur,m) $(t_n(t,nCur) $ sameas(curmanchain,"LiquidBiogas")) ..
 
-        v_nutCropBiogasM(nut2,t,nCur,m) =E=  v_nutCropBiogasY(nut2,t,nCur) / card(m);
+        v_nutCropBiogasM("LiquidBiogas",nut2,t,nCur,m) =E=  v_nutCropBiogasY("LiquidBiogas", nut2,t,nCur) / card(m);
 ```
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /nut2ManurePurch_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nut2ManurePurch_(nut2,maM,tCur(t),nCur,m) $ t_n(t,nCur)..
+nut2ManurePurch_(curmanchain,nut2,curmaM,tCur(t),nCur,m) $( t_n(t,nCur) $ sameas(curmanchain,"LiquidBiogas"))  ..
 
-         v_nut2ManurePurch(nut2,maM,t,nCur,m)
+         v_nut2ManurePurch(curmanchain,nut2,curmaM,t,nCur,m)
             =E=    sum ( (curBhkw(bhkw), curEeg(eeg)),
-                        v_purchManure(bhkw,eeg,maM,t,nCur,m) * p_nut2manPurch(nut2,maM)  )    ;
+                        v_purchManure(bhkw,eeg,curmaM,t,nCur,m) * p_nut2manPurch("LiquidBiogas",nut2,curmaM)  )    ;
 ```
 
 
@@ -119,9 +117,7 @@ nut2ManurePurch_(nut2,maM,tCur(t),nCur,m) $ t_n(t,nCur)..
 
 Equations related to manure storage serve mainly for the calculation of
 the needed storage capacity, linked to investment, and for the
-calculation of emissions during storage. The *manure\_module.gms* is
-activated when fattners, sows, dairy and/or biogas is activated in the
-GUI.
+calculation of emissions during storage. The equations realted to manrue storage in *manure\_module.gms* are activated when fattners, sows, dairy and/or biogas is activated in the GUI.
 
 The amount of manure in the storage in cubic meter is described in the
 following equation. Manure is emptied by field application,
@@ -130,7 +126,7 @@ exported from the farm.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /volInStorage_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-volInStorage_(curManChain(manChain),tCur(t),nCur,m) $ t_n(t,nCur) ..
+volInStorage_(curManChain(manChain),tCur(t),nCur,m) $ ( t_n(t,nCur)$ ( not sameas (manchain,"LiquidImport"))  ) ..
 
        v_volInStorage(manChain,t,nCur,m) =e= [sum(t_n(t-1,nCur1) $ anc(nCur,nCur1),
                                   v_volInStorage(manChain,t-1,nCur1,"Dec")) $ (sameas(m,"Jan") $ tCur(t-1))
@@ -148,7 +144,7 @@ $iftheni.herd %herd% == true
 *
 *                               --- m3 excreted per year divied by # of month: monthly inflow
 *
-                                + v_manQuantM(manChain,t,nCur,m)
+                                + v_manQuantM(manChain,t,nCur,m) $ (not sameas(manchain,"LiquidBiogas"))
 $endif.herd
 
 *                               --- m3 coming from biogas plant s energy crops and purchased manure
@@ -156,18 +152,18 @@ $iftheni.b %biogas% == true
 
 *                               --- Diogas digestate based on energy crops
 
-                                +  sum(crm(biogasfeedM), v_volDigCrop(crM,t,nCur,m))
+                                +  sum(crm(biogasfeedM), v_volDigCrop(crM,t,nCur,m)) $ sameas(manchain,"LiquidBiogas")
 
 *                               --- Biogas digestate based on manure
 
-                                +  v_volDigMan(t,nCur,m)
+                                +  v_volDigMan(t,nCur,m) $ sameas(manchain,"LiquidBiogas")
 $endif.b
 *
 *                               --- m3 taken out of storage type for application to crops
 *
                                 - v_volManApplied(manChain,t,nCur,m)
 
-$iftheni.ExMan %AllowManureExport%==true
+$iftheni.ExMan "%AllowManureExport%"=="true"
 
 *                               --- m3 exported from farm
 
@@ -184,12 +180,11 @@ $endif.emissionRight
 
 Following the same structure as the equation above, there is a nutrient
 pool for NTAN, Norg and P in the storage. Losses of NTAN and Norg during
-storage are subtracted. When environmental accounting is switched off,
-standard loss factors are subtracted directly in the equation.
+storage are calculated in the environmental accounting and subtracted.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /nutPoolInStorage_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nutPoolInStorage_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
+nutPoolInStorage_(curManChain(manChain),nut2,tCur(t),nCur,m) $ ( t_n(t,nCur)$ ( not sameas (manchain,"LiquidImport"))  ) ..
 
             v_nutPoolInStorage(manChain,nut2,t,nCur,m)
 
@@ -210,25 +205,24 @@ $endif.cs
 
 $iftheni.herd %herd% == true
 
-                 + v_nut2ManureM(manChain,nut2,t,nCur,m)
+                 + v_nut2ManureM(manChain,nut2,t,nCur,m) $ (not sameas(manchain,"LiquidBiogas"))
 
 $endif.herd
 
 $iftheni.biogas %biogas% == true
 
-                 +  sum( (curBhkw(bhkw),curEeg(eeg),maM),   v_nut2ManurePurch(nut2,maM,t,nCur,m)  )
+                 +  sum( (curBhkw(bhkw),curEeg(eeg),curmaM),   v_nut2ManurePurch("LiquidBiogas",nut2,curmaM,t,nCur,m)  ) $ sameas(manchain,"LiquidBiogas")
 
-                 +  v_nutCropBiogasM(nut2,t,nCur,m)
+                 +  v_nutCropBiogasM("LiquidBiogas",nut2,t,nCur,m) $ sameas(manchain,"LiquidBiogas")
 $endif.biogas
 
 
-$iftheni.envAcc %envAcc% == true
 
 * --- When environmental accounting is switched on, storage losses are calculated in envir_acc_module.gms
 
                 - v_nutLossInStorage(manChain,nut2,t,nCur,m)
 
-$else.envAcc
+$ontext
 
 * --- When environmental accounting is switched off, only standard losses for NH3 are substracted from NTAN
 
@@ -247,7 +241,7 @@ $else.envAcc
 
                 $$endif.biogas
 
-$endif.envAcc
+$offtext
 
 * --- Nutrients applied
 
@@ -255,7 +249,7 @@ $endif.envAcc
 
 * --- Nutrients exported from farm
 
-$iftheni.ExMan %AllowManureExport%==true
+$iftheni.ExMan "%AllowManureExport%"=="true"
 
                  - v_nut2export(manChain,nut2,t,nCur,m)
 
@@ -270,28 +264,29 @@ $endif.emissionRight
  ;
 ```
 
-When environmental accounting is switched on, losses are calculated in
-the equation *nutLossInStorage\_*, using emission factors from the
-environmental impact accounting module (see chapter 2.12).
+Storage losses of reactive nitrogen are calculated in the equation *nutLossInStorage\_*, using emission factors from the
+environmental impact accounting module.
 
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /nutLossInStorage_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-nutLossInStorage_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
+nutLossInStorage_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur)  ..
 
        v_nutLossInStorage(manChain,nut2,t,nCur,m) =E=
 
 * --- NH3 losses in stable and storage, only related to N TAN
 
-                   + v_emStabSto(manChain,"NH3",t,nCur,m) $ sameas(nut2,"NTAN")
+                   + v_emissions(manChain,"staSto","NH3",t,nCur,m) $( sameas(nut2,"NTAN") $ (not sameas(manchain,"LiquidBiogas")))
+
 
             $$iftheni.herd %herd% == true
 
 * --- N2O, N2 and NO losses in stable and storage, related to NTAN and Norg
 
-                   + v_nut2ManureM(manChain,"NTAN",t,nCur,m) * ( p_EFStaSto("N2O") +  p_EFStaSto("NOx") + p_EFStaSto("N2") )   $ sameas(nut2,"NTAN")
+                   + v_nut2ManureM(manChain,"NTAN",t,nCur,m) * ( p_EFStaSto("N2O",curManChain) +  p_EFStaSto("NOx",curManChain) + p_EFStaSto("N2",curManChain) )   $(sameas(nut2,"NTAN")  $(not sameas(manchain,"LiquidBiogas")))
 
-                   + v_nut2ManureM(manChain,"NOrg",t,nCur,m) * ( p_EFStaSto("N2O") +  p_EFStaSto("NOx") + p_EFStaSto("N2") )   $ sameas(nut2,"NOrg")
+                   + v_nut2ManureM(manChain,"NOrg",t,nCur,m) * ( p_EFStaSto("N2O",curManChain) +  p_EFStaSto("NOx",curManChain) + p_EFStaSto("N2",curManChain) )   $(sameas(nut2,"NOrg")   $(not sameas(manchain,"LiquidBiogas")))
+
 
             $$endif.herd
 
@@ -299,11 +294,11 @@ nutLossInStorage_(curManChain(manChain),nut2,tCur(t),nCur,m) $ t_n(t,nCur) ..
 
             $$iftheni.biogas %biogas% == true
 
-                   + [ ( v_nutCropBiogasM("NTAN",t,nCur,m)   + sum (maM, v_nut2ManurePurch("NTAN",maM,t,nCur,m)  ) )
-                                          * p_EFStaSto("N2O")   * p_EFStaSto("NOx")  * p_EFStaSto("N2") ]  $ sameas(nut2,"NTAN")
+                   + [ ( v_nutCropBiogasM(manchain,"NTAN",t,nCur,m)   + sum (curmaM(mam), v_nut2ManurePurch(manchain,"NTAN",curmaM,t,nCur,m)  ) )
+                                          * (p_EFStaSto("N2O",curManChain)   + p_EFStaSto("NOx",curManChain)  + p_EFStaSto("N2",curManChain)) ]  $( sameas(nut2,"NTAN") $ sameas(manchain,"LiquidBiogas"))
 
-                   + [ ( v_nutCropBiogasM("NOrg",t,nCur,m)   + sum (maM, v_nut2ManurePurch("NOrg",maM, t,nCur,m) ) )
-                                          * p_EFStaSto("N2O")   * p_EFStaSto("NOx")  * p_EFStaSto("N2") ]  $ sameas(nut2,"NOrg")
+                   + [ ( v_nutCropBiogasM(manchain,"NOrg",t,nCur,m)   + sum (curmaM(mam), v_nut2ManurePurch(manchain,"NOrg",curmaM, t,nCur,m) ) )
+                                          *( p_EFStaSto("N2O",curManChain)   + p_EFStaSto("NOx",curManChain)  + p_EFStaSto("N2",curManChain)) ]  $( sameas(nut2,"NOrg") $ sameas(manchain,"LiquidBiogas"))
 
            $$endif.biogas
         ;
@@ -324,10 +319,10 @@ totalManStorCap_(curManChain(manChain),tCur(T),nCur) $ t_n(t,nCur) ..
        v_TotalManStorCap(manChain,t,nCur) =e=
 
 $iftheni.herd %herd%  == true
-                              v_SubManStorCap(manChain,t,nCur)
-                            + v_SiloManStorCap(manChain,t,nCur)
+                              v_SubManStorCap(manChain,t,nCur)  $ (not sameas ("LiquidBiogas",manchain))
+                            + v_SiloManStorCap(manChain,t,nCur) $ (not sameas ("LiquidBiogas",manchain))
 $endif.herd
-$ifi %biogas% == true       + v_siloBiogasStorCap(t,nCur)
+$ifi %biogas% == true       + v_siloBiogasStorCap(t,nCur) $ sameas ("LiquidBiogas",manchain)
     ;
 ```
 
@@ -361,7 +356,7 @@ m³.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /subManStorCap_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
-subManStorCap_(curManChain(manChain),tCur(t),nCur) $ t_n(t,nCur) ..
+subManStorCap_(curManChain(manChain),tCur(t),nCur) $(t_n(t,nCur)$(not sameas(curManChain,"LiquidBiogas"))) ..
 
        v_SubManStorCap(manChain,t,nCur) =e=
        sum(stables $ (      sum( (t_n(t1,nCur1),hor) $ isNodeBefore(nCur,nCur1),
@@ -410,14 +405,8 @@ siloCoverInv_(curManChain(manChain),silos,tCur(t),nCur)
 ```
 
 The amount of storage capacity is prescribed by environmental law.
-FARMDYN allows applying different regulations with regard to required
-storage capacity, changed in the GUI. The necessary silo capacity can be
-set (1) to 6 month, i.e. 50 % of annual manure excretion, or to (2)
-amount of month when manure application is forbidden in winter. For (2),
-there is a differentiation for arable land and grassland.
-
-![](../media/image102.png)
--> only first equation is the same
+FarmDyn allows applying different regulations with regard to required
+storage capacity, changed in the GUI. Thereby FarmDyn allows to precisely caputre the requirements of the German Fertilization Ordinance 2007 and 2017, which is further specified in the [Fertilization Ordinance chapter](fertilization_ordinance.md#required-manure-storage-capacities).
 
 The total manure storage capacity *v\_TotalManStorCap* must be greater
 than the required storage capacity *v\_ManStorCapNeed*.
@@ -466,9 +455,9 @@ maxManVolStorLastMonth_(curManChain(manChain),"%lastYear%",nCur,"Dec") $ t_n("%l
 
                         (
 
-$ifi %herd% == true         v_manQuant(manChain,"%lastYearCalc%",nCur)
+$ifi %herd% == true         v_manQuant(manChain,"%lastYearCalc%",nCur)$ (not sameas(manchain,"LiquidBiogas"))
 
-$ifi %biogas% == true     + sum((crm(biogasFeedM),m), v_voldigCrop(crM,"%lastYearCalc%",nCur,m)+ v_volDigMan("%lastYearCalc%",nCur,m) )
+$ifi %biogas% == true     + sum((crm(biogasFeedM),m), v_voldigCrop(crM,"%lastYearCalc%",nCur,m)+ v_volDigMan("%lastYearCalc%",nCur,m) ) $ sameas(manchain,"LiquidBiogas")
 
                          ) * 8/12
 
@@ -481,10 +470,16 @@ maxManNutStorLastMonth_(curManChain(manChain),nut2,"%lastYear%",nCur,"Dec") $ t_
 
                         (
 
-$ifi %herd% ==true          sum(m, v_nut2ManureM(manChain,nut2,"%lastYear%",nCur,m))
+$ifi %herd% ==true          sum(m, v_nut2ManureM(manChain,nut2,"%lastYear%",nCur,m) $ (not sameas(manchain,"LiquidBiogas")))
 
-$ifi %biogas% == true     + sum((maM,m), + v_nut2ManurePurch(nut2,maM,"%lastYearCalc%",nCur,m))
+$iftheni.b %biogas% == true
 
+                          + sum((curmaM,m), v_nut2ManurePurch(manchain,nut2,curmaM,"%lastYear%",nCur,m) ) $ sameas(manchain,"LiquidBiogas")
+
+                          + sum(m, v_nutCropBiogasM("LiquidBiogas",nut2,"%lastYear%",nCur,m))             $ sameas(manchain,"LiquidBiogas")
+
+
+$endif.b
                          ) * 8/12
 
                       =G=  v_nutPoolInStorage(manChain,nut2,"%lastYear%",nCur,"Dec");
@@ -494,8 +489,8 @@ $ifi %biogas% == true     + sum((maM,m), + v_nut2ManurePurch(nut2,maM,"%lastYear
 ## Manure Application
 
 Different application procedures for manure N are implemented,
-*ManApplicType*, including broad spread, drag hose spreader and
-injection of manure. The core variable is *v\_mandist* that represents
+*ManApplicType*, including broad spread, drag hose spreader, injection of manure, and solid manure spread.
+The core variable is *v\_mandist* that represents
 the amount of manure in cubic meter. The different techniques are
 related to different application costs, labour requirements as well as
 effects on different emissions. Furthermore, manure application is
@@ -505,66 +500,16 @@ manure storage (see chapter 2.9.2).
 The application of manure links nutrient with volumes. The nutrient
 content of the manure is depending on the herd's excretion as well as on
 the losses during storage. The parameter *p\_nut2inMan* contains the
-amount of NTAN, Norg and P per cubic meter of manure applied. Relevant
-parameters are calculated in *coeffgen\\manure.gms*. There are two
-approaches to calculate the parameter, (1) environmental accounting not
-activated and (2) environmental accounting activated.
+amount of NTAN, Norg and P per cubic meter of manure applied. The parameter is differentiated for the manure types linked to the present herd.
+Relevant parameters are calculated in *coeffgen\\manure.gms*.
 
-For both systems, the amount of different nutrients per cubic meter is
-calculated without losses, *p\_nut2inManNoLoss*. In the following
-equation, *p\_nut2inMan* is calculated when the environmental accounting
-is not active. In this case, only a fixed factor for NH<sub>3</sub> emissions is
-subtracted from NTAN contained in the manure. The parameter is
-calculated for the types of manure from different herds, *mantype.* The
-herds and types of manure are linked via the cross set *herds\_mantype*.
-This calculation implies that there is one type of manure for every herd
-activated in FARMDYN.
+As a first step, the amount of different nutrients per cubic meter without losses is calculated in *p\_nut2inManNoLoss* . Here, the nutrient excretion of the animals is related to their volume excretion depending on the stables present on the farm.
 
-![](../media/image106.png)
--> couldn't find this parameters
-
-If environmental accounting is active, the calculation of *p\_nut2inMan*
-differs. It is taken into account, the storage time of manure varies
-and, therefore, losses during storage vary. For the manure of every
-herd, two types of manure are calculated, representing the maximum and
-minimum possible amount of losses during one year. This allows a
-complete emptying of the storage in a linear programming setting.
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NTAN"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
-```GAMS
-p_nut2inMan("NTAN",manType,manChain)  $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("NTAN","highRedNP",mantype) * (1 - p_lossFactorSto("low",mantype,"NTAN")  );
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NOrg"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
-```GAMS
-p_nut2inMan("NOrg",manType,manChain)  $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("NOrg","highRedNP",mantype) * (1 -  p_lossFactorSto("low",mantype,"Norg") );
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("P"[\S\s]*?"low"[\S\s]*?[=][\S\s]*?highRedNP/ /;/)
-```GAMS
-p_nut2inMan("P",manType,manChain)     $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("P","highRedNP",mantype);
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NTAN"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
-```GAMS
-p_nut2inMan("NTAN",manType,manChain)  $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("NTAN","highRedNP",mantype) * (1 - p_lossFactorSto("low",mantype,"NTAN")  );
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("NOrg"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
-```GAMS
-p_nut2inMan("NOrg",manType,manChain)  $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("NOrg","highRedNP",mantype) * (1 -  p_lossFactorSto("low",mantype,"Norg") );
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /p_nut2inMan\("P"[\S\s]*?"high"[\S\s]*?[=][\S\s]*?normFeed/ /;/)
-```GAMS
-p_nut2inMan("P",manType,manChain)     $ manuretype_nutConMan("low",mantype)
-                                 =  p_nut2inManNoLoss("P","highRedNP",mantype);
-```
+In a second step, the nutrients per cubic meter are corrected for the storage losses in *p\_nut2inMan*.
+Varying storage time of manure, and hence varying nutrient content, can be taken into account by activating the "Nutrient loss depending on storage time" control in the GUI.
+In this case, for the manure of every herd, two types of manure are calculated, representing the maximum and
+minimum possible amount of losses during one year. This allows a complete emptying of the storage in a linear programming setting.
+In the default case, only the minimum losses are assumed.
 
 The total manure distributed in cubic meter and in nutrients per month
 is summarized in the following equations according to:
@@ -576,7 +521,8 @@ nut2ManApplied_(curManChain(manChain),nut2,tCur(t),nCur,m) $ ((v_volManApplied.u
        v_nut2ManApplied(manChain,nut2,t,nCur,m) =e= sum( (c_s_t_i(curCrops(crops),plot,till,intens),
                                                              manChain_applic(manChain,ManApplicType),curManType)
                                       $ (manApplicType_manType(ManApplicType,curManType)
-                                          $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)),
+                                          $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)
+                                          $ (not sameas (curCrops,"catchcrop")) ),
 
                                          v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
                                                   * p_nut2inMan(nut2,curManType,manChain));
@@ -586,159 +532,30 @@ nut2ManApplied_(curManChain(manChain),nut2,tCur(t),nCur,m) $ ((v_volManApplied.u
 ```GAMS
 volManApplied_(curManChain(manChain),tCur(t),nCur,m) $ ((v_volManApplied.up(manChain,t,nCur,m) ne 0) $  t_n(t,nCur)) ..
 
-       v_volManApplied(manChain,t,nCur,m) =e= sum( (c_s_t_i(curCrops(crops),plot,till,intens),
-                                                         manChain_applic(manChain,ManApplicType),curManType)
-                                      $ (manApplicType_manType(ManApplicType,curManType)
-                                           $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)),
-                                           v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m));
+       v_volManApplied(manChain,t,nCur,m)
+         =e= sum( (c_s_t_i(curCrops(crops),plot,till,intens),
+                     manChain_applic(manChain,ManApplicType),curManType)
+                                           $ (manApplicType_manType(ManApplicType,curManType)
+                                           $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)
+                                           $ (not sameas (curCrops,"catchcrop")) ),
+                     v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m));
 ```
 
 
 There are several restrictions with regard to the application of manure.
 First of all, the application of manure is not possible in some crops in
-some month, e.g. in maize at certain height of growth.
+some months, e.g. in maize at certain height of growth.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /set doNotApplyManure/ /;/)
 ```GAMS
 set doNotApplyManure(crops,m) /
-                                 (potatoes,sugarbeet,maizSil)           .(Jun,Jul,Aug,Sep)
-                                 (WinterWheat,WinterBarley,SummerBeans) .(May,Jun,Jul,Aug)
+                                 (potatoes,sugarbeet,maizSil)           .(Jun,Jul,Aug)
+                                 (WinterWheat,SummerBeans)              .(Apr,May,Jun,Jul,Aug)
+                                 (WinterBarley)                         .(Apr,May,Jun,Jul)
                                  (SummerPeas,SummerCere,WinterRape)     .(May,Jun,Jul)
                                  (WheatGPS)                             .(May,Jun)
-                                 (MaizCorn, MaizCCM)                    .(Jul,Aug,Sep,Oct)
+                                 (MaizCorn, MaizCCM)                    .(Jun,Jul,Aug)
                                 /;
 ```
 
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS / v_manDist.up\(crop[\S\s]*?,m\)/ /;/)
-```GAMS
- v_manDist.up(crops,plot,till,intens,manApplicType,manType,t,n,m)
-     $ ( t_n(t,n) $ c_s_t_i(crops,plot,till,intens) $ doNotApplyManure(crops,m) ) = 0  ;
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS / v_manDist.up\(arable[\S\s]*?"applTShoePig"/ /;/)
-```GAMS
- v_manDist.up(arableCrops(crops),plot,till,intens, "applTShoePig",manType,t,n,m)
-          $ (t_n(t,n) $ c_s_t_i(crops,plot,till,intens)) = 0 ;
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS / v_manDist.up\(arab.*?"applTShoeCattle"/ /;/)
-```GAMS
- v_manDist.up(arableCrops(crops),plot,till,intens, "applTShoeCattle",manType,t,n,m)
-          $ (t_n(t,n) $ c_s_t_i(crops,plot,till,intens)) = 0 ;
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS / v_manDist\.up\("maizSil"[\S\s].*?"applInjecPig"/ /;/)
-```GAMS
- v_manDist.up("maizSil",plot,till,intens,"applInjecPig",manType,t,n,m)
-         $ (t_n(t,n) $  (not (sameas(m,"Mar") or sameas(m,"Oct"))) $ c_s_t_i("maizSil",plot,till,intens)) = 0;
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS / v_manDist.up\("maizSil"[\S\s].*?"applInjecCattle"/ /;/)
-```GAMS
- v_manDist.up("maizSil",plot,till,intens,"applInjecCattle",manType,t,n,m)
-         $ (t_n(t,n) $  (not (sameas(m,"Mar") or sameas(m,"Oct"))) $ c_s_t_i("maizSil",plot,till,intens)) = 0;
-```
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /v_manDist\.up\("idle"/ /;/)
-```GAMS
-v_manDist.up("idle",plot,till,intens, manApplicType,manType,t,n,m) $ (t_n(t,n) $ c_s_t_i("idle",plot,till,intens)) = 0;
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /\$\$ifi %cattle%.*?/ /;/)
-```GAMS
-$$ifi %cattle% == true   v_manDist.up("idlegras",plot,till,intens, manApplicType,manType,t,n,m) $ (t_n(t,n) $ c_s_t_i("idlegras",plot,till,intens)) = 0;
-```
-
-There are restrictions with the timing and the quantity of applied
-manure coming from the German fertilizer directive. Generally, the
-application of manure is forbidden during winter. Depending on settings
-in the GUI, manure application can be forbidden only three month during
-winter or more restrictive regulations apply.
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /\$\$iftheni\.appS/ /\$\$endif\.appS/)
-```GAMS
-$$iftheni.appS %blockingPeriodManureAppl% == short
-          set monthApplicationForbidden(m)             / Nov, Dec, Jan/;
-          set monthApplicationForbiddenArab(m)         / Nov,Dec,Jan /;
-          set monthApplicationForbiddenGrass(m)        / Nov,Dec,Jan /;
-
-      $$endif.appS
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /\$\$iftheni\.appL.*?long/ /\$\$endif\.appL/)
-```GAMS
-$$iftheni.appL %blockingPeriodManureAppl% == long
-         set   monthApplicationForbidden(m) /Nov,Dec,Jan/;
-         set monthApplicationForbiddenArab(m)  / Sep,Oct,Nov,Dec,Jan /;
-         set monthApplicationForbiddenGrass(m)  / Nov,Dec,Jan /;
-      $$endif.appL
-```
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /\$\$elseifi\.fertGui.*?FD_2007/ /\$\$endif\.fertGui/)
-```GAMS
-$$elseifi.fertGui %RegulationFert% == FD_2007
-
-*      --- (2) Depending on regulation of FO 07
-
-       set  monthApplicationForbidden(m)                    /Dec,Jan /  ;
-       set  monthApplicationForbiddenArab(m)            /Nov,Dec,Jan /  ;
-       set  monthApplicationForbiddenGrass(m)              / Dec,Jan /  ;
-
-
-   $$elseifi.fertGui %RegulationFert% == FD_2017
-
-*      --- (3) Depending on regulation of FO 17
-       set  monthApplicationForbidden(m)              /Nov,Dec,Jan / ;
-       set  monthApplicationForbiddenArab(m)      /Oct,Nov,Dec,Jan / ;
-       set  monthApplicationForbiddenGrass(m)        / Nov,Dec,Jan / ;
-
-   $$endif.fertGui
-```
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /\$\$iftheni\.v_manDist/ /\$\$endif\.v_manDist/)
-```GAMS
-$$iftheni.v_manDist declared v_manDist
-
-     v_volManApplied.up(manChain,t,n,monthApplicationForbidden) $ t_n(t,n)  = 0;
-     v_nut2ManApplied.up(manChain,nut2,t,n,monthApplicationForbidden) $ t_n(t,n) = 0;
-     v_manDist.up(crops,plot,till,intens,manApplicType,manType,t,n,monthApplicationForbidden)
-        $ (t_n(t,n) $  c_s_t_i(crops,plot,till,intens)) = 0;
-
-     v_manDist.up(arabCrops(crops),plot,till,intens,manApplicType,manType,t,n,monthApplicationForbiddenArab)
-        $ (t_n(t,n) $ c_s_t_i(crops,plot,till,intens)) = 0;
-
-     v_manDist.up(grassCrops(crops),plot,till,intens,manApplicType,manType,t,n,monthApplicationForbiddenGrass)
-        $ (t_n(t,n) $ c_s_t_i(crops,plot,till,intens)) = 0;
-
-   $$endif.v_manDist
-```
-
-Furthermore, there is the option to ban certain manure application
-techniques to represent technical requirements given by the German
-fertilizer directive. These requirements can be activated in the GUI.
-The sets *tNotLowAppA(t)* and *tLowAppA(t)* represents the years with
-certain technical requirements.
-
-![](../media/image112.png)
--> couln't find this
-
-In the German fertilizer directive, the total amount of Nitrogen from
-manure is restricted to 170 kilogram N per ha and year in farm average.
-For grassland, there is the possibility to apply 230 kilogram. The
-restrictions can be switched on or off in the GUI. In the following
-equations, *v\_DueVOrgN* represent the amount of organic nutrients
-excreted by animals minus nutrient exports from the farm.
-*v\_nutExcrDueV* is calculated in the *general\_herd\_module.gms and*
-*v\_nutBiogasDueV* in the *biogas\_module.gms* (equations not shown
-here).
-
-![](../media/image113.png)
--> doesn't exist
-
-The applied N is not allowed to exceed the given threshold,
-*p\_nutManApplLimit*, as stated in the following equation. In current
-legislation, organic N from digestates of plant origin is excluded in
-the calculation of this threshold. Note that the organic N application
-according to the fertilizer directive is always calculated in FARMDYN.
-The restrictive threshold can be switched on and off in the GUI.
-
-![](../media/image114.png)
--> doesn't exist
+For these months, *v_manDist* is forced to be zero.

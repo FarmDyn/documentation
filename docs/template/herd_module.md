@@ -161,9 +161,8 @@ herdsBal_(balHerds,breeds,tCur(t),nCur,m) $ (  sum(feedRegime,actherds(balHerds,
 
          =e=
 *
-*      --- equal to the starting herd of the process wich generates these
-*          these herds
-
+*      --- equal to the starting herd of the process wich generates these herds
+*
      + sum( (herds_from_herds(balHerds,herds,breeds),t_n(t1,nCur1),m1)
                    $ (( (-p_mDist(t,m,t1,m1)    eq round(p_prodLengthB(herds,breeds)/(12/card(herdM)))* (12/card(herdM)) )
                 $$iftheni.compStat "%dynamics%" == "comparative-static"
@@ -334,13 +333,14 @@ of the herd used in the farm branch for sows.
 ```GAMS
 $$iftheni.sows "%farmBranchSows%" == "on"
 
-      herds_from_herds("piglets","youngPiglets","")    = yes;
-      bought_to_herds("youngSows","","sows")           = yes;
+      herds_from_herds("piglets","youngPiglets","")  = yes;
 
-      actHerds("piglets","",feedRegimePigs,t,m)            = yes;
-      actHerds("sows","",feedRegimePigs,t,m)               = yes;
-      actHerds("youngPiglets","",feedRegimePigs,t,m)       = yes;
-      actHerds("youngSows","",feedRegimePigs,t,m)          = yes;
+      bought_to_herds("youngSows","","sows")         = yes;
+
+      actHerds("piglets","",feedRegimePigs,t,m)      = yes;
+      actHerds("sows","",feedRegimePigs,t,m)         = yes;
+      actHerds("youngPiglets","",feedRegimePigs,t,m) = yes;
+      actHerds("youngSows","",feedRegimePigs,t,m)    = yes;
    $$endif.sows
 ```
 
@@ -352,18 +352,17 @@ branch for fatteners.
 $iftheni.pigHerd %pigHerd% == true
    $$iftheni.fattners "%farmBranchFattners%" == "on"
 
-       actHerds("Fattners","",feedRegimePigs,t,m)        = yes;
-       actHerds("earlyFattners","",feedRegimePigs,t,m)   = yes;
-       actHerds("midFattners","",feedRegimePigs,t,m)     = yes;
-       actHerds("lateFattners","",feedRegimePigs,t,m)    = yes;
-       actHerds("pigletsBought","",feedRegimePigs,t,m)   = yes;
-       bought_to_herds("pigletsBought","","earlyFattners")   = yes;
+       actHerds("Fattners","",feedRegimePigs,t,m)          = yes;
+       actHerds("earlyFattners","",feedRegimePigs,t,m)     = yes;
+       actHerds("midFattners","",feedRegimePigs,t,m)       = yes;
+       actHerds("lateFattners","",feedRegimePigs,t,m)      = yes;
+       actHerds("pigletsBought","",feedRegimePigs,t,m)     = yes;
 
+       bought_to_herds("pigletsBought","","earlyFattners") = yes;
 
-
-       herds_from_herds("midfattners","earlyfattners","") = yes;
-       herds_from_herds("lateFattners","midFattners","") = yes;
-       herds_from_herds("Fattners","lateFattners","") = yes;
+       herds_from_herds("midfattners","earlyfattners","")  = yes;
+       herds_from_herds("lateFattners","midFattners","")   = yes;
+       herds_from_herds("Fattners","lateFattners","")      = yes;
 
    $$endif.fattners
 ```

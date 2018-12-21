@@ -17,7 +17,7 @@ done with manure.
 ```GAMS
 nMinMin_(c_s_t_i(curCrops(crops),plot,till,intens),nut,tCur(t),nCur)
         $ (  (v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0)
-                $ p_minChemFert(crops,nut) $ t_n(t,nCur) ) ..
+                $ p_minChemFert(crops,nut) $ (not sameas(till,"eco")) $ t_n(t,nCur) ) ..
 
        sum ((syntFertilizer,m),
                       v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)

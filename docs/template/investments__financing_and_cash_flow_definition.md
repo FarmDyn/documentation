@@ -158,19 +158,19 @@ $iftheni.dh %cowherd%==true
 *
              + sum( actHerds("cows",curBreeds,feedRegime,"%lastYear%",herdm),
                        sum(m_to_herdm("dec",herdm), v_herdSize("cows",curBreeds,feedRegime,"%lastYear%",nCur,herdm))
-                                * p_price("youngCow","%lastYearCalc%") * 0.6 ) $ p_liquid
+                                * p_price("youngCow","conv","%lastYearCalc%") * 0.6 ) $ p_liquid
 *
 *              -- heifers at 30% of value of a young cow
 *
              + sum( actHerds("heifs",curBreeds,feedRegime,"%lastYear%",herdm),
                        sum(m_to_herdm("dec",herdm), v_herdSize("heifs",curBreeds,feedRegime,"%lastYear%",nCur,herdm))
-                                * p_price("youngCow","%lastYearCalc%") * 0.3 ) $ p_liquid
+                                * p_price("youngCow","conv","%lastYearCalc%") * 0.3 ) $ p_liquid
 *
 *              -- raising cavles at 10% of value of a young cow
 *
              + sum( actHerds("fCalvsRais",curBreeds,feedRegime,"%lastYear%",herdm),
                        sum(m_to_herdm("dec",herdm), v_herdSize("fCalvsRais",curBreeds,feedRegime,"%lastYear%",nCur,herdm))
-                                * p_price("youngCow","%lastYearCalc%") * 0.1 ) $ p_liquid
+                                * p_price("youngCow","conv","%lastYearCalc%") * 0.1 ) $ p_liquid
 $endif.dh
        ;
 ```
@@ -204,8 +204,8 @@ each year and state of nature, *p\_price*:
 ```GAMS
 salRev_(tCur(t),nCur) $ t_n(t,nCur)    ..
 *
-       v_salRev(t,nCur)  =e= sum(  curProds(prodsYearly) $ (v_saleQuant.up(prodsYearly,t,nCur) ne 0),
-                                  p_price(prodsYearly,t)
+       v_salRev(t,nCur)  =e= sum(  (curProds(prodsYearly),sys) $ (v_saleQuant.up(prodsYearly,sys,t,nCur) ne 0),
+                                  p_price(prodsYearly,sys,t)
 $iftheni.sp "%stochProg%"=="true"
 *
 *     --- a product is both output and input, use price of inputs to avoid a situation
@@ -215,7 +215,7 @@ $iftheni.sp "%stochProg%"=="true"
             + (p_randVar("priceInputs",nCur)-1)  $ (randProbs(prodsYearly) and (    sum(sameas(prodsYearly,inputs),1)))
          )
 $endif.sp
-                                   *  v_saleQuant(prodsYearly,t,nCur));
+                                   *  v_saleQuant(prodsYearly,sys,t,nCur));
 ```
 
 The sale quantity, *v\_saleQuant*, plus feed use, *v\_feedUse*, must
@@ -223,9 +223,9 @@ exhaust the production quantity, *v\_prods*:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /saleQuant_\(.*?\.\./ /;/)
 ```GAMS
-saleQuant_(curProds(prodsYearly),tCur(t),nCur) $ (p_price(prodsYearly,t) $ t_n(t,nCur)) ..
+saleQuant_(curProds(prodsYearly),tCur(t),nCur) $ (sum(sys,p_price(prodsYearly,sys,t)) $ t_n(t,nCur)) ..
 
-       v_saleQuant(prodsYearly,t,nCur)
+       sum(sys $ p_price(prodsYearly,sys,t),v_saleQuant(prodsYearly,sys,t,nCur))
 
 $iftheni.dh %cattle%==true
 
@@ -245,7 +245,7 @@ $iftheni.p %pigherd%==true
        +  sum(sameas(prodsYearly,feedsPig),
                              v_feedOwnPig(feedspig,t,nCur))
 $endif.p
-         =e= v_prods(prodsYearly,t,nCur)
+         =L= v_prods(prodsYearly,t,nCur)
 
 
 
@@ -282,7 +282,7 @@ considered:
 $iftheni.BWA "%branchMode%" == "BWA"
                           $ intensResRem(intens)
 $endif.BWA
-                                                 )
+                          )
                                  ,  v_residuesRemoval(crops,plot,till,intens,t,nCur)
             *  sum(plot_soil(plot,soil), p_OCoeffResidues(crops,soil,till,intens,prodsyearly,t)) )
 *
@@ -304,7 +304,7 @@ $iftheni.herd %herd% == true
                                        * ( 1/min(12,p_prodLength(possHerds,breeds))
                                             * ( (12/card(herdM)) $ (not sameas(possHerds,"fattners")) + 1 $ sameas(possHerds,"fattners")))
                                                $ ( (p_prodLength(possHerds,breeds) gt 1)
-$ifi "%farmBranchFattners%" == "on"             or ((p_prodLength(possHerds,breeds) le 1) $ sum((feedRegime,m),actHerds("Fattners","",feedRegime,tCur,m)))
+$ifi "%farmBranchFattners%" == "on"             or ((p_prodLength(possHerds,breeds) le 1) $ sameas(possHerds,"fattners"))
 $ifi "%farmBranchSows%" == "on"                and (p_prodLength(possHerds,breeds) gt 2)
                                         )
                               + sum(m $ sum(feedRegime,actherds(possHerds,breeds,feedRegime,t,m)),  v_herdStart(possHerds,breeds,t,nCur,m))
