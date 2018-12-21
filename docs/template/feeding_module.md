@@ -49,7 +49,7 @@ days of lactation.
        |----------------|---------|--------|---------|---------|-----|
        |Daily fraction  | 0.00356 |0.0043  | 0.00333 | 0.00233 |  0  |
 
-    :   Figure 7. Daily fraction of whole lactation milk
+    :   Daily fraction of whole lactation milk
         yield in different lactation phases
         Remark: Own calculation based on Huth (1995, pp.224-226)
 
@@ -65,30 +65,28 @@ which define milk yield in ton/year, stored on the general output
 coefficient parameter *p\_OCoeff*. The coefficient is scaled to match
 total yearly milk yield.
 
-![](../media/image15.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/requ.gms GAMS /p_mlkPerDay\(dcows,"%basBreed%","LC30"\)/ /0\.002333333 \* sum\(t \$ \(t\.pos eq 1\), p_OCoeff\(dcows,"milk","%basBreed%",t\) \* 1000\);/)
+```GAMS
+p_mlkPerDay(dcows,"%basBreed%","LC30")  = 0.003555556 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,"milk","%basBreed%",t) * 1000);
+p_mlkPerDay(dcows,"%basBreed%","LC92")  = 0.004333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,"milk","%basBreed%",t) * 1000);
+p_mlkPerDay(dcows,"%basBreed%","LC213") = 0.003333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,"milk","%basBreed%",t) * 1000);
+p_mlkPerDay(dcows,"%basBreed%","LC305") = 0.002333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,"milk","%basBreed%",t) * 1000);
+```
 
-The model differentiates for each herd between requirements for energy
-in NEL, raw protein and maximum dry matter. So far, for heifers and
-calves only one feeding phase is depicted such that daily requirements
-during the production process are identical.
+The model differentiates between requirements for energy in NEL, raw protein and maximum dry matter. The feeding requirements are descibed by the parameter `p_reqsPhase` for each herd and a certain requirement phase. As described earlier, the requirement phases of cows are differentiated at specific, fixed stages during lactation. For bulls, heifers, and
+calves, the amount of feeding/requirement phases are defined over the GUI. For each feeding phase, the daily requirements during the production process are identical.
 
-The distribution of the requirements for cows in specific lactation
-periods *p\_reqsPhase*, over the months, *m*, depends on the monthly
-distribution of births, *p\_birthDist*, as can be seen in the following
-equation.
+The requirement functions account for differing start and final weights, as well as daily weight gains of the animals. The underlying regression models were kindly provided by the Institut für Tierernährung und Futterwirtschaft of the Bayerische Landesandstalt für Landwirtschaft (LfL)[^1].
 
-![](../media/image16.png)
+The requirements per requirement phase `p_reqsPhase` are subsequently converted into values per month, in order to ensure that the animals are correctly fed throughout the requirement period.
 
-In order to test different model configurations and to reduce the number
-of equations and variables in the model, the monthly requirements,
-*p\_Monthly*, are aggregated to an intra-annual planning period,
-*intrYPer*, for which a different feed mix can be used for each type of
-herd, see the following equation.
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/requ.gms GAMS /p_reqsPhaseMonths\(herds,curBreeds,reqsPhase,reqs\) \$/ /;/)
+```GAMS
+p_reqsPhaseMonths(herds,curBreeds,reqsPhase,reqs) $ p_reqsPhaseLength(herds,curBreeds,reqsPhase)
+  = p_reqsPhase(herds,curBreeds,reqsPhase,reqs)/p_reqsPhaseLength(herds,curBreeds,reqsPhase) * 30.5;
+```
 
-![](../media/image17.png)
-
-The requirements per planning period, *p\_reqs*, enter the equation
-structure of the model. The equations are differentiated by herd, year,
+The monthly requirements per planning period, `p_reqsPhaseMonths`, enter the equation structure of the model. The equations are differentiated by herd, year,
 planning period and state-of-nature, and ensure the requirements are
 covered by an appropriate feed mix made out of different feeding
 stuff [^3]. The composition of the feed mix is determined endogenously.
@@ -102,68 +100,82 @@ differentiated by herd, breed, planning period (lactation phase of cow),
 state-of-nature and year, if the requirement phases are not defined for
 specific time spans after the herd start:
 
-![](../media/image18.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /reqs_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+reqs_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur,nCur))
+        $ sum( m_to_herdm(m,herdm)
+                                   $ (p_reqsPhaseLengthMonths(possHerds,breeds,"gen")
+                                   $ p_reqsPhaseMonths(possHerds,breeds,reqsphase,reqs)),
+                                     actHerds(possHerds,breeds,feedRegime,tCur,herdm)) ..
+*
+*      --- herd size times requirements per head, minus year and SON specific reduction in milk yield
+
+        sum((m_to_herdm(m,herdm)) $ actHerds(possHerds,breeds,feedRegime,tCur,herdm),
+               v_herdSize(possHerds,breeds,feedRegime,tCur,nCur,herdm)
+                 *p_corrHerdm(possHerds,breeds)*p_reqsPhaseMonths(possHerds,breeds,reqsPhase,reqs))
+*
+*      --- must be covered by feeding times the content of the feed stuff
+*
+          =L= sum(feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs));
+```
 
 Alternatively, requirements can be linked to the start point of an
 animal process to break down the total requirement during the length of
 the production processes in phases. The equation is only switched on if
-the parameter *p\_reqsPhaseLength* is non-zero:
+the parameter `p_reqsPhaseLength` is non-zero:
 
-![](../media/image19.png)
-
-This extension of the feeding module is used for the raising calves
-process. As a representative example the raising calves process for
-females calves, fCalvsRais, from birth to the 12th month. Three
-requirement phases are defined: *0\_2*, *3\_7* and *8\_12*; the labels
-indicate the start and end month of each phase:
-
-![](../media/image20.png)
-
-The requirements are defined for each phase separately, as
-representative examples the first two phases are illustrated in the
-following.
-
-![](../media/image21.png)
-
-The link between the variable *v\_herdStart* and per phase requirements
-when using the *reqs1\_* equation is shown in the listing below. The
-requirements for the first two months, *0\_2*, are only entering the
-first intra-year feeding period (which covers the months January to
-April). The requirements for the next 5 months, *3\_7*, are distributed
-with a weighting of 2:2:1 over the first three intra-year periods (two
-months in the period of January to April, JAN\_APR, two months in the
-period of May to June, MAY\_JUN, and one in the period of July to
-August, JUL\_AUG). Similarly, the periods for the last five months,
-*8\_12*, enter with a weighting of 1:2:2 over the last three feeding
-periods of that year.
-
-![](../media/image22.png)
-
-If the herd starts one month later in February (see the following
-listing), the weights are shifted accordingly and one fifth of the
-requirements for the last five months, *8\_12*, occurs in the first
-feeding period of the next year 2012.
-
-![](../media/image23.png)
-
-The model allows to not fully exploit the genetic potential of cows,
-based on the endogenous variable *v\_redMlk*. Lower utilization reduces
-requirements for a specific cow herd, in a specific lactation period,
-year and planning period by the amount of energy and protein requirement
-for a specific amount of milk and reduces milk production of the farm
-accordingly.
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /reqsPhase_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+reqsPhase_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur,nCur))
+             $ (sum(m_to_herdm(m,herdm),actHerds(possHerds,breeds,feedRegime,tCur,herdm))
+                  $ (not p_reqsPhaseLengthMonths(possHerds,breeds,"gen"))
+                  $ p_reqsPhase(possHerds,breeds,reqsPhase,reqs)) ..
+*
+*         --- herds which started in the months before the production length
+*
+*                   -- number of months that herd in that requirement phase during that period
+*                      multiplied with monthly requirements
+*
+              sum((m_to_herdm(m,herdm)) $ actHerds(possHerds,breeds,feedRegime,tCur,herdm),
+                     v_herdsReqsPhase(possHerds,breeds,feedRegime,reqsphase,herdm,tCur,nCur)
+                       * p_corrHerdm(possHerds,breeds) * p_reqsPhaseMonths(possHerds,breeds,reqsPhase,reqs))
+*
+*      --- must be covered by feeding times the content of the feed stuff
+*
+          =L= sum( feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))
+          ;
+```
 
 In a next step feeding amounts are aggregated to total feed use,
 v\_feeduse, per each product and for each year, feed and planning
 period.
 
-![](../media/image24.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /feedUse_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+feedUse_(feedsY,t_n(tCur,nCur))  ..
+
+       v_feedUse(feedsY,tCur,nCur)
+
+           =e= sum( (possHerds,breeds,feedRegime,reqsPhase,m) $ (actHerds(possHerds,breeds,feedRegime,tCur,m)
+                      $ p_reqsPhase(possHerds,breeds,reqsPhase,"DMMX")),
+                            v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feedsY,tCur,nCur));
+```
 
 For own produced feed which is not storable and shows a variable
 availability over the year such as grass from pasture, an aggregation to
 the intra-year periods is done.
 
-![](../media/image25.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /feedUseM_[\S\s][^;]*?\.\./ /;/)
+```GAMS
+feedUseM_(feedsM,m,t_n(tCur,nCur)) ..
+
+       v_feedUseM(feedsM,m,tCur,nCur)
+
+           =e= sum( (possHerds,breeds,feedRegime,reqsPhase)
+                      $ (p_reqsPhase(possHerds,breeds,reqsPhase,"DMMX")
+                       $ sum(m_to_herdm(m,herdm),actHerds(possHerds,breeds,feedRegime,tCur,herdm))),
+                                            v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feedsM,tCur,nCur));
+```
 
 ## Pigs Feed Module
 
@@ -244,3 +256,5 @@ p_feedMinPigday(feedRegime,massPhases,feedspig)
         normFeed.stg28_40            0.23                             0.015       0.037
         normFeed.stg40_118           0.195                            0.015       0.032
 ```
+
+[^1]: The regression models originate from the ["Zifo2" Target-value fodder optimization program](http://www.zifo-bayern.de/) of the LfL Bayern.

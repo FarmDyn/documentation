@@ -234,36 +234,64 @@ newCalves_("%basBreed%",t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,"%
 The calving coefficients are defined in the *Cows* tab of the Graphical User Interface.
 Here, the amount of births per lactation, living calves per birth, calf losses, and days between births can be set for the different breeds Holstein-Friesian (HF), Simmental (SI, which stands a placeholder for the individual breed defined in the GUI), and mother cows (MC). The values are stored in the parameter ```p_calvAttr```.
 
+The amount of calves that are born in a given month is derived from the information enetered in the GUI with the help of an entropy estimator. For the sake of simplicity, but without loss of generality, it is assumed that birth is equally likely in the two months surrounding the average calving interval.
 
-The amount of living calves per year is then calculated from these values as follows (from *coeffgen\\ini\_herds.gms*)
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /p_livingCalvesPerYear.*?/ /;/)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /set curCycleLength/ /NLP;/)
 ```GAMS
-p_livingCalvesPerYear(cows,allBreeds);
+set curCycleLength / l11*l15 /;
+*
+*  --- entropy estimator
+*
+   variable v_ent "Entropy";
+   positive variables         v_prob(cowTypes,curCycleLength)
+
+   parameter p_cycleLength(curCycleLength);
+   p_cycleLength(curCycleLength) = 10 + curCycleLength.pos;
+
+
+   equation e_ent                    "Entropy definition"
+            e_daysBetweenBirths      "Recover given information on inter calving interval"
+            e_sumUnity               "Probs add up to unity"
+   ;
+
+   e_ent .. -v_ent =E=  sum( (cowTypes,curCycleLength),v_prob(cowTypes,curCycleLength)
+                                 * log(v_prob(cowTypes,curCycleLength)/card(curCycleLength)));
+
+   e_daysBetweenBirths(cowTypes) ..
+        p_calvAttr(cowTypes,"daysBetweenBirths")/30.5
+                 =E=  sum(curCycleLength, v_prob(cowTypes,curCycleLength)* p_CycleLength(curCycleLength));
+
+   e_sumUnity(cowTypes) ..  sum(curCycleLength, v_prob(cowTypes,CurCycleLength)) =E= 1;
+
+   v_prob.up(cowTypes,curCycleLength) = 1;
+   v_prob.lo(cowTypes,curCycleLength) = 1.E-5;
+
+   v_prob.fx(cowTypes,curCycleLength) $ (p_calvAttr(cowTypes,"daysBetweenBirths")/30.5 lt p_CycleLength(curCycleLength)-1) = 1.E-6;
+   v_prob.fx(cowTypes,curCycleLength) $ (p_calvAttr(cowTypes,"daysBetweenBirths")/30.5 gt p_CycleLength(curCycleLength)+1) = 1.E-6;
+
+   v_prob.l(cowTypes,CurCycleLength)  = 1/card(CurCycleLength);
+
+   model m_ent / e_ent,e_daysBetweenBirths,e_sumUnity /;
+   solve m_ent maximizing v_ent using NLP;
 ```
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /parameter p_livingCalvesPerYear.*?/ /;/)
+The calving propabilities are then mapped to the actual endogenous calving distribution in the paramter `p_calvCoeff`, whis is subsequently used in the `herdStart_` equation.  
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /p_calvCoeff\(dCows,"%basBreed%",mDist\)/ /;/)
 ```GAMS
-parameter p_livingCalvesPerYear(cows,allBreeds);
+p_calvCoeff(dCows,"%basBreed%",mDist)
+     $ ( (mDist.pos ge 12)
+          $ (mDist.pos/12 le (ceil(p_nlac(dcows)))*p_calvAttr("%cowType%","daysBetweenBirths")/365))
+            = sum( curCycleLength $ (mod(mDist.pos-1,curCycleLength.pos+11) eq 0),
+                p_livingCalvesPerYear(dCows,"%basBreed%") * v_prob.l("%cowType%",curCycleLength)  );
 ```
 
+For a cow with a lifespan of four lactations, the calving distribution is depicted in the following figure. Notice how the distribution widens with increasing amounts of lactations.
 
-In order to allow for an increase of the genetic yield potential of
-herd, two mechanisms are available. If the farmer is allowed to buy
-heifers from the market, the bought heifers can have a higher milk yield
-than the replaced ones; the price for heifers depends on their milk
-yield potential. The second mechanism is to systematically breed towards
-higher milk yields. Breeding progress is restricted to about 200 kg per
-year and cow, which can be seen from the following equation.
+![Calving Distribution](../media/calv_dist_norm.png)
+:   Figure 3: Calving distribution of a cow with four lactations, according to the endogenous calculation. Source: Own represenation.
 
-<!-- ToDo: RW 08.06 remonteMax equation does not exist any more... needs to be updated-->
-
-Most equations - such as those relating to stable place needs -
-differentiate by genetic potential. Therefore, in the following equation
-the individual herds are aggregated to summary herds which are partly
-used in other equations where differentiation by genetic potential is
-not needed. Additionally, this provides a better overview on model
-results in the equation listing.
+In order to provide a better overview on model results in the equation listing, the a yearly average herd size is calculated in the equation `sumHerds_`
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /sumHerds_.*?\$/ /;/)
 ```GAMS

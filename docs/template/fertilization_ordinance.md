@@ -499,6 +499,7 @@ is banned except on fallow land followed by direct incorporation. This measures 
    $$iftheni.dh %cattle%==true
       v_manDist.up(grassCrops(crops),plot,till,intens,"applSpreadPig",manType,t,nCur,m) $ t_n(t,Ncur)   = 0   ;
       v_manDist.up(grassCrops(crops),plot,till,intens,"applSpreadCattle",manType,t,nCur,m) $ t_n(t,Ncur)   = 0   ;
+  $$ifi %AllowManureImport% == true v_manDist.up(grassCrops(crops),plot,till,intens,"applSpreadImport",manType,t,nCur,m) $ t_n(t,Ncur)   = 0   ;
    $$endif.dh
 ```
 
@@ -507,5 +508,5 @@ is banned except on fallow land followed by direct incorporation. This measures 
 * --- Broadcast spreader are generally banned on arable land, except when there is no crop
 
    v_manDist.up(arabCrops(crops),plot,till,intens,"applSpreadPig",manType,t,nCur,m) $ (t_n(t,Ncur) $ monthGrowthCrops(crops,m))    = 0   ;
-   v_manDist.up(arabCrops(crops),plot,till,intens,"applSpreadCattle",manType,t,nCur,m) $ (t_n(t,Ncur) $ monthGrowthCrops(crops,m))    = 0   ;
+   v_manDist.up(arabCrops(crops),plot,till,intens,"applSpreadCattle",manType,t,nCur,m) $ (t_n(t,Ncur) $ monthGrowthCrops(crops,m)) = 0   ;
 ```
