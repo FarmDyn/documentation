@@ -1,4 +1,10 @@
-# FarmDyn - A highly detailed template model for dynamic optimization of farms
+# FarmDyn 
+
+## A dynamic mixed integer bio-economic farm scale model
+
+FARMDYN provides a **flexible, modular template** to simulate
+**different farming systems (dairy, mother cows, beef fattening, pig fattening, piglet
+production, arable farming, biogas plants)** at single farm scale. 
 
 ![](/media/FarmDyn.png)
 
@@ -6,10 +12,7 @@ Universität Bonn<br/>
 Institute for Food and Resource Economics<br/>
 [Economic Modeling of Agricultural Systems Group](http://www.ilr.uni-bonn.de/em/em_e.htm)
 
-FARMDYN provides a **flexible, modular template** to simulate
-**different farming systems (dairy, mother cows, beef fattening, pig fattening, piglet
-production, arable farming, biogas plants)** at single farm scale. Main
-characteristics of the model are:
+## Main characteristics
 
 -   **Fully dynamic**, simulations typically cover several decades,
     alternatively comparative-static or short run version

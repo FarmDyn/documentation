@@ -100,9 +100,9 @@ Velthof and Oenema (1997) and the RAINS
 model definition (for changes in NO<sub>x</sub> and NH<sub>3</sub> fluxes concerning
 manure application type) (Alcamo et al., 1990).
 
-![](media/image211.png)
+![](../media/image211.png)
 
-![](media/image212.png)
+![](../media/image212.png)
 
 The parameters and scalars shown above are described by the statements
 within the model code excerpt. These are basic emission factors which
@@ -123,7 +123,7 @@ calculation the indicators *actBased*, *prodBased* and *genProdBased*.
 Calculation procedures for the *NBased* and *refInd* indicator schemes
 are explained later.
 
-![](media/image213.png)
+![](../media/image213.png)
 
 For each indicator scheme different parameters per head, hectare or per
 production quantity are defined in the indicator module and will be
@@ -184,7 +184,7 @@ parameters, *p\_GHGEmissions(prods,\...),* the calculated total GHG
 amount per hectare is divided by the output quantity per hectare,
 *p\_OCoeff(crops,prods,t).*
 
-![](media/image214.png)
+![](../media/image214.png)
 
 For dairy cows the GHG emission factor per kg of milk,
 *p\_GHGEmissions("milk",\...)*is derived by taking default emission
@@ -201,7 +201,7 @@ from herds, calculation functions 10.25, 10.26 and 10.30 of IPCC (2006)
 are filled with average weights (e.g. cow: 650kg) and excretion rates of
 the different herd categories taken from KTBL (2010).
 
-![](media/image215.png)
+![](../media/image215.png)
 
 No differentiation in GHG emission rates of the farm are made concerning
 storage and application techniques of manure and synthetic fertilizers.
@@ -223,7 +223,7 @@ and heifers the default emission indicators are the same as for
 by the derivation scheme of the *prodBased* indicator taking average
 yield levels and fertilizer application rates.
 
-![](media/image216.png)
+![](../media/image216.png)
 
 Furthermore, no differentiation concerning emission rates of different
 intensity levels for grassland (different pasture types) is made.
@@ -245,7 +245,7 @@ maintenance, activity, gross and lactation. GE demands used are
 calculated following equation from IPCC (2006) and taking
 a default digestibility of feed from IPCC of 60%.
 
-![](media/image217.png)
+![](../media/image217.png)
 
 In case of emission calculations from dairy cows genetic potential is
 considered. Therefore, the gross energy demand of each different genetic
@@ -262,7 +262,7 @@ a cow with 4000 kg milk yield per year to 0.46 CO<sub>2</sub>eq/kg for a cow wit
 10000 kg. This decline in emissions per kg of milk with increasing milk
 yield is not linear as illustrated in the following Figure 10.
 
-![](media/figure9.png)
+![](../media/figure9.png)
 :   Figure 10: GHG emissions per cow and per kg of milk
     depending on milk yield potential.
     Source: Own illustration based on Kirchgessner (2004) and IPCC (2006)
@@ -316,7 +316,7 @@ multiplying a crop specific emission parameter, *p\_backCH4soil,* (taken
 from Dämmgen, 2009:p.315) with the activity level,
 *v\_cropHa(crops,t,s).*
 
-![](media/image219.png)
+![](../media/image219.png)
 
 With the statement *\$(sameas (emitters,"entFerm"))* the calculated
 CH<sub>4</sub> emissions are assigned to the source enteric fermentation. The
@@ -335,7 +335,7 @@ indirect nitrous oxide emissions are considered following IPCC (2006)
 equations 10.27 and 10.29 to account for outgassing of NO<sub>x</sub> and NH3,
 *p\_FracGasMS(manStorage),* and leaching *,p\_FracLeachMS.*
 
-![](media/image220.png)
+![](../media/image220.png)
 
 The next excerpt of the model code represents the detailed N<sub>2</sub>O
 derivation concerning manure and synthetic fertilizer application on
@@ -358,7 +358,7 @@ The calculation of indirect N<sub>2</sub>O emissions from atmospheric deposition
 leaching and runoff is corresponding to equations 11.9 and 11.10 from
 IPCC (2006) guidelines.
 
-![](media/image221.png)
+![](../media/image221.png)
 
 The emission factor for background emissions of N<sub>2</sub>O from soils are not
 taken from IPCC (2006) methodology because these are valued to high, as
@@ -369,7 +369,7 @@ Oenema (1997:p.351) is used. They investigated an emission
 factor of 0.9 kg N<sub>2</sub>O-N per ha, as it was already shown in the
 declaration of basic emission parameters.
 
-![](media/image222.png)
+![](../media/image222.png)
 
 The parameters 44/28 and 310 which are multiplied with the calculated
 N<sub>2</sub>O-N amounts by each source are on the one hand the conversion factor
@@ -397,7 +397,7 @@ Methane calculations only differ between animals due to different
 enteric fermentation. The CH<sub>4</sub> emissions from intestine processes are
 calculated by the following:
 
-![](media/image223.png)
+![](../media/image223.png)
 
 The feed use for each animal, *v\_feeding(herds,phase,\...)*, is
 multiplied by a specific emission parameter per kg of feed compound,
@@ -409,7 +409,7 @@ calculated following the below stated routine. Per kg feed emission
 parameters are derived from IPCC (2006) equations based on GE of
 specific feedstuff, *p\_feedAttr(feeds,"GE")*.
 
-![](media/image224.png)
+![](../media/image224.png)
 
 ### Source Specific Accounting of Emissions
 

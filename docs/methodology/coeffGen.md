@@ -108,11 +108,11 @@ The interface allows defining which data should be taken from the
 regional data base and, in case one or several of these options are
 selected, to choose a region:
 
-![](media/image225.png)
+![](../media/image225.png)
 
 The list of regions is defined in *gui\\dairydyn\_default.xml*:
 
-![](media/image226.png)
+![](../media/image226.png)
 
 The regional data are stored in three files according to the available
 options:
@@ -134,27 +134,27 @@ soil shares determine potentially the size of the plots the information
 is used in many subsequent programs. The inclusion of the regional data
 is conditional on the interface settings:
 
-![](media/image227.png)
+![](../media/image227.png)
 
 The file with the regional data, *regionalData\\Climate\_soil.gms*,
 comprises a cross-set between the regions and the climate zone. The
 current climate zone is only overwritten if an element in the cross-set
 for that region is found:
 
-![](media/image228.png)
+![](../media/image228.png)
 
 Similarly, soil shares entered via the interface or a batch file are
 only overwritten if for it at least one of the soil types data are
 entered:
 
-![](media/image229.png)
+![](../media/image229.png)
 
 ### Yield Data
 
 Handling of the yields is similar. The inclusion of the data is done by
 *coeffgen\\cropping.gms*:
 
-![](media/image230.png)
+![](../media/image230.png)
 
 The crop yields data is entered in a table and overwrites the data from
 the interface, *p\_cropYieldInt,* only if a non-zero entry is found for
@@ -164,27 +164,27 @@ is not domain checked. This is despite the fact that the list of
 activities, *acts,* is defined in *model\\templ\_decl* with *\$If*
 conditions which would need to be repeated here as well.
 
-![](media/image231.png)
+![](../media/image231.png)
 
 ### Price Data
 
 The information on regional prices is included in
 *coeffgen\\prices.gms*:
 
-![](media/image232.png)
+![](../media/image232.png)
 
 The file comprises a section for output and another for input prices,
 both consisting of a table with regional prices and a statement which
 overwrites the information from the interface:
 
-![](media/image233.png)
+![](../media/image233.png)
 
 For price data there is as well no domain checking to increase
 readability. The section of the inputs is structurally identical to the
 one shown above:
 
-![](media/image234.png)
+![](../media/image234.png)
 
 The updated prices are used in a next step in *coeffgen\\prices.gms*:
 
-![](media/image235.png)
+![](../media/image235.png)

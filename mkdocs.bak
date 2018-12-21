@@ -38,7 +38,6 @@ pages:
        - Plant Nutrition: template/plant_nutrition.md
        - Environmental Accounting Module: template/environmental_accounting_module.md
        - Biogas Module: template/biogas_module.md
-       - Fertilization Ordinance: template/fertilization_ordinance.md
     - Publications:
        - Publications: publications/publications.md
     - Training Videos:

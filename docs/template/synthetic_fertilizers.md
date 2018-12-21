@@ -13,5 +13,18 @@ represents the limitation meeting the plant need with nutrients from
 manure, e.g. fertilizing short before harvest for baking wheat cannot be
 done with manure.
 
-![](../media/image115.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /nMinMin_\(c_/ /;/)
+```GAMS
+nMinMin_(c_s_t_i(curCrops(crops),plot,till,intens),nut,tCur(t),nCur)
+        $ (  (v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0)
+                $ p_minChemFert(crops,nut) $ (not sameas(till,"eco")) $ t_n(t,nCur) ) ..
 
+       sum ((syntFertilizer,m),
+                      v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)
+                                                   * p_nutInSynt(syntFertilizer,nut))
+              =G=
+
+*         sum(plot_soil(plot,soil),
+*                      p_nutNeed(crops,soil,till,intens,nut,t))
+                v_cropHa(crops,plot,till,intens,t,nCur) * p_minChemFert(crops,nut);
+```

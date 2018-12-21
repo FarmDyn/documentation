@@ -200,33 +200,7 @@ are used by which herd type at a certain time. The equation
 *feedSourcePig\_* determines the source of feed, i.e. whether it is
 purchased or produced on farm.
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/pig_module.gms GAMS /reqPigs_\(p/ /;/)
-```GAMS
-reqPigs_(possHerds,feedAttr,feedRegime,tCur(t),nCur,m) $( sum(actHerds(herds,"",feedRegime,t,m),1) $ t_n(t,nCur)
-                                           $ (not sameas(possherds,"pigletsBought")) $ (not sameas(possherds,"youngSows"))
-                                           $ (not sameas(possherds,"youngPiglets"))) ..
-
-         v_herdSize(possHerds,"",feedRegime,t,nCur,m) * p_feedReqPig(possHerds,feedRegime,feedAttr)
-
-* --- Accounting for temporal resolution for sows
-
-$iftheni.sows "%farmBranchSows%" == "on"
-                                                 * 12/card(herdM)
-$endif.sows
-                                   =L=
-                           sum(feedspig , v_feedingPig(possherds,feedsPig,feedRegime,t,nCur,m) * p_feedAttrPig(feedsPig,feedAttr));
-```
-
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/pig_module.gms GAMS /feedSourcePig_.*?\.\./ /;/)
-```GAMS
-feedSourcePig_(feedspig,tCur(t),nCur) $ ( sum(actHerds(herds,"",feedRegime,t,m),1) $ t_n(t,nCur))   ..
-
-                (v_feedOwnPig(feedspig,t,nCur) $ (sum(sameas(curProds,feedspig),1))) + v_feedPurchPig(feedspig,t,nCur)
-                            =E=
-                       sum((possherds,feedRegime,m) $ ((not sameas(possherds,"pigletsBought")) $ (not sameas(possherds,"youngSows"))
-                                         $  (not sameas(possherds,"youngPiglets"))),
-                                                                                   v_feedingPig(possherds,feedsPig,feedRegime,t,nCur,m));
-```
+@ Rienne: bitte aus model\pig_module die Gleichungen  reqPigs_ und feedSourcePig_ einfügen
 
 The upper and lower bound for the feeding mix are then determined by
 *feedTot\_, feedmax\_, feedMin\_* (not additionally shown here) which
@@ -235,12 +209,5 @@ allows certain flexibility in the feeding mix.
 However, for the fattners the feeding mix is fixed for different feeding regimes to
 precisely reproduce empirically found feeding ratios.
 
-[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/requ.gms GAMS /p_feedMinPigday\(f/ /0\.032/)
-```GAMS
-p_feedMinPigday(feedRegime,massPhases,feedspig)
+@ Rienne. bitte aus coeffgen\requ.gms den table  p_feedMinPigday einfügen
 
-                                   soybeanMeal     rapeSeedMeal      PlantFat     MinFu      MinFu2      MinFu3     MinFu4
-
-        normFeed.stg28_40            0.23                             0.015       0.037
-        normFeed.stg40_118           0.195                            0.015       0.032
-```
