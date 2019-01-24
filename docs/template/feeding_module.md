@@ -73,8 +73,7 @@ p_mlkPerDay(dcows,"%basBreed%","LC213") = 0.003333333 * sum(t $ (t.pos eq 1), p_
 p_mlkPerDay(dcows,"%basBreed%","LC305") = 0.002333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,"milk","%basBreed%",t) * 1000);
 ```
 
-The model differentiates between requirements for energy in NEL, raw protein and maximum dry matter. The feeding requirements are descibed by the parameter `p_reqsPhase` for each herd and a certain requirement phase. As described earlier, the requirement phases of cows are differentiated at specific, fixed stages during lactation. For bulls, heifers, and
-calves, the amount of feeding/requirement phases are defined over the GUI. For each feeding phase, the daily requirements during the production process are identical.
+The model differentiates between requirements for energy in net-energy for lactation, raw protein and maximum dry matter. The feeding requirements are described by the parameter `p_reqsPhase` for each herd and a certain requirement phase. As described earlier, the requirement phases of cows are differentiated into specific, fixed stages during lactation. For bulls, heifers, and calves, the amount of feeding/requirement phases are defined over the GUI. For each feeding phase, the daily requirements during the production process are identical.
 
 The requirement functions account for differing start and final weights, as well as daily weight gains of the animals. The underlying regression models were kindly provided by the Institut für Tierernährung und Futterwirtschaft of the Bayerische Landesandstalt für Landwirtschaft (LfL)[^1].
 
@@ -87,17 +86,13 @@ p_reqsPhaseMonths(herds,curBreeds,reqsPhase,reqs) $ p_reqsPhaseLength(herds,curB
 ```
 
 The monthly requirements per planning period, `p_reqsPhaseMonths`, enter the equation structure of the model. The equations are differentiated by herd, year,
-planning period and state-of-nature, and ensure the requirements are
+planning period and state-of-nature (SON), and ensure the requirements are
 covered by an appropriate feed mix made out of different feeding
-stuff [^3]. The composition of the feed mix is determined endogenously.
-In general, a herd consists of cows of different milk yield potentials,
-heifers and different types of calves. Total feed requirements for a
-farm in the different intra-yearly planning periods depend on the
-distributions of calving dates in the cow herd, therefore, cows of the
+stuff [^3]. The composition of the feed mix is determined endogenously. The total feed requirements for a farm in the different intra-yearly planning periods depend on the
+distribution of calving dates in the cow herd, therefore, cows of the
 same milk yield potential can be in different lactation phases during
 the year. The requirements of tons of feed, *v\_feeding*, are
-differentiated by herd, breed, planning period (lactation phase of cow),
-state-of-nature and year, if the requirement phases are not defined for
+differentiated by herd, breed, planning period (lactation phase of cow), SON and year, if the requirement phases are not defined for
 specific time spans after the herd start:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /reqs_[\S\s][^;]*?\.\./ /;/)
@@ -147,7 +142,7 @@ reqsPhase_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur,nCur))
 ```
 
 In a next step feeding amounts are aggregated to total feed use,
-v\_feeduse, per each product and for each year, feed and planning
+*v\_feeduse*, per each product and for each year, feed and planning
 period.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /feedUse_[\S\s][^;]*?\.\./ /;/)
@@ -162,7 +157,7 @@ feedUse_(feedsY,t_n(tCur,nCur))  ..
 ```
 
 For own produced feed which is not storable and shows a variable
-availability over the year such as grass from pasture, an aggregation to
+availability over the year, such as grass from pasture, an aggregation to
 the intra-year periods is done.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /feedUseM_[\S\s][^;]*?\.\./ /;/)
@@ -189,12 +184,12 @@ in the feed intake is assumed to assure a correct viscosity.
 
 The fattening branch distinguishes between four fattening stages to
 provide the option of nitrogen and phosphorus reduced feeding (N/P). It
-includes the stages *earlyFattners*, *midFattners, lateFattners,
+includes the stages *earlyFattners*, *midFattners*, and *lateFattners*,
 Fattners.* Three feeding regimes are applicable, which are: normal feed,
 reduced N/P feed and highly reduced N/P feed. The primary differences
 between the feeding schemes are the adjustments of daily nutrient
 requirements depending on the stage a fattening pig is currently in. For
-instance, with the normal feed there are only to two different feeding
+instance, with the normal feed there are only two different feeding
 requirements; a daily requirement for the weight range from 28-40 kg
 which is in the early fattening phase and a daily requirement from
 40-118 kg which assumes daily feed requirements in the mid, late and
@@ -244,7 +239,7 @@ The upper and lower bound for the feeding mix are then determined by
 *feedTot\_, feedmax\_, feedMin\_* (not additionally shown here) which
 allows certain flexibility in the feeding mix.
 
-However, for the fattners the feeding mix is fixed for different feeding regimes to
+However, for the fatteners the feeding mix is fixed for different feeding regimes to
 precisely reproduce empirically found feeding ratios.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/requ.gms GAMS /p_feedMinPigday\(f/ /0\.032/)

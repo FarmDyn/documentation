@@ -1,6 +1,6 @@
 # Introduction
 
-The dynamic single farm model documented in here is the outcome of
+The dynamic single farm model FarmDyn is the outcome of
 several, partially on-going research activities. Its first version
 (named DAIRYDYN) was developed in the context of a research project
 financed by the German Science Foundation (DFG, Nr. HO3780/2-1) focusing

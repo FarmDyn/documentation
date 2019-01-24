@@ -1,6 +1,5 @@
 print/frontMatter.yaml
 docs/index_print.md
-docs/introduction.md
 docs/template/introduction.md
 docs/template/herd_module.md
 docs/template/feeding_module.md
@@ -15,11 +14,11 @@ docs/template/synthetic_fertilizers.md
 docs/template/plant_nutrition.md
 docs/template/environmental_accounting_module.md
 docs/template/biogas_module.md
-docs/dynamics.md
-docs/risk.md
-docs/ghgAcc.md
-docs/coeffGen.md
-docs/technical.md
-docs/gui.md
-docs/References.md
-docs/appendix.md
+docs/methodology/dynamics.md
+docs/methodology/risk.md
+docs/methodology/ghgAcc.md
+docs/methodology/coeffGen.md
+docs/methodology/technical.md
+docs/methodology/gui.md
+docs/methodology/References.md
+docs/methodology/appendix.md

@@ -61,8 +61,8 @@ set machType   /  tractor
 
 For further information see Appendix A1.
 
-Each machinery type is characterized by set of attributes *p\_machAttr*
-(see *coeffgen\\mach.gms*), see as an example:
+Each machinery type is characterised by set of attributes *p\_machAttr*
+(see *coeffgen\\mach.gms*), for example:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/mach.gms GAMS /table.*?p_mach/ /5\.0/)
 ```GAMS
@@ -160,7 +160,7 @@ set operation "Field operators as defined by KTBL"
 For more details see Appendix A2.
 
 Labour needs, diesel, variable and fixed machinery costs are linked to
-these operations, an extraction is shown in the following:
+these operations. An extraction is shown in the following:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/tech.gms GAMS /table\sop_attr/ /;/)
 ```GAMS
@@ -264,8 +264,8 @@ table op_attr(operation,machVar,plotSize,opAttr)
 ;
 ```
 
-Furthermore, the model considers the effect of different plot size and
-the mechanisation level:
+Furthermore, the model considers the effect of different plot sizes and
+the mechanisation levels:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/tech.gms GAMS /(?i)table\sp_plotsize/ /;/)
 ```GAMS
@@ -356,19 +356,19 @@ table crop_op_per_till(crops,operation,labPeriod,till)
  potatoes     .    lime_fert           .  OCT1                 0.333
 ```
 
-That detailed information on farm operations determines
+These information on farm operations determine
 
-1.  The **number of necessary field working days** and *monthly labor
-    need* per ha (excluding the time used for fertilizing, which is
+1.  The **number of necessary field working days** and *monthly labour
+    need* per ha (excluding the time used for fertilising, which is
     determined endogenously)
 
 2.  The **machinery need** for the different crops
 
 3.  Related **variable costs**
 
-The labor needs per month are determined by adding up over all farm
-operations, considering the labor period, the effect of plot size and
-mechanization (*coeffgen\\labour.gms*):
+The labour needs per month are determined by summing up over all farm
+operations, considering the labour period, the effect of plot size and
+mechanisation (*coeffgen\\labour.gms*):
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/labour.gms GAMS /p_cropLab/ /;/)
 ```GAMS
@@ -432,8 +432,7 @@ The last expression is used when the farm program for the simulated
 period is used to estimate the machinery needs for all years until the
 stables are fully depreciated.
 
-The machinery need in each year is the maximum of the need in any
-state-of-nature in that year:
+The machinery need in each year is defined from activities or processes requiring machinery::
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/GENERAL_HERD_MODULE.gms GAMS /machNeedHerds_\(c/ /;/)
 ```GAMS
@@ -529,7 +528,7 @@ machInvT_(curMachines(machType),tFull(t),nCur)
                                                 v_buyMach(machType,t1,nCur1));
 ```
 
-Those are linked to the existence of stables, i.e. stables cannot be
+The aforementioned set of machinery, depreciated by time and not usage, are linked to the existence of stables, i.e. stables cannot be
 used if machinery is not present:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /machInvStable_\(c/ /;/)

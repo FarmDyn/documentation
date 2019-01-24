@@ -4,10 +4,6 @@ Alcamo J., Shaw R. & L. Hordijk (1990): The RAINS Model of
 Acidification. Science and Strategies in Europe. Kluwer Academic
 Publishers, Dordrecht, Netherlands
 
-Baker, E., Clarke, L.E. & E. Shittu (2008): Technical
-change and the marginal cost of abatement. Energy Economics
-30:2799-2816.
-
 Britz, W. & B. Lengers (2012): R routine to estimate Heckman two stage
 regression procedure on marginal abatement costs of dairy farms, based
 on large scale outputs of the model DAIRYDYN. Technical Paper for
@@ -29,10 +25,6 @@ Britz, W. (2014). A New Graphical User Interface Generator
 for Economic Models and its Comparison to Existing Approaches, German
 Journal of Agricultural Economics 63(4): 271-285
 
-Clarke, L.E., Weyant, J.P. & Edmonds, J.A. (2008): On the
-sources of technological change: what do the models assume? Energy
-Economics 30:409-424.
-
 Dämmgen, U. (2009) Calculations of emission from German
 agriculture -- *National Emission Inventory Report (NIR) 2009 for 2007*.
 Landbauforschung vTI Agriculture and Forestry Research, Sonderheft 324
@@ -43,18 +35,16 @@ Research Institute, Santa Monica, USA.
 <http://www.rand.org/content/dam/rand/pubs/reports/2009/R4252.pdf>
 (stand 13.08.2012)
 
-DeCara, S. & P.A. Jayet (2001): Agriculture and Climate
-Change in the European Union: Greenhouse Gas Emissions and Abatement
-Costs. AAEA Annual Meeting -- August 4-8 2001, ChicagoFAO (2006):
-livestock´s long shadow -- environmental issues and options. Food and
-Agricultural Organization, Rome, Italy
-
-DüV (2009): Verordnung über die Anwendung von Düngemitteln,
+DüV (2007): Verordnung über die Anwendung von Düngemitteln,
 Bodenhilfsstoffen, Kultursubstraten und Pflanzenhilfsmitteln nach den
 Grundsätzen der guten fachlichen Praxis beim Düngen. „Düngeverordnung in
 der Fassung der Bekanntmachung vom 27. Februar 2007 (BGBl. I S. 221),
 die zuletzt durch Artikel 18 des Gesetzes vom 31. Juli 2009 (BGBl. I S.
 2585) geändert worden ist\"
+
+EMEP, EEA (2013): "EEA air pollutant emission inventory guidebook 2013." European Environment Agency, Copenhagen.
+
+EMEP (2016)
 
 FAO (2006): livestock´s long shadow, environmental issues and options.
 Food and Agricultural Organization, Rome Italy
@@ -69,16 +59,22 @@ Garbert, J. 2013. Ökonomische Auswirkung von Politiken zur
 Umsetzung der Wasserrahmenrichtlinie auf die Schweinehaltung im
 Münsterland. Dissertation, University of Bonn, Germany.
 
-Gillingham, K., Newell, R.G. & W.A. Pizer (2008): Modeling
-endogenous technological change for climate policy analysis. Energy
-Economics 30:2734-2753.
-
 Grimm, V. (2002): Ten years of individual-based modelling
 in ecology: what have we learned, and what could we learn in the future.
 Ecological Modelling 115:129-148
 
+Haenel, H.-D., et al (2018): Calculations of gaseous and particulate emissions from German agriculture 1990-2016: Report on methods and data (RMD) Submission 2018. No. 57. Thünen Report
+
+Haenel (2015)
+
+Hazell, P. (1971): "A linear alternative to quadratic and semivariance programming for farm planning under uncertainty." American Journal of Agricultural Economics 53.1: 53-62
+
 Heckman, J.J. (1979): Sample Selection Bias as
 Specification Error. *Econometrica* 47:153-161.
+
+Heitsch & Römisch (2008)
+
+Heitsch & Römisch (2009)
 
 Hertel, T.W. (1997): Global Trade Analysis -- Modeling and
 Applications. Cambridge University Press
@@ -128,35 +124,10 @@ Landwirtschaft e.V., Darmstadt
 KTBL (2013): Faustzahlen Biogas. 3. Ausgabe, Kuratorium für Technik und
 Bauwesen in der Landwirtschaft e.V., Darmstadt
 
-Lengers, B. & W. Britz (2011): Farm specific
-marginal abatement costs for dairy GHG emissions which base upon
-different emission indicators -- a bio-economic model approach.
-Vorgestelltes Paper auf dem   EAAE PhD Workshop 2011, Nitra, Slowakei,
-April 27-29.
-
 Lengers, B. and Britz, W. (2012). The choice of emission
 indicators in environmental policy design: an analysis of GHG abatement
 in different dairy farms based on a bio-economic model approach. Review
 of Agricultural and Environmental Studies, 93(2), 117-144.
-
-Lengers, B., Britz, W. & K. Holm-Müller (2013c): What
-drives marginal abatement costs of greenhouse gases on dairy farms -- a
-meta-modelling approach. Paper presented at the 2012 AURÖ-Workshop,
-Frankfurt (Oder), Germany, February 18-19.
-
-Lengers, B., Britz, W. & K. Holm-Müller (2014): What
-drives marginal abatement costs of greenhouse gases on dairy farms? A
-meta-modeling approach. *Journal of Agricultural Economics,* 65:2
-
-Lengers, B., Britz, W. and Holm-Müller, K. (2013a):
-Comparison of GHG-emission indicators for dairy farms with respect to
-induced abatement costs, accuracy and feasibility, *Applied Economic
-Perspectives and Policy*, 35(3):451-475.
-
-Lengers, B., Schiefler, I. & W. Büscher (2013b): A
-comparison of emission calculations using different modeled indicators
-with 1-year online measurements. *Environmental Monitoring and
-Assessment*, 185:9751-9762.
 
 Lofgren, H., Harris, R.L. & S. Robinson (2002): A standard
 computable general equilibrium (CGE) model in GAMS. Microcomputers in
@@ -164,7 +135,7 @@ Policy Research 5. International Food Policy Research Institute,
 Washington, D.C.,
 http://www.ifpri.org/sites/default/files/publications/mc5.pdf
 
-[Louhichi, K., Janssen, S., Kanallopoulos, A., Li, H., Borowski, N.,
+Louhichi, K., Janssen, S., Kanallopoulos, A., Li, H., Borowski, N.,
 Flichman, G., Hengsdijk, H., Zander, P., Fonseca, M.B., Stokstad, G.,
 Athanasiadis, I.N., Rizzoli, A.E., Huber, D., Heckelei, T. & M. Van
 Ittersum] (2010): A Generic Farming System Simulator, in:
@@ -176,21 +147,18 @@ comparison of three methods for selecting values of input variables in
 the analysis of output from computer code. *Technometrics*
 21(2):239-245.
 
-Nemhauser, G. & J. Wolsey (1999): Integer and
-Combinatorial Optimization. A Wiley-Interscience Publication, New York
-
 Park, J.S. (1994): Optimal Latin-hypercube designs for
 computer experiments. *Journal of Statistical Planning and Inference*
 39:95-111
 
-Pochet, Y. & L.A. Wolsey (2006): Production Planning by
-Mixed Integer Programming. Springer Series in Operation Research and
-Financial Engineering, Springer Science + Business Media, USA
+ReCiPe (2016): Huijbregts, M. A. J., Steinmann, Z. J. N., Elshout, P. M. F., Stam, G., Verones, F., Vieira, M. D. M., ... & van Zelm, R. (2016). A harmonized life cycle impact assessment method at midpoint and endpoint level Report I: Characterization.
 
-Remble, A., W. Britz, and R. Keeney. 2013. Farm Level
+Remble, A., W. Britz, and R. Keeney (2013): Farm Level
 Tradeoffs in the Regulation of Greenhouse Gas Emissions. selected paper
 presented at the Agricultural and Applied Economics Association, 2013
 Annual Meeting, August 4-6, 2013, Washington, D.C (USA).
+
+Rosemann (2015): Rösemann C, Haenel H-D, Dämmgen U, Freibauer A, Wulf S, EurichMenden B, Döhler H, Schreiner C, Bauer B, Osterburg B (2015) Calculations of gaseous and particulate emissions from German agriculture 1990 – 2013 : Report on methods and data (RMD) Submission 2015. Braunschweig: Johann Heinrich von Thünen-Institut, 372 p, Thünen Rep 27
 
 R-software (2012): The R project for statistical computing. Version
 R-2.15.1. <http://www.r-project.org/index.html> (stand 16.10.2012)
@@ -201,6 +169,8 @@ alternative assumptions. Agricultural Economics 35:277--287[Velthof,
 G.L. & O. Oenema] (1997) Nitrous oxide emissions from dairy
 farming systems in the Netherlands. *Netherlands Journal of Agricultural
 Science* 45:347-360
+
+Stehfest, E. & Bouwman, L. (2006): "N 2 O and NO emission from agricultural fields and soils under natural vegetation: summarizing available measurement data and modeling of global annual emissions." Nutrient Cycling in Agroecosystems74.3: 207-228.
 
 Vermont, B. & S. DeCara (2010): How costly is mitigation
 of non-CO2 greenhouse gas emissions from agriculture? A meta-analysis.

@@ -2,12 +2,12 @@
 # Biogas Module
 
 !!! abstract
-    The biogas module defines the economic and technological relations between components of a biogas plant with a monthly resolution, as well as links to the farm. Thereby, it includes the statutory payment structure and their respective restrictions according to the German Renewable Energy Acts (EEGs) from 2004 up to 2014. The biogas module differentiates between three different sizes of biogas plants and accounts for three different life spans of investments connected to the biogas plant. Data for the technological and economic parameters used in the model are derived from KTBL (2014) and FNR (2013). The equations within the template model related to the biogas module are presented in the following section.
+    The biogas module defines the economic and technological relations between components of a biogas plant with a monthly resolution, as well as links to the farm. Thereby, it includes the statutory payment structure and their respective restrictions according to the German Renewable Energy Acts (EEGs) from 2004 up to 2014. The biogas module differentiates between three different sizes of biogas plants and accounts for three different life spans of investments connected to the biogas plant. Data for the technological and economic parameters used in the model are derived from KTBL (2013) and FNR (2013). The equations within the template model related to the biogas module are presented in the following section.
 
 ## Biogas Economic Part
 
-The economic part describes at the one hand the revenues stemming from
-the heat and electricity production of the biogas plant, and at the
+The economic part describes on the one hand the revenues stemming from
+the heat and electricity production of the biogas plant, and on the
 other hand investment and operation costs. The guaranteed feed-in tariff
 paid to the electricity producer per kWh, *p\_priceElec*, and underlying
 the revenues, is constructed as a sliding scale price and is exemplary
@@ -74,7 +74,7 @@ bioGasObje_(tCur(t),nCur) $ t_n(t,nCur) ..
 ;
 ```
 
-In addition to the *traditional* guaranteed-feed in tariff, the biogas
+In addition to the *traditional* guaranteed feed-in tariff, the biogas
 module comprises the payment structure for the so-called *direct
 marketing option* which was implemented in the EEG 2012. The calculation
 of the revenue with a direct marketing option is defined as the product
@@ -84,7 +84,7 @@ Spot, *p\_dmsellPriceHigh/Low.* The latter depends on the amount of
 electricity sold during high and low stock market prices. Additionally,
 it is accounted for a flexibility premium, *p\_flexPrem*.
 
-Furthermore, the revenue stemming from heat is accounted for and it is
+Furthermore, the revenue stemming from heat is accounted for and is
 included as the product of sold heat, *v\_sellHeat*, times the price of
 heat, *p\_priceHeat*, which is set to two cents per kWh. The amount of
 head sold is set exogenously and depends on the biogas plant type.
@@ -109,7 +109,7 @@ set bhkw "different bhkw sizes" /
 ```
 
 
-Moreover, in order to use a biogas plant different components need to be present which differ by lifetime
+Moreover, in order to use a biogas plant, different components need to be present which differ by lifetime
 (investment horizon *ih*). For example, in order to use the original
 plant, the decision maker has to re-invest every seventh year in a new
 engine but only every twentieth year in a new fermenter.
@@ -205,8 +205,7 @@ production is not explicitly described.
 The size of the engine restricts with *p\_fixElecMonth* the maximal
 output of electricity in each month. According to the available size
 classes, the maximal outputs are 150kW, 250kW and 500kW, respectively,
-at 8.000 operating hours per year, as it is assumed that the biogas
-plant is not operating for 9% of the available time due to maintenance,
+at 8.000 operating hours per year. This number of hours stems from the assumption that the biogas plant is not operating for 9% of the available time due to maintenance,
 etc.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /fixkWel_\(curBhkw[\S\s]*?\.\./ /;/)
@@ -220,11 +219,11 @@ fixkWel_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) and (v_prodEle
 
 
 The production process of electricity, *v\_prodElec,* is constructed in
-a two-stage procedure. First, biogas [^6], *v\_methCrop*/*Manure,* is
+a two-stage procedure. First, biogas [^6], *v\_methCrop/Manure,* is
 produced in the fermenter as the product of crops and manure,
 *v\_usedCrop/Manure,* and the amount of methane content per ton fresh
 matter of the respective input. Second, the produced methane is
-combusted in the engine in which the electricity--output,
+combusted in the engine in which the electricity-output,
 *v\_prodElecCrop/Manure,* is calculated by the energy content of
 methane, *p\_ch4Con,* and the conversion efficiency of the respective
 engine, *p\_bhkwEffic*.
@@ -283,9 +282,9 @@ separated in methane produced from the *Crop* input class and the
 
 The production technology imposes a second bound by connecting a
 specific fermenter volume, *p\_volFermMonthly,* to each engine size. The
-fermenter volume is exogenously given under the assumption of a 90 day
-hydraulic retention time and an input mix of 70 percent maize silage and
-30 percent manure. Hence, the input quantity derived from crops,
+fermenter volume is exogenously given under the assumption of a 90-day
+hydraulic retention time and an input mix of 70% maize silage and
+30% manure. Hence, the input quantity derived from crops,
 *v\_usedCropBiogas,* and manure, *v\_usedManBiogas,* is bound by the
 fermenter size, *v\_totVolFermMonthly.*
 
@@ -381,7 +380,7 @@ the EEG 2004 and EEG 2009 are inherently included such as the KWK-Bonus
 and NawaRo-Bonus, i.e. the plant is already defined such that these
 additional subsidies on top of the basic feed-in tariff can be claimed.
 Additionally, the biogas operator has the option to receive the
-Manure-Bonus, if he ensures that 30 percent of his input quantity is
+Manure-Bonus, if he ensures that 30% of his input quantity is
 manure based, as can be seen in the following code.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /manureRes_\(curBhkw[\S\s]*?\.\./ /;/)
@@ -393,11 +392,11 @@ manureRes_(curBhkw(bhkw),eegMan(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) $ curEeg(eeg
 
 Furthermore, the EEG 2012 imposes two requirements which have to be met
 by the plant operator to receive any statutory payment at all. First,
-the operator has to ensure that not more than 60 percent of the used
+the operator must ensure that not more than 60% of the used
 fermenter volume, *v\_totVolFermMonthly,* is used for maize. Second,
-under the assumption that the operator uses 25 percent of the heat
+under the assumption that the operator uses 25% of the heat
 emitted by the combustion engine for the fermenter itself, he has to
-sell at least 35 percent of the generated heat externally;
+sell at least 35% of the generated heat externally;
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/biogas_module.gms GAMS /maizeRes_\(curBhkw[\S\s]*?\.\./ /;/)
 ```GAMS

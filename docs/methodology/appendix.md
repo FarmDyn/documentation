@@ -3,7 +3,7 @@
 
 Table 1.  Machinery included in the set *machType*
 
-  |Machine                          | Naming in FARMDYN          | Definition                                                        |Reference in KTBL 14/15|
+  |Machine                          | Naming in FarmDyn         | Definition                                                        |Reference in KTBL 14/15|
   |---------------------------------| ---------------------------| ------------------------------------------------------------------|-----------------------|
   |Tractor large                    | *tractor*                  | Traktor, 67kW                                                     |KTBL 12/13 p. 65
   |Tractor small                    | *tractorSmall*             | Traktor, 54kW                                                     |KTBL 12/13 p. 65
@@ -56,7 +56,7 @@ Table 1.  Machinery included in the set *machType*
 
 Table 2.  Field operations from the set *operation*
 
-| Naming in FARMDYN      | Included machines                                    | Definition                                      |
+| Naming in FarmDyn      | Included machines                                    | Definition                                      |
 |:-----------------------|:-----------------------------------------------------|:------------------------------------------------|
 | *Soilsample*           |                                                      | Bodenproben ziehen                              |
 | *manDist*              | tractorSmall                                         | Gülleausbringung                                |

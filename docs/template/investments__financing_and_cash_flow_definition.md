@@ -2,7 +2,7 @@
 # Investments, Financing and Cash Flow Definition
 
 !!! abstract
-    The investment module depicts investment decisions in machinery, stables and structures (silos, biogas plants, storage) as binary variables with a yearly resolution. Physical depreciation can be based on lifetime or use. Machinery use can be alternatively depicted as continuous re-investment rendering investment costs variable, based on a Euro per ha threshold. Investment can be financed out of (accumulated) cash flow or by credits of different length and related interest rates. For stables and biogas plants, maintenance investment is reflected as well.
+    The investment module depicts investment decisions in machinery, stables and structures (silos, biogas plants, storage) as binary variables with a yearly resolution. Physical depreciation can be based on lifetime or use. Machinery use can be alternatively depicted as continuous re-investment rendering investment costs variable, based on a Euro per ha threshold. Investment can be financed out of (accumulated) cash flow or by credits of different length and related interest rates. For stables and biogas plants maintenance investment are reflected as well.
 
 The total investment sum *v\_sumInv* in each year is defined by:
 
@@ -51,9 +51,9 @@ $endif
 ;
 ```
 
-It can be financed either by equity or by credits, and enters
+Investments can be financed either by equity or by credits, and enters
 accordingly the cash balance definition, *v\_liquid*. The cash balance
-is the cash at the end of the last year plus the net cash flow,
+represents the cash at the end of the forgone year plus the net cash flow,
 *v\_netCashFlow*, in the current year plus new credits, *v\_credits*,
 minus fixed household expenditures, *p\_hcon*, and new investments,
 *v\_sumInv*:
@@ -92,10 +92,7 @@ credSum_(creditType,tFull(t),nCur) $ t_n(t,nCur)     ..
                                     * (1-1/p_payBackTime(creditType) * (p_year(t)-p_year(t1))));
 ```
 
-The net cash flow is defined as the sum of the gross margins in each
-SON, *v\_objeTS* plus received interest and revenue from liquidation
-(selling equipment or land) minus storing costs for manure, interest
-paid on outstanding credits and repayment of credits:
+The net cash flow is defined as the sum of the gross margins, *v\_objeTS* plus received interest and revenue from liquidation (selling equipment or land) minus storing costs for manure, interest paid on outstanding credits and repayment of credits:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /netCashFlow_.*?\.\./ /;/)
 ```GAMS
@@ -115,7 +112,7 @@ netCashFlow_(tFull(t),nCur) $ t_n(t,nCur)  ..
 ```
 
 Revenues from liquidation are only assumed to take place in the last
-year (of the farm's life):
+year (of the simulation):
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /liquidation_.*?\.\./ /;/)
 ```GAMS
@@ -176,17 +173,17 @@ $endif.dh
 ```
 
 Liquidation is active if the model runs in fully dynamic mode and not in
-comparative-static and short run mode.
+comparative static and short run mode.
 
-The gross margin for each state-of-nature is defined as revenues from
+The gross margin for each year is defined as revenues from
 sales, *v\_salRev*, income from renting out land, *v\_rentOutLand*, and
-salary from working off farm minus variable costs. The latter relate to
-costs of buying intermediate inputs such as fertilizer, feed or young
+salary from working off-farm minus variable costs. The latter relate to
+costs of buying intermediate inputs such as fertiliser, feed or young
 animals comprised in the equations structure of the model template,
 *v\_buyCost*, and other variable costs, *v\_varCosts*. For off-farm work
-(full and half time, v*\_workOff*) the weekly work time in hours,
-*p\_weekTime*, is given. In addition, it is assumed that off-farm week
-covers 46 weeks each year, so that income is defined then from
+(full-and half-time, v*\_workOff*) the weekly work time in hours,
+*p\_weekTime*, is given. In addition, it is assumed that off-farm work
+covers 46 weeks each year, so that income is defined from
 multiplying these two terms with hourly wage, *p\_wage*.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/EMV.gms GAMS /objeTS_\(.*?\.\./ /;/)
@@ -198,7 +195,7 @@ objeTS_(t,s)    ..  v_objeTS(t,s)
 
 The sales revenues, *v\_salRev*, that enter the equation above are
 defined from net production quantities, *v\_prods*, and given prices in
-each year and state of nature, *p\_price*:
+each year and SON, *p\_price*:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /salRev_\(.*?\.\./ /;/)
 ```GAMS
@@ -320,11 +317,3 @@ $ifi "%farmBranchSows%" == "on"              or (p_prodLength(possHerds,breeds) 
 $endif.herd
       ;
 ```
-
-The variable *v\_redMlk* allows the farmer to not fully use the genetic
-potential of the milk cow by adjusting the feed mix. This could be of
-relevance in the optimization process for instance if the yield
-potential of different herds are very high, but price combinations of
-in- and output lead to an economic optimal intensity level that is below
-the maximum milk yield potential. Without this variable, cows would have
-always to be milked at the maximum level.

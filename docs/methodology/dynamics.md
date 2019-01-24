@@ -1,23 +1,22 @@
-# Dynamic Character of FARMDYN
+# Dynamic Character of FarmDyn
 
 ## The Fully Dynamic Version
 
-As described in earlier sections, the model template optimizes the farm
-production process over time in a fully dynamic setting. Connecting
-different modules over time (t<sub>1</sub>-t<sub>n</sub>) allows for a reproduction of
-biologic and economic path dependencies.
+As described in earlier sections, the model template optimises the farm
+production process over time in a fully dynamic setting, i.e. all time points are simultaneously considered. Connecting
+different modules over time (t<sub>1</sub>-t<sub>n</sub>) allows considering biologic and economic path dependencies.
 
 As can be seen from Figure 6, the temporal resolution varies across
 different parts of the template module. Cropping decisions are annually
 implemented, whereas the intra-year resolution of the herd size module
-can be flexibly chosen by the user.
+can be flexibly chosen by the user with a minimal resolution of one month.
 
 Concerning fodder composition, decision points in each year are every
-three month. This provides the decision maker a more flexible adjustment
+three months. This provides the decision maker a more flexible adjustment
 to feed requirements of the herd (conditional on lactation phase), his
 resources and prices respectively availability of pasture, silage and
 concentrates. Furthermore, as stated in the manure module, the
-application of manure or synthetic fertilizers, as well as the stored
+applications of manure or synthetic fertilisers, as well as the stored
 manure amounts on farm are implemented on monthly level.
 
 The optimal production plan over time is not simulated in a recursive
@@ -27,10 +26,10 @@ influence decisions before and not only after that point. For instance,
 an increase in the herd at some point might require increased raising
 processes before.
 
-## Short Run and Comparative Static Version
+## Short-Run and Comparative Static Version
 
-The short run version considers only one year and does not comprise a
-liquidation of the enterprise. The comparative-static version replaces
+The short-run version considers only one year and does not comprise a
+liquidation of the enterprise. The comparative static version replaces
 the herd dynamics by a steady state model where, for example, the cows
 replaced in the current year are equal to the heifers in the current
 year, which in turn are equal to the calves raised in the current year.

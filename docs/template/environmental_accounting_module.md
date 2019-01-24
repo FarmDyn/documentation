@@ -3,24 +3,24 @@
 
 
 !!! abstract
-    The environmental accounting module utilizes commonly applied methodology as laid down in IPCC (2006), Haenel (2018) and EMEP (2013, 2016) for the quantification of methane (CH4), ammonia (NH3), nitrous dioxide (N2O), nitrogen oxides (NOx) and di nitrogen (N2). An extension of the scope of accounting to LCA methodology enables the consideration of emissions prior to on-farm activities such are the provision of major inputs (EcoInvent 2.X). Emissions are characterized at midpoint level using characterization factors from ReCiPe (2016). A soil surface balance is calculated for nitrogen (N) and (P) indicating N and P prone to loss through run off or leaching.
+    The environmental accounting module utilises commonly applied methodology for the quantification of methane (CH4), ammonia (NH3), nitrous dioxide (N2O), nitrogen oxides (NOx) and elemental nitrogen (N2), as laid down in IPCC (2006), Haenel (2018) and EMEP (2013, 2016). An extension of the scope of accounting to LCA methodology enables the consideration of emissions prior to on-farm activities such as the provision of major inputs (EcoInvent 2.X). Emissions are characterised at midpoint level using characterisation factors from ReCiPe (2016). A soil surface balance is calculated for nitrogen (N) and (P) indicating N and P prone to loss through run-off or leaching.
 
 ## Gaseous emissions
 
-All calculations related to the environmental accounting are listed in *model\\env\_acc\_module.gms.* while the respective emission factors, characterization factors and other input data are specified in *coeffgen\\env\_acc.gms*. The calculation of emissions follows Haenel et al. (2018). An overview of the methodology, data and the respective (primary) sources used are presented in table XY.
+All calculations related to the environmental accounting are listed in *model\\env\_acc\_module.gms* while the respective emission factors, characterisation factors and other input data are specified in *coeffgen\\env\_acc.gms*. The calculation of emissions follows Haenel et al. (2018). An overview of the methodology, data and the respective (primary) sources used are presented in the table below.
 
 | Source/Emission | Methodology applied | Emission factor | Revised EF |
 |:--------------|:-------------|:--------------|
-| CH4 enteric fermentation	| IPCC(2006)-10.30 f. tier 2+3	| Hanele et al. (2018) p.140, p.145, p.155, p.168, p.214, p.194, IPCC p.10.30	| Haenel et al. (2018), DAMMGEN et al. (2013), IPCC (2006)- 10.30, DAMMGEN et al. (2012C)|
-| CH4 stable, storage and pasture	| Haenel et al. (2018) p. 42 No. 3.28 and 3.29 Following IPCC, 2006, eq. 10.23 |	Hanel et al. p.108 and p. 185. IPCC 2006 p.10.41	| DAMMGEN et al., (2012a), IPCC (2006)-|
-| NH3 emissions from stable and storage |	EMEP (2016) |	Haenel 2018 p.108, p. 109, Haenel et al. (2018) p.186 p.187 |	DAMMGEN et al. (2010a), DAMMGEN et al. (2010b)|
-| N2O, NOx, N2 emissions from stable and storage	| EMEP (2016), Haenel 2018 p. 53 |	Haenel 2018 p. 110, HAENEL et al. (2012), JARVIS & PAIN (1994), Haenel et al. 2015 pp. 188 |	IPCC (2006), DAMMGEN et al. (2010b)|
+| CH4 enteric fermentation	| IPCC(2006)-10.30 f. tier 2+3	| Haenel et al. (2018) p.140, p.145, p.155, p.168, p.214, p.194, IPCC p.10.30	| Haenel et al. (2018), DAMMGEN et al. (2013), IPCC (2006)- 10.30, DAMMGEN et al. (2012C)|
+| CH4 stable, storage and pasture	| Haenel et al. (2018) p. 42 No. 3.28 and 3.29 Following IPCC (2006) eq. 10.23 |	Haenel et al.(2018) p.108 and p. 185. IPCC (2006) p.10.41	| DAMMGEN et al., (2012a), IPCC (2006)-|
+| NH3 emissions from stable and storage |	EMEP (2016) |	Haenel (2018) p.108, p. 109, Haenel et al. (2018) p.186 p.187 |	DAMMGEN et al. (2010a), DAMMGEN et al. (2010b)|
+| N2O, NOx, N2 emissions from stable and storage	| EMEP (2016), Haenel (2018) p. 53 |	Haenel 2018 p. 110, HAENEL et al. (2012), JARVIS & PAIN (1994), Haenel et al. (2015) pp. 188 |	IPCC (2006), DAMMGEN et al. (2010b)|
 | NH3 from manure application |	EMEP (2016) |	Haenel et al. (2018), pp. 111-112, 189, 64	| DOHLER et al. (2002) |
-|N2O, NOx, N2 emissions from manure application	| EMEP (2016), Haenel et al. 2018, pp. 316-317	| Haenel et al. (2018) p.326, Stehfest and Bouwman (2006) N2 Roesemann et al. 2015, pp. 316-317 | |
-| NH3 from excreta from pasture	| EMEP (2016), Haenel et al. (2018) p.55 |	Haenel 2018 p.137/EMEP(2013): 3B , pp. 27 | |
-| N2O, NOx, N2 emissions from excreta on pastures	| EMEP (2016), Haenel et al. (2018) p.55	| Haenel et al. (2018) p. 332; IPCC (2006) 11.11, table 11.1, Haenel et al. (2018) p. 332, STEHFEST UND BOUWMAN (2006) Roesemann et al. 2015, pp. 324 | |
-| NH3, N2O, NOx, N2 emissions from mineral fertilizer application |	Haenel et al. 2018, pp. 316-317 |	Haenel et al. (2018) p.325, Haenel et al. (2018) p.326, Stehfest and Bouwman(2006) N2 Roesemann et al. 2015 | |
-| Indirect N2O emissions from prior NOx, NH3 and NO3 emissions 	| IPCC (2006) |	IPCC(2006)-11.24, Table 11.3	| IPCC (2006) |
+|N2O, NOx, N2 emissions from manure application	| EMEP (2016), Haenel et al. (2018), pp. 316-317	| Haenel et al. (2018) p.326, Stehfest and Bouwman (2006) N2 Roesemann et al. (2015) pp. 316-317 | |
+| NH3 from excreta from pasture	| EMEP (2016), Haenel et al. (2018) p.55 |	Haenel (2018) p.137/EMEP(2013): 3B , pp. 27 | |
+| N2O, NOx, N2 emissions from excreta on pastures	| EMEP (2016), Haenel et al. (2018) p.55	| Haenel et al. (2018) p. 332; IPCC (2006) 11.11, table 11.1, Haenel et al. (2018) p. 332, STEHFEST UND BOUWMAN (2006) Roesemann et al. (2015), pp. 324 | |
+| NH3, N2O, NOx, N2 emissions from mineral fertiliser application |	Haenel et al. (2018), pp. 316-317 |	Haenel et al. (2018) p.325, Haenel et al. (2018) p.326, Stehfest and Bouwman(2006) N2 Roesemann et al. (2015) | |
+| Indirect N2O emissions from prior NOx, NH3 and NO3 emissions 	| IPCC (2006) |	IPCC (2006)-11.24, Table 11.3	| IPCC (2006) |
 | CO2 emission from provision of inputs |		| Ecoinvent | |
 | NO3-N leach	| Agroscope | | |
 | P-loss	| Agroscope | | | |
@@ -53,9 +53,11 @@ set source_emissions(source,emissions) /
 ```GAMS
 set emCat /GWP,PMFP,TAP,FEP,MEP/;
 ```
-The actual calculation of the emissions is realized in the equation *emissions\_*. The timely resolution allows for reporting of emissions on a monthly basis. The different compartments of the equation represent the order of emission accounting by emissions and sources based on Haenel et al. (2018). By the use of conditional sameas statements only relevant emissions and sources are activated. The different compartments of the equation emissions are presented in the following in their order of appearance:
+The actual calculation of the emissions is realised in the equation *emissions\_*. The timely resolution allows for reporting of emissions on a monthly basis. The different compartments of the equation represent the order of emission accounting by emissions and sources based on Haenel et al. (2018). Using conditional *sameas* statements only relevant emissions and sources are activated. The different compartments of the equation *emissions_* are presented in the following in their order of appearance:
 
 1.	Methane emissions from enteric fermentation
+
+	Emissions from enteric fermentation are calculated based on the actual feedintake, v_feeduse, measured in gross energy. CH4 conversion factors, p_Ym, represent animal specific emission rates for cattle and pig herds.  
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /emissions_[\S\s][^;]*?\.\./ /"entFerm"\)  \)/)
 ```GAMS
@@ -101,6 +103,8 @@ $iftheni.h %herd% == true
 
 2.	Methane emissions from stable and storage
 
+CH4 emissions stemming from manure storage are calculated according to the volume in the different storage systems, *v\_volInStorageType*. The amount of volatile solids in the slurry is estimated based on the stored volume using the average dry matter, *p\_avDmMan*, and the share of volatile solids in the dry matter, *p\_oTSMan*. The effect of different slurry cover types on emissions is incorporated via different methane conversion factors, *p\_MCF*. Furthermore, different manure types are considered in the maximum methane producing capacity, *p\_BO*.
+
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?CH4 from manure/ /"staSto"\)  \)/)
 ```GAMS
 *  CH4 from manure storage:
@@ -114,7 +118,8 @@ $iftheni.h %herd% == true
 
 3.	Methane emissions from excreta on pastures
 
-N-emissions are calculated using a mass-flow approach starting with the N excretion by farm animals. Three N-pools are considered, N-TAN, N-Org and total N. The correction of the N pools by previous losses are not part of the *env\_acc module* but are considered in the *manure\_module*.
+
+Excreta on pastures also emits CH4. The calculation of those emissions is conducted analog to the emissions from storage with a specific methane conversion factor, *p\_MCFPast*:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?Pasture:/ /"past"\)  \)/)
 ```GAMS
@@ -128,12 +133,14 @@ N-emissions are calculated using a mass-flow approach starting with the N excret
                     )
          ] $ ( sameas(emissions,"CH4") $ sameas(source,"past")  )
 ```
+N-emissions are calculated using a mass-flow approach starting with the N excretion by farm animals. Three N-pools are considered, N-TAN, N-Org and total N. The correction of the N pools by previous losses are not part of the *env\_acc module* but are considered in the *manure\_module*.  The considered N flows and emissions are depicted in the figure below :
+![](../media/präsentation1.wmf)
+Figure 1: N massflow approach with considered stages and emissions in FarmDyn
 
-4.	Ammonia emissions from stable and storage
+4.	N emissions from stable and storage
 
-xx
-
-5.  N2O, NOx, N2, N2Oind from stable and storage
+NH3 emissions at the stable stage are calculated according to the NTAN in manure as excreted by the animals, *v\_nut2ManureM*. NH3 emissions from storage are calculated based on the N-TAN pool in storage, *v\_nutPoolInStorage*. The emission factors differentiate between cattle and pig slurry.
+While NH3 emissions are based only on the N-TAN pool, other N emissions are based on the total N pool as depicted in *v\_nut2manureM*. Considered emissions are N2O, and NOx. N2 is generally not considered as an emission. For the completeness of the N-flow model N losses in the form of N2 are still calculated in the environmental accounting. Indirect N2O emissions (N2Oind) are calculated based on prior emissions of reactive N species, namely NH3 and NOx. For the sake of simplicity, the stages stable and storage are summarized in the calculation of emissions. Compared to total N2O and NOx emissions on farm the emissions at this stage are rather small and the generalisation is not expected to distort the results.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?\(staSto\)/ /,"staSto"\)/)
 ```GAMS
@@ -168,6 +175,8 @@ xx
 
 6.	Calculation of NH3, N2O, NO and N2 losses from manure excretion on pasture for cattle
 
+The calculation of N emissions from pastures follows the same logic as the calculation of emissions from the stable and storage stage. The emission factors represent the conditions of manure excreted on pastures.
+
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?NH3.*?from\smanure\sexc/ /\(emissions,\"N2\"/)
 ```GAMS
 *     --- Calculation of NH3, N2O, NO and N2 losses from manure excretion on pasture for cattle according to Haenel et al. (2018) p.55
@@ -188,6 +197,8 @@ $$iftheni.ch %cattle% == true
 ```
 
 7.	Calculation of NH3, N2O, NOx, N2 from manure application
+
+NH3 emissions from the application of manure are calculated based on the N-TAN pool in the slurry leaving the storage stage. The emission factors vary between grassland and arable land, different application devices and pig and cattle slurry. N2O, NOx and N2 emissions are calculated based on the total N pool at the application stage, *v_nut2manApplied*. The emission factors are equal to the emission factors for the application of synthetic fertilisers, as proposed by EMEP(2016). Indirect N2O emissions are based on prior emissions of NH3 and NOx.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?from\smanure\sappl/ /"manAppl"\)/)
 ```GAMS
@@ -214,7 +225,9 @@ $$iftheni.ch %cattle% == true
       ] $ sameas(source,"manAppl")
 ```
 
-8.	Calculation of NH3, N2O, NOx, N2 from mineral fertilizer application
+8.	Calculation of NH3, N2O, NOx, N2 from mineral fertiliser application
+
+N-emissions from the application of mineral fertiliser application follow the same logic as from the application of manure, except for the considered N-pool. In synthetic fertiliser all N is present as N-TAN. The emission factor for NH3 emissions distinguishes between different fertiliser types.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\*.*?from\smineral\sfer/ /"minAppl"\)/)
 ```GAMS
@@ -236,6 +249,8 @@ $$iftheni.ch %cattle% == true
 
 9.	Calculation of CO2 emissions from bought inputs
 
+Up-stream emissions stemming from the production of farm inputs are included to gain a more detailed, Life cycle assessment like, perspective. For the moment being, the global warming potential of the provision of mayor farm inputs is measured in CO2 equivalents. The emission factors are not part of the official part of the model, as they are subject of license fees.
+
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\\*.*?Calculation of yearly CO2/ /"input"\)\)/)
 ```GAMS
 * --- Calculation of yearly CO2 emissions from bought inputs in kg CO2eq per month devided by 12 for monthly resolution
@@ -246,27 +261,24 @@ $$iftheni.ch %cattle% == true
 ```
 
 
-To ease the calculation of the emissions along the N mass flow N-emissions are calculated according to their N-weight. The equation *emissionsMass\_* converts the weight into the actual mass of the molecule as a preliminary step for further calculations, chracterizations and weightings.
+To ease the calculation of the emissions along the N mass-flow N-emissions are calculated according to their N-weight. The equation *emissionsMass\_* converts the weight into the actual mass of the molecule as a preliminary step for further calculations, characterisations and weightings.
 
-The equation *emissionsCat* relates the emissions to midpoint categories using characterization factors from ReCiPe (2016). The emissions in the respective category are then summed over the manure chains, sources and month to gain an emission profile for the whole farm.
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\\*.*?Calculation.*?N-/ /;/)
 
+The equation *emissionsCat* relates the emissions to midpoint impact categories using characterisation factors from ReCiPe (2016). The emissions in the respective category are then summed over the manure chains, sources and month to gain an emission profile for the whole farm.
 
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /\\*.*?Character/ /;/)
 
 ## N and P surplus
 
 The losses of N, mainly as Nitrate to groundwater bodies, and P, mainly
-via erosion and entry to surface waters, are most relevant environmental
-threats of farming systems. Since it is highly depending on
-environmental and geographical conditions, fixed emissions factors are
+via erosion and entry to surface waters, are the most relevant environmental threats of farming systems. Since they are highly depending on environmental and geographical conditions, fixed emission factors are
 less commonly used than for gaseous losses. Therefore, we calculate N
 and P surplus balances in the equation *SoilBal\_* as an indicator for
-potential loss of N and P after field application. This part of the
-environmental accounting will be replaced by results from crop models as
-part as of an ongoing research project
-(<http://www.ilr.uni-bonn.de/pe/research/project/pro/pro16_e.html>).
+potential loss of N and P after field application. . A more detailed depiction of those emissions can be achieved with the usage of the crop model Simplace. The linkage of the model to FarmDyn is described in the previous chapter: Using data output of the crop modelling framework SIMPLACE.
 
 The balance is calculated as the difference between the nutrient input
-via organic and mineral fertilizer and the removal of nutrients via the
+via organic and mineral fertiliser and the removal of nutrients via the
 harvested product.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/env_acc_module.gms GAMS /SoilBal_.*?\.\./ /;/)
@@ -313,7 +325,7 @@ $endif.h
 ```
 
 Note, that the calculated surplus differs from the surplus calculated
-for the threshold under the fertilizer directive (see chapter 2.11.4).
+for the threshold under the fertiliser directive (see chapter 2.11.4).
 For the environmental accounting, the estimated losses from storage,
 stable etc. are modelled precisely whereas fixed, prescribed values are
-used for the fertilizer directive.
+used for the fertiliser directive.

@@ -5,7 +5,7 @@
 Animals are dealt with in three parts of the model: the general herd
 module, the cattle module and the pig module. The general herd module
 depicts the herd demography while the latter two add aspects specific to
-cattle and pigs
+cattle and pigs.
 
 ## General Herd Module
 
@@ -14,19 +14,17 @@ cattle and pigs
 
 The general herd module depicts relations between herds of different
 animal types on farm. Specifically, herds are differentiated by age,
-gender, breeds, production objectives, month in each year. Female cows
-of milk breeds can be optionally differentiated by their genetic
-potential regarding the milk yield.
+gender, breeds, production objectives, month in each year.
 
 The model uses two different variables to describe herds: *v\_herdStart*
-describes the number of animals by type which enter the production
+describes the number of animals by type which enter a production
 process at a certain time, while *v\_herdSize* describes the number of
 animals by type at the farm at a specific time. More precisely the
 standing herd, *v\_herdSize*, can be described as animals which joint
 the herd since the beginning of the production process, *v\_herdStart,*
-minus slaughtered ones, as can be seen in the following equation. The
+minus sold and slaughtered ones, as can be seen in the following equation. The
 parameter *p\_mDist* in the equation describes the difference in months
-between two time points defined by year, *t,t1*, and month, *m,m1*,
+between two time points defined by year, *t, t1*, and month, *m, m1*,
 *p\_prodLength* depicts the length of the production process in months.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdSize_[\S\s][^;]*?\.\./ /;/)
@@ -116,7 +114,7 @@ processes such as replacement or slaughter, such that the expression
 turns into a n:1 relation. This case is captured by second additive
 expression in the equation.
 
-In comparative-static mode *p\_compStatHerd*, all lags are removed such
+In comparative static mode *p\_compStatHerd*, all lags are removed such
 that a steady-state herd model is described.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdsBal_[\S\s][^;]*?\.\./ /;/)
@@ -181,17 +179,17 @@ herdsBal_(balHerds,breeds,tCur(t),nCur,m) $ (  sum(feedRegime,actherds(balHerds,
 ## Cattle Module
 
 !!! abstract
-    Cow herds can be distinguished by genetic potential, including endogenous breeding towards higher milk yield. Herds can be differentiated by animal types - such as cow, heifer, calf -, breeds, intensity levels (milk yield, daily weight gain) and feeding regimes.
+     Herds can be differentiated by animal types - such as cow, heifer, calf -, breeds, and feeding regimes.
 
 The cattle module is closely related to the general herd module. It
 describes the demographic relations between cattle types (dairy cows,
 mother cows, male and female calves, heifers, young bulls) on the farm.
 New-born calves can be sold immediately or after one year or being
 raised to a heifer or young bulls, respectively. The heifer process,
-starting with a female calf raised for one year is available in three
+starting with a female calf raised for one year, is available in three
 intensity levels, leading to different process lengths (12, 21, 27
 month) and thus first calving ages (12, 33 and 40 months) for the
-remonte. In Figure 3 the general concept of the cattle module and its
+replacement. In Figure 3 the general concept of the cattle module and its
 decision points are illustrated.
 
 ![](../media/figure3.png)
@@ -231,10 +229,10 @@ newCalves_("%basBreed%",t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,"%
 ```
 
 
-The calving coefficients are defined in the *Cows* tab of the Graphical User Interface.
-Here, the amount of births per lactation, living calves per birth, calf losses, and days between births can be set for the different breeds Holstein-Friesian (HF), Simmental (SI, which stands a placeholder for the individual breed defined in the GUI), and mother cows (MC). The values are stored in the parameter ```p_calvAttr```.
+The calving coefficients are defined in the *Cows* tab of the GUI.
+Here, the amount of births per lactation, living calves per birth, calf losses, and days between births can be set for the different breeds Holstein-Friesian (HF), Simmental (SI, which stands a placeholder for the individual breed defined in the GUI), and mother cows. The values are stored in the parameter ```p_calvAttr```.
 
-The amount of calves that are born in a given month is derived from the information enetered in the GUI with the help of an entropy estimator. For the sake of simplicity, but without loss of generality, it is assumed that birth is equally likely in the two months surrounding the average calving interval.
+The amount of calves that are born in a given month is derived from the information entered in the GUI with the help of an entropy estimator. For the sake of simplicity, but without loss of generality, it is assumed that birth is equally likely in the two months surrounding the average calving interval.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /set curCycleLength/ /NLP;/)
 ```GAMS
@@ -275,7 +273,7 @@ set curCycleLength / l11*l15 /;
    solve m_ent maximizing v_ent using NLP;
 ```
 
-The calving propabilities are then mapped to the actual endogenous calving distribution in the paramter `p_calvCoeff`, whis is subsequently used in the `herdStart_` equation.  
+The calving probabilities are then mapped to the actual endogenous calving distribution in the parameter `p_calvCoeff`, which is subsequently used in the `herdStart_` equation.  
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /p_calvCoeff\(dCows,"%basBreed%",mDist\)/ /;/)
 ```GAMS
@@ -289,9 +287,9 @@ p_calvCoeff(dCows,"%basBreed%",mDist)
 For a cow with a lifespan of four lactations, the calving distribution is depicted in the following figure. Notice how the distribution widens with increasing amounts of lactations.
 
 ![Calving Distribution](../media/calv_dist_norm.png)
-:   Figure 3: Calving distribution of a cow with four lactations, according to the endogenous calculation. Source: Own represenation.
+:   Figure 3: Calving distribution of a cow with four lactations, according to the endogenous calculation. Source: Own representation.
 
-In order to provide a better overview on model results in the equation listing, the a yearly average herd size is calculated in the equation `sumHerds_`
+In order to provide a better overview of model results in the equation listing, a yearly average herd size is calculated in the equation `sumHerds_`:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /sumHerds_.*?\$/ /;/)
 ```GAMS
@@ -304,22 +302,56 @@ sumHerds_(sumHerds,breeds,feedRegime,t,nCur,m) $ (t_n(t,nCur)
                  v_herdSize(possHerds,breeds,feedRegime,t,nCur,m) $ (p_prodLength(possHerds,breeds) gt 1)
               +  v_herdStart(possHerds,breeds,t,nCur,m) $ (p_prodLength(possHerds,breeds) eq 1));
 ```
+## Sexing
+
+On interface: define if it used to generate males and/or females and define costs
+Bild ("sexing")
+
+In the “model\templ.gms”, male and female sexing are treated as inputs with their prices:
+Einfügen
+
+The prices are taken from the interface and introduced in “coeffgen\prices.gms”:
+Einfügen
+
+If the user has sexing switched off, the variable is fixed to zero in “model\define_starting_bounds”:
+Einfügen
+
+Sexing changes the male-female balance equation (see model\cattle_module.gms):
+Einfügen
+
+If sexing is switched off, the number of female siblings (LHS) must be (approximately) equal to the males ones (RHS). Sexing an insemination to male will take 0.5 female out and increase the number of males of 0.5. Female sexing leads to the opposite effect.
+
+##Cross-Breeding
+Cross breeding can be switched on the interface on the “bulls” tab:
+Bild ("crossbreeding")
+
+As consequence, a second table is offered where data for the cross-breed can be entered.
+
+The cross-breeds enter the calves balance (model\cattle_module.gms) The left hand side adds up all male and female calves, if cross-breeding is switched on, adding the cross-breeds.
+Einfügen
+
+The activation also affect “coeffgen\ini-herds”:
+Einfügen
+
+By setting the actHerds indicator set active for the cross-breeds. Accordingly, the sets for bulls work on a set which can include the cross-breed:
+Einfügen
+
+
 
 ## Pig Module
 
 !!! abstract
-    The pig module distinguishes between fattening- and piglet production systems. Fattening pigs are subdivided into different phases to account for different feeding requirements and excretion values. The piglet production system differentiates between sows, young piglets and piglets, which are separated from their mother after two weeks.
+    The pig module distinguishes between fattening- and piglet production systems. Fattening pigs are subdivided into different phases to account for different feeding requirements and excretion values. The piglet production system differentiates between sows, young piglets and weaners.
 
 The pig module, similar to the cattle module, is closely linked with the
-general herd module. It distinguishes between a fattening branch and a
-piglet production branch with sows. The herd dynamics of the pig module
+general herd module. The herd dynamics of the pig module
 are shown in Figure 4.
 
 ![](../media/figure4.png)
 :   Figure 4: Pig module management decisions.
 
 The piglet production process starts with the production of young
-piglets born to sows, shown in the following equation.
+piglets born to sows, shown in the following equation:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/pig_module.gms GAMS /newPiglets_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
@@ -332,23 +364,23 @@ newPiglets_(tCur(t),nCur,herdm) $  (sum(feedRegime,actHerds("sows","",feedRegime
 
 
 Each sow produces on average 26.7 young piglets per year in the default
-parameterization. After one month young piglets become piglets and
+parameterisation. After one month young piglets become weaners and
 remain 2 months within the herd before they are sold or transferred to
-the fattener branch. Labor and feed requirements are chosen according to
+the fattener branch. Labour and feed requirements are chosen according to
 a growing period of 41 days and a weight gain from 8 to 30 kg. The
-feeding-, stable- and labor requirements of the piglet production branch
+feeding-, stable- and labour requirements of the piglet production branch
 are steered by the sows and piglets herd size.
 
 The fattener farm branch distinguishes between four different stages of
 fatteners to account for different feeding and excretion values during
 the production process. Feeding levels and excretion values are
-connected via the set *feedregime*. That allows to adapt feeding
+connected via the set *feedregime*. This set allows to adapt feeding
 patterns, for instance to adjust nutrient output in response to
-legislatively given fertilizer restrictions. For a more thorough
+legislatively given fertiliser restrictions. For a more thorough
 explanation of the feeding options, please refer to the pig feeds module
 in section 2.2.2. The piglets bought in a month are immediately
-transferred into early fatteners and are after a month transferred to
-the next fattening stage until they become fatteners and are sold as
+transferred into early fatteners and are transferred to
+the next fattening stage after a month until they become fatteners and are sold as
 fattened pigs. Each stage lasts for one month. The weight development
 during the fattening process is assumed from 28 to 118kg live weight.
 

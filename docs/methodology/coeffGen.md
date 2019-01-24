@@ -3,12 +3,12 @@
 
 ## Concept and File Structure
 
-The coefficient generator comprises a number of small modules, realized
+The coefficient generator comprises a number of small modules, realised
 in GAMS, which define the various exogenous parameters comprised in the
 template. It is designed such that it can generate from a few central
 characteristics of the farm (herd size, current milk yield, existing
 stables and their construction year, labour force and available land)
-and the realized crop yields a plausible set of coefficients for the
+and the realised crop yields a plausible set of coefficients for the
 template model. The coefficient generator can also be set-up to load
 parameters for a specific region.
 
@@ -30,25 +30,25 @@ The coefficient generator is divided in:
     demand and yield potentials.
 
 -   **Environmental accounting**: defines environmental impact due to
-    manure and fertilizer application.
+    manure and fertiliser application.
 
 -   **Farm constructor**: the farm constructor defines the relationships
     between benchmark data of the farms and production specific
     endowments e.g. of land, stables and machinery in the initial
     situation.
 
--   **Farm\_Ini:** Initializes the farms land endowment and plot
+-   **Farm\_Ini:** Initialises the farms land endowment and plot
     distribution
 
 -   **Feeds**: possible fodder compounds are listed with their specific
     contents of ingredients (N, C, DM, XP,\...).
 
--   **Fermenter\_tech: i**ncludes all data regarding the technical
+-   **Fermenter\_tech**: includes all data regarding the technical
     aspects of the biogas fermenter, the different inputs and their
     related biogas yields.
 
--   **Fertilizing**: defines coefficients for various application
-    techniques for organic and synthetic fertilizers.
+-   **Fertilising**: defines coefficients for various application
+    techniques for organic and synthetic fertilisers.
 
 -   **Greening \<not yet included\>:** Adds the restrictions of the CAP
     Greening into the model.
@@ -74,16 +74,16 @@ The coefficient generator is divided in:
     storage and application types are derived by this module.
 
 -   **Pigs:** defines output coefficients, production lengths and other
-    variable costs for fattners and sows**.**
+    variable costs for fattners and sows.
 
 -   **Prices**: different default values are defined if prices for
-    variables are not defined by the graphical user interface
+    variables are not defined by the GUI.
 
 -   **Prices\_eeg**: contains the prices applied in the different EEGs
     as well as investment prices for different biogas plant parts.
 
 -   **Requ**: definitions of requirement functions for lactating cows in
-    relation to their milk yield, live weight etc, as well as for
+    relation to their milk yield, live weight etc., as well as for
     heifers and calves are included in this module.
 
 -   **Silos**: in this module the definition of different types of
@@ -144,14 +144,14 @@ for that region is found:
 ![](../media/image228.png)
 
 Similarly, soil shares entered via the interface or a batch file are
-only overwritten if for it at least one of the soil types data are
+only overwritten if at least one of the soil types data are
 entered:
 
 ![](../media/image229.png)
 
 ### Yield Data
 
-Handling of the yields is similar. The inclusion of the data is done by
+Handling of yields is similar. The inclusion of the data is done by
 *coeffgen\\cropping.gms*:
 
 ![](../media/image230.png)

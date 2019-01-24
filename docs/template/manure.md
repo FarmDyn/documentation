@@ -3,7 +3,7 @@
 
 
 !!! abstract
-    Manure excretion from animals is calculated based on fixed factors, differentiated by animal type, yield level and feeding practice. For biogas production, the composition of different feed stock is taken into account. Manure is stored subfloor in stables and in silos. Application of manure has to follow legal obligations and interacts with plant nutrient need from the cropping module. Different N losses are accounted for in stable, storage and during application.
+    Manure excretion from animals is calculated based on fixed factors, differentiated by animal type, breed and feeding practice. For biogas production, the composition of different feed stock is taken into account. Manure is stored subfloor in stables and in silos. Application of manure has to follow legal obligations and interacts with plant nutrient need from the cropping module. Different N losses are accounted for in stable, storage and during application.
 
 ## Manure Excretion
 
@@ -26,13 +26,13 @@ manQuantM_(curManChain(manChain),tCur(t),nCur,m) $(t_n(t,nCur)$(not sameas(curMa
                     * sum(m_to_herdm(m,m1), v_herdSize(possHerds,breeds,feedRegime,t,nCur,m1)));
 ```
 
-Furthermore, the monthly excretion of nutrients, NTAN, Norg and P is
+Furthermore, the monthly excretion of nutrients, NTAN (total ammonia nitrogen), Norg (organic nitrogen) and P (phosphorus) is
 calculated, multiplying *v\_herdsize* and *p\_nut2ManMonth*. For cows,
 excretion rate depends on animal category, feeding regime and yield
-level. For fatteners and sows, excretion depends on animal category and
+level. For fatteners and sows excretion depends on animal category and
 feeding regime. Corresponding parameters can be found in
 *coeffgen\\manure.gms* (not shown here). For dairy cows, excretion on
-pasture is subtracted. Depending on the stable inventory of a herd, manure excretion can be differentiated by liquid, semi-solid, and solid manure. If a herd is set on a straw stables, the manure excretion is split among the different manure types accordingly.
+pasture is subtracted. Depending on the stable inventory of a herd, manure excretion can be differentiated by liquid, semi-solid, and solid manure. If a herd is kept in a straw stables, the manure excretion is split among the different manure types accordingly.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /nut2ManureM_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
@@ -51,11 +51,10 @@ nut2ManureM_(curManChain(manChain),nut2,tCur(t),nCur,m) $(t_n(t,nCur)$(not samea
 ```
 
 
-Biogas production involves the production of digestates. Four sources
-can be differentiated depending on the origin of the feed crop: use of
+Biogas production involves the production of digestates. Four feed sources
+can be differentiated depending on their origin: use of
 manure produced on farm, manure imported to the farm, crops grown on
-farm and crops imported on farm. Manure produced on farm is treated like
-not fermented manure, as though it is not entering the biogas plant.
+farm and crops imported to the farm. Manure produced on farm is treated as not fermented manure, as though it is not entering the biogas plant.
 
 For digestates from imported manure and from crops, volume of digestates
 in cubic meter is calculated in the *biogas\_module.gms* by multiplying
@@ -117,7 +116,7 @@ nut2ManurePurch_(curmanchain,nut2,curmaM,tCur(t),nCur,m) $( t_n(t,nCur) $ sameas
 
 Equations related to manure storage serve mainly for the calculation of
 the needed storage capacity, linked to investment, and for the
-calculation of emissions during storage. The equations realted to manrue storage in *manure\_module.gms* are activated when fattners, sows, dairy and/or biogas is activated in the GUI.
+calculation of emissions during storage. The equations related to manure storage in *manure\_module.gms* are activated when fatteners, sows, dairy and/or biogas is activated in the GUI.
 
 The amount of manure in the storage in cubic meter is described in the
 following equation. Manure is emptied by field application,
@@ -180,7 +179,7 @@ $endif.emissionRight
 
 Following the same structure as the equation above, there is a nutrient
 pool for NTAN, Norg and P in the storage. Losses of NTAN and Norg during
-storage are calculated in the environmental accounting and subtracted.
+storage are calculated in the environmental accounting and subtracted from the respective pool.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /nutPoolInStorage_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
@@ -327,7 +326,7 @@ $ifi %biogas% == true       + v_siloBiogasStorCap(t,nCur) $ sameas ("LiquidBioga
 ```
 
 The storage capacity of silos *v\_SiloManStorCap* is derived by
-multiplying the silo inventory with parameters characterizing the
+multiplying the silo inventory with parameters characterising the
 corresponding storage capacity.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /siloManStorCap_[\S\s][^;]*?\.\./ /;/)
@@ -343,7 +342,7 @@ siloManStorCap_(curManChain(manChain),tCur(t),nCur) $ t_n(t,nCur) ..
 
 The subfloor storage capacity of stables *v\_SubManStorCap* is
 calculated in the *general\_herd\_module.gms*. The stable inventory is
-multiplied with parameters characterizing the corresponding subfloor
+multiplied with parameters characterising the corresponding subfloor
 storage capacity. The amount of manure which can be stored in the stable
 building, *p\_ManStorCap*, depends on the stable system. Slurry based
 systems with a plane floor normally only have small cesspits which
@@ -351,7 +350,7 @@ demand the addition of manure silo capacities. The manure storage
 capacity of stables with slatted floor depends on the size of the
 stable, where a storage capacity for manure of three month in a fully
 occupied stable is assumed. A set of different dimensioned liquid manure
-reservoirs is depicted in the code, *p\_ManStorCapSi*, from 500 to 4000
+reservoirs is depicted in the parameter, *p\_ManStorCapSi*, ranging from 500 to 4000
 m³.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /subManStorCap_[\S\s][^;]*?\.\./ /;/)
@@ -406,7 +405,7 @@ siloCoverInv_(curManChain(manChain),silos,tCur(t),nCur)
 
 The amount of storage capacity is prescribed by environmental law.
 FarmDyn allows applying different regulations with regard to required
-storage capacity, changed in the GUI. Thereby FarmDyn allows to precisely caputre the requirements of the German Fertilization Ordinance 2007 and 2017, which is further specified in the [Fertilization Ordinance chapter](fertilization_ordinance.md#required-manure-storage-capacities).
+storage capacity, changed in the GUI. Thereby FarmDyn allows to precisely capture the requirements of the German Fertilisation Ordinance 2007 and 2017, which is further specified in the [Fertilisation Ordinance chapter](fertilization_ordinance.md#required-manure-storage-capacities).
 
 The total manure storage capacity *v\_TotalManStorCap* must be greater
 than the required storage capacity *v\_ManStorCapNeed*.
@@ -418,14 +417,13 @@ manStorCap_(curManChain(manChain),tCur(t),nCur) $ t_n(t,nCur) ..
        v_TotalManStorCap(manChain,t,nCur) =g= v_ManStorCapNeed(manChain,t,nCur);
 ```
 
-Besides requirement with regard to the storage capacity, there are
+Besides legal requirements for the storage capacity, there are
 equations which make sure that the storage is emptied in certain points
 of time. Every spring, the storage has to be emptied completely with
 regard to nutrients and volume, what is made sure of in the equations
 *emptyStorageVol\_* and *emptyStorageNut\_*. On the one hand, this
 represents typical manure management of farms. On the other hand, the
-restriction is necessary to make sure that the storage can be emptied
-when relation between nutrients and volume changes due to nutrient
+restriction is necessary to make sure that the correct relation between mass and nutrients is maintained when nutrients and volume changes due to nutrient
 losses during storage (see chapter 2.9.3).
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /emptyStorageVol_[\S\s][^;]*?sameas[\S\s]*?\.\./ /;/)
@@ -491,8 +489,7 @@ $endif.b
 Different application procedures for manure N are implemented,
 *ManApplicType*, including broad spread, drag hose spreader, injection of manure, and solid manure spread.
 The core variable is *v\_mandist* that represents
-the amount of manure in cubic meter. The different techniques are
-related to different application costs, labour requirements as well as
+the amount of manure in distributed cubic meter. The different techniques are related to different application costs, labour requirements as well as
 effects on different emissions. Furthermore, manure application is
 linked to the nutrient balance (see chapter 2.11.2 and 2.11.3) and the
 manure storage (see chapter 2.9.2).
@@ -503,7 +500,7 @@ the losses during storage. The parameter *p\_nut2inMan* contains the
 amount of NTAN, Norg and P per cubic meter of manure applied. The parameter is differentiated for the manure types linked to the present herd.
 Relevant parameters are calculated in *coeffgen\\manure.gms*.
 
-As a first step, the amount of different nutrients per cubic meter without losses is calculated in *p\_nut2inManNoLoss* . Here, the nutrient excretion of the animals is related to their volume excretion depending on the stables present on the farm.
+As a first step, the amount of different nutrients per cubic meter without losses is calculated in *p\_nut2inManNoLoss*. Here, the nutrient excretion of the animals is related to their volume excretion depending on the stables present on the farm.
 
 In a second step, the nutrients per cubic meter are corrected for the storage losses in *p\_nut2inMan*.
 Varying storage time of manure, and hence varying nutrient content, can be taken into account by activating the "Nutrient loss depending on storage time" control in the GUI.
@@ -512,7 +509,7 @@ minimum possible amount of losses during one year. This allows a complete emptyi
 In the default case, only the minimum losses are assumed.
 
 The total manure distributed in cubic meter and in nutrients per month
-is summarized in the following equations according to:
+is summarised in the following equations according to:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /nut2ManApplied_[\S\s][^;]*?\.\./ /;/)
 ```GAMS

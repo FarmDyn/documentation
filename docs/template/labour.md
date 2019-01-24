@@ -3,22 +3,19 @@
 
 
 !!! abstract
-    The labour module optimizes work use on- and off farm with a monthly resolution, depicting in detail labour needs for different farm operations, herds and stables as well as management requirements for each farm branch and the farm as a whole. Off farm work distinguishes between half and full time work (binaries) and working flexibly for a low wage rate.
+    The labour module optimises work use on- and off-farm with a monthly resolution, depicting detailed labour needs for different farm operations, herds and stables, management requirements for each farm branch, and the farm as a whole. Off-farm work distinguishes between half- and full-time work (binaries) and working flexibly for a low wage rate.
 
 ## General Concept
 
-The template differentiates between three type of labour on farm:
+The template differentiates between three types of labour on farm:
 
 1.  **General management and further activities for the whole farm,**
-    *p\_labManag("farm","const"*, which are needed as long as the farm
-    is not given up ,*v\_hasFarm* = 1, *binary variable*, and not
+    *p\_labManag("farm","const"*), which are needed as long as the farm
+    is not abandoned ,*v\_hasFarm* = 1, *binary variable*, and not
     depending on the level of individual farm activities.
 
 2.  **Management activities and further activities depending on the size
-    of farm branches** such as arable cropping, dairying, pig fattening,
-    sows. The necessary working hours are broken down into a base need,
-    *const* which is linked to having the farm branch, *v\_hasBranch*,
-    *integer*, and a linear term depending on its size, *slope*.
+    of farm branches** such as arable cropping, dairying, beef fattening, pig fattening, and piglet production. The necessary working hours are broken down into a base need, *const* which is linked to having the respective farm branch, *v\_hasBranch*, *integer*, and a linear term depending on its size, *slope*.
 
 3.  **Labour needs for certain farm operations** (aggregated to
     *v\_totLab*).
@@ -46,7 +43,7 @@ p_yearlyLabH(t)   =  %AkhFirst%   * min(1,%Aks%)
                       + %AkhFurther% * (%Aks%-2)      $ (%Aks% > 2);
 ```
 
-The maximal work hours per month is defined in the following statement,
+The maximaum work hours per month is defined in the following statement,
 represented by the parameter *p\_monthlyLabH*:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/farm_constructor.gms GAMS /p_monthlyLabH\(t,m\).*?=/ /;/)
@@ -54,10 +51,8 @@ represented by the parameter *p\_monthlyLabH*:
 p_monthlyLabH(t,m) =  max(p_yearlyLabH(t) / 365 * p_daysPerMonth(m)*1.2,  %Aks% * 12 * p_daysPerMonth(m) * 5/7);
 ```
 
-The template considers sum of labour needs for each month, *m,* and each
-SON, *s*. Farm labour needs are related to certain farm activities on
-field and in stable. The labour need for work on farm and flexibly off
-farm is defined by the following equation. The variables that enter in
+The template considers the sum of labour needs for each month, *m,* and each SON, *s*. Farm labour needs are related to certain farm activities on
+field and in stable. The labour need for work on-farm and flexibly off-farm is defined by the following equation. The variables that enter in
 the equation are explained in the next section of the labour section.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /labTotSM_\(tCur/ /;/)
@@ -173,7 +168,7 @@ hasFarm_(branches,tCur(t),nCur) $ ((not sameas(branches,"farm")) $ (v_hasBranch.
        v_hasBranch(branches,t,nCur)  =l= v_hasFarm(t,nCur);
 ```
 
-The hours are needed for yearly farm management are defined from a
+The hours needed for yearly farm management are defined using a
 constant and the branch specific values:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /labManag_\(tCur.*?\$/ /;/)
@@ -193,13 +188,11 @@ labManag_(tCur(t),nCur) $ t_n(t,nCur) ..
 
 ## Labour Need for Herd, Cropping, Operations and Off-Farm Work
 
-***Herd Activities and Cropping***
+### Herd Activities and Cropping
 
 The labour need for animals, *v\_herdLabM,* is defined by an animal type
 specific requirement parameter, *p\_herdLab,* in hours per animal and
-month (see in the next equation, working hours per animal and month) and
-in addition by the time requirement per stable place, which is
-differentiated by stable type. This formulation allows labour saving
+month (see in the next equation, working hours per animal and month) and by the time requirement per stable place, which differs with the stable type. This formulation allows labour saving
 scale effects related to the stable size:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /labHerdM_\(tCur.*?\$/ /;/)
@@ -225,13 +218,7 @@ labHerdM_(tCur(t),nCur,m) $ t_n(t,nCur) ..
                                 v_stableShareCost(stables,t,nCur) * p_stableLab(stables,m) );
 ```
 
-A similar equation exists for crops, however, crop labour need is
-differentiated here by state of nature in the partial stochastic
-version. The parameter *p\_cropLab* defines the labour hours per hectare
-and month for each crop. In addition, the parameters *p\_manDistLab* and
-*p\_syntDistLab* multiplied by the *N type* applied to each crop are
-added to the overall crop labour demand for the application of synthetic
-and manure:
+A similar equation exists for crops. The parameter *p\_cropLab* defines the labour hours per hectare and month for each crop. In addition, the parameters *p\_manDistLab* and *p\_syntDistLab* multiplied by the *N type* applied to each crop are added to the overall crop labour demand for the application of synthetic fertiliser and manure:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /labCropSM_\(tCur.*?\$/ /;/)
 ```GAMS
@@ -258,7 +245,7 @@ $endif.man
                v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * p_syntDistLab(syntFertilizer));
 ```
 
-***Farm Operations***
+### Farm Operations
 
 Field working days define the number of days available in a labour
 period of half a month, *labPeriod,* during which soil conditions allow
@@ -291,7 +278,7 @@ fieldWorkHours_(plot,labReqLevl,labPerSum,tCur(t),nCur)
         );
 ```
 
-The number of field work hours cannot exceed a limit which is defined by
+The number of field working hours cannot exceed a limit which is defined by
 the available field working days, *p\_fieldWorkingDays.* Field working
 days depend on climate zone, soil type (*light, middle, heavy*) and
 distribution of available tractors to the soil type, *v\_tracDist*. It
@@ -322,17 +309,17 @@ tracDistribution_(labPerSum,tCur(t),nCur) $ t_n(t,nCur) ..
 ```
 
 It implicitly assumes that farm family members are willing to spend
-hours for on farm work even if working off farm, e.g. by taking days
+hours for on-farm work even if working off-farm, e.g. by taking days
 off.
 
-***Off-Farm Work***
+### Off-Farm Work
 
-Farm family members can optionally work half or full time, *v\_workoff*,
-or on an hourly basis off farm, *v\_workHourly*. Half and full time work
-are realized as integer variables. In the normal setting the wage per
+Farm family members can optionally work half- or full-time, *v\_workoff*,
+or on an hourly basis off-farm, *v\_workHourly*. Half- and full-time work
+are realised as integer variables. In the normal setting the wage per
 hour for working half time exceeds the wage of short time hourly work.
-Moreover, the per hour wage of full time work is higher than of working
-half time one. For half and full time work commuting time can be
+Moreover, the wage per hour of full time work is higher than of working
+half time. For half- and full-time work commuting time can be
 considered:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /offFarmHoursPerYearFixed_\(tCur/ /;/)
@@ -358,8 +345,8 @@ p_workTime(workType) =   (p_workT("Half")+p_workT("Full")*floor(workType.pos/2))
 ```
 
 It is assumed that decisions about how much to work flexibly on an
-hourly basis are taken on a yearly basis (i.e. the same amount of hours
-are inputted in each month) and can be adjusted to the state of nature.
+hourly basis are taken on a yearly basis (i.e. the same number of hours
+is inputted in each month).
 
 The total number of hours worked off-farm is defined as:
 

@@ -3,10 +3,10 @@
 
 
 !!! abstract
-    The cropping module optimizes the cropping pattern subject to land availability, reflecting yields, prices, machinery and fertilizing needs and other variable costs for a selectable longer list of arable crops. The crops can be differentiated by production system (plough, minimal tillage, no tillage, organic) and intensity level (normal and reduced fertilization in 20% steps). Machinery use is linked to field working days requirements depicted with a bi-weekly resolution during the relevant months. Crop rotational constraints can be either depicted by introducing crop rotations or by simple maximal shares. The model can capture plots which are differentiated by soil and land (gras, arable) type and size.
+    The cropping module optimises the cropping pattern subject to land availability, reflecting yields, prices, machinery and fertilising needs and other variable costs for a selectable list of arable crops. The crops can be differentiated by production system (conventional, organic), tillage (plough, minimal tillage, no tillage) and intensity level (normal and reduced fertilisation in 20% steps). Machinery use is linked to field working-day requirements depicted with a bi-weekly resolution during the relevant months. Crop rotational constraints can be either depicted by introducing crop rotations or by simple maximal shares. The model can capture plots which are differentiated by soil and land type (grassland, arableland and pasture) and size.
 
 Crop activities are differentiated by crop, *crops*, soil types, *soil,*
-management intensity, *intens*, and tillage type, *till*. Use of
+management intensity, *intens*, and tillage type, *till*. The use of
 different management intensities and tillage types is optional.
 Management intensities impact yield levels (see chapter 2.11.1.1).
 Necessary field operations and thus variable costs, machinery and labour
@@ -14,17 +14,7 @@ needs reflect intensity and tillage type as well.
 
 ## Cropping Activities in the Model
 
-Crop activities are defined with a yearly resolution and can be adjusted
-to the state of nature in the partially stochastic version. The farmer
-is assumed to be able to adjust on a yearly basis its land use to a
-specific state of nature as long as the labour, machinery and further
-restrictions allow for it. Land is differentiated between arable and
-permanent grass land, *landType*, the latter is not suitable for arable
-cropping. Land use decisions can be restricted by maximal rotational
-shares for the individual crops. The set *plot* differentiates the land
-with regard to plot size, soil type and climate zone. The attributes of
-plots, as well as the number of plots from 1 to 20, is defined in the
-GUI.
+The farmer is assumed to be able to adjust on a yearly basis its land use  as long as the labour, machinery and further restrictions allow for it. Land is differentiated into arable and permanent grass land, *landType*. Land use decisions can be restricted by maximal rotational shares for the individual crops. The set *plot* differentiates the land with regard to plot size, soil type and climate zone. The attributes of plots and the number of plots from 1 to 20, is defined in the GUI.
 
 The total land endowment is calculated in the equation *totPlotLand\_*
 as the sum of the initial endowment, *p\_plotSize(plot)*, and land
@@ -50,7 +40,7 @@ $ifi %landBuy% == true + sum(t_n(t1,nCur1) $ (tcur(t1) $ isNodeBefore(nCur,nCur1
 
 Total cropped land is defined by the land occupied by the different
 crops, *v\_cropH*a. The *c\_s\_t\_i* set defines the active possible
-combinations of crops, soil type, tillage type and management intensity.
+combinations of crops, soil type, tillage type/system and management intensity.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /croppedLand_[\S\s][^;]*?\.\./ /;/)
 ```GAMS
@@ -106,8 +96,7 @@ $ifi %landLease% == true            -v_rentOutPlot(plot,t,nCur) * p_plotSize(plo
 Alternatively to the use of maximum rotational shares (see previous
 section) the model offers an option of a three year crop rotation
 system. The rotation names (shown in the following list, see
-*model\\templ\_decl.gms*), set *rot*, show the order of the crops in the
-rotations. Each line depict a sequence of three crop types (do not have
+*model\\templ\_decl.gms*), set *rot*, displays the order of the crops in the rotations. Each line depicts sequences of three crop types (do not have
 to be different) in a rotation with only the order being differently.
 This avoids unnecessary rigidities in the model.
 
@@ -276,8 +265,7 @@ set cropType1_rot(cropTypes,rot);cropType1_rot(cropTypes,rot) $ sum(rot_cropType
 set cropType2_rot(cropTypes,rot);cropType2_rot(cropTypes,rot) $ sum(rot_cropTypes(rot,cropTypes1,cropTypes2,cropTypes),1) = YES;
 ```
 
-For each simulation, crops can be selected that are cultivated on farm,
-therefore, it can be the case that not all rotations are operational.
+For each simulation, crops can be selected to be available for cropping  on farm, therefore, it is possible that not all rotations are operational.
 Accordingly, in *coeffgen\\coeffgen.gms*, the set of available crop
 rotations is defined:
 
@@ -328,10 +316,7 @@ cropType0_rot(cropTypes,rot) $ (not sum( (cropType0_rot(cropTypes1,rot),curCrops
 
 
 The rotations enter the model via three constraints (*see
-model\\templ.gms*). The right hand side sums up the crop hectares of a
-certain crop type in the current year in all four constraints, while the
-left hand side exhausts these hectares in the current, next and after
-next year based on the rotations grown in these years.
+model\\templ.gms*). The right hand side sums up the crop hectares of a certain crop type in the current year in all three constraints, while the left hand side exhausts these hectares in the current, next and year after next year based on the rotations grown in these years.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /rotHa0_\(.*?"g/ /;/)
 ```GAMS
@@ -375,3 +360,52 @@ rotHa2_(cropTypes,plot,tCur(t),nCur) $ ((not sum(plot_lt_soil(plot,"gras",soil),
 
 The rotations restrict the combination of crops and enter into the
 optional soil pool balancing approach.
+
+## Grassland management
+
+Grassland management was so far based on two type of pasture (past22 and past33) and three types of gras for silage (gras20, gras24 and gras33). The names were originally referring to annual fresh weigth yields, but actual yields could be changed via the interface. Content were fixed. The approach was completely overhauled as described in the following.
+
+### Grazing of herds
+
+For cows, bulls, heifers and calves, the user can define on the interface if no grazing (= all day long in stable), partial grazing (= half day in stable) or full grazing (= no time in stable) can be used. Figure XY illustrates the grazing of calves as specified in the GUI. The entries would imply that calves have to kept in stable during JAN,FEB,NOV,DEC as no other option is open, partial grazing is additionally possible in MAR and OCTOBER, and during the period APR-SEP, the farmer has the choice of all three types.
+Bild ("grazing")
+
+The labour needs differ between the three options:
+Einfügen
+
+The additional work load for partial grazing is calculated as follows: It is assumed that it takes one hour a day to move the herd form the stable to the pasture and back (= 15 hours in total in a month). The average herd driven is assumed to be equal to 60 animals for cows and 30 animals for heifers/bulls. For calves, which are assumed to be driven with other herds, 0.25 hours a month are added.
+The introduction of these grazing feeding regimes (part of the set “feedRegime”) requires a change in the logic of the program. The *v\_herdStart* variable now is no longer indexed with the feed regime – reflecting that e.g. a heifer entering the cow herd might during its lifetime as a cow sometimes be grazed and sometimes not. The *herdsSize\_* equation (below an incomplete screen shot, see *model\general_herd_module*) equilibrates the herd sizes in the different months (LHS) to the herds starting in the yearly and months before:
+Einfügen
+
+An additional equation (see *model\cattle_module.gms*) ensures that the feeding phase variable is linked to herd in a specific feed regime:
+Einfügen
+
+### Nutrient content of different grassland outputs
+
+The model now supports three types of fresh gras (labelled early – middle – late), three types of gras silage (labelled early – middle – late) and hay based on their feed attributes per unit of dry matter. Dry matter content is inputted as well:
+Bild (grazing_nutrient)
+
+### Grasland management
+
+The user can define up to 10 different types of grassland management by the following two attributes:
+1.	Total dry matter output
+2.	Distribution of outputs (see above) over months
+The default setting defines two differently intensive grazing schemes, which only differ in dry matter output:
+ Bild (gra1)
+Bild (gar2)
+Two different silage use schemes:
+Bild (gra3)
+Bild (gra4)
+Embedded phyton code (see *util\grasAttr.gms*) introduces more easily interpretable labels for reporting:
+Einfügen
+
+After the original label follows the annual dry matter yield, followed by the number of cuts (where applicable) and the share of biomass used for grazing resp. silage or hay.
+The assignment of machinery needs and (related) labour hours in defined in “*coeffgen\tech.gms*” and “*coeffgen\cropping.gms*”:
+Einfügen
+
+The operations shown above occur on all type of grasslands in the given frequency.
+The operations related to cuts are defined as follows:
+Einfügen
+
+And are used to define the machinery needs:
+Einfügen

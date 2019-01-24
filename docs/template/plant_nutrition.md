@@ -2,7 +2,7 @@
 # Plant Nutrition
 
 !!! abstract
-    The equations related to plant nutrition make sure that the nutrient need of crops is met. Nutrient need can be derived from N response functions or from planning data for fixed yield levels. Furthermore, FarmDyn is loosely connected to the crop modelling framework SIMPLACE which provides data on cropping activities. Needed nutrients are provided by manure and synthetic fertilizer.
+    The equations related to plant nutrition make sure that the nutrient need of crops is met. Nutrient need can be derived from N response functions or from planning data for fixed yield levels. Furthermore, FarmDyn is loosely connected to the crop modelling framework SIMPLACE which provides data on cropping activities. Needed nutrients are provided by manure and synthetic fertiliser.
 
 The template supports two differently detailed ways to account for plant
 nutrition need.
@@ -15,19 +15,19 @@ nutrition need.
 
 2.  Using data output of the crop modelling framework SIMPLACE
 
-*p\_nutNeed* is the nutrient need for different crops and enters the
+*p\_nutNeed* is the nutrient need for different crops tat enters the
 equation for fixed factor approach and the flow model. For the fixed
 factor approach, nutrient need can be calculated based on N response
 curves and alternatively based on planning data. In the detailed flow
 model, nutrient need is calculated based on N response curves.
-All relevant calculation can be found in *coeffgen\\cropping.gms*.
+All relevant calculations can be found in *coeffgen\\cropping.gms*.
 
 ## The fixed factor approach
 
 The fixed factor approach is used in combination with the use of N response curves
-and planning data. Generally, the plant need in p_nutneed has to be met with manure and
-chemical fertilizer. There is the option to allow manure application over plant need as
-manure nutrients on livestock farms with high stocking densities partly are waste.
+and planning data. Generally, the plant need in *p\_nutneed* has to be met with manure and
+synthetic fertiliser. There is the option to allow manure application over plant need as
+manure nutrients on livestock farms with high stocking densities partly treated as waste.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /NutBalCrop_\(c_/ /;/)
 ```GAMS
@@ -121,9 +121,9 @@ takes a growth rate given by the GUI into account.
 p_OCoeffC("winterCere",soil,till,intens,"winterCere",t)     $ sum(soil_plot(soil,plot),c_s_t_i("winterCere",plot,till,intens))       =  8   * (1.00 + p_cropYieldInt("winterCere","GrowthRateY")/100) **t.pos;
 ```
 
-In the next step, the nutrient need for crops are linked to the
+In the next step, the nutrient needs for crops are linked to the
 different cropping intensities. There are five different intensity
-levels with regard to the amount of N fertilizer applied:
+levels with regard to the amount of N fertiliser applied:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ_decl.gms GAMS /set\sintens/ /;/)
 ```GAMS
@@ -143,10 +143,10 @@ set intens      / normal   "Full N fertilization"
 
 These nutrient needs for the different intensities are based on nitrogen
 response functions from field trials. The intensity can be reduced from
-100 % to an N fertilizer application of 80 %, 60 %, 40 % and 20 %. The
+100 % to an N fertiliser application of 80 %, 60 %, 40 % and 20 %. The
 yield level is reduced to 96 %, 90 %, 82 % and 73 %, respectively. These
 steps reflect the diminishing yield increases from increased N
-fertilizer application.
+fertiliser application.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_OCoeffC.*?"fert80p"/ /0\.53;/)
 ```GAMS
@@ -162,10 +162,10 @@ p_OCoeffC(arabCrops,soil,till,"fert80p",prods,t) $ (not sameas(till,"eco"))   = 
 ```
 
 
-The output coefficients, *p\_OCoeffC*, represent the yields per hectare.
-They are used to define the nutrient uptake by the crops, *p\_nutNeed,*
+The output coefficient, *p\_OCoeffC*, represents the yields per hectare.
+It is used to define the nutrient uptake by the crops, *p\_nutNeed,*
 based on the nutrient content, *p\_nutContent*. Values for
-*p\_nutContent* are taken from the German Fertilizer Directive
+*p\_nutContent* are taken from the German Fertiliser Directive
 (DüV 2007, Appendix 1).
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /\s\sp_nutNeed\(c.*?nut.*?\$/ /;/)
@@ -176,14 +176,13 @@ based on the nutrient content, *p\_nutContent*. Values for
 ```
 
 For different intensities, the corresponding amount of nutrient applied
-has to be determined to fulfil the need *p\_nutNeed*.
+has to fulfil the need *p\_nutNeed*.
 
 The parameter *p\_basNut* defines the amount of nutrients coming from
-other sources than directly applied fertilizer. The curve suggests that
+other sources than directly applied fertiliser, for example mineralization and atmospheric deposition. The curve suggests that
 for a 53%-level of yield, only 20% of the N dose at full yield is
 necessary. Assuming a minimum nutrient loss factor that allows defining
-how much N a crop takes up from other sources (mineralisation,
-atmospheric deposition):
+how much N a crop takes up from other sources:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_basNut\(crops.*?nut.*?\$.*?\$/ /;/)
 ```GAMS
@@ -197,7 +196,7 @@ p_basNut(crops,soil,till,nut,t) $ (sum(prods, p_OCoeffC(crops,soil,till,"normal"
                                                                                             + 1.0 $ sameas(intens,"normal")) );
 ```
 
-The amount of nutrient applied, *p\_nutApplied,* is estimated as shown
+The amount of nutrients applied, *p\_nutApplied,* is estimated as shown
 in the following equation. It is assumed that at least 20% of the
 default leaching and NH<sub>3</sub> losses will occur.
 
@@ -252,15 +251,15 @@ plants:
 *p\_nutLossUnavoidable* enters the Standard Nutrient Fate Model (see
 chapter 2.11.2). It represents the factor that has to be applied over
 the plant removal, *p\_nutNeed*, to reach a certain yield level. It
-indicates the nutrient efficiency of the fertilizer management.
+indicates the nutrient efficiency of the fertiliser management.
 
 ## Planning Data
 
 The nutrient need can also be derived from planning data from the revised
-Fertilizer Directive (BMEL 2015). The proposed directive includes
-compulsory fertilizer planning to increase N use efficiency on farms.
-This measure is included in FarmDyn. When fertilizer management follows
-the planning data, different intensities do not exist and yield levels
+Fertiliser Directive (BMEL 2015). The proposed directive includes
+compulsory fertiliser planning to increase N use efficiency on farms.
+This measure is included in FarmDyn. When fertiliser management follows
+the planning data, different intensities do not exist, and yield levels
 are fixed, i.e. cannot be changed by the GUI.
 
 The yield level *p\_OCoeffC* is fixed in the following equation, showing
@@ -290,7 +289,7 @@ the nutrients removed by the harvested product.
 ```
 
 The directive prescribes that nutrients delivered from soil and air have
-to be taken into account. This reduces the amount of fertilizer that
+to be taken into account. This reduces the amount of fertiliser that
 needs to be applied, i.e. p_nutNeed is lowered.
 `
 
@@ -306,9 +305,9 @@ needs to be applied, i.e. p_nutNeed is lowered.
 FarmDyn is loosely connected to the crop modelling framework [SIMPLACE](http://www.simplace.net/Joomla/index.php). This crop model provides cropping activities consisting of different managements and corresponding yields and externalities. They are provided as a gdx file
 and loaded into FarmDyn.
 The parameter *p\_simres* contains all information from the crop model for
-different crops, crop rotations (represented in the set till) and intensities. Intensities represent a whole
-range of management, consisting of different amounts of fertilizer, straw removal and catch crop growing. The elements of
-the set @Till add setname contain the information on yields and externalities for the different cropping activities.
+different crops, crop rotations (represented in the set *till*) and intensities. Intensities represent a whole
+range of management, consisting of different amounts of fertiliser, straw removal and catch crop growing. The elements of
+the set contain the information on yields and externalities for the different cropping activities.
 The use of the SIMPLACE data is activated in the GUI by selecting the BWA mode. It requires to choose specific farm types
 and their location in different soil-climate regions. Currently, SIMPLACE data are available for the German Federal State
 of North Rhine-Westphalia.
@@ -334,8 +333,7 @@ SimplaceRot_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),tCur(t),nCur)
 ```
 
 
-The synthetic fertilizer need linked to cropping activities in the SIMPLACE data has to be provided
-by synthetic fertilizer distribution in FarmDyn.
+The synthetic fertiliser need linked to cropping activities in the SIMPLACE data has to be provided by synthetic fertiliser distribution in FarmDyn.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /NMineralSim_\(c_/ /;/)
 ```GAMS
@@ -350,9 +348,7 @@ NMineralSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t),n
 ;
 ```
 
-The manure application in spring linked to cropping activities in the SIMPLACE data has to be provided
-by manure application in FarmDyn in the months January to June. Note that other restrictions such as
-the Fertilization Ordinance may restrict application in certain months.
+The cropping activities in the SIMPLACE data correspond to the month January to June. Accordingly, manure application has to be conducted in those months. Note that other restrictions such as the Fertilisation Ordinance may restrict application in certain months.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /NOrgSpringSim_\(c_/ /;/)
 ```GAMS
@@ -382,7 +378,7 @@ NOrgSpringSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                                         ;
 ```
 
-The manure application in autumn linked to cropping activities in the SIMPLACE data has to be provided
+In line with manure application in spring, the manure application in autumn linked to cropping activities in the SIMPLACE data has to be provided
 by manure application in FarmDyn in the months July to December.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /NOrgAutumnSim_\(c_/ /;/)
@@ -413,9 +409,8 @@ NOrgAutumnSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                        v_cropHa(crops,plot,till,intens,t,nCur) *  p_SimRes(till,crops,intens,"NOrgA") ;
 ```
 
-The cropping activities provided by SIMPLACE do not contain information of P<sub>2</sub>O<sub>5</sub> fertilizer need. Therefore,
-the following equation ensures that P<sub>2</sub>O<sub>5</sub> removal with the harvested product has to be meet by P<sub>2</sub>O<sub>5</sub> in manure and
-chemical fertilizer.
+The cropping activities provided by SIMPLACE do not contain information on P<sub>2</sub>O<sub>5</sub> fertiliser need. Therefore,
+the following equation ensures that P<sub>2</sub>O<sub>5</sub> removal with the harvested product has to be meet by P<sub>2</sub>O<sub>5</sub> from manure and chemical fertiliser.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /PFertilizingSim_.*?\.\./ /;/)
 ```GAMS
@@ -446,9 +441,9 @@ $endif.man
                                                            ;
 ```
 
-Some crops require minimum chemical fertilizer doses such as the starter fertilization of maize. For N, minimum
-chemical fertilizer needs are reflected in the SIMPLACE results. For P<sub>2</sub>O<sub>5</sub>, the following equations ensures that
-the minimum chemical fertilizer needs are met.
+Some crops require minimum chemical fertiliser doses such as the starter fertilisation of maize. For N, minimum
+chemical fertiliser needs are reflected in the SIMPLACE results. For P<sub>2</sub>O<sub>5</sub>, the following equations ensures that
+the minimum chemical fertiliser needs is met.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /MinChemFertSimplace_.*?\.\./ /;/)
 ```GAMS
@@ -465,7 +460,7 @@ MinChemFertSimplace_(tCur(t),nCur)    $ t_n(t,nCur)  ..
                                                      ;
 ```
 
-The SIMPLACE results contains scenarios, captured in the set intensities, with and without residue removal. Therebey, it is assumed that straw from
+The SIMPLACE results contain scenarios, captured in the set intensities, with and without residue removal. Thereby, it is assumed that straw from
 cereal production can be sold. The following equation maps the cropping activities on the variable *v\_residuesRemoval*
 which is used in other parts of FarmDyn to calculate the costs and revenues related to residue removal.
 
@@ -496,7 +491,7 @@ CatchCropsSimHa_(plot,curRotTill(till),intens,tCur(t),nCur)
 ```
 
 The SIMPLACE results contain nitrate leaching for the different cropping activities. This externality is
-summarized in the following equation for the environmental accounting in FarmDyn.
+summarised in the following equation for the environmental accounting in FarmDyn.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /NleachSim_\(cu/ /;/)
 ```GAMS
@@ -512,8 +507,8 @@ NleachSim_(curCrops(crops),tCur(t),nCur)
                                                                               * p_SimRes(curRotTill,crops,intens,"Nleach")  )  ;
 ```
 
-Furthermore, the SIMPLACE results contain an N balance which is summarized in the following equation. Please note
-that the calculation of this balance differs from the balance calculation under the Fertilization Ordinance.
+Furthermore, the SIMPLACE results contain a N balance which is summarised in the following equation. Please note
+that the calculation of this balance differs from the balance calculation under the Fertilisation Ordinance.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/simplace_module.gms GAMS /NSurplusSim_\(cu/ /;/)
 ```GAMS

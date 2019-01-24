@@ -1,16 +1,16 @@
 
-# Synthetic Fertilizers
+# Synthetic Fertilisers
 
 
-To meet the N and P demand of crops, synthetic fertilizer can be applied
-besides manure, *v\_syntDist*. Synthetic fertilizer application enters
+To meet the N and P demand of crops, synthetic fertiliser, *v\_syntDist*, can be applied
+besides manure. Synthetic fertiliser application enters
 equations with regard to the buying of inputs, *buy\_* and *varcost\_*,
 the labour need for application, *labCropSM\_*, the field work hours and
 machinery, *fieldWorkHours\_* and *machines\_*, and with regard to plant
 nutrition (see chapter 2.11). The equation *nMinMan\_* makes sure that
-minimum amounts of mineral fertilizer are applied for certain crops. It
+minimum amounts of mineral fertiliser are applied for certain crops. It
 represents the limitation meeting the plant need with nutrients from
-manure, e.g. fertilizing short before harvest for baking wheat cannot be
+manure, e.g. fertilising short before harvest for baking wheat cannot be
 done with manure.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /nMinMin_\(c_/ /;/)

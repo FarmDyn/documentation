@@ -1,4 +1,4 @@
-# The Graphical User Interface
+# The Graphical User Interface (GUI)
 
 ![](../media/installation-25c60479.png)
 
@@ -30,7 +30,7 @@ Institute for Food and Resource Economics, University Bonn, 147 pages,
 In the following, the different tabs of the GUI are shown and shortly
 described.
 
-### Workstep and task selection
+### Work step and task selection
 
 In „Single farm runs" mode, all run specific settings (input and output
 prices, farm assets etc.) are set by the user in the interface. This is
@@ -180,7 +180,7 @@ In general it is recommended to use CPLEX as the MIP solver, see section
 
 ![](../media/image300.png)
 
-## Visualizing and analysing results
+## Visualising and analysing results
 
 
 After a successful simulation (statement "normal completion" in the
@@ -223,9 +223,9 @@ grouped by themes. Currently, the following reports are available:
 
 -   Crops, time series
 
--   Crops,tillage, time series
+-   Crops, tillage, time series
 
--   Crops,intensities, time series
+-   Crops, intensities, time series
 
 -   Crop intensities, time series
 
@@ -255,11 +255,11 @@ grouped by themes. Currently, the following reports are available:
 
 -   Overview work, mean
 
--   OffFarm, mean
+-   Off-Farm, mean
 
 -   Overview work, time series
 
--   OffFarm, time series
+-   Off-Farm, time series
 
 -   Manure, mean
 
@@ -293,7 +293,7 @@ grouped by themes. Currently, the following reports are available:
 
 -   N in soil, by weather and soil depth
 
--   N Balance, per month, mean
+-   N balance, per month, mean
 
 -   P2O5 balance, per month, mean
 
@@ -349,7 +349,7 @@ dialog to choose results from parallel runs:
 
 ![](../media/image302.png)
 
-When *show results* are clicked the interface the results in tables:
+When *show results* are clicked the interface presents the results in tables:
 
 ![](../media/image303.png)
 
@@ -379,7 +379,7 @@ the variable values) and variable selection [^16]:
 ![](../media/image306.png)
 
 Additionally, the user has the possibility to view Figures, histograms
-or graphs of the interesting output values for graphical visualization.
+or graphs of the interesting output values for graphical visualisation.
 Statistical characteristics like minimum, maximum or median values are
 automatically generated as well as mean value of the selected results
 and the standard deviation.
@@ -415,11 +415,11 @@ The second tab “Defaults” comprises a list of GUI controls of the tool with 
 
 ![](../media/gui-275637d1.png)
 
-The left hand size shows the title of the control, the right hand comprises a text field with the default settings as stored in the XML-definition file for the GUI. That general default can be overwritten with a project specific one. Only these differences are stored 
+The left hand side shows the title of the control, the right hand comprises a text field with the default settings as stored in the XML-definition file for the GUI. That general default can be overwritten with a project specific one. Only these differences are stored.
 
 Similarly, the two remaining tables show under “System settings” the location of system directories, and under the SVN tab optional project specific SVN settings.
 
-Once you press the **Generate project** button, a a new file called `project_Your Project Name_default.ini`, where `Your Project Name` will be replaced by the name you entered for the project, will be created in your FarmDyn `GUI`folder. 
+Once you press the **Generate project** button, a new file called `project_Your Project Name_default.ini`, where `Your Project Name` will be replaced by the name you entered for the project, will be created in your FarmDyn `GUI`folder.
 
 ### Switching projects
 You can switch between projects by choosing **File** -> **Set Project** -> **Project Name**, where **Project Name** refers to the name of the project you want to switch to.
@@ -439,10 +439,10 @@ You can edit an existing project by choosing **File** -> **Edit Project** -> **P
 
 The project dialog as described under [*Setting up a new Project*](#setting-up-a-new-project) will be opened where the necessary changes can be done.
 
-When you are done changing the project's default settings, make sure to press the **Update project** Button. Notice that the dialog window will not close automatically after the changes were saved. 
+When you are done changing the project's default settings, make sure to press the **Update project** Button. Notice that the dialog window will not close automatically after the changes were saved.
 
 ### Important information on the project workflow
-Please notice that you **cannot** change the projects default settings from the general user-interace tabs. The idea is as follows: In the project settings, the default values displayed in the user-interface tabs are stored. However, changing these settings in the user-interface will not affect the project defaults. This way you can do sensitivty analysis or test certain settings without losing your default project values or breaking any important project specifics. If the tests turn out to be working fine, you may update the project defaults as described [*above*](#editing-projects).
+Please notice that you **cannot** change the projects default settings from the GUI tabs. The idea is as follows: In the project settings, the default values displayed in the GUI tabs are stored. However, changing these settings in the user-interface will not affect the project defaults. This way you can do sensitivity analysis or test certain settings without losing your default project values or breaking any important project specifics. If the tests turn out to be working fine, you may update the project defaults as described [*above*](#editing-projects).
 
 
 
@@ -453,7 +453,7 @@ Please notice that you **cannot** change the projects default settings from the 
     our data set as farms which have already exited are in the
     regression relevant dataset. This may cause a sample selection bias
     and lead to potentially small explanatory character of the estimated
-    linear regression model. Therefore generated data should be analyzed
+    linear regression model. Therefore, generated data should be analysed
     by a routine, written in R (also designed by Britz and Lengers in
-    2012 (2012) which is available on enquiry from the responsible
+    (2012) which is available on enquiry from the responsible
     authors.

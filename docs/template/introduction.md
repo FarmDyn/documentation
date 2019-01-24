@@ -1,13 +1,7 @@
 
 # Introduction
 
-An economic template model uses a declarative approach which depicts in
-rather generic terms the physical and financial relations in the system
-to analyse. It describes their relations based on a set of decision
-variables, exogenous parameters and equations describing their
-relations. Template models in that sense have a long-standing tradition
-in economics. In macro-applications, template based computable general
-equilibrium models, such as GTAP (Hertel 1997) or the
+An economic template model uses a declarative approach which depicts in rather generic terms the physical and financial relations in the system to analyse. It describes their relations based on a set of decision variables, exogenous parameters and equations. Template models in that sense have a long-standing tradition in economics. In macro-applications, template based computable general equilibrium models, such as GTAP (Hertel 1997) or the
 IFPRI [^1] CGE\_template (Lofgren et al. 2002), are quite
 common. For regional and farm type applications, programming model
 templates are underlying e.g. the regional or farm type model in CAPRI
@@ -28,16 +22,16 @@ to use the template model's results as inputs, e.g. for reporting
 purposes or systematic analysis.
 
 For our purposes, a suitable template must be able to generate instances
-representing farms characteristics by differing initial conditions and
+representing farm characteristics by differing initial conditions and
 further attributes, specific to the firm and farmer. Initial conditions
 are for example the existing herds, available family labour, capital
-stock such as stables, machinery or storage facilities and its age, land
+stock, such as stables, machinery or storage facilities and its age, land
 owned and rented by the farm or his equity. Further attributes could
 describe the firm's market environment such as input and output prices,
 yield potentials, household expenditures, the willingness of the farmer
 and family members to work off-farm and the potential farm branches.
 
-Farming is characterized by long lasting and relatively expensive
+Farming is characterised by long lasting and relatively expensive
 stationary capital stock, especially in form of stables and related
 equipment. High sunk costs related to past investments can lead to
 sticky farm programs, as key management possibilities such as reducing
@@ -46,10 +40,10 @@ in revenues. Consequently, strategies of farms as a response to changes
 in market and policy environment such as GHG emission ceilings are path
 dependent on investment decisions in the past. Whereas all farms can
 implement certain short term adjustments regarding herd-, feed- or
-fertilizer-management, investment based strategies are not very likely
+fertiliser-management, investment based strategies are not very likely
 to be adjusted for farms which invested recently in new buildings or
-expensive machinery. These characteristics imply individual farms and
-the industry as a whole that optimal short and long term strategies
+expensive machinery. These characteristics imply for individual farms, and
+for the industry as a whole that optimal short and long term strategies
 might differ considerably.
 
 Accordingly, a framework is needed which covers a longer planning period
@@ -67,7 +61,7 @@ equations in the different modules to avoid a second layer of mnemonics.
 The following naming conventions are used in the GAMS code and also in
 the documentation. All decision variables of the farmers start with a
 *v\_*. They are endogenous to the simultaneous solution of all equations
-when maximizing the objective function and hence depend on each other.
+when maximising the objective function and hence depend on each other.
 Exogenous parameters start with a *p\_*. They can typically be changed
 in an experiment. Sets, i.e. collection of index elements, do not carry
 a specific prefix.
@@ -77,4 +71,3 @@ parameters and sets also used outside of the model equations can be
 found in *model\\templ\_decl.gms*.
 
  [^1]: International Food Policy Research Institute
-

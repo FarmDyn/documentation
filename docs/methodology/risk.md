@@ -1,41 +1,24 @@
-# Dealing with risk and risk behavior: deterministic versus stochastic model versions
+# Dealing with risk and risk behaviour: deterministic versus stochastic model versions
 
 !!! danger "Prototype feature"
     This feature has not been thoroughly tested and should be used with caution.
 
 !!!abstract
-    The default layout of the model maximizes the net present value over the simulation horizon in a deterministic setting. The stochastic programming extensions introduces decision trees based on mean reverting processes for the output and input price levels and renders all variable state contingents, calculating the option value of full flexibility in management and investment decision over the simulation horizon. A tree reduction algorithm allows exploiting the outcome of large-scale Monte-Carlo simulations while avoiding the curse of dimensionality. Besides risk neutral maximization of the expected net present value, different types of risk behavior such as MOTAD, Target MOTAD or value at risk can be used in conjunction with the stochastic programming extension.
+    The default layout of the model maximises the NPV over the simulation horizon in a deterministic setting. The stochastic programming extensions introduces decision trees based on mean reverting processes for the output and input price levels and renders all variable state contingents, calculating the option value of full flexibility in management and investment decision over the simulation horizon. A tree reduction algorithm allows exploiting the outcome of large-scale Monte-Carlo simulations while avoiding the curse of dimensionality. Besides risk neutral maximisation of the expected NPV, different types of risk behaviour such as MOTAD, Target MOTAD or value at risk can be used in conjunction with the stochastic programming extension.
 
 ## Overview
 
 
 The FarmDyn model comprises since the first versions optionally
-stochastic components. In the current version, three set-ups are
+stochastic components. In the current version, two set-ups are
 possible:
 
 1.  A deterministic version
 
-2.  A partial stochastic programming version where only some variables
-    (crop acreages, feed mix, manure handing and fertilization) are
-    state contingent. In that version, in each year, several price
-    levels for input and outputs can be considered and the state
-    contingent variables adjusted accordingly, but conceptually, each
-    year starts again with a given mean expected price level as all
-    other variables are not state contingent.
-
-3.  A fully stochastic programming version where all variables are state
+2.  A fully stochastic programming version where all variables are state
     contingent and unbalanced stochastic trees are used.
 
-In the deterministic version, no parameter is stochastic and hence no
-variable state contingent. The equations, variables and certain
-parameter carry nevertheless indices for nodes in the decision tree and
-States-of-Natures, but these refer in any year to a deterministic
-singleton. In the partly stochastic simulation version of the FarmDyn
-model, farm management and investment characters with a longer term
-character are not state contingent and hence must allow managing all
-states-of-natures in any year. For example, in case of machine
-depreciation based on use, the investment decisions must ensure the
-maximum use in any year and state-of-nature.
+In the deterministic version, no parameter is stochastic and hence no variable state contingent. The equations, variables and certain parameter carry nevertheless indices for nodes in the decision tree and SON, but these refer in any year to a deterministic singleton. In the partly stochastic simulation version of the FarmDyn model, farm management and investment characters with a longer-term character are not state contingent and hence must allow managing all SONs in any year. For example, in case of machine depreciation based on use, the investment decisions must ensure the maximum use in any year and SON.
 
 The fully Stochastic Programming (SP) version of the model introduces
 scenario trees and renders all variables in the model stage contingent
@@ -48,87 +31,31 @@ would be impossible to generate and solve. In the following, we briefly
 discuss the changes to model structure and how the decision tree and the
 related random variable(s) are constructed.
 
-The SP version of the model can be combined with a number of risk
-behavioral models to maximize the expected utility. Given the complex
-character of the remaining modules in the model, only those extensions
-were chosen which can be implemented in a MIP framework, hence, a
-non-linear approach such as an E-V approach are not considered. The
-available risk models (value at risk (var), conditional value at risk,
-MOTAD and target MOTAD) are discussed in Risk behavior section below.
+The SP version of the model can be combined with a number of risk behavioural models to maximise the expected utility. Given the complex character of the remaining modules in the model, only those extensions were chosen which can be implemented in a MIP framework, hence, a non-linear approach such as an E-V approach are not considered. The available risk models (value at risk (var), conditional value at risk, MOTAD and target MOTAD) are discussed in Risk behaviour section below.
 
-Partly stochastic version where long term variables are not state contingent
+### Objective Function in the deterministic
 
-### States of Nature (SON) in the partly stochastic version
-
-In the partly stochastic version, only some variables are assumed to be
-state contingent and there is no complex tree structure. Specifically,
-we assume that SONs relate to the farm's market environment,
-specifically to the input and output prices, wages and interest rates
-faced by the firm. Crop yield variability is not considered. Each SON
-defines price levels for all input and output prices simultaneously,
-i.e. one vector of input and output prices. The cropping pattern,
-feeding, off-farm labour on an hourly basis and further farm activities
-are state contingent with regard to these SONs. However, decisions with
-a long-term character (full or half time work off farm, investment
-decisions, herd size, renting out of land) are not state contingent. The
-differentiation between SON specific decisions (cropping, feeding) and
-annual decisions in the otherwise deterministic version of the model is
-depicted in the following Figure:
-
-![Figure 6: Systematic view on the model approach](../media/risk-8aae95a4.png)
-Source: Own illustration
-
-The first two blocks of variables shown above labelled investments and
-herds are identical for all state of nature as indicated with the blue
-brackets below, whereas cropping and feeding and some other farm
-management decisions are state contingent and are adjusted to the
-State-of-the-nature. That implies that for instance the unique, i.e. not
-state contingent, investment decisions in machinery must ensure that the
-maximum occurring depreciation under any state of nature can be
-realized.
-
-### Objective Function in the deterministic and partly stochastic version
-
-In the deterministic version of the model, we consider a maximization of
-net present value of profit under a discount rate. The partly stochastic
-version assumes always a risk neutral profit maximizing farmer, and
-hence maximizes the expected net present values of profits from SONs.
-The farm is assumed to be liquidated at the end of the planning horizon,
-i.e. the cow herd, machinery, land are sold and loans are paid back. Any
-remaining equity is discounted to its net present value; therefore, a
-definition close to the flow-to-equity approach is used:
+In the deterministic version of the model, we consider a maximisation of NPV of profit under a discount rate. The farm is assumed to be liquidated at the end of the planning horizon, i.e. the cow herd, machinery, land are sold and loans are paid back. Any remaining equity is discounted to its NPV; therefore, a definition close to the flow-to-equity approach is used:
 
 ![](../media/image173.png)
 
-Further on, fully dynamic optimization assumes that the decision maker
-is fully informed about the future states of nature such that the
-economically optimal farm plan over the chosen planning horizon is
-simulated, potentially under different future SON (best-practice
-simulations).
+Further on, fully dynamic optimisation assumes that the decision maker is fully informed about the future such that the economically optimal farm plan over the chosen planning horizon is simulated.
 
 ## The Stochastic Programming version with full stage contingency
 
-
-As opposed to the deterministic or partly stochastic version, in the stochastic programming version all variables are state contingent. The stochastic version considers different future developments over time, currently implemented for selected output and input prices, i.e. price paths. These paths do not need to have equal probability. The stochastic programming (SP) approach includes a decision tree that reflects decision nodes where each node has leaves with probability of occurrence. All decisions are contingent on the state of nature in the current year, and decisions in subsequent years depend on decisions made on previous nodes (=stages) on the path to a final leave. In the SP, all production and investment decisions in any year are hence depicted as
+As opposed to the deterministic or partly stochastic version, in the stochastic programming version all variables are state contingent. The stochastic version considers different future developments over time, currently implemented for selected output and input prices, i.e. price paths. These paths do not need to have equal probability. The stochastic programming (SP) approach includes a decision tree that reflects decision nodes where each node has leaves with probability of occurrence. All decisions are contingent on the SON in the current year, and decisions in subsequent years depend on decisions made on previous nodes (=stages) on the path to a final leave. In the SP, all production and investment decisions in any year are hence depicted as
 state-contingent, i.e. they reflect at that time point the different futures which lay ahead, including future management flexibility. Also the timing of investments is hence state contingent.
 
-All variables and equations carry the index *nCur*, which indicates the
-current node in the decision tree. Equally, the node needs to be linked
-to the correct year, which is achieved by a dollar operator and the
-*t\_n* set, for instance as in the following equation which was already
-shown above. Whereas in the deterministic and partly stochastic version,
-there is just one dummy node for each year, in the stochastic version,
-potentially different states and thus nodes are found for decision
-variables and equations in any one year.
+All variables and equations carry the index *nCur*, which indicates the current node in the decision tree. Equally, the node needs to be linked to the correct year, which is achieved by a dollar operator and the *t\_n* set, for instance as in the following equation which was already shown above. Whereas in the deterministic version, there is just one dummy node for each year, in the stochastic version, potentially different states and thus nodes are found for decision variables and equations in any one year.
 
-The revised objective function maximizes the probability weighted
+The revised objective function maximises the probability weighted
 average of the final liquidity for each final leave in the decision
 tree:
 
 ![](../media/image174.png)
 
 The number of uncompressed scenarios to start with and the desired
-number of leaves in the final reduced tree are defined via the interface
+number of leaves in the final reduced tree are defined via the GUI
 if the SP module is switched on:
 
 ![](../media/image175.png)
@@ -175,7 +102,7 @@ implemented in Java. Currently, two random variables (one for output and
 one for input price changes) are generated based on two independent
 logarithmic mean-reverting processes (MRPs), the log is introduced to
 avoid negative outcomes. The variance and speed of reversion are defined
-on the graphical user interface as shown above, under an expected mean
+on the GUI as shown above, under an expected mean
 of unity. The starting price multiplier is also set to unity. Each path
 of input and output prices are simulated once in the SP.
 
@@ -194,15 +121,15 @@ the first year, is on the left side of the Figure. The nodes 2, 5, 8,
 followers, and all nodes besides *1* have the same probability of 20%.
 
 ![](../media/figure8.png)
-:   Figure 8: Example of an input decision tree organized as a fan.
+:   Figure 8: Example of an input decision tree organised as a fan.
     Source: Own illustration
 
 Increasing the number of years leads to a proportional increase in the
 number of nodes. For complex stochastic processes such as MRPs, many
 paths are needed, each reflecting a Monte-Carlo experiment, to properly
-capture the properties of the stochastic process. That leads to the
+capture the properties of the stochastic process. This leads to the
 curse of dimensionality, as the number of variables and equations in the
-model increases quadratic in the number of years and number of
+model increases quadratic with the number of years and number of
 Monte-Carlo experiments. As MIP models are NP-hard to solve, that
 quickly leads to models which cannot be solved in any reasonable time.
 Hence, in a next step, the tree must be reduced to avoid that curse of
@@ -298,7 +225,7 @@ itself. An example gives:
 | 2\. The normal case is that the objective value increases when          |
 | considering stage contingency under risk neutrality. This is due to the |
 | effect that profits increase over-proportionally in output prices under |
-| profit maximization.                                                    |
+| profit maximisation.                                                    |
 |                                                                         |
 | 3\. The solution time of the model can be expected to increase          |
 | substantially with the SP extension switched on. MIP models are         |
@@ -325,8 +252,8 @@ log(1):
 
 The notion *random variable* only implies that the variable has an
 underlying probability distribution and not that it is a decision
-variable in our problem. Consequently, random are a parameter in GAMS
-and not declared as a variable. As mentioned in the section above, in
+variable in our problem. Consequently, random are parameters in GAMS
+and are not declared as variables. As mentioned in the section above, in
 the SP version of the model the MRPs are simulated in Java that generate
 deviations around unity, i.e. we can multiply a given mean price level
 for an output and/or an input (e.g. defined by user on the interface)
@@ -343,14 +270,14 @@ inputs, *buyCost\_*, by state specific input price(s):
 
 ![](../media/image188.png)
 
-The decision in which prices are treated as random variables is steered
+The decision whether prices are treated as random variables is steered
 via the interface:
 
 ![](../media/image189.png)
 
 ![](../media/image190.png)
 
-In the case neither input nor output prices are random a run time error
+In the case where neither input nor output prices are random a run time error
 will occur.
 
 The core branches are defined in *coeffgen\\stochprog.gms*:
@@ -361,7 +288,7 @@ That means that dairy production takes precedence over other branches
 and pigs over arable cropping, assuming that arable crops are typically
 not the core farm branch in mixed enterprises.
 
-## Risk Behavior
+## Risk Behaviour
 
 
 The model allows introducing four different risk behaviour options in
@@ -374,7 +301,7 @@ All risk measures relate to the distribution of the NPV, i.e. changes in
 expected returns aggregated over the full simulation horizon, and do not
 take fluctuations of the cash flow for individual years into account.
 This is reasonable as the farmer is assumed to have access to credits
-which can be used to overcome short run cash constraints. The cost of
+which can be used to overcome short-term cash constraints. The cost of
 using credits as a risk management option is considered endogenously in
 the model as farmers have to pay interest on these credits which reduces
 the NPV. Still, considering that risk is accessed here with regard to
@@ -386,7 +313,7 @@ margins.
 ### MOTAD for Negative Deviations against NPV
 
 The first and simplest risk model modifies the objective function: it
-maximizes a linear combination of the expected NPV and the expected mean
+maximises a linear combination of the expected NPV and the expected mean
 negative deviation from the NPV.
 
 ![](../media/image193.png)
@@ -442,7 +369,7 @@ simulated objective value in the case of no farming activity, therefore,
 income is only drawn from off-farm work, decoupled payments and
 interest. This income level is used as the absolute benchmark level
 which can be modified by the user with the percentage multiplier entered
-in the graphical user interface. This effects the following equation:
+in the GUI. This effects the following equation:
 
 ![](../media/image198.png)
 
@@ -450,7 +377,7 @@ Using this information the expected shortfall is defined:
 
 ![](../media/image199.png)
 
-The expected shortfall enters then the objective function:
+The expected shortfall then enters the objective function:
 
 ![](../media/image200.png)
 
@@ -490,7 +417,7 @@ by how much income drops below the given threshold. For the *conditional
 value at risk* at approach see next section.
 
 If the maximal probability is set to zero, the threshold acts as a
-binding constraint in any state of nature, i.e. the NPV at any leaf
+binding constraint in any SON, i.e. the NPV at any leaf
 cannot fall below it. The NPV at risk approach does thus not change the
 equation for the objective function, but introduces additional
 constraints. The first one drives a binary indicator variable,
@@ -499,7 +426,7 @@ leaf falls below the threshold:
 
 ![](../media/image204.png)
 
-If v\_*npvAtRisk* is zero, the objective value (LHS) fo r each final
+If v\_*npvAtRisk* is zero, the objective value (LHS) for each final
 leave must exceed the given threshold *p\_npvAtRiskLim*. The second
 constraint, shown below, adds up the probabilities for those final nodes
 which undercut the threshold (LHS) and ensures that their sum is below
@@ -520,7 +447,7 @@ of the VaR approach and target MOTAD with an endogenously determined
 limit. The decision taker defines hence a quantile, say 10% as in the
 screen shot below, and the model calculates endogenously the expected
 shortfall for the lowest 10% of the scenarios. The objective function in
-the model maximizes a linear combination of the expected NPV and the
+the model maximises a linear combination of the expected NPV and the
 endogenous mean shortfall, subject to a predefined lower quantile:
 
 ![](../media/image206.png)
@@ -537,8 +464,8 @@ not contribute to active lower quantile must be zero, based on a
 so-called BIGM formulation, i.e. the binary variable *v\_npvAtRisk* is
 multiplied with a very large number, here with 1.E+7. If *v\_npvAtRisk*
 for that final leave is zero (= it does not belong to the leaves with
-the worst NPVs), the left hand size must be zero as well. On the other
-hand, if *v\_npvAtRisk* is unity, i.e. the final leaves's NPV belongs to
+the worst NPVs), the left hand side must be zero as well. On the other
+hand, if *v\_npvAtRisk* is unity, i.e. the final leaves' NPV belongs to
 the x% worst cases, where x is set by the user, the shortfall for that
 leave can consider any number determined by the model as the RHS value
 of 1.E+7 in the case of *v\_npvAtRisk* equal unity never becomes

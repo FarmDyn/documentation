@@ -33,7 +33,7 @@ siloInv_(curManChain(manChain),silos,tCur(t),nCur)
                                            v_buysilos(manChain,silos,t1,nCur1));
 ```
 
-The manure silos are linked to the manure storage needs which are
+The manure silos are linked to the manure storage needs, which are
 described in chapter Manure. A similar inventory equation as for manure
 silos is implemented for the other buildings:
 
