@@ -37,7 +37,21 @@ The SP version of the model can be combined with a number of risk behavioural mo
 
 In the deterministic version of the model, we consider a maximisation of NPV of profit under a discount rate. The farm is assumed to be liquidated at the end of the planning horizon, i.e. the cow herd, machinery, land are sold and loans are paid back. Any remaining equity is discounted to its NPV; therefore, a definition close to the flow-to-equity approach is used:
 
-![](../media/image173.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /OBJE_/ /;/)
+```GAMS
+OBJE_           ..
+*
+       v_obje =L=
+                v_objeMean
+
+*
+*       --- penalty for negative deviation from mean NPV (similar MOTAD) or target MOTAD / ES
+*
+$ifi %stochProg%==true - v_expNegDevNPV * p_negDevPen  $ (not p_expShortFall)
+$ifi %stochProg%==true - v_expShortFall * p_negDevPen  $ (not p_expShortFall)
+$ifi %stochProg%==true + v_expShortFall * p_negDevPen  $ p_expShortFall
+    ;
+```
 
 Further on, fully dynamic optimisation assumes that the decision maker is fully informed about the future such that the economically optimal farm plan over the chosen planning horizon is simulated.
 
@@ -52,7 +66,13 @@ The revised objective function maximises the probability weighted
 average of the final liquidity for each final leave in the decision
 tree:
 
-![](../media/image174.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /OBJE_/ /v_objeMean/)
+```GAMS
+OBJE_           ..
+*
+       v_obje =L=
+                v_objeMean
+```
 
 The number of uncompressed scenarios to start with and the desired
 number of leaves in the final reduced tree are defined via the GUI
@@ -67,7 +87,33 @@ the stochastic programming extension is switched off, there is only one
 node (which is indicated by a blank space, " ") and the model collapses
 to a deterministic one:
 
-![](../media/image177.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ_decl.gms GAMS /\$iftheni\.sp/ /= 1;/)
+```GAMS
+$iftheni.sp not %stochProg%==true
+*
+*  --- dummy implementation of SP frameworK
+*      there is one universal node, i.e. that is the deterministic version
+*
+
+   set n "Decision nodes in tree" / " " /;
+   set t_n(t,n) "Link betwen year and decision node";
+   t_n(t," ") = YES;
+
+   set anc(n,n) "Is the second node the node before first one?";
+   anc(" "," ") = YES;
+
+   set isNodeBefore(n,n) "Is the second node before first one?";
+   isNodeBefore(" "," ") = YES;
+
+   set sameScen(n,n) "The two nodes belong to the same scenario";
+   sameScen(" "," ") = YES;
+
+   set leaves(n) / " " /;
+
+
+   parameter p_probN(n);
+   p_probN(" ") = 1;
+```
 
 The changes in the listing are minimal compared to the previous version
 without the SP extension, only one point more in each variable or
@@ -79,7 +125,27 @@ equation name is included, which indicates the blank common node
 With the SP extension, information is needed about ancestor nodes and
 nodes before the current one:
 
-![](../media/image179.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ_decl.gms GAMS /\$else\.sp/ /\$endif\.sp/)
+```GAMS
+$else.sp
+
+$evalglobal nt %lastYear%-%firstYear%+1
+
+
+$evalGlobal nNode (%nt%-1) * %nOriScen% + 1
+*
+*  --- sets and parameters are population in coeffgen/stochProg.gms
+*
+   set n /n1*n%nNode%/;
+   set t_n(t,n) "Link betwen year and decision node";
+   set anc(n,n) "Is the second node the node before first one?";
+   set isNodeBefore(n,n) "Is the second node before first one?";
+   set sameScen(n,n) "The two nodes belong to the same scenario";
+   set leaves(n);
+   parameter p_probN(n);
+
+$endif.sp
+```
 
 ### Generating Random Variable(s) and the decision tree
 
@@ -110,7 +176,28 @@ The Java program is called from GAMS to pass the information on the
 number of decision nodes (= simulated time points) and the desired
 number of scenarios to the program:
 
-![](../media/image180.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /\$ift.*?Ou.*?N/ /\$endif\.stochPrices/)
+```GAMS
+$iftheni.stochPrices not "%StochPricesOutputs%"=="None"
+
+ execute "java -Djava.library.path=..\gui\jars -jar ..\gui\mrpfan.jar %nt% %nOriScen% %scrdir%\\mrp.gdx 1 1 %varOutputs% %lambdaOutputs% 2>1"
+
+ execute_load "%scrdir%\\mrp.gdx" p_randVar,tn,anc;
+ p_randVar("priceOutputs",n) = p_randVar("Price",n);
+$endif.stochPrices
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /\$ift.*?In.*?N/ /\$endif\.stochPrices/)
+```GAMS
+$iftheni.stochPrices not "%StochPricesInputs%"=="None"
+
+ execute "java -Djava.library.path=..\gui\jars -jar ..\gui\mrpfan.jar %nt% %nOriScen% %scrdir%\\mrp.gdx 1 1 %varInputs% %lambdaInputs% 2>1"
+
+ execute_loadpoint "%scrdir%\\mrp.gdx" p_randVar,tn,anc;
+ p_randVar("priceInputs",n) = p_randVar("Price",n);
+
+$endif.stochPrices
+```
 
 The Java process stores the generated random developments along with the
 ancestor matrix in a GDX file. The following Figure shows an example of
@@ -121,6 +208,7 @@ the first year, is on the left side of the Figure. The nodes 2, 5, 8,
 followers, and all nodes besides *1* have the same probability of 20%.
 
 ![](../media/figure8.png)
+
 :   Figure 8: Example of an input decision tree organised as a fan.
     Source: Own illustration
 
@@ -140,7 +228,7 @@ remaining one.
 
 The example in the Figure below depicts a hypothetical tree from tree
 reduction with four final leaves generated from the tree given in Figure
-8. Each scenario starts with the same root node, *1*, for which the
+8\. Each scenario starts with the same root node, *1*, for which the
 information is assumed to be known for certain, i.e. the probability for
 this root node N*1,* which falls in the first year, is equal to unity
 and ends with one of the final leaves, 7, 10, 13 or 16. In the second
@@ -153,9 +241,7 @@ simultaneously on the possible future development beyond that node while
 being conditioned on the decisions in the root node (which itself
 depends on all follow up scenarios).
 
-9. Example of a reduced tree
-
-Source: Own illustration
+:   Figure 9: Example of a reduced tree. Source: Own illustration
 
 The example can also help to understand better some core symbols used in
 the code and relations in the SP extension. The nodes remaining in the
@@ -188,60 +274,135 @@ In the current implementation, the tree size which also determines the
 overall model size is steered by setting exogenously the number of final
 nodes.
 
-![](../media/image181.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /\$setglobal sr2/ /red_prob;/)
+```GAMS
+$setglobal sr2prefix test
+$setglobal treeGen on
+
+$iftheni.runSR2 %treeGen%==on
+*
+*  --- scenario tree construction from fan
+*
+   $$libinclude scenRed2
+*
+*  --- information for SCENRED: option file and options from interface
+*
+   ScenredParms('sroption')       = 1;
+   ScenredParms('num_time_steps') = %nt%;
+   ScenredParms('num_nodes')      = card(n);
+   ScenredParms('num_random')     = %MRP%;
+   ScenredParms('num_leaves')     = %nOriScen%;
+   ScenredParms('visual_red')     = 1;
+   $$libinclude runScenRed2 %sr2Prefix% tree_con n anc p_probN ancRed p_probRed p_randVar
+
+$endif.runSr2
+
+   ;
+*
+*  --- load information from ScenRed2
+*
+   execute_load 'sr2%sr2Prefix%_out.gdx' ancRed=red_ancestor,p_probRed=red_prob;
+```
 
 Based on the information returned from the scenario reduction utility,
 the set of active nodes, *nCur,* is determined:
 
-![](../media/image182.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /\*.*?act/ /probRed\(n\);/)
+```GAMS
+*  --- actives nodes are those which have an updated probability
+*
+   option kill=nCur;
+   nCur(n) $ p_probRed(n) = YES;
+*
+*  --- cleanse link between time points and nodes from unused nodes
+*
+   tn(tnum,n) $ (not nCur(n)) = no;
+*
+*  --- map into year set used by model
+*
+   t_n(tCur,nCur) $ sum(tn(tnum,nCur) $ (tnum.pos eq tCur.pos),1) = YES;
+   t_n(tBefore,"n1") = YES;
+
+*
+*  --- take over cleansed ancestor matrix and probabilities
+*
+   option kill=anc;
+   anc(nCur,nCur1) = ancRed(nCur,nCur1);
+   anc("n1","n1")    = YES;
+   p_probN(n)  = p_probRed(n);
+```
 
 A little bit trickier is to efficiently find *all* nodes that are before
 a given node in the same scenario (these are often nodes shared with
 other scenarios such as the root node, see Figure 9 above). This is
 achieved by an implicit backward recursion over a year loop:
 
-![](../media/image183.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /loop\(tCur/ /\);/)
+```GAMS
+loop(tCur,
+      loop(anc(nCur,nCur1),
+        isNodeBefore(nCur,nCur2) $ isNodeBefore(nCur1,nCur2) = YES;
+      );
+```
 
 As indicated above, the set *anc (nCur, nCur1)* indicates that decision
 node *nCur1* is the node before the node *nCur*, i.e. they belong to the
 same scenario. That is used in lag and lead operators, e.g.:
 
-![](../media/image184.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /hasFarmOrder_.*?\.\./ /;/)
+```GAMS
+hasFarmOrder_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..
+
+       v_hasFarm(t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasFarm(t-1,nCur1));
+```
 
 The *isNodeBefore(nCur,nCur1)* relation depicts all nodes, *nCur1,*
 before node *nCur* in the same scenario, including the node *nCur*
 itself. An example gives:
 
-![](../media/image185.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /\*.*?starting/ /;/)
+```GAMS
+*         --- steady state: starting herds before the first fully simulated year are equal to that one
+*
+      sum(t_n(tBefore,nCur1) $ sameScen(nCur1,nCur),v_herdStart(herds,breeds,tBefore,nCur1,m))
+              =E=  v_herdStart(herds,breeds,t,nCur,m);
+```
 
-+| > **Important Aspects to remember!**                                    |
-|                                                                         |
-| 1\. Even if the program scales the drawn price changes such that their  |
-| mean is equal to unity, this does not guarantee that the model, even    |
-| without stage contingency, would perfectly replicate the deterministic  |
-| version as the timing of the changes is also relevant (discounting,     |
-| dynamic effects on liquidity etc.).                                     |
-|                                                                         |
-| 2\. The normal case is that the objective value increases when          |
-| considering stage contingency under risk neutrality. This is due to the |
-| effect that profits increase over-proportionally in output prices under |
-| profit maximisation.                                                    |
-|                                                                         |
-| 3\. The solution time of the model can be expected to increase          |
-| substantially with the SP extension switched on. MIP models are         |
-| non-convex and NP-Complete problems. To our knowledge there is no       |
-| existing sting polynomial-time algorithm, which means that the solution |
-| time to optimality increases typically dramatically in the number of    |
-| considered integers. Even small problems can take quite long to be      |
-| solved even towards moderate optimality tolerances and not fully        |
-| optimality. This holds especially if the *economic signal* to choose    |
-| between one of the two branches of a binary variable is weak, i.e. if   |
-| the underlying different strategy yield similar objective values. Which |
-| is unfortunately exactly the case where the SP programming approach is  |
-| most interesting (if there is one clearly dominating strategy rather    |
-| independent e.g. of a reasonable range of output prices, considering    |
-| different future inside that reasonable range is not necessary).        |
-+
+ **Important Aspects to remember!**       
+
+---
+1\. Even if the program scales the drawn price changes such that their  
+ mean is equal to unity, this does not guarantee that the model, even    
+ without stage contingency, would perfectly replicate the deterministic  
+ version as the timing of the changes is also relevant (discounting,     
+ dynamic effects on liquidity etc.).       
+
+---  
+
+2\. The normal case is that the objective value increases when          
+ considering stage contingency under risk neutrality. This is due to the
+ effect that profits increase over-proportionally in output prices under
+ profit maximisation.                                                    
+
+---                                                                         
+ 3\. The solution time of the model can be expected to increase          
+ substantially with the SP extension switched on. MIP models are         
+ non-convex and NP-Complete problems. To our knowledge there is no       
+ existing sting polynomial-time algorithm, which means that the solution
+ time to optimality increases typically dramatically in the number of    
+ considered integers. Even small problems can take quite long to be      
+ solved even towards moderate optimality tolerances and not fully        
+ optimality. This holds especially if the *economic signal* to choose    
+ between one of the two branches of a binary variable is weak, i.e. if   
+ the underlying different strategy yield similar objective values. Which
+ is unfortunately exactly the case where the SP programming approach is  
+ most interesting (if there is one clearly dominating strategy rather    
+ independent e.g. of a reasonable range of output prices, considering    
+ different future inside that reasonable range is not necessary).        
+
+ ---
+
+
 The interface allows to define the parameters of the logarithmic Mean
 Reverting processes (MRP) with an expected mean and start value of
 log(1):
@@ -266,9 +427,35 @@ The random variable can impact either revenue, *salRev\_*, by
 introducing state specific output price(s) and/or cost for buying
 inputs, *buyCost\_*, by state specific input price(s):
 
-![](../media/image187.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /salRev_.*?\.\./ /;/)
+```GAMS
+salRev_(tCur(t),nCur) $ t_n(t,nCur)    ..
+*
+       v_salRev(t,nCur)  =e= sum(  (curProds(prodsYearly),sys) $ (v_saleQuant.up(prodsYearly,sys,t,nCur) ne 0),
+                                  p_price(prodsYearly,sys,t)
+$iftheni.sp "%stochProg%"=="true"
+*
+*     --- a product is both output and input, use price of inputs to avoid a situation
+*           where the product can be bought cheaper than it is sold
+*
+      * ( 1 + (p_randVar("priceOutputs",nCur)-1) $ (randProbs(prodsYearly) and (not sum(sameas(prodsYearly,inputs),1)))
+            + (p_randVar("priceInputs",nCur)-1)  $ (randProbs(prodsYearly) and (    sum(sameas(prodsYearly,inputs),1)))
+         )
+$endif.sp
+                                   *  v_saleQuant(prodsYearly,sys,t,nCur));
+```
 
-![](../media/image188.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /buyCost_.*?\.\./ /;/)
+```GAMS
+buyCost_(curInputs(inputs),sys,tCur(t),nCur) $ (t_n(t,nCur) $ p_inputprice(inputs,sys,t) $ (v_buy.up(inputs,sys,t,nCur)  ne 0))  ..
+
+       v_buyCost(inputs,sys,t,nCur) =e= p_inputprice(inputs,sys,t)
+$iftheni.sp %stochProg%==true
+      * ( 1 + (p_randVar("priceInputs",nCur)-1) $ randProbs(inputs) )
+$endif.sp
+                                      * v_buy(inputs,sys,t,nCur);
+```
+
 
 The decision whether prices are treated as random variables is steered
 via the interface:
@@ -282,7 +469,18 @@ will occur.
 
 The core branches are defined in *coeffgen\\stochprog.gms*:
 
-![](../media/image191.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/stochProg.gms GAMS /\$if.*?Core/ /\$endif\.stochPrices/)
+```GAMS
+$iftheni.stochPrices "%StochPricesOutputs%"=="Core branch outputs"
+
+*
+   $$ifi "%farmBranchArable%" == "on" option kill = randProbs; randProbs(set_crop_prods)  = yes;
+   $$ifi "%pigHerd%"          == "on" option kill = randProbs; randProbs(set_pig_prods)   = yes;
+   $$ifi "%farmBranchDairy%"  == "on" option kill = randProbs; randProbs(set_dairy_prods) = yes;
+   $$ifi "%farmBranchBeef%"   == "on" option kill = randProbs; randProbs(set_beef_prods) = yes;
+
+$endif.stochPrices
+```
 
 That means that dairy production takes precedence over other branches
 and pigs over arable cropping, assuming that arable crops are typically
@@ -332,7 +530,12 @@ Our approach builds on an often used modification by only considering
 down-side risk, i.e. only negative deviations from the simulated mean
 are taken into account:
 
-![](../media/image194.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /negDevNPV_.*?\.\./ /;/)
+```GAMS
+negDevNPV_(nCur) $ t_n("%lastYearCalc%",nCur) ..
+
+        v_objeN(nCur) + v_negDevNPV(nCur)  =G= v_objeMean;
+```
 
 This approach is especially relevant if the deviation above and below
 the objective function are not by definition symmetric. However, as the
@@ -340,11 +543,24 @@ distribution itself is determined in our stage contingent approach
 endogenously, symmetry makes limited sense. The expected mean deviation
 is calculated as:
 
-![](../media/image195.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /expNegDevNPV_.*?\.\./ /;/)
+```GAMS
+expNegDevNPV_ ..
+
+        v_expNegDevNPV =E= sum(nCur $ t_n("%lastYearCalc%",nCur), v_negDevNPV(nCur)*p_probN(nCur));
+```
 
 And subtracted from the objective function (see equation *OBJE\_*),
 
-![](../media/image196.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /\*.*?penalty/ /;/)
+```GAMS
+*       --- penalty for negative deviation from mean NPV (similar MOTAD) or target MOTAD / ES
+*
+$ifi %stochProg%==true - v_expNegDevNPV * p_negDevPen  $ (not p_expShortFall)
+$ifi %stochProg%==true - v_expShortFall * p_negDevPen  $ (not p_expShortFall)
+$ifi %stochProg%==true + v_expShortFall * p_negDevPen  $ p_expShortFall
+    ;
+```
 
 The reader should note that the standard MOTAD approach by Hazell and
 described in text books is based on expected gross margins and deviation
@@ -371,22 +587,30 @@ interest. This income level is used as the absolute benchmark level
 which can be modified by the user with the percentage multiplier entered
 in the GUI. This effects the following equation:
 
-![](../media/image198.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /shortFall_.*?\.\./ /;/)
+```GAMS
+shortFall_(nCur) $ (t_n("%lastYearCalc%",nCur) $ (p_npvAtRiskLim gt 1))  ..
+
+        v_objeN(nCur) + v_shortFall(nCur) =G= p_npvAtRiskLim;
+```
 
 Using this information the expected shortfall is defined:
 
-![](../media/image199.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /expShortFall_.*?\.\./ /;/)
+```GAMS
+expShortFall_ $ ( p_expShortFall or p_maxShortFall ) ..
 
-The expected shortfall then enters the objective function:
+        v_expShortFall =E= sum(nCur $ t_n("%lastYearCalc%",nCur), v_shortFall(nCur)*p_probN(nCur));
+```
 
-![](../media/image200.png)
+The expected shortfall then enters the objective function.
 
 ### Target MOTAD
 
 ![](../media/image201.png)
 
 The second option is what is called *Target MOTAD* in programming
-modelling. It has some relation to *MOTAD* as it also takes negative
+modeling. It has some relation to *MOTAD* as it also takes negative
 deviation from a pre-defined threshold into account, *p\_npvAtRiskLim*.
 
 The difference to the approach above is that the expected shortfall
@@ -394,7 +618,13 @@ below the predefined threshold does not enter the objective function,
 but acts as an upper bound. Hence, the shortfall of NPV cannot be lower
 than certain level:
 
-![](../media/image202.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /maxShortFall_.*?\.\./ /;/)
+```GAMS
+maxShortFall_  $ ( (p_npvAtRiskLim gt 1) $ (p_maxShortFall gt 0) ) ..
+
+        sum(nCur $ t_n("%lastYearCalc%",nCur), v_shortFall(nCur)*p_probN(nCur))
+                                                   =L= p_maxShortFall*p_npvAtRiskLim;
+```
 
 ### Value at Risk Approach
 
@@ -424,7 +654,12 @@ constraints. The first one drives a binary indicator variable,
 v\_*npvAtRisk,* which is equal to one if the objective value at a final
 leaf falls below the threshold:
 
-![](../media/image204.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /npvAtRisk_.*?\.\./ /;/)
+```GAMS
+npvAtRisk_(nCur) $ (t_n("%lastYearCalc%",nCur) $ (p_npvAtRiskLim gt 1))  ..
+
+       v_objeN(nCur) =G= p_npvAtRiskLim - v_npvAtRisk(nCur) * p_npvAtRiskLim;
+```
 
 If v\_*npvAtRisk* is zero, the objective value (LHS) for each final
 leave must exceed the given threshold *p\_npvAtRiskLim*. The second
@@ -432,7 +667,12 @@ constraint, shown below, adds up the probabilities for those final nodes
 which undercut the threshold (LHS) and ensures that their sum is below
 the given maximal probability:
 
-![](../media/image205.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /maxProbNpvAtRisk_.*?\.\./ /;/)
+```GAMS
+maxProbNpvAtRisk_ $ ( ( (p_npvAtRiskLim gt 1) or p_expShortFall) $ p_npvAtRiskmaxProb) ..
+
+      sum(t_n("%lastYearCalc%",nCur), v_npvAtRisk(nCur) * p_probN(nCur)) =L= p_npvAtRiskmaxProb;
+```
 
 As long as off-farm income is considered deterministic and the relative
 threshold is below 100%, a solution where only off-farm income is
@@ -457,7 +697,12 @@ the sum of the considered cases does not fall below the now endogenously
 defined limit (equation was already shown above in the section on the
 Value at Risk Approach):
 
-![](../media/image205.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /maxProbNpvAtRisk_.*?\.\./ /;/)
+```GAMS
+maxProbNpvAtRisk_ $ ( ( (p_npvAtRiskLim gt 1) or p_expShortFall) $ p_npvAtRiskmaxProb) ..
+
+      sum(t_n("%lastYearCalc%",nCur), v_npvAtRisk(nCur) * p_probN(nCur)) =L= p_npvAtRiskmaxProb;
+```
 
 Additionally, the expected shortfall for any of the final nodes which do
 not contribute to active lower quantile must be zero, based on a
@@ -471,30 +716,55 @@ leave can consider any number determined by the model as the RHS value
 of 1.E+7 in the case of *v\_npvAtRisk* equal unity never becomes
 binding.
 
-![](../media/image207.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /shortFallTrigger1_.*?\.\./ /;/)
+```GAMS
+shortFallTrigger1_(nCur) $ ( t_n("%lastYearCalc%",nCur) $ p_expShortFall ) ..
+
+        v_shortFall(nCur) =L= 1.E+7 * v_npvAtRisk(nCur);
+```
 
 Besides this, any leaves which is not in worst cases set (*v\_npvAtRisk*
 = 0) must at least generate a NPV which exceeds the best shortfall.
 
-![](../media/image208.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /shortFallBound_.*?\.\./ /;/)
+```GAMS
+shortFallBound_(nCur)  $ ( t_n("%lastYearCalc%",nCur) $ p_expShortFall  ) ..
+
+        v_objeN(nCur)     =G= v_bestShortFall+1 - v_npvAtRisk(nCur) * 1.E+7;
+```
 
 For cases at or below the quantile which contributed towards the
 expected mean shortfall, both the own expected NPV and the best NPV act
 simultaneously as lower bounds:
 
-![](../media/image209.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /shortFallTrigger2_.*?\.\./ /;/)
+```GAMS
+shortFallTrigger2_(nCur) $ ( t_n("%lastYearCalc%",nCur) $ p_expShortFall ) ..
+
+        v_slackNPV(nCur)  =L= 1.E+7 * (1-v_npvAtRisk(nCur));
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /shortFallTrigger3_.*?\.\./ /;/)
+```GAMS
+shortFallTrigger3_(nCur) $ ( t_n("%lastYearCalc%",nCur) $ p_expShortFall ) ..
+
+        v_shortFall(nCur) + v_slackNPV(nCur) =E= v_objeN(nCur);
+```
 
 Accordingly, the *v\_bestShortFall* splits the expected NPVs in those
 below and above the relevant quantile.
 
 The cases below that bound define the expected shortfall:
 
-![](../media/image199.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/stochprog_module.gms GAMS /expShortFall_.*?\.\./ /;/)
+```GAMS
+expShortFall_ $ ( p_expShortFall or p_maxShortFall ) ..
+
+        v_expShortFall =E= sum(nCur $ t_n("%lastYearCalc%",nCur), v_shortFall(nCur)*p_probN(nCur));
+```
 
 The expected shortfall adds to the objective (in opposite to target
-MOTAD):
-
-![](../media/image210.png)
+MOTAD).
 
 The objective function is hence a trade-off between a higher expected
 mean NPV and the expected shortfall of cases x% relative to that

@@ -368,44 +368,224 @@ Grassland management was so far based on two type of pasture (past22 and past33)
 ### Grazing of herds
 
 For cows, bulls, heifers and calves, the user can define on the interface if no grazing (= all day long in stable), partial grazing (= half day in stable) or full grazing (= no time in stable) can be used. Figure XY illustrates the grazing of calves as specified in the GUI. The entries would imply that calves have to kept in stable during JAN,FEB,NOV,DEC as no other option is open, partial grazing is additionally possible in MAR and OCTOBER, and during the period APR-SEP, the farmer has the choice of all three types.
-Bild ("grazing")
+![](../media/grazing.png)
 
 The labour needs differ between the three options:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/labour.gms GAMS /p\_he.*?heifs.*?noG/ /;/)
+```GAMS
+p_herdLab("heifs","noGraz",m)        =   9 / card(m);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/labour.gms GAMS /p\_he.*?heifs.*?partG/ /;/)
+```GAMS
+p_herdLab("heifs","partGraz",m)      =   9 / card(m) + 0.5;
+```
+
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/labour.gms GAMS /p\_he.*?heifs.*?fullG/ /;/)
+```GAMS
+p_herdLab("heifs","fullGraz",m)      =   5 / card(m);
+```
 
 The additional work load for partial grazing is calculated as follows: It is assumed that it takes one hour a day to move the herd form the stable to the pasture and back (= 15 hours in total in a month). The average herd driven is assumed to be equal to 60 animals for cows and 30 animals for heifers/bulls. For calves, which are assumed to be driven with other herds, 0.25 hours a month are added.
 The introduction of these grazing feeding regimes (part of the set “feedRegime”) requires a change in the logic of the program. The *v\_herdStart* variable now is no longer indexed with the feed regime – reflecting that e.g. a heifer entering the cow herd might during its lifetime as a cow sometimes be grazed and sometimes not. The *herdsSize\_* equation (below an incomplete screen shot, see *model\general_herd_module*) equilibrates the herd sizes in the different months (LHS) to the herds starting in the yearly and months before:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /sum\(feedRegime \$/ /;/)
+```GAMS
+sum(feedRegime $ actHerds(herds,breeds,feedRegime,t,m),v_herdSize(herds,breeds,feedRegime,t,nCur,m))
+
+          =E=
+*
+*         --- herds which started in the months before the production length, in case for piglets a separate construct is used
+*
+
+          +  sum( (t_n(t1,nCur1),m1) $ (
+                                       ((   (-p_mDist(t,m,t1,m1)    le (p_prodLength(herds,breeds)-1))
+                                          $ (p_mDist(t,m,t1,m1) le 0))
+
+                                         or
+                                          ( (abs(p_mDist(t,m,t1,m1)-12) le (p_prodLength(herds,breeds)-1))
+                                              $ (p_mDist(t,m,t1,m1)-12 le 0)) $ p_compStatHerd
+                                       )
+                              $ sum(feedRegime,actHerds(herds,breeds,feedRegime,t1,m1)) $ isNodeBefore(nCur,nCur1)
+                     $$iftheni.sows "%farmBranchSows%" == "on"
+                              $(not sameas(herds,"piglets"))
+                     $$endif.sows
+                               ),
+                    v_herdStart(herds,breeds,t1,nCur1,m1)
+
+
+                    $$iftheni.ch %cowHerd%==true
+*
+*                   --- minus, in case of cows, slaughtered before reaching the final age
+*
+                         -sum( (slgtCows,cows) $ (sum(feedRegime, actHerds(slgtCows,breeds,feedRegime,t1,m1))
+                              $ sameas(cows,herds) $ (slgtCows.pos eq cows.pos)),
+                                 v_herdStart(slgtCows,breeds,t1,nCur1,m1))
+                    $$endif.ch
+            )
+*
+*         --- Herd size dynamic for piglets separately to depict a correct transfer from year t to year t1 as well as account for temporal resolution adjustments
+*
+
+          $$iftheni.sows "%farmBranchSows%" == "on"
+        +  sum( (t_n(t1,nCur1),m1) $ ( (abs(p_mDist(t,m,t1,m1)) le (p_prodLengthB(herds,breeds) -1 $ (p_prodLengthB(herds,breeds) eq 1)))
+                              $ (p_mDist(t,m,t1,m1) le 0) $ isNodeBefore(nCur,nCur1)
+                              $ sum(feedRegime,actHerds(herds,breeds,feedRegime,t1,m1))
+                              $ (not sameas(herds,"sows"))
+                              ${ ( sameas(t,t1) $ (not sameas(m  - p_prodLengthB(herds,breeds),m1)))
+                                or ((not sameas(t,t1)) $ (sameas("Jan",m))$ (sameas( m + 11, m1)))}),
+
+                   v_herdStart(herds,"",t1,nCur1,m1))
+          $$endif.sows
+    ;
+```
 
 An additional equation (see *model\cattle_module.gms*) ensures that the feeding phase variable is linked to herd in a specific feed regime:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /herdsByFeedRegime/ /;/)
+```GAMS
+herdsByFeedRegime_(herds,breeds,feedRegime,t,n,m)         "Distribute herds to feed regimes"
+      herdsreqsPhase_(herds,breeds,reqsPhase,m,t,n)             "Animal herds in a certain phase in a certain month"
+      reqsPhase_(herds,breeds,feedRegime,reqs,reqsPhase,m,t,n)  "Animal requirements need to be covered"
+      sumReqs_(reqs,t,n)                                        "Total requirements per year"
+      sumReqsBought_(reqs,t,n)                                  "Total requirements per year from bought feed"
+      feedUse_(feeds,t,n)                                       "Definition of total feed use"
+      feedUseHerds_(herds,feeds,t,n)                            "Definition of total feed use"
+      feedUseM_(feeds,m,t,n)                                    "Definition of total feed use"
+      prodsM_(prods,m,t,n)                                      "Monthly feed use definition"
+      herdsBefore_(herds,breeds,feedRegime,t,t,n,m)             "First two years"
+      herdsStartBefore_(herds,breeds,t,t,n,m)                   "First two years"
+      sumHerds_(sumHerds,breeds,feedRegime,t,n,m)               "Summary herd definition, per month"
+      sumHerdsY1_(sumHerds,breeds,t,n)                          "Summary herd definition, per year, sold herds"
+      avgLactations_(breeds,t,n)                                "Recover average lactation length from short and long"
+      herdsLast_(herds,breeds,feedRegime,t,n,m)                 "Prolongate herd size"
+      herdsLast1_(herds,breeds,feedRegime,t,n,m)                "Prolongate herd size"
+      maxHerdChange1_(herds,breeds,feedRegime,t,n,n)            "Special restricton for heifer and calves raisingherd"
+      maxHerdChange2_(herds,breeds,feedRegime,t,n,n)            "Special restricton for heifer and calves raisingherd"
+      hasHerdOrderDairy_(t,n)
+      hasHerdOrderMotherCows_(t,n)
+
+$iftheni.dh %cowherd%==true
+      newCalves_(breeds,t,n,m)                                  "Born calves (male and female)"
+      maleFemaleRel_(breeds,t,n,m)                              "Born calves, keep male/female relation"
+$endif.dh
+
+      nutExcrPast_(allNut,t,n,m)                                "N and P excretion on pasture"
+      nut2ManurePast_(nut2,t,n,m)
+      FixGrasLand_(t,n)                                         "Ensures that there is no grassland on arable land"
+      FixPastLand_(t,n)                                         "Distribution of gras and past land on total land  "
+
+;
+```
 
 ### Nutrient content of different grassland outputs
 
 The model now supports three types of fresh gras (labelled early – middle – late), three types of gras silage (labelled early – middle – late) and hay based on their feed attributes per unit of dry matter. Dry matter content is inputted as well:
-Bild (grazing_nutrient)
 
-### Grasland management
+![](../media/grazing_nutrient.png)
+
+### Grassland management
 
 The user can define up to 10 different types of grassland management by the following two attributes:
 1.	Total dry matter output
 2.	Distribution of outputs (see above) over months
 The default setting defines two differently intensive grazing schemes, which only differ in dry matter output:
- Bild (gra1)
-Bild (gar2)
+
+![](../media/gra1.png)
+
+![](../media/gra2.png)
+
 Two different silage use schemes:
-Bild (gra3)
-Bild (gra4)
+
+![](../media/gra3.png)
+
+![](../media/gra4.png)
+
 Embedded phyton code (see *util\grasAttr.gms*) introduces more easily interpretable labels for reporting:
-Einfügen
+
+xx
 
 After the original label follows the annual dry matter yield, followed by the number of cuts (where applicable) and the share of biomass used for grazing resp. silage or hay.
 The assignment of machinery needs and (related) labour hours in defined in “*coeffgen\tech.gms*” and “*coeffgen\cropping.gms*”:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/tech.gms GAMS /\*.*?definition.*?op/ /;/)
+```GAMS
+* --- definition of basic field operations for graslands
+*
+ set.gras     .    soilSample          .  SEP2                                      0.25                 0.25  0.25
+ set.gras     .    weederlight         .  MAR2                                      0.25                 0.25  0.25
+ set.gras     .    sowMachine          .  MAR2                                      0.75                 0.75  0.75
+ set.gras     .    grasReSeeding       .  APR1                                      0.25                 0.25  0.25
+ set.gras     .    roller              .  APR1                                      0.25                 0.25  0.25
+ ;
+```
 
 The operations shown above occur on all type of grasslands in the given frequency.
 The operations related to cuts are defined as follows:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/tech.gms GAMS /\*.*?definition.*?cut/ /baleT.*?0\.86/)
+```GAMS
+* --- definition of cuts for grasland
+*
+
+set toSilage(noPastOutputs) / earlyGrasSil,middleGrasSil,lateGrasSil /;
+set toHay(noPastOutputs) / hay /;
+
+ set grasToOutput(crops,grasOutputs);
+ grasToOutput(crops,grasOutputs) $ sum((m) $(p_grasAttr(crops,grasOutputs,m)), 1) = YES;
+
+ table p_opPerCut(operation,noPastOutputs,till) "Field operations for one gras cut per cutting process (either silo or bales)"
+
+                                  silo     bales
+  mowing.set.noPastOutputs        1.00      1.00
+  tedding.set.noPastOutputs       1.00      1.00
+  raking.set.noPastOutputs        1.00      1.00
+*
+*   --- these operations are changed by harvested biomas
+*
+   closeSilo.middleGrasSil        1.00
+   silageTrailer.middleGrasSil    1.00
+   balePressWrap.middleGrasSil              1.00
+   balePressHay.hay                         1.00
+   baleTransportSil.hay
+   baleTransportHay.hay                     1.00
+ ;
+
+
+parameter p_bioMassOpsFac(operation) "Factor in order to correct dry matter content to witted silage content (35% DM) or hay (86% DM)"
+  /
+    silageTrailer        0.35
+    balePressWrap        0.35
+    baleTransportSil     0.35
+    balePressHay         0.86
+    baleTransportHay     0.86
+```
 
 And are used to define the machinery needs:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/tech.gms GAMS /\*.*?count.*?cut/ /labPeriod\);/)
+```GAMS
+* --- count lab period where gras is cut
+*
+parameter p_cutPeriod(crops,*) "Count # of labour period where grass is cut";
+
+p_cutPeriod(gras,m)
+    = sum( (labPeriod_to_month(labPeriod,m),noPastOutputs) $ p_grasAttr(gras,noPastOutputs,m),1);
+
+p_cutPeriod(gras,labPeriod) = sum( labPeriod_to_month(labPeriod,m),p_cutPeriod(gras,m));
+*
+* --- silo cut for silage
+*
+ crop_op_per_till(gras,operation,labPeriod,"silo")
+     $ (p_cutPeriod(gras,labPeriod) $ p_opPerCut(operation,"middleGrasSil","silo") $ grasToOutput(gras,"middleGrasSil"))
+    =   sum( (labPeriod_to_month(labPeriod,m),toSilage) $ p_grasAttr(gras,toSilage,m),
+          p_opPerCut(operation,"middleGrasSil","silo")
+*
+*            --- change machinery needs (or not) depending on harvested dry matter
+*
+                 * (    1 $ (not p_bioMassOpsFac(operation))
+                     +  (p_grasAttr(gras,toSilage,m)/p_bioMassOpsFac(operation)/op_attr(operation,"67kw","2ha","amount")) $ p_bioMassOpsFac(operation))
+          )/ p_cutPeriod(gras,labPeriod);
+```

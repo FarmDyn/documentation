@@ -12,8 +12,8 @@ fertiliser
     (6) a binding fertiliser planning, (7) compulsory low-emission manure application techniques.
 
  The equations regarding the Fertilisation Ordinance are mainly found in the Fertilisation Ordinance
- module (duev_module.gms). Measures with regard to the storage capacity are partly found in the
- manure module. FarmDyn is used to asses the revision of the Fertilisation Ordinance in 2017. Therefore,
+ module (*duev\_module.gms*). Measures with regard to the storage capacity are partly found in the
+ *manure module*. FarmDyn is used to asses the revision of the Fertilisation Ordinance in 2017. Therefore,
  the Ordinance from 2007 and 2017 can be directly selected in the GUI to activate the corresponding measures. In addition,
  thresholds and requirements can be modified separately in the GUI.
 
@@ -26,7 +26,7 @@ fertiliser
   threshold.
 
 Nutrient removal via harvested product is calculated, depending on its yield level and nutrient
-content. The main harvested product as well as straw from cereal production which can be sold in FarmDyn are covered.
+content. The main harvested product, as well as straw from cereal production which can be sold in FarmDyn, are covered.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /nutRemovalDuev_\(.*?\.\./ /;/)
 ```GAMS
@@ -116,22 +116,22 @@ $iftheni.b %biogas% == true
 
 $endif.b
 
-*  --- Applied synthetic fertiliser
+*  --- Applied synthetic fertilizer
 
          + v_synthAppliedDueV(nut,t,nCur)
 
 
 *  --- Nutrient from N fixation from legumes in grassland
          + sum(  (c_s_t_i(crops,plot,till,intens)) ,
-                   v_cropHa(crops,plot,till,intens,t,nCur) *   p_NfromLegumes(Crops)  )       $ sameas (nut,"N")
+                   v_cropHa(crops,plot,till,intens,t,nCur) *   p_NfromLegumes(Crops)  )       $ (sameas (nut,"N") )
 
 
 * --- Import of manure
-*     [TK][TO DO] add coefficient for accounting for imported manure
 
        $$iftheni.im "%AllowManureImport%" == "true"
 
-         +   sum ( (nut2_nut(nut2,nut),m),   v_manImport(t,nCur,m) *    p_nut2inMan(nut2,"manImport","LiquidImport") )
+         +   sum ( (nut2_nut(nut2,nut),m),   v_manImport(t,nCur,m) *    p_nut2inMan(nut2,"manImport","LiquidImport") )   * (1- (p_nutEffectivDueVAl - p_nutEffectivDueVNv("N") ))   $ sameas (nut,"N")
+         +   sum ( (nut2_nut(nut2,nut),m),   v_manImport(t,nCur,m) *    p_nut2inMan(nut2,"manImport","LiquidImport") )      $ sameas (nut,"P")
 
        $$endif.im
 
@@ -145,7 +145,7 @@ $iftheni.h %herd% == true
 
       $$iftheni.ExMan %AllowManureExport%==true
 
-        -  sum( (curManChain,m,nut2) $(not sameas (nut2,"P")), v_nut2export(curManChain,nut2,t,nCur,m) )  $ sameas (nut,"N")
+        -  sum( (curManChain,m,nut2) $(not sameas (nut2,"P")), v_nut2export(curManChain,nut2,t,nCur,m) )   $ sameas (nut,"N")
         -  sum( (curManChain,m), v_nut2export(curManChain,"P",t,nCur,m) )                                 $ sameas (nut,"P")
 
       $$endif.ExMan
@@ -197,7 +197,7 @@ nutBiogasDueVAccAL_(tCur(t),nCur)  $ t_n(t,nCur)..
 
            sum( (curmanchain,m,nut2) $ (not sameas (nut2,"P")), v_nutCropBiogasM(curmanchain,nut2,t,nCur,m)        * p_nutEffectivDueVAlBiogasPlantDig
 
-* --- Depending of the Fertiliser Ordinance, the inclusion of digestate N from plant origin can be switched on/off (GUI=optional, FO07 = off, FO17 = on)
+* --- Depending of the Fertilizer Ordinance, the inclusion of digestate N from plant origin can be switched on/off (GUI=optional, FO07 = off, FO17 = on)
 
                              *  p_NincludeBioDigest )
 
@@ -205,8 +205,8 @@ nutBiogasDueVAccAL_(tCur(t),nCur)  $ t_n(t,nCur)..
                                  v_purchManure(bhkw,eeg,curmaM,t,nCur,m) * p_nut2manPurch("LiquidBiogas",nut2,curmaM) *  p_nutEffectivDueVAlBiogasPurchMan(curmaM)  ) ;
 ```
 
-The N input from manure and biogas digestate as well as manure import is summarized in the following equation. The export of manure
-is substracted in the equation. The variable *v_DueVOrgN* returns the accourance of nitrogen from organic sources at a farm level.
+The N input from manure and biogas digestate and manure import is summarized in the following equation. The export of manure
+is substracted in the equation. The variable *v_DueVOrgN* returns the accordance of nitrogen from organic sources at a farm level.
 The nitrogen has to be accounted with factors defined by the Fertilisation Ordinance.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /DuevOrgN_.*?\.\./ /;/)
@@ -281,8 +281,8 @@ The derived nutrient need with regard to nitrogen must not be exceeded. This all
 quota which farms have to meet. The fertiliser quota is always calculated, if the Fertilisation Ordinance is switched on.
 However, it only becomes binding for fertiliser application under the Fertilisation Ordinance 2017.
 
-The nutrient input is summarized in the equation *FertQuotaInput_*. Nutrients from chemical fertiliser, manure and mineralization
-from the soil are taken into account. Manure N is accounted with mineral fertiliser equivalents defined by the Ordinace.
+The nutrient input is summarised in the equation *FertQuotaInput_*. Nutrients from chemical fertiliser, manure and mineralisation
+from the soil are taken into account. Manure N is accounted with mineral fertiliser equivalents defined by the Ordinance.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /FertQuotaInput_.*?\.\./ /;/)
 ```GAMS
@@ -292,12 +292,12 @@ FertQuotaInput_(tCur(t),nCur)   $ t_n(t,nCur)  ..
 
             =e=
 
-* --- Input of chemical N fertiliser which is fully accounted in the fertiliser quota
+* --- Input of chemical N fertilizer which is fully accounted in the fertilizer quota
 
                   sum (  (c_s_t_i(curCrops(crops),plot,till,intens),syntFertilizer,m)  $( (not sameas (crops,"catchCrop")) $ ( not sameas (crops,"idle") ) $ (not sameas (crops,"idleGras") )  ),
                               v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)     * p_nutInSynt(syntFertilizer,"N") )
 
-* --- Input of manure N which is accounted with prescribed mineral fertiliser equivalents
+* --- Input of manure N which is accounted with prescribed mineral fertilizer equivalents
 
 $iftheni.man %manure% == true
 
@@ -313,7 +313,7 @@ $endif.man
                          ;
 ```
 
-Furtermore, the plant nutrient need is calculated. It depends on the yield level and is precisley defined by the Fertilisation
+Furthermore, the plant nutrient need is calculated. It depends on the yield level and is precisely defined by the Fertilisation
 Ordinance.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /FertQuotaNeed_.*?\.\./ /;/)
@@ -335,7 +335,7 @@ FertQuotaNeed_(tCur(t),nCur) ..
 ```
 
 The plant nutrient input is not allowed to exceed the estimated nutrient need. The restriction becomes only binding under the Fertilisation Ordinance
-2017. p_bigNumberFO, being a very large number if the Fertilisation Ordinance 2017 is not activated, ensures that the nutrient need is extremly high under the Fertilisation Ordinance
+2017. *p\_bigNumberFO*, being a very large number if the Fertilisation Ordinance 2017 is not activated, ensures that the nutrient need is extremely high under the Fertilisation Ordinance
 2007 and not binding.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /FertQuota_.*?\.\./ /;/)
@@ -351,7 +351,7 @@ Farms are required to hold a minimum storage capacity to bridge the time in autu
 capacity was defined at federal state level under the Fertilisation Ordinance 2007. Under the Fertilisation Ordinance 2017, it is defined at federal level.
 
 Generally, farms have to hold a manure storage capacity to gap the amount of manure excretion corresponding to a certain time period, e.g. 6 months.
-Therefore, the required storage capacity is defined in the manure module. The parameter *p_ManureStorageNeed* defines the required amount of months
+Therefore, the required storage capacity is defined in the manure module. The parameter *p\_ManureStorageNeed* defines the required amount of months
 and is linked to the selected Fertilisation Ordinance or can be defined in the GUI.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/manure_module.gms GAMS /manStorCapNeed_.*?\.\./ /;/)
@@ -370,7 +370,7 @@ manStorCapNeed_(curManChain(manChain),tCur(t),nCur) $ (t_n(t,nCur) $ p_ManureSto
 ```
 
 Under the Fertilisation Ordinance 2017, farms exceeding a stocking density of 3 livestock units per ha have to hold additional manure storage capacity.
-This is implemented with a binary trigger in FarmDyn. The variable *v_triggerStorageGVha* becomes one when the farm exceeds the livestock unit
+This is implemented with a binary trigger in FarmDyn. The variable *v\_triggerStorageGVha* becomes one when the farm exceeds the livestock unit
 threshold.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /triggerStorageGVha_.*?\.\./ /;/)
@@ -380,7 +380,7 @@ triggerStorageGVha_(tCur(t),nCur) $t_n(t,nCur) ..
           (    v_sumGV(t,nCur)   /   sum(plot, p_plotSize(plot))  ) - 3  =l= v_triggerStorageGVha(t,nCur) *  16 ;
 ```
 
-If the variable *v_triggerStorageGVha* is one, the restriction in the following equation becomes binding.
+If the variable *v\_triggerStorageGVha* is one, the restriction in the following equation becomes binding.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /manStorCapGVDepend_.*?\.\./ /;/)
 ```GAMS
@@ -394,7 +394,7 @@ manStorCapGVDepend_(curManChain(manChain),tCur(t),nCur) $ t_n(t,nCur) ..
 ## Banning periods for fertiliser application
 
 During certain months of the year, the application of fertiliser is not allowed as there is no plant nutrient need and the risk of nitrate leaching is very high.
-This is implemented in FarmDyn by setting the variable *v_mandist* and *v_syntdist* to zero for certain months which disables fertiliser application in the model.
+This is implemented in FarmDyn by setting the variable *v\_mandist* and *v\_syntdist* to zero for certain months which disables fertiliser application in the model.
 
 Depending on the Fertilisation Ordinance selected, sets are defined which include the months in which fertiliser application is forbidden (can also be defined
 via the GUI which is not shown here).
@@ -420,7 +420,7 @@ $$elseifi.fertGui %RegulationFert% == FD_2007
    $$endif.fertGui
 ```
 
-For the months which are defined in the described sets, the varialbes for fertiliser application are set to zero.
+For the months which are defined in the described sets, the variables for fertiliser application are set to zero.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/fertilizing.gms GAMS /v_syntDist.up.*?\(arabCrops.*?till/ /\$\$endif\.v_manDist/)
 ```GAMS
@@ -452,7 +452,7 @@ v_syntDist.up(arabCrops(crops),plot,till,intens,syntFertilizer,t,n,monthApplicat
 ## Restriction of fertiliser application in autumn
 
 In addition to the fixed banning periods, the application of fertiliser in autumn is only legal for some crops and restricted
-to a defined amount of nitrogen per ha. The parameter *p_NLimitInAutumn* contains the allowed amount of N and is
+to a defined amount of nitrogen per ha. The parameter *p\_NLimitInAutumn* contains the allowed amount of N and is
 defined depending on the Fertilisation Ordinance. Catch crops allow additional manure application in autumn.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/duev_module.gms GAMS /NLimitAutumn_.*?c_[\s\S]*?\.\./ /;/)
@@ -490,7 +490,7 @@ $endif.man
 
 The Fertilisation Ordinance defines which manure application techniques are legally allowed. Under the Fertilisation Ordinance 2017, broadcast spreading
 is banned except on fallow land followed by direct incorporation. This measures is introduced in FarmDyn by setting the variable
-*v_mandist* to zero for certain months and not allowed application techniques.
+*v\_mandist* to zero for certain months and not allowed application techniques.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/manure.gms GAMS /\* \-\-\- Broadcast spreader/ /\$\$endif\.dh/)
 ```GAMS

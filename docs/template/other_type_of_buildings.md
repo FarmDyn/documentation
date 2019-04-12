@@ -34,7 +34,7 @@ siloInv_(curManChain(manChain),silos,tCur(t),nCur)
 ```
 
 The manure silos are linked to the manure storage needs, which are
-described in chapter Manure. A similar inventory equation as for manure
+described in chapter [Manure](manure.md)Manure. A similar inventory equation as for manure
 silos is implemented for the other buildings:
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /buildingInv_\(.*?nCur/ /;/)

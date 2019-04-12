@@ -7,7 +7,7 @@ Publishers, Dordrecht, Netherlands
 Britz, W. & B. Lengers (2012): R routine to estimate Heckman two stage
 regression procedure on marginal abatement costs of dairy farms, based
 on large scale outputs of the model DAIRYDYN. Technical Paper for
-modelling documentation, University of Bonn
+modeling documentation, University of Bonn
 
 Britz, W. & H.P. Witzke (2008): CAPRI model documentation
 2008: Version 2.
@@ -30,7 +30,7 @@ agriculture -- *National Emission Inventory Report (NIR) 2009 for 2007*.
 Landbauforschung vTI Agriculture and Forestry Research, Sonderheft 324
 
 Davis, P.K. (1993): An introduction to variable-resolution
-modelling and cross-resolution model connection. RAND, National Defense
+modeling and cross-resolution model connection. RAND, National Defense
 Research Institute, Santa Monica, USA.
 <http://www.rand.org/content/dam/rand/pubs/reports/2009/R4252.pdf>
 (stand 13.08.2012)
@@ -44,7 +44,7 @@ die zuletzt durch Artikel 18 des Gesetzes vom 31. Juli 2009 (BGBl. I S.
 
 EMEP, EEA (2013): "EEA air pollutant emission inventory guidebook 2013." European Environment Agency, Copenhagen.
 
-EMEP (2016)
+EMEP (2016): EEA, EMEP. "EEA air pollutant emission inventory guidebook 2016 (EEA Report No 21/2016)." European Environment Agency(2016).
 
 FAO (2006): livestock´s long shadow, environmental issues and options.
 Food and Agricultural Organization, Rome Italy
@@ -59,22 +59,21 @@ Garbert, J. 2013. Ökonomische Auswirkung von Politiken zur
 Umsetzung der Wasserrahmenrichtlinie auf die Schweinehaltung im
 Münsterland. Dissertation, University of Bonn, Germany.
 
-Grimm, V. (2002): Ten years of individual-based modelling
+Grimm, V. (2002): Ten years of individual-based modeling
 in ecology: what have we learned, and what could we learn in the future.
-Ecological Modelling 115:129-148
+Ecological Modeling 115:129-148
 
 Haenel, H.-D., et al (2018): Calculations of gaseous and particulate emissions from German agriculture 1990-2016: Report on methods and data (RMD) Submission 2018. No. 57. Thünen Report
 
-Haenel (2015)
+Haenel, H.-D., Rösemann, C., Dämmgen, U., Poddey, E., Freibauer, A., Döhler, H., Eurich-Menden, B., Wulf, S., Dieterle, M., Osterburg, B. (2012): Calculations of gaseous and particulate emissions from German agriculture 1990–2010. Report on methods and data (RMD). Submission 2012. Landbauforsch, Special Issue 356, 394 pp
 
 Hazell, P. (1971): "A linear alternative to quadratic and semivariance programming for farm planning under uncertainty." American Journal of Agricultural Economics 53.1: 53-62
 
-Heckman, J.J. (1979): Sample Selection Bias as
-Specification Error. *Econometrica* 47:153-161.
+Heckman, J.J. (1979): Sample Selection Bias as Specification Error. *Econometrica* 47:153-161.
 
-Heitsch & Römisch (2008)
+Heitsch, H. et al. (2008): "Generierung von Szenariobäumen und Szenarioreduktion für stochastische Optimierungsprobleme in der Energiewirtschaft." WAGNER, H.-J.(Hrsg.): Innovative Modellierung und Optimierung. LIT Verlag.
 
-Heitsch & Römisch (2009)
+Heitsch, H. & Römisch, W. (2009): "Scenario tree reduction for multistage stochastic programs." Computational Management Science 6.2: 117-133.
 
 Hertel, T.W. (1997): Global Trade Analysis -- Modeling and
 Applications. Cambridge University Press
@@ -139,7 +138,7 @@ Louhichi, K., Janssen, S., Kanallopoulos, A., Li, H., Borowski, N.,
 Flichman, G., Hengsdijk, H., Zander, P., Fonseca, M.B., Stokstad, G.,
 Athanasiadis, I.N., Rizzoli, A.E., Huber, D., Heckelei, T. & M. Van
 Ittersum] (2010): A Generic Farming System Simulator, in:
-Environmental and Agricultural Modelling -- Integrated Approaches for
+Environmental and Agricultural Modeling -- Integrated Approaches for
 Policy Impact Assessment, Springer
 
 McKay, M.D., Conover, W.J. & Beckman, R.J. (1979): A

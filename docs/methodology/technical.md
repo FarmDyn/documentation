@@ -7,7 +7,7 @@
 
 
 The model template and the coefficient generator are realised in GAMS
-(General Algebraic Modelling System), a widely used modelling language
+(General Algebraic Modeling System), a widely used modeling language
 for economic simulation models. GAMS is declarative (as seen from the
 template discussion above), i.e. the structure of the model's equation
 is declared once, and from there different model instances can be
@@ -119,9 +119,27 @@ The larger the threshold, the lower is the number of integer variables
 and the higher the (potential) difference to the solution where more
 indivisibilities in machine investments are taken into account.
 
-The relevant code section (*exp\_starter.gms*) is shown below:
+The relevant code section (*define_starting_bounds.gms*) is shown below:
 
-![](../media/image237.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/define_starting_bounds.gms GAMS /\$ifi.*?dynamics/ /;/)
+```GAMS
+$ifi "%dynamics%" == "comparative-static"  $setglobal buyMachFlexThreshold 1E+6
+$ifi not setglobal buyMachFlexThreshold $setglobal buyMachFlexThreshold 3
+
+
+    v_buyMach.fx(machType,t,nCur)     $ (t_n(t,nCur)
+    $ (    (p_machAttr(machType,"depCost_ha")    le %buyMachFlexThreshold%) $ p_machAttr(machType,"depCost_ha")
+        or (p_machAttr(machType,"depCost_hour")   le %buyMachFlexThreshold%) $ p_machAttr(machType,"depCost_hour")
+                                     ) $ (not p_machAttr(machType,"years"))) = 0;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/define_starting_bounds.gms GAMS /v_buyMachFlex\.fx/ /;/)
+```GAMS
+v_buyMachFlex.fx(machType,t,nCur) $ (t_n(t,nCur)
+    $  (   (p_machAttr(machType,"depCost_ha")    gt %buyMachFlexThreshold%)
+        or (p_machAttr(machType,"depCost_hour")  gt %buyMachFlexThreshold%)
+                                         or p_machAttr(machType,"years"))) = 0;
+```
 
 ### Heuristic reduction of binaries
 
@@ -141,7 +159,97 @@ maximal size or smaller than 2/3 of the maximal size are removed from
 the MIP. Equally, investment in stables is set to zero if there was no
 investment in the RMIP solution.
 
-![](../media/image238.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/reduce_vars_for_mip.gms GAMS /\*.*?bigger/ /\*.*?MIP.*?RMIP/)
+```GAMS
+* --- exclude bigger stable investment under binary conditions
+*
+  p_maxBoughtStableSize(stableTypes,leaves)
+     = smax(t_n(tCur,nCur) $ sameScen(leaves,nCur),
+                       sum( (stables1) $ p_stableSize(stables1,stableTypes),
+                                        v_buyStables.l(stables1,"long",tCur,nCur)*p_stableSize(stables1,stableTypes)))
+           $ (smax(t_n(tCur,nCur) $ sameScen(leaves,nCur),
+                        sum( (stables1) $ p_stableSize(stables1,stableTypes),
+                                 v_buyStables.l(stables1,"long",tCur,nCur)*p_stableSize(stables1,stableTypes))) ne -INF);
+
+
+
+  p_maxInvStableSize(stableTypes,leaves)
+     = max(smax(t_n(tCur,nCur) $ sameScen(leaves,nCur),
+                       sum(stables1 $ p_stableSize(stables1,stableTypes),
+                            v_stableUsed.l(stables1,tCur,nCur)*p_stableSize(stables1,stableTypes)))
+           $ (smax(t_n(tCur,nCur) $ sameScen(leaves,nCur),
+                        sum(stables1 $ p_stableSize(stables1,stableTypes),
+                           v_stableUsed.l(stables1,tCur,nCur)*p_stableSize(stables1,stableTypes))) ne -INF),
+
+           smax(tOld,
+                       sum(stables1 $ p_stableSize(stables1,stableTypes),
+                         p_iniStables(stables1,"long",tOld)*p_stableSize(stables1,stableTypes)))
+         $  (smax(tOld,
+                       sum(stables1 $ p_stableSize(stables1,stableTypes),
+                         p_iniStables(stables1,"long",tOld)*p_stableSize(stables1,stableTypes))) ne -INF));
+
+  p_maxBoughtStableSize(stableTypes,leaves)
+     = smin(stables1 $ (p_stableSize(stables1,stableTypes) ge p_maxBoughtStableSize(stableTypes,leaves)),
+               p_stableSize(stables1,stableTypes));
+
+  p_maxBoughtStableSize(stableTypes,leaves) $ (p_maxBoughtStableSize(stableTypes,leaves) eq INF)
+     = smax(stables1 $ p_stableSize(stables1,stableTypes),p_stableSize(stables1,stableTypes));
+
+
+  p_maxInvStableSize(stableTypes,leaves)
+     = smin(stables1 $ (p_stableSize(stables1,stableTypes) ge p_maxInvStableSize(stableTypes,leaves)),
+               p_stableSize(stables1,stableTypes));
+
+  p_maxInvStableSize(stableTypes,leaves) $ (p_maxInvStableSize(stableTypes,leaves) eq INF)
+     = smax(stables1 $ p_stableSize(stables1,stableTypes),p_stableSize(stables1,stableTypes));
+
+  v_stableInv.up(stables,hor,t,nCur)
+    $ (t_n(t,nCur) $ sum( (stableTypes,sameScen(nCur,leaves)) $ (     (p_stableSize(stables,stableTypes) le p_maxInvStableSize(stableTypes,leaves))
+                         and  (p_stableSize(stables,stableTypes) ge p_maxBoughtStableSize(stableTypes,leaves)*6/10)
+                                         $ p_stableSize(stables,stableTypes)),1 )) = 1;
+
+  v_stableInv.lo(stables,hor,t,nCur)
+   $ (t_n(t,nCur) $ sum( (stableTypes,sameScen(nCur,leaves)) $ (     (p_stableSize(stables,stableTypes) le p_maxInvStableSize(stableTypes,leaves))
+                        and  (p_stableSize(stables,stableTypes) ge p_maxBoughtStableSize(stableTypes,leaves)*6/10)
+                                        $ p_stableSize(stables,stableTypes)),1 )) = 0;
+
+  v_stableInv.up(stables,hor,t,nCur)
+    $ ( sum( (stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) gt p_maxInvStableSize(stableTypes,leaves))
+             $ p_stableSize(stables,stableTypes)),1 )  ) = 0;
+
+  v_buyStables.up(stables,hor,t,nCur)
+    $ (sum((stables1,stableTypes) $ (p_stableSize(stables,stableTypes) $ p_stableSize(stables1,stableTypes)), v_buystables.l(stables1,hor,t,nCur))
+     $ sum( (stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) lt p_maxInvStableSize(stableTypes,leaves))
+         $  (p_stableSize(stables,stableTypes) ge p_maxBoughtStableSize(stableTypes,leaves)*6/10)
+               $ p_stableSize(stables,stableTypes)),1 ) $ t_n(t,nCur) ) = 1;
+
+
+   v_stableUsed.up(stables,t,nCur)
+    $ ( sum((stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) gt p_maxInvStableSize(stableTypes,leaves))
+                 $ p_stableSize(stables,stableTypes)),1 ) $ t_n(t,nCur)) = 0;
+
+   v_buyStables.up(stables,hor,t,nCur)
+    $ ( sum((stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) gt p_maxInvStableSize(stableTypes,leaves))
+                 $ p_stableSize(stables,stableTypes)),1 ) $ t_n(t,nCur)) = 0;
+
+   v_stableInv.up(stables,hor,t_n(t,nCur))
+      $ ( sum((stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) lt p_maxBoughtStableSize(stableTypes,leaves)*5/10)
+                  $ p_maxBoughtStableSize(stableTypes,leaves)
+                  $ p_stableSize(stables,stableTypes)),1 ) ) = 0;
+
+   v_buyStables.up(stables,hor,t_n(t,nCur))
+      $ sum((stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) lt p_maxBoughtStableSize(stableTypes,leaves)*5/10)
+                  $ p_maxBoughtStableSize(stableTypes,leaves)
+                  $ p_stableSize(stables,stableTypes)),1 ) = 0;
+
+   v_buyStables.up(stables,hor,t,nCur)
+      $ ( sum((stableTypes,sameScen(nCur,leaves)) $ ((p_stableSize(stables,stableTypes) lt p_maxInvStableSize(stableTypes,leaves)*5/10)
+                  $ p_stableSize(stables,stableTypes)),1 ) $ t_n(t,nCur)) = 0;
+
+*
+*  --- do not buy stables in MIP mode if never bought under RMIP
+```
+
 
 Similar statements are available for investments into manure silos,
 buildings and machinery. These heuristics are defined in
@@ -176,20 +284,41 @@ LP iterations due to the increase in the constraints.
 
 One way to improve the branching order is to link binaries with regard to dynamics. There are currently *three ordering equations over time*. The first two prescribes respectively that if a farm has a cow herd in t+1 this implies that a cow herd in the previous year existed:
 
-![](../media/image239.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /hasHerdOrderDairy_.*?\.\./ /;/)
+```GAMS
+hasHerdOrderDairy_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..
 
-![](../media/image240.png)
+       v_HasBranch("dairy",t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasBranch("dairy",t-1,nCur1));
+```
 
-The second one implies that working off-farm in a year t implies also
-working off-farm
-afterwards:![](../media/image241.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /hasFarmOrder_.*?\.\./ /;/)
+```GAMS
+hasFarmOrder_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..
+
+       v_hasFarm(t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasFarm(t-1,nCur1));
+```
+
+The third one implies that working off-farm in a year t implies also
+working off-farm afterwards:
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /workOrder_.*?\.\./ /;/)
+```GAMS
+workOrder_(tCur(t),nCur) $ ((sum(workOpps(workType) $ (v_labOff.up(t,nCur,workType) ne 0),1) $ tCur(t-1)) $ t_n(t,nCur)) ..
+
+       v_labOffB(t,nCur) =G= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_labOffB(t-1,nCur1));
+```
 
 Another tactic followed is to define logical high level binaries which
 dominate other. These *general binaries* are partly already shown above:
 the *v\_hasFarm* and *v\_workOffB* variables. The later one is linked to
 the individual off-farm working possibilities:
 
-![](../media/image242.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /convLab_.*?\.\./ /;/)
+```GAMS
+convLab_(tCur(t),nCur) $ (sum(workOpps(workType)$ (v_labOff.up(t,nCur,workType) ne 0),1) $ t_n(t,nCur) ) ..
+
+       sum(workOpps(workType), v_labOff(t,nCur,workType)) =E= v_labOffB(t,nCur);
+```
 
 In order to support the solving process, *w\_workOff* is defined as a
 *SOS1* variable, which implies that at most one of the *workType*
@@ -197,7 +326,12 @@ options is greater than zero in any year.
 
 The *v\_hasFarm* variables dominates the *v\_hasBranch* variables:
 
-![](../media/image243.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /hasFarmOrder_.*?\.\./ /;/)
+```GAMS
+hasFarmOrder_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..
+
+       v_hasFarm(t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasFarm(t-1,nCur1));
+```
 
 That equation is additionally linked to the logic of the model as
 *v\_hasFarm* implies working hours for general farm management.
@@ -208,18 +342,57 @@ dairy herd in any year.This is based on the equation *hasAlwaysLast\_*
 together with the order equation *hasHerdOrder\_* shown below.
 
 ![](../media/image244.png)
+-> gibt es so nicht mehr
 
 The equations which support the MIP solution process by linking
 fractional variables to binary ones relate to investment decisions.
 Firstly, investments in machinery are only possible if there is matching
 machinery need:
 
-![](../media/image245.png)Secondly, two equations link the dairy
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /machBuy_.*?nCur/ /;/)
+```GAMS
+machBuy_(curMachines(machType),machLifeUnit,t,nCur)
+          $ (     (v_machInv.up(machType,machLifeUnit,t,nCur) ne 0)
+                $ (v_buyMach.up(machType,t,nCur) ne 0)
+                $ p_lifeTimeM(machType,machLifeUnit)  $ p_priceMach(machType,t)
+                $ (not sameas(machLifeUnit,"years")) $ t_n(t,nCur)  )  ..
+          v_buyMach(machType,t,nCur)
+
+              =L= (v_machNeed(machType,machLifeUnit,t,nCur) $ tCur(t)
+*
+*        --- minus operating hours of weighted average over normal planning period
+*            if beyond the normal planning period
+*
+                   + [sum( (t_n(t1,nCur1)) $ ( (p_year(t1) lt p_year(t)) $ tCur(t1) $ isNodeBefore(nCur,nCur1)),
+                                                 v_machNeed(machType,machLifeUnit,t1,nCur1)
+                                                                     * 1/(p_year(t)+5 - p_year(t1)) )
+                     /sum( (t1) $ ( (p_year(t1) lt p_year(t)) $ tCur(t1)),    1/(p_year(t)+5 - p_year(t1)) )
+                      ] $ ( (not tCur(t)) and p_prolongCalc)
+
+                   ) * 10;
+```
+
+Secondly, two equations link the dairy
 herd to investment decisions into stables and manure storage silos:
 
-![](../media/image246.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /stableBuy_.*?\.\./ /;/)
+```GAMS
+stableBuy_(stables,hor,tCur(t),nCur) $ ( (v_buyStables.up(stables,hor,t,nCur) gt 0) $ t_n(t,nCur)) ..
 
-![](../media/image247.png)
+       v_buyStables(stables,hor,t,nCur) =L= sum(stableTypes_to_branches(stableTypes,branches)
+                                              $ p_stableSize(stables,stableTypes), v_HasBranch(branches,t,nCur));
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /stableInvb_.*?nCur/ /;/)
+```GAMS
+stableInvb_(stables,hor,tCur(t),nCur)
+        $ ( (    (sum( t_n(t1,nCur1) $ (isNodeBefore(nCur,nCur1) or sameas(nCur,nCur1)),
+                             v_buyStables.up(stables,hor,t1,nCur1)) gt 0)
+              or (sum( tOld, p_iniStables(stables,hor,tOld)))) $ t_n(t,nCur) ) ..
+
+       v_stableInv(stables,hor,t,nCur)  =L= sum(stableTypes_to_branches(stableTypes,branches)
+                                              $ p_stableSize(stables,stableTypes), v_HasBranch(branches,t,nCur));
+```
 
 These supporting restrictions can be switched off from the model via the
 interface, to check if they unnecessarily restrict the solution domain
@@ -237,11 +410,32 @@ defines such priorities.
 The model is instructed to branch first on the decision to have a herd
 in any year, next on having a farm and the individual branches:
 
-![](../media/image248.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS / v_hasAlwaysHerd\.prior/ /;/)
+```GAMS
+ v_hasAlwaysHerd.prior                           = %priorOperator%  (p_priorMax*20);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS / v_hasFarm\.prior/ /;/)
+```GAMS
+ v_hasFarm.prior(t,n)        $ t_n(t,n)          = %priorOperator%  (p_priorMax*6  +  %timeWeight%);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS / v_hasBranch\.prior/ /;/)
+```GAMS
+ v_hasBranch.prior("dairy",t,n) $ t_n(t,n) = %priorOperator%  (p_priorMax*4  +  %timeWeight%);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS / v_hasBranch\.prior.*?farm/ /;/)
+```GAMS
+ v_hasBranch.prior("farm",t,n)   $ t_n(t,n)         = %priorOperator%  (p_priorMax*5  +  %timeWeight%);
+```
 
 Generally, early years are given precedence:
 
-![](../media/image249.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /\$setglobal timeWeigh/ /10/)
+```GAMS
+$setglobal timeWeight (card(t)-ord(t)+1)/card(t)  * p_priorMax * 10
+```
 
 The *p\_priorMax* is the maximal priorities assigned to stables, which
 is defined by a heuristic rule: large stables are tried before smaller
@@ -249,17 +443,54 @@ ones, cow stable before young cattle and calves stables, and finally
 long-term investment in the whole building done before maintenance
 investments:
 
-![](../media/image250.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /parameter p_priorStables/ /1;/)
+```GAMS
+parameter p_priorStables(stables);
+
+       p_priorStables(stables) $ sum(stableTypes $ p_stableSize(stables,stableTypes), stableTypes.pos)
+          = sqr(1/sum(stableTypes $ p_stableSize(stables,stableTypes), stableTypes.pos)*10)
+
+                                  * sqrt( sum(stableTypes $ p_stableSize(stables,stableTypes),
+                                                      p_stableSize(stables,stableTypes))
+                                       / smax((stables1,stableTypes) $ p_stableSize(stables,stableTypes),
+                                                 p_stableSize(stables1,stableTypes)));
+
+       p_priorMax              = smax(stables, p_priorStables(stables)) * card(hor);
+       p_priorStables(stables) = p_priorStables(stables)/p_priorMax;
+       p_priorMin              = smin(stables, p_priorStables(stables));
+       p_priorMax              = 1;
+```
 
 Off-farm work decisions currently receive a lower priority compared to
 investments into stables:
 
-![](../media/image251.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /v_buyStables\.prior/ /;/)
+```GAMS
+v_buyStables.prior(stables,hor,t,n) $ t_n(t,n)  = %priorOperator%  (p_priorStables(stables)*hor.pos + %timeWeight%);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /v_stableInv\.prior/ /;/)
+```GAMS
+v_stableInv.prior(stables,hor,t,n)  $ t_n(t,n)  = %priorOperator%  [(p_priorStables(stables)*hor.pos + %timeWeight%)*0.95];
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /v_labOffB\.prior/ /;/)
+```GAMS
+v_labOffB.prior(t,n)            $ t_n(t,n)         = %priorOperator%  (p_priorMin * 0.9 +  %timeWeight%);
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /v_labOff\.prior/ /;/)
+```GAMS
+v_labOff.prior(t,n,workType)    $ t_n(t,n)         = %priorOperator%  (p_priorMin * 0.8 +  %timeWeight%);
+```
 
 For other investment decisions, the investment sum is used for priority
-ordering:
+ordering, e.g:
 
-![](../media/image252.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_priors.gms GAMS /p_rank\(buildings/ /;/)
+```GAMS
+p_rank(buildings) = p_priceBuild(buildings,"%firstYear%") / ( p_building(buildings,"lifeTime") + 15 $ (not p_building(buildings,"lifeTime")));
+```
 
 The SOS1 variables should have all the same priorities. Therefore, no
 distinction is introduced for the *v\_workOff* and *v\_siCovComb* variables, with the exemption of the time dimension.
@@ -276,7 +507,15 @@ that all results are stored in one multi-dimensional cube. Accordingly,
 after the model is solved, its variables are copied to a result
 parameter, as shown in the following example:
 
-![](../media/image253.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/exploiter/store_res.gms GAMS / p_res.*?liquid/ /;/)
+```GAMS
+ p_res(%1,%2,"liquid","sum","",tCur)       = sum(t_n(tCur,nCur), p_probn(nCur) * v_liquid.l(tCur,nCur));
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/exploiter/store_res.gms GAMS / p_res.*?liquid.*?mean/ /;/)
+```GAMS
+ p_res(%1,%2,"liquid","sum","","mean")     = sum(t_n(tCur,nCur), p_probn(nCur) *v_liquid.l(tCur,nCur))/p_cardTCur;
+```
 
 ## Systematic sensitivity analysis based on Design of Experiments
 
@@ -295,7 +534,7 @@ number of instances to derive a meta-model in order to estimate
 abatement costs for larger population of farms, for example based on an
 appropriate regression model.. Meta modeling seems also a suitable tool
 to learn more about which farm attribute impact abatement costs and to
-which extend the occurring MACs depend on the GHG calculation procedure
+which extend the occurring Marginal Abatement Costs (MACs) depend on the GHG calculation procedure
 of the different indicators.
 
 For this four steps are required:
@@ -375,40 +614,135 @@ permutation area.
 
 The GAMS side of the technical implementation is shown in the following:
 
-![](../media/image254.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\* Use R to / /putclose;/)
+```GAMS
+* Use R to define the DOE
+*
+*------------------------------------------------------------------------------
+*
+ file rIncFile / "%curDir%/rBridge/incFile.r" /;
+ put rIncFile;
+ $$setglobal outputFileD  "%scrdir%/fromR"
+ $$setglobal inputFile    "%scrdirR%/toR.gdx"
+
+ put ' plotFile    <- "%resdirR%/scenGen/lhs_%scenDes%.pdf"; '/;
+ put ' outputFile  <- "%outputFile%"; '/;
+ put ' inputFile   <- "%inputFile%"; '/;
+ put ' useCorr     <- "%useCorr%"; '/;
+ put ' useColors   <- "true"; '/;
+ put ' maxRunTime  <- %maxRunTime%; '/;
+    putclose;
+```
 
 The maximal run time for finding a sample can be defined, *maxRunTime.*
 If correlations between variables are known and should be recognised
 within the sampling procedure, the command *useCorr* has to be set to
 *"true"*. Then the correlation matrix can be defined specifically.
 
-![](../media/image255.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\*.*?set correlation/ /;/)
+```GAMS
+*    --- set correlation matrix
+*
+*        correlation coefficients are derived from data collections from AMI for prices and
+*        from LWK-NRW (Milchviehreport NRW, verschiedene Jahrg�nge, 2007 bis 2011)as well as
+*        a data collection of the LKV-NRW in 2012 for 5000 dairy farms in NRW. Correlation between
+*        nCows and CowsPerAK stem from the Forschungsdatenzentrum des Bundes und der L�nder after
+*        analysis on the "Landwirtschaftsz�hlung 2010", results were aligned with results derived
+*        from KTBL (2010,p.541).
+
+     table p_cor1(*,*)
+
+                          WinterCerePrice SummerCerePrice MaizCornPrice WinterRapePrice SummerBeansPrice SummerPeasPrice PotatoesPrice SugarBeetPrice
+     WinterCerePrice                            0.8            0.7            0.5            0.5                0.5          0.5             0.5
+     SummerCerePrice                                           0.7            0.5            0.5                0.5          0.5             0.5
+     MaizCornPrice                                                            0.5            0.5                0.5          0.5             0.5
+     WinterRapePrice                                                                         0.5                0.5          0.5             0.5
+     SummerBeansPrice                                                                                           0.7          0.5             0.5
+     SummerPeasPrice                                                                                                         0.5             0.5
+     PotatoesPrice                                                                                                                           0.5
+     SugarBeetPrice
+
+     ;
+```
 
 The names of the set of varying factors, the factor names, the scenario
 name, the desired number of draws and, if activated, also the
 correlation matrix are send to R. Then the R file "*rbridge\\lhs.r*" is
 executed.
 
-![](../media/image256.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /set factor_name/ /display p_testDoe;/)
+```GAMS
+set factor_name(*,*) / name.factors /;
+     set scen_name(*,*) / name."%scendes%"/;
+
+     execute_unload "%inputFile%" p_n,factor_name,scen_name,factors,p_cor;
+     $$setglobal rFile "%curDir%/rbridge/lhs.r"
+
+     $$if exist "%outputFileD%_doe.gdx" execute "rm %outputFileD%_doe.gdx"
+     $$batinclude 'util/title.gms' "'execute %rexe% %rFile%'";
+     $$if exist %rexe% execute "%rexe% %rFile% %curDir%/rBridge/incFile.r";
+
+$endif.onlyCollect
+
+*
+* --- read output from LHS sampling provided by R
+*
+ parameter p_doe(*,*);
+ execute_load "%outputFile%_doe" p_doe;
+ if ( card(p_doe) eq 0, abort "Error generating doe, no data found";);
+ display p_doe;
+
+ parameter p_testDoe "Check for mean of draws";
+ p_testDoe(factors) = sum(draws, p_doe(draws,factors))/card(draws);
+ display p_testDoe;
+```
+
 
 The R-bridge is hence activated (R side). Therefore, several packages are
 installed in R from the R library to be able to do LHS sampling:
 
-![](../media/image257.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /#install/ /library\(reshape2\);/)
+```R
+#install.packages("d:\r\R-2.15.1\library\mc2d_0.1-13.zip",repos=NULL);
+#install.packages("d:\r\R-2.15.1\library\mvtnorm_0.9-9992.zip",repos=NULL);
+#install.packages("d:\r\R-2.15.1\library\lhs_0.10.zip",repos=NULL);
+#install.packages("d:\\temp\\gclus_1.3.1.zip",repos=NULL);
+# install.packages("t:\\britz\\gdxrrw_0.0-2.zip",repos=NULL);
+# install.packages("D:\\temp\\gdxrrw_1.0.2.zip", repos = NULL, type="source");
+ library(lhs);
+ library(gdxrrw);
+ igdx("N:/soft/gams24.7new/24.7");
+ library(mc2d);
+ library(mvtnorm);
+ library(Matrix);
+ library(gclus);
+ library(reshape2);
+```
 
 *p\_n* denotes the number of draws defined via the GUI, which is equivalent to the number of scenarios resulting from
 the sampling routine. *Sys.getenv(....)* asks for commands or
 information given by the environment (for example if correlations have
 to be recognised or not).
 
-![](../media/image258.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /#useCorr/ /\)\)/)
+```R
+#useCorr    <- Sys.getenv("useCorr")
+#useColors  <- Sys.getenv("useColors")
+#inputFile  <- Sys.getenv("inputFile");
+#plotFile   <- Sys.getenv("plotFile")
+#outputFile <- Sys.getenv("outputFile");
+#maxRunTime <- as.numeric(Sys.getenv("maxRunTime"))
+```
 
 We decided to use the "*improvedLHS"* type for randomisation [^15] which
 produces a sample matrix of *n* rows and *k* columns (n = number of
 draws, k = number of factors). This leads to a quite efficient sample
 generation in R:
 
-![](../media/image259.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /out1.*?imp/ /\);/)
+```R
+out1 <- improvedLHS(n,k);
+```
 
 Usually, input variables for sensitivity analysis in computer models are
 assumed to be independent from each other (Iman et al., 1981a;b). Also
@@ -431,7 +765,15 @@ which shuffles observations for single factors between the draws to
 mimic given *k\*k* correlation matrix (therefore the R package *MC2d*
 including the routine *cornode* is necessary).
 
-![](../media/image260.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /#.*?load c/ /t\);/)
+```R
+#   --- load correlation matrix from GAMS
+#
+    t <- rgdx.param(inputFile,"p_cor",names=c("f1","f2"),compress="true");
+    t
+    t<-acast(t, f1~f2, value.var="value")
+    t<-as.matrix(t);
+```
 
 To increase the possibility to randomise a sample which offers a
 correlation matrix of factors near the proposed one, the routine allows
@@ -446,13 +788,67 @@ will be stopped by a threshold value (*if meanDev \< 1*) for the
 deviation between the assumed and the randomised sample correlation
 matrix.
 
-![](../media/image261.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /bestFit <\- 1/ /\s}\s\s/)
+```R
+bestFit <- 10;
+    iDraw <- 0;
+
+
+    while( runTime < maxRunTime ){
+
+       iDraw <- iDraw + 1;
+
+       if ( LHSType == "optimumLHS" ) {
+          out1 <- optimumLHS(n,k,2,0.01);
+
+          print("shit");
+
+       } else {
+          out1 <- improvedLHS(n,k);
+       }
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /# .*?use c/ /\s}\s\s/)
+```R
+# --- use cornode to apply Iman & conover 1982 to impose correlation
+#     t on the LHS matrix out
+#
+       out1  <- cornode(out1,target=t)
+       c <- cor(out1);
+
+       fit = 0;
+       for ( i in 1:k )
+            for ( j in 1:k )
+                if ( fit < bestFit )
+
+       if ( fit < bestFit )
+       {
+          out     <-out1;
+          bestFit <-fit;
+
+          meanDev = sqrt(fit/k)*100;
+       };
+
+       if ( iDraw %% reportDraws == 0){
+          curTime <- as.numeric(Sys.time(),units="seconds");
+          runTime <- curTime - begTime;
+          print(paste(" draw :",iDraw," runTime ",round(runTime)," of ",maxRunTime,"seconds, mean sqrt of squared diff between given corr and best draw: ",round(meanDev,2),"%"));
+       }
+```
 
 For the case that the correlations between factors are given by the
 user, leading to an undefined correlation matrix, the program adjusts
 the correlation matrix to the nearest one possible:
 
-![](../media/image262.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/rbridge/lhs.r R /#.*?find/ /mat\);/)
+```R
+#   --- find nearest positive definite matrix
+#
+
+    t1<-nearPD(t);
+
+    t <- as.matrix(t1$mat);
+```
 
 As mentioned above the LHS sampling defines random value combinations
 between all factors in each single draw. Therefore, uniform distributed
@@ -554,7 +950,28 @@ value *(%factorMin%)* has to be added to the product to yield the factor
 level *x* for the specific factor and scenario. This is illustrated for
 some parameters in the following.
 
-![](../media/image265.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\*.*?result r/ /true/)
+```GAMS
+* --- result related declaration
+*
+  PARAMETER p_res(*,*,*,*,*,*)
+           p_meta;
+  set resItems / mac,mean,cows,levl,margArab,margGras,margLand,herdRand,cropRand,ProfitDiff,manExportVol,profit/;
+
+
+  parameter p_scenParam(draws,allFactors) "Numerical values for the scenario specific items";
+
+*
+* --- standard setting for aks
+*
+  p_scenParam(draws,"Aks") = %aks%;
+*
+* --- general mapping from DOE to factor ranges as defined on interface
+*
+  p_scenParam(draws,factors)   = p_doe(draws,factors) * (p_ranges(factors,"max")-p_ranges(factors,"min"))+p_ranges(factors,"min");
+
+$iftheni.obDist %useObsDistr% == true
+```
 
 *p\_scenParam(draws,factor)* gives the scenario parameter one factor
 defined by the random values given by the LHS sampling routine. The
@@ -564,7 +981,15 @@ draw defines one single sensitivity scenario.
 The set *scenItems* defines which settings are (possibly) defined
 specificly for each scenario:
 
-![](../media/image266.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /file sc/ /;/)
+```GAMS
+file scenFile / "incgen/curScen.gms" /;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /alias\(s/ /;/)
+```GAMS
+alias(scenItems,allFactors);
+```
 
 Nevertheless, correlations between factors are able to be recognised
 during the sample generation to avoid factor level combinations within
@@ -575,22 +1000,38 @@ low milk yield levels or high numbers of cows per farm and only very low
 yielding phenotypes.
 
 ![](../media/image267.png)
+-> wird nicht mehr genutzt so [RW]
 
 These scenario settings must be stored in a GAMS file which is then
 picked up by the child processes. In order to keep the system
 extendable, firstly, all settings inputted via the GUI are copied over to the specific scenario:
 
-![](../media/image268.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scengen/gen_inc_file.gms GAMS /\*.*?copy c/ /gms"/)
+```GAMS
+*  --- copy content of current scen file into new one
+*      via OS command
+*
+   execute "cp %curDir%/incgen/expinc.gms %curDir%/incgen/curScen.gms"
+```
 
 Secondly, the modifications defining the specific sensitivity
 experiment, i.e. the scenario, are appended with GAMS file output
 commands (see *scenGen\\gen\_inc\_file.gms*):
 
-![](../media/image269.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scengen/gen_inc_file.gms GAMS /\*.*?put s/ /scenFile;/)
+```GAMS
+*  --- put statements will append to the new scen file
+*      and overwrite standard setting
+*
+   put scenFile;
+```
 
 Finally, the content is copied to a specific scenario input file:
 
-![](../media/image270.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scengen/gen_inc_file.gms GAMS /put_utility/ /;/)
+```GAMS
+put_utility batch 'shell' / "cp %curDir%/incgen/curScen.gms %curDir%/incgen/"scen.tl".gms";
+```
 
 The code to build and optimise the single farm model is realised
 in GAMS and uses CPLEX 12.6 in parallel mode as the MIP solver.
@@ -603,7 +1044,17 @@ multi-core machine it seems promising to execute several such processes
 in parallel. That is realised by a GAMS program which starts each model
 on its own set of input parameters:
 
-![](../media/image271.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\*.*?execute/ /;/)
+```GAMS
+*     --- execute exp_starter as a seperate program, no wait, program will delete a flag at the end to signal that it is ready
+*
+
+      put_utility  batch  'msglog'  / '%GAMSPATH%/gams.exe %CURDIR%/exp_starter.gms --scen='allScen.tl
+                           ' --iScen='iLoop:0:0' -maxProcDir=255 -output='allScen.tl'.lst'
+                          ' --seed=',uniform(0,1000):0:0,
+                          ' -maxProcDir=255 -output='allScen.tl:0'.lst %gamsarg% lo=3'
+                          ' --pgmName="'allScen.tl' (',iLoop:0:0,' of ',card(allScen):0:0,')"';
+```
 
 The name of the scenario, *allScen.tl* is passed as an argument to the
 process which will lead a specific include file comprises the definition
@@ -615,15 +1066,31 @@ mother process has to wait until all child processes have terminated.
 That is achieved by generating a child process specific flag file before
 starting the child process:
 
-![](../media/image272.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /put_utility batch 's/ /\.lst"';/)
+```GAMS
+put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f "../results/expFarms/res_',scen.tl,'_until_' p_scenParam(scen,"lastYear"):0:0,'.gdx"';
+      put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f "%curdir%/incgen/'scen.tl'.gms"';
+      put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f "%curdir%/'scen.tl'.lst"';
+```
 
 This flag file will be deleted by the child process when it finalises:
 
 ![](../media/image273.png)
+-> finde ich so nicht [RW]
 
 A simple DOS script waits until all flags are deleted:
 
-![](../media/image274.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/util/TaskSync.bat GAMS /set \/a/ /\s\)/)
+```GAMS
+set /a _trys=0
+:again
+IF %_Mode% EXIST %_FlagFiles% (
+  set /a _trys+=1
+  if %_trys%.==%_MaxTrys%. goto errorexit
+  sleep.exe %_seconds%
+  goto again
+)
+```
 
 Using that set-up would spawn for each scenario a GAMS process which
 would then execute all in parallel. The mother process would wait until
@@ -637,35 +1104,94 @@ that only a pre-defined number of child processes is active in parallel.
 That is established by a second simple DOS script which waits until the
 number of flag files drops below a predefined threshold:
 
-![](../media/image275.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/util/TaskSyncNFiles.bat GAMS /set \/a _trys=0/ /\s\)/)
+```GAMS
+set /a _trys=0
+:again
+
+set _count=1
+
+for %%x in (%_FlagFiles%) do set /a _count+=1
+
+REM @echo %_count% %_nFiles% >> d:\temp\test.txt
+
+if %_count% gtr %_nFiles% (
+
+  set /a _trys+=1
+
+  if %_trys%.==%_MaxTrys%. goto errorexit
+
+REM @echo %_trys% %_maxTrys% %_seconds% >> d:\temp\test.txt
+
+
+  sleep.exe %_seconds%
+
+  goto again
+
+)
+```
 
 Finally, the results from individual runs are collected and stored. A
 GAMS facility is used to define the name of a GDX file to read at run
 time:
 
-![](../media/image276.png)
-
-And load from there the results of interest:
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /put_utilities/ /;/)
+```GAMS
+put_utilities batch 'gdxin' / ' ../results/expFarms/res_',scen.tl,'_until_' p_scenParam(scen,"lastYear"):0:0,'.gdx';
+```
 
 We now transformed all MAC estimates which are 0 due to an exit decision
-of a farm to be able to select these cases for our meta-modelling
+of a farm to be able to select these cases for our meta-modeling
 estimation (Heckman two-stage selection, described in the next technical
 documentation: "R routine to estimate Heckman two stage regression
 procedure on marginal abatement costs of dairy farms, based on large
 scale outputs of the model DAIRYDYN" by Britz and Lengers (2012)).
 
-![](../media/image277.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\*.*?load t/ /\s\);/)
+```GAMS
+*        --- load the result
+*
+              execute_load p_res;
+              p_dummy = sleep(.01);
+*
+*        --- filter out results of interest (so far only macs, avAcs and totACs)
+*
+         $$ifi "%scentype%"=="MAC"     $include 'scengen/scen_load_res_mac.gms'
 
-![](../media/image278.png)
+         $$ifi "%scentype%"=="PROFITS" $include 'scengen/scen_load_res_profits.gms'
+         $$ifi "%scentype%"=="Fertilizer directive" $include 'scengen/scen_load_res_profits.gms'
+
+       );
+```
+
 
 Further on, the scenario specific settings which can be used as
-explanatory variables for later regressions are stored:
+explanatory variables for later regressions are stored, see for example:
 
-![](../media/image279.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scengen/scen_load_res_mac.gms GAMS /\*.*?add/ /mean"\);/)
+```GAMS
+*     --- add scen variables to store explanatory vars
+*
+      p_meta(actInds,redLevl,scenItems,actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,"mac",actInds1,"mean")) = p_scenParam(scen,scenItems);
+
+      p_meta(actInds,redLevl,actInds,actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,"mac",actInds1,"mean")) = 1;
+
+      p_meta(actInds,redLevl,"redLevl",actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,"mac",actInds1,"mean")) =
+                                                                         p_res(actInds,redLevl,"redlevl",actInds1,"mean");
+```
+
 
 In a next step, the results are stored in a GDX container
 
-![](../media/image280.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/scen_gen.gms GAMS /\*.*?Store/ /;/)
+```GAMS
+*   --- Store to disk
+*
+    execute_unload '../results/scenGen/meta_%scenDes%.gdx' s_meta,p_meta=p_res;
+```
 
 The major challenge consists in ensuring that the child processes do not
 execute write operation on shared files. In the given example, that
@@ -676,7 +1202,23 @@ option files into it and use the *optdir* setting in GAMS, or (2) label
 the option files accordingly. That latter option was chosen which
 restricts the number of scenarios to 450:
 
-![](../media/image281.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/def_run.gms GAMS /\*.*?opt3/ /\$else\.iScen/)
+```GAMS
+* --- opt3 file will by replaced by ###
+*     that allows for 300 parallel threads
+*
+$iftheni.iScen not "%iScen%"==""
+
+$evalGlobal op3 round(%iScen%+100)
+$evalGlobal op4 round(%iScen%+400)
+$evalGlobal op5 round(%iScen%+700)
+
+
+$setglobal scenWithoutIncgen  %scen%
+$set       scen  incgen/%scen%
+
+$else.iScen
+```
 
 In the case of normal single farm run, the standard option files will be
 used.

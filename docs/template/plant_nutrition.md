@@ -2,7 +2,7 @@
 # Plant Nutrition
 
 !!! abstract
-    The equations related to plant nutrition make sure that the nutrient need of crops is met. Nutrient need can be derived from N response functions or from planning data for fixed yield levels. Furthermore, FarmDyn is loosely connected to the crop modelling framework SIMPLACE which provides data on cropping activities. Needed nutrients are provided by manure and synthetic fertiliser.
+    The equations related to plant nutrition make sure that the nutrient need of crops is met. Nutrient need can be derived from N response functions or from planning data for fixed yield levels. Furthermore, FarmDyn is loosely connected to the crop modeling framework SIMPLACE which provides data on cropping activities. Needed nutrients are provided by manure and synthetic fertiliser.
 
 The template supports two differently detailed ways to account for plant
 nutrition need.
@@ -13,7 +13,7 @@ nutrition need.
 
     b.  Using planning data
 
-2.  Using data output of the crop modelling framework SIMPLACE
+2.  Using data output of the crop modeling framework SIMPLACE
 
 *p\_nutNeed* is the nutrient need for different crops tat enters the
 equation for fixed factor approach and the flow model. For the fixed
@@ -93,7 +93,7 @@ NutBalCrop_(c_s_t_i(curCrops(crops),plot,till,intens),nut,tCur(t),nCur)
 
 
                     + sum( (nut2_nut(nut2,nut),manApplicType_manType(ManApplicType,curManType),m)
-                             $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+                             $(not sameas(plot,"plot7") $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0 )),
                            v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
                               * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan(nut2,curManType,manChain))
                                    * p_nut2UsableShare(crops,curManType,ManApplicType,nut2,m))
@@ -103,7 +103,7 @@ NutBalCrop_(c_s_t_i(curCrops(crops),plot,till,intens),nut,tCur(t),nCur)
 
 *               -- mineral N application
 
-                + sum ((syntFertilizer,m),
+                + sum ((syntFertilizer,m)$(not sameas(plot,"plot7")),
                       v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)
                                                        * p_nutInSynt(syntFertilizer,nut) )
  ;
@@ -276,7 +276,7 @@ given by the directive.
 
 [embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutNeed\("winter/ /;/)
 ```GAMS
-p_nutNeed("winterWheat",soil,till,intens,"N",t)   $ sum(soil_plot(soil,plot), c_s_t_i("winterWheat",plot,till,intens))  =   230 - p_basNut("winterWheat",soil,till,"N",t)   ;
+p_nutNeed("winterWheat",soil,till,intens,"N",t)   $ sum(soil_plot(soil,plot), c_s_t_i("winterWheat",plot,till,intens))  =   230 - p_basNut("winterWheat",soil,till,"N",t)  ;
 ```
 
 In the case of P, it is assumed that the nutrient need corresponds to
@@ -300,9 +300,9 @@ needs to be applied, i.e. p_nutNeed is lowered.
 ```
 
 
-## Using data output of the crop modelling framework SIMPLACE
+## Using data output of the crop modeling framework SIMPLACE
 
-FarmDyn is loosely connected to the crop modelling framework [SIMPLACE](http://www.simplace.net/Joomla/index.php). This crop model provides cropping activities consisting of different managements and corresponding yields and externalities. They are provided as a gdx file
+FarmDyn is loosely connected to the crop modeling framework [SIMPLACE](http://www.simplace.net/Joomla/index.php). This crop model provides cropping activities consisting of different managements and corresponding yields and externalities. They are provided as a gdx file
 and loaded into FarmDyn.
 The parameter *p\_simres* contains all information from the crop model for
 different crops, crop rotations (represented in the set *till*) and intensities. Intensities represent a whole
@@ -340,7 +340,8 @@ The synthetic fertiliser need linked to cropping activities in the SIMPLACE data
 NMineralSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t),nCur)
                      $ ((v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0) $ t_n(t,nCur)   $   (not sameas (curCrops,"catchcrop") ) $ (not sameas (curCrops,"idle") )    ) ..
 
-         sum ( (syntFertilizer,m) , v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)  * p_nutInSynt(syntFertilizer,"N") * (1 - p_EFApplMinNH3(syntFertilizer)) )
+           sum ( (syntFertilizer,m) , v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)  * p_nutInSynt(syntFertilizer,"N")
+                           * (1 - p_EFApplMinNH3(syntFertilizer) -  p_EFApplMin("N2O") - p_EFApplMin("NOx") ) )
 
            =e=
 
@@ -361,7 +362,7 @@ NOrgSpringSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                   sum( (manApplicType_manType(ManApplicType,curManType),m_spring(m) )
                    $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m_spring) ne 0),
                        v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m_spring )
-                          * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NOrg",curManType,manChain))   )
+                          * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NOrg",curManType,manChain)) * (1 - ( p_EFApplMin("N2O") + p_EFApplMin("NOx")))  )
 
 *               -- NTAN applied minus losses with application
 
@@ -369,7 +370,7 @@ NOrgSpringSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                     $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m_spring) ne 0),
                        v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m_spring)
                            * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NTan",curManType,manChain))
-                               * p_nut2UsableShare(crops,curManType,ManApplicType,"NTAN",m)
+                               * (p_nut2UsableShare(crops,curManType,ManApplicType,"NTAN",m) - ( p_EFApplMin("N2O") + p_EFApplMin("NOx")) )
                                    )
                    =e=
 
@@ -393,7 +394,7 @@ NOrgAutumnSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                   sum( ( manApplicType_manType(ManApplicType,curManType),m_autumn(m) )
                    $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m_autumn) ne 0),
                        v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m_autumn )
-                          * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NOrg",curManType,manChain))   )
+                          * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NOrg",curManType,manChain)) * (1 - ( p_EFApplMin("N2O") + p_EFApplMin("NOx")))   )
 
 *               -- NTAN applied minus losses with application
 
@@ -401,7 +402,7 @@ NOrgAutumnSim_(c_s_t_i(curCrops(crops),plot,curRotTill(till),intens),"N",tCur(t)
                     $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m_autumn) ne 0),
                        v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m_autumn)
                            * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan("NTan",curManType,manChain))
-                               * p_nut2UsableShare(crops,curManType,ManApplicType,"NTAN",m)
+                               * ( p_nut2UsableShare(crops,curManType,ManApplicType,"NTAN",m)  - ( p_EFApplMin("N2O") + p_EFApplMin("NOx"))  )
                                      )
 
                   =e=
@@ -416,8 +417,8 @@ the following equation ensures that P<sub>2</sub>O<sub>5</sub> removal with the 
 ```GAMS
 PFertilizingSim_("P",tCur(t),nCur)  $ t_n(t,nCur)  ..
 
-                sum( (prods,c_s_t_i(curcrops(crops),plot,till,intens))   $ (    not sameas (prods,"WCresidues") $ ( not sameas (prods,"WBresidues")) $ (not sameas (prods,"SCresidues"))
-                                                                             $ (not sameas (curCrops,"catchcrop") )  $ (not sameas (curCrops,"idle") )  )
+                sum( (prods,c_s_t_i(curcrops(crops),plot,till,intens))   $ (  ( not sameas (prods,"WCresidues")) $ ( not sameas (prods,"WBresidues")) $ (not sameas (prods,"SCresidues"))
+                                                                             $ (not sameas (curCrops,"catchcrop") )  $ (not sameas (curCrops,"idle") )   )
                             ,  p_SimRes(till,crops,intens,"yield")  * p_nutContent(crops,prods,"P") * 10/1000
                                                                             * v_cropHa(crops,plot,till,intens,t,nCur)   )
 

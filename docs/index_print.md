@@ -1,6 +1,6 @@
 # FarmDyn - A highly detailed template model for dynamic optimisation of farms
 
-![](/media/image1.png)
+![](media/image1.png)
 
 Universität Bonn<br/>
 Institute for Food and Resource Economics<br/>

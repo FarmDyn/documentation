@@ -45,9 +45,9 @@ days of lactation.
     Table 1.
 
 
-       |                |  LC30   | LC100  |  LC200  | LC3005  | Dry |
-       |----------------|---------|--------|---------|---------|-----|
-       |Daily fraction  | 0.00356 |0.0043  | 0.00333 | 0.00233 |  0  |
+    |                |  LC30   | LC100  |  LC200  | LC3005  | Dry |
+    |----------------|---------|--------|---------|---------|-----|
+    |Daily fraction  | 0.00356 |0.0043  | 0.00333 | 0.00233 |  0  |
 
     :   Daily fraction of whole lactation milk
         yield in different lactation phases
@@ -111,7 +111,9 @@ reqs_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur,nCur))
 *
 *      --- must be covered by feeding times the content of the feed stuff
 *
-          =L= sum(feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs));
+          =L= sum( feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))$(sameas(feedregime,"noGraz"))
+             +sum( feeds $(not sum( sameas(feeds,roughage),1)),v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))$(not sameas(feedregime,"noGraz"))
+             ;
 ```
 
 Alternatively, requirements can be linked to the start point of an
@@ -137,7 +139,8 @@ reqsPhase_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur,nCur))
 *
 *      --- must be covered by feeding times the content of the feed stuff
 *
-          =L= sum( feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))
+          =L= sum( feeds,v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))$(sameas(feedregime,"noGraz"))
+             +sum( feeds $(not sum(sameas(feeds,roughage),1)),v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,tCur,nCur) * p_feedContFMton(feeds,reqs))$(not sameas(feedregime,"noGraz"))
           ;
 ```
 

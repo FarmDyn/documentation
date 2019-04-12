@@ -3,12 +3,7 @@
 
 ## Concept and File Structure
 
-The coefficient generator comprises a number of small modules, realised
-in GAMS, which define the various exogenous parameters comprised in the
-template. It is designed such that it can generate from a few central
-characteristics of the farm (herd size, current milk yield, existing
-stables and their construction year, labour force and available land)
-and the realised crop yields a plausible set of coefficients for the
+The coefficient generator comprises a number of small modules, realised in GAMS, which define the various exogenous parameters comprised in the template. It is designed such that it can generate from a few central characteristics of the farm (herd size, current milk yield, existing stables and their construction year, labour force and available land) and the realised crop yields a plausible set of coefficients for the
 template model. The coefficient generator can also be set-up to load
 parameters for a specific region.
 
@@ -74,7 +69,7 @@ The coefficient generator is divided in:
     storage and application types are derived by this module.
 
 -   **Pigs:** defines output coefficients, production lengths and other
-    variable costs for fattners and sows.
+    variable costs for fatteners and sows.
 
 -   **Prices**: different default values are defined if prices for
     variables are not defined by the GUI.
@@ -134,20 +129,40 @@ soil shares determine potentially the size of the plots the information
 is used in many subsequent programs. The inclusion of the regional data
 is conditional on the interface settings:
 
-![](../media/image227.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/farm_ini.gms GAMS /curClima.*?\(/ /Climate_soil\.gms'/)
+```GAMS
+curClimateZone("%curClimateZone%") = YES;
+*
+*  --- scale soil shares edited by user to add up to unity
+*
+   p_soilShare(soil,"Share") = p_soilShare(soil,"Share") * 1 / sum(soil1, p_soilShare(soil1,"Share"));
 
-The file with the regional data, *regionalData\\Climate\_soil.gms*,
-comprises a cross-set between the regions and the climate zone. The
-current climate zone is only overwritten if an element in the cross-set
-for that region is found:
 
-![](../media/image228.png)
+*
+*  --- Regional climate and soil data (overwrites the data given in the GUI for climate zone and soil)
+*
+$ifi "%useRegionalDataSoilAndClimate%"=="ON" $include 'regionalData/Climate_soil.gms'
+```
 
-Similarly, soil shares entered via the interface or a batch file are
-only overwritten if at least one of the soil types data are
-entered:
+Soil shares are entered via the interface or a batch file is overwritten if at least one of the soil types data are entered:
 
-![](../media/image229.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/regionalData/Climate_soil.gms GAMS /p_soilShare\("l/ /;/)
+```GAMS
+p_soilShare("l","Share") = 0.2 ;
+```
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/regionalData/Climate_soil.gms GAMS /p_soilShare\("m/ /;/)
+```GAMS
+p_soilShare("m","Share" ) = 0.5 ;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/regionalData/Climate_soil.gms GAMS /p_soilShare\("h/ /;/)
+```GAMS
+p_soilShare("h","Share") = 0.3 ;
+```
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/regionalData/Climate_soil.gms GAMS /p_soilShare\(soil/ /;/)
+```GAMS
+p_soilShare(soil,"Share") = p_soilShare(soil,"Share") * 1 / sum(soil1, p_soilShare(soil1,"Share"));
+```
 
 ### Yield Data
 
@@ -187,4 +202,7 @@ one shown above:
 
 The updated prices are used in a next step in *coeffgen\\prices.gms*:
 
-![](../media/image235.png)
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/prices.gms GAMS /\$ifi.*?Regional/ /\.gms'/)
+```GAMS
+$ifi "%useRegionalDataPrices%"=="ON" $include 'regionalData/prices.gms'
+```

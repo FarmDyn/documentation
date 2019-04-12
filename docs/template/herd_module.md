@@ -305,36 +305,132 @@ sumHerds_(sumHerds,breeds,feedRegime,t,nCur,m) $ (t_n(t,nCur)
 ## Sexing
 
 On interface: define if it used to generate males and/or females and define costs
-Bild ("sexing")
+![](../media/sexing.png)
 
 In the “model\templ.gms”, male and female sexing are treated as inputs with their prices:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /buy_\(curi/ /\.\./)
+```GAMS
+buy_(curinputs(inputs),tCur(t),nCur) $ (t_n(t,nCur)) ..
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/templ.gms GAMS /\*.*?sexing/ /"male.*?"\)/)
+```GAMS
+*             --- costs of sexing
+*
+              + sum((breeds,m),v_sexingF(breeds,t,nCur,m)) $ sameas(inputs,"femaleSexing")
+              + sum((breeds,m),v_sexingM(breeds,t,nCur,m)) $ sameas(inputs,"maleSexing")
+```
 
 The prices are taken from the interface and introduced in “coeffgen\prices.gms”:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/prices.gms GAMS /p_in.*?\("maleS/ /;/)
+```GAMS
+p_inputPrices("maleSexing","price")   = %costMaleSexing%;
+```
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/prices.gms GAMS /p_in.*?\("femaleS/ /;/)
+```GAMS
+p_inputPrices("femaleSexing","price") = %costfemaleSexing%;
+```
 
 If the user has sexing switched off, the variable is fixed to zero in “model\define_starting_bounds”:
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/define_starting_bounds.gms GAMS /\*.*?switch/ /ingM.*?;/)
+```GAMS
+*   --- switch off sexing if not activated by user
+
+    $$ifi not "%useFemaleSexing%"=="true" v_sexingF.fx(breeds,t_n(t,nCur),m) = 0;
+    $$ifi not "%useMaleSexing%"=="true"   v_sexingM.fx(breeds,t_n(t,nCur),m) = 0;
+```
 
 Sexing changes the male-female balance equation (see model\cattle_module.gms):
-Einfügen
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /maleFemaleRel_.*?nCur/ /;/)
+```GAMS
+maleFemaleRel_(breeds,t,nCur,m) $( sum( (feedRegime,calvs), actHerds(calvs,breeds,feedRegime,t,m))
+                        $ (p_Year(t) le p_year("%lastYear%")) $ t_n(t,nCur)) ..
+
+
+                 [
+                   v_herdStart("fCalvsRais",breeds,t,nCur,m) $ sum(feedRegime,actHerds("fCalvsRais",breeds,feedRegime,t,m))
+                 + v_herdStart("fCalvsSold",breeds,t,nCur,m) $ sum(feedRegime,actHerds("fCalvsSold",breeds,feedRegime,t,m))
+                 ] /0.495
+
+                 + v_sexingF(breeds,t,nCur,m)*0.5
+                 - v_sexingM(breeds,t,nCur,m)*0.5
+
+             =E=
+                 - v_sexingF(breeds,t,nCur,m)*0.5
+                 + v_sexingM(breeds,t,nCur,m)*0.5
+
+             +[
+                   v_herdStart("mCalvsRais",breeds,t,nCur,m) $ sum(feedRegime,actHerds("mCalvsRais",breeds,feedRegime,t,m))
+                 + v_herdStart("mCalvsSold",breeds,t,nCur,m) $ sum(feedRegime,actHerds("mCalvsSold",breeds,feedRegime,t,m))
+              ] / 0.505;
+```
 
 If sexing is switched off, the number of female siblings (LHS) must be (approximately) equal to the males ones (RHS). Sexing an insemination to male will take 0.5 female out and increase the number of males of 0.5. Female sexing leads to the opposite effect.
 
 ##Cross-Breeding
 Cross breeding can be switched on the interface on the “bulls” tab:
-Bild ("crossbreeding")
+![](../media/crossbreeding_bulls.png)
 
 As consequence, a second table is offered where data for the cross-breed can be entered.
 
-The cross-breeds enter the calves balance (model\cattle_module.gms) The left hand side adds up all male and female calves, if cross-breeding is switched on, adding the cross-breeds.
-Einfügen
+The cross-breeds enter the calves balance (*model\cattle_module.gms*) The left hand side adds up all male and female calves, if cross-breeding is switched on, adding the cross-breeds.
 
-The activation also affect “coeffgen\ini-herds”:
-Einfügen
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/model/cattle_module.gms GAMS /newCalves_.*?nCur/ /;/)
+```GAMS
+newCalves_("%basBreed%",t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,"%basBreed%",feedRegime,t,m))
+                        $ (p_Year(t) le p_year("%lastYear%")) $ t_n(t,nCur)) ..
+*
+*      --- new born calves (for females by genetic potential for milk yield) are born
+*          from the current herd of cows
+*
+                  v_herdStart("fCalvsRais","%basBreed%",t,nCur,m)  $ sum(feedRegime,actHerds("fCalvsRais","%basBreed%",feedRegime,t,m))
+                + v_herdStart("fCalvsSold","%basBreed%",t,nCur,m)  $ sum(feedRegime,actHerds("fCalvsSold","%basBreed%",feedRegime,t,m))
+                + v_herdStart("mCalvsSold","%basBreed%",t,nCur,m)  $ sum(feedRegime,actHerds("mCalvsSold","%basBreed%",feedRegime,t,m))
+                + v_herdStart("mCalvsRais","%basBreed%",t,nCur,m)  $ sum(feedRegime,actHerds("mCalvsRais","%basBreed%",feedRegime,t,m))
+              $$iftheni.crossBreed "%crossBreeding%"=="true"
+               + v_herdStart("fCalvsRais","%crossBreed%",t,nCur,m) $ sum(feedRegime,actHerds("fCalvsRais","%crossBreed%",feedRegime,t,m))
+               + v_herdStart("fCalvsSold","%crossBreed%",t,nCur,m) $ sum(feedRegime,actHerds("fCalvsSold","%crossBreed%",feedRegime,t,m))
+               + v_herdStart("mCalvsSold","%crossBreed%",t,nCur,m) $ sum(feedRegime,actHerds("mCalvsSold","%crossBreed%",feedRegime,t,m))
+               + v_herdStart("mCalvsRais","%crossBreed%",t,nCur,m) $ sum(feedRegime,actHerds("mCalvsRais","%crossBreed%",feedRegime,t,m))
+             $$endif.crossBreed
 
-By setting the actHerds indicator set active for the cross-breeds. Accordingly, the sets for bulls work on a set which can include the cross-breed:
-Einfügen
+
+          =e= sum( (cows,t1,nCur1,m1,mDist) $ (sum(feedRegime,actHerds(cows,"%basBreed%",feedRegime,t1,m1))
+                  $ (      (mDist.pos  eq -p_mDist(t,m,t1,m1))
+                         or (mDist.pos eq -p_mDist(t,m,t1,m1)+12) $ p_compStatHerd)
+                       $ t_n(t1,nCur1)),
+                          v_herdStart(cows,"%basBreed%",t1,nCur1,m1) * p_calvCoeff(cows,"%basBreed%",mDist));
+```
+
+The activation also affect *coeffgen\ini-herds.gms*:
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /\$\$iftheni\.crossB/ /\$\$endif\.crossBreed/)
+```GAMS
+$$iftheni.crossBreed "%crossBreeding%"=="true"
+
+           actHerds("fCalvsRais","%crossBreed%",feedRegimeCattle,t,m)     = yes;
+           actHerds("fCalvsSold","%crossBreed%","",t,m)                   = yes;
+           actHerds("mCalvsRais","%crossBreed%",feedRegimeCattle,t,m)     = yes;
+           actHerds("mCalvsSold","%crossBreed%","",t,m)                   = yes;
+           herds_from_herds("mCalvsRaisSold","mCalvsRais","%crossBreed%") = yes;
+*           herds_from_herds(bulls,"mCalvsRais","%crossBreed%") = yes;
+*           herds_from_herds(heifsCross,"fCalvsRais","%crossBreed%")            = yes;
+
+       $$endif.crossBreed
+```
+
+By setting the *actHerds* indicator set active for the cross-breeds. Accordingly, the sets for bulls work on a set which can include the cross-breed:
+
+[embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/ini_herds.gms GAMS /set.*?bullBreeds/ /yes;/)
+```GAMS
+set bullBreeds(Breeds) / "%basBreed%" /;
+  $$ifi "%crossBreeding%"=="true" bullBreeds("%crossBreed%") = yes;
+```
 
 
 

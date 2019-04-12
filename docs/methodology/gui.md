@@ -1,6 +1,6 @@
 # The Graphical User Interface (GUI)
 
-![](../media/installation-25c60479.png)
+![](../media/GUI.png)
 
 The Graphical User Interface (GUI) is based on GGIG (GAMS Graphical
 Interface Generator, Britz 2014). It serves two main purposes: to steer
@@ -36,149 +36,96 @@ In „Single farm runs" mode, all run specific settings (input and output
 prices, farm assets etc.) are set by the user in the interface. This is
 discussed in the following.
 
-In the experiment mode the user instead define ranges for selected
+In the experiment mode the user instead defines ranges for selected
 settings which are varied based on stratified random sampling using
 Design of Experiments for a defined number of experiment. For each
 experiment, a single farm run is solved. These single farm runs are
 typically solved in parallel. After they are finalized, their results
 are combined into one result set.
 
-![](../media/image282.png)
+| Workstep and tasks: Single farm runs | Workstep and tasks: Experiments|
+|-----------------------------------------------------------------|------------------------------------------------------------------------------|
+| ![](../media/singlefarmrun.png) | ![](../media/experiments.png) |
 
-![](../media/image283.png)
 
 ### General Settings
 
-![](../media/image284.png)
+![](../media/generalsetting.png)
 
-The first tab in *General settings* defines the name of the scenario
-under which the results are stored. Further on, the user chooses general
-farm characteristics and options for the run: (1) the active farm
-branches, (2) if different states of nature (with regard to prices) are
-used, (3) if land can be leased or bought. Furthermore, the threshold to
-consider machinery investments as binary variables can be set.
+The General settings are sub divided into three components:
+i) Branches and data, where the user might name the scenario under which the results are stored, define the active farm branches, decide on the use of regional data and the timely resolution of the herd;
+ii) Simulation control, where the uses decides on the models stochastics, if off-farm work for the farm-employed family members is optional and if land is marketable; and time and
+iii) Time and investment, where the models dynamics, the simulation period, the construction year of the stables and age of machinery are chosen.
 
-The options under *Time* determine the last simulation year, if
-information from this simulation period is used to estimate economic
-returns until stables are depreciated and the time resolution for
-investment / farm labour and feeding decisions.
+The model allows choosing between the following four mode to describe dynamics (or not):
 
-The model allows to choose between the following four mode to describe
-dynamics (or not):
-
-![](../media/image285.png)
-
-The stochastic programming extension can only be switched on *Fully
-dynamic without prolongation mode.* For details on these settings, see
-section 3.3 above:
-
-![](../media/image286.png)
-
-In experiment mode, upper and lower ranges for certain settings can be
-set, as well as the number of experiments and some further algorithmic
-details:
-
-![](../media/image287.png)
+![](../media/modelmodes.png)
 
 ### Farm Settings
 
-![](../media/image288.png)
+![](../media/farmsettings.png)
 
-The farm settings panel carries general information about the
-farm-household and general price increases as shown in the following:
+The farm settings panel carries general information about the farms land endowment, available premiums, labour endowment, the farms finances, the credit range and income taxes.
 
 ### Animals
 
-![](../media/image289.png)
+Depending on the chosen farm branches the user has different tabs to further specify his simulated farm. For pigs and sows only one tab exists where the user can specify the initial herdsizes. For cattle several tabs and options exist. In general the initial herdsizes are used to determine the initial stable endowment and manure storage capacities on farm.
 
-The tab "animals" allows setting the initial herd sizes and other
-attributes related to animal husbandry. The herd size will be used to
-derive the initial stable and silo inventory, the current stocking rate
-the land endowment in case of a dairy farm. Note, the herd size which
-can be set depend on the active farm branches.
+In the tab Cows the herd size, the milk yield, premiums, herd dynamics, manure management in stable, reproductive management and grazing period are to be specified by the user. The grazing period is distinguished into grazing, meaning animals are outside day and night, partial grazing, meaning animals are kept in stable over night and no grazing. Besides milk yield, further attributes of the specified cow breed are variable in the calving attributes and cow attributes tables.
 
-In the experiment mode, ranges can be defined:
+![](../media/animals1.png)
 
-![](../media/image290.png)
+The other cattle related tabs, namely calves, heifers and bulls, allow for specification of the length of different growth periods and the respective start and end-weight, prices and the dress percentage of the potentially slaughtered animals. Similar to the cows, the grazing period and manure management system have to be specified. The tab Heifers is depicted below:
+
+![](../media/animal2.png)
 
 ### Cropping
 
-The tab "Crops and yields" comprises the selection of the crops and the
-yields and their growth rates (if arable farming is active).
+The tabs "Crops and Gras" comprise the selection of the crops and the yields and their growth rates.
+The tab Gras comprises two tables: the feed attributes table and the yield and yield distribution table. In the feed attribute table, the user might change the different ingredients of the harvested products. Products are silage gras, grazed gras and hay. The products are further divided by the time of harvest: early, middle and late. The yield table specifies the month of harvest of the respective products, the total yield in DM and the distribution of the yield over the harvest month. Using these information up to 10 different grassland usage options are derivable with differing management, yields and harvested products.
 
-![](../media/image291.png)
+![](../media/cropping1.png)
 
-A further tab "Crop management" comprises the steering options related
-to land use: if different tillage type, cropping intensities and crop
-rotations are used. Moreover, the average plot size, mechanization level
-and the climate zone as well as the distribution of the soil type can be
-chosen.
+The tab crops lets the user choose the active arable crops, sell options for forage crops, yields, manure import and export, management and tillage system (ecological/conventional ploughing/direct tillage), the usage of crop rotations and the fertilization planning. Moreover, the average plot size, mechanisation level and the climate zone as well as the distribution of the soil type can be chosen.
 
-![](../media/image292.png)
+![](../media/cropping2.png)
 
 ### Biogas
 
-![GUI -
-Biogas.jpg](../media/image293.jpeg)
+![](../media/image293.jpeg)
 
-The biogas tab includes different Renewable Energy Acts (EEGs) choices
-for the investment options as well as available biogas plant sizes.
-Moreover, it provides the option to select from potential inputs.
-Additionally, one can set up an existing biogas plant with the options
-to choose the size, the valid EEG as well as the construction year.
-However, in order to use this function the plant size and EEG has to be
-activated in the \"Investment options\" panel. Lastly, some options for
-scenario premiums are included.
+The biogas tab includes different Renewable Energy Act (EEGs) choices for the investment options as well as available biogas plant sizes. Moreover, it provides the option to select from potential inputs. Additionally, one can set up an existing biogas plant with the options to choose the size, the valid EEG and the construction year. However, in order to use this function the plant size and EEG has to be activated in the "Investment options" panel. Lastly, some options for scenario premiums are included.
 
 ### Output Prices
 
 That panel *Output prices* allows to set the price of the outputs
 present in the model.
 
-![](../media/image294.png)
+![](../media/outputprices.png)
 
 ### Input Prices
-
-![](../media/image295.png)
 
 That table *Input prices* allows to set the price of the outputs present
 in the model.
 
+![](../media/inputprices.png)
+
 ### Prices in Experiments
 
-![](../media/image296.png)
+![](../media/pricesinExperiments.png)
 
-### Environmental Impacts
+### Environmental Impacts and restrictions
 
-![](../media/image297.png)
+Environmental impacts are always calculated, as described in the Environmental accounting module. At the moment of writing the farm can be restricted by the German FO and the Greening obligations. The fertiliser restrictions are further subdivided into the Ordinance of 2007 (FD_2007), the latest revision of 2017 (FD_2017) or the user is able to set limits and thresholds by her- or himself (GUI_setting).   
 
-### MACs
+![](../media/env_impacts.png)
 
-As the aim of the overall constructed model is to compare different
-designed emission indicator schemes, the GUI sheet "MACs" offers an
-assortment of the available indicators, usable to force abatement
-ceilings by the simulated farm to create marginal abatement cost curves.
-In addition the number of reduction emission reduction steps within the
-simulation runs and the percentage reduction per step (compared to
-baseline emissions) has to be defined to define the maximal emission
-reduction (GHG reduction steps time reduction per step).
+### GAMS and Solver
 
-![](../media/image298.png)
+The last tab of the GUI which is shown here defines the chosen solver to optimise the fully dynamic MIP problem and further precision adjustments. Furthermore listing options for the resulting listing files and debug options are offered depending on the user type
+In general it is recommended to use CPLEX as the MIP solver, see section 7.2.
 
-### Algorithm and Debugging Options
-
-![](../media/image299.png)
-
-The last tab of the GUI which is shown here defines the chosen solver to
-optimize the fully dynamic MIP problem and further precision
-adjustments.
-
-In general it is recommended to use CPLEX as the MIP solver, see section
-7.2.
-
-### GAMS
-
-![](../media/image300.png)
+![](../media/gams_solver.png)
 
 ## Visualising and analysing results
 

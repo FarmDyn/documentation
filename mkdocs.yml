@@ -1,9 +1,9 @@
 site_name: FarmDyn Documentation
 site_description: FarmDyn - A highly detailed template model for dynamic optimization of farms
-site_author: ILR - Economic Modelling of Agricultural Systems
+site_author: ILR - Economic Modeling of Agricultural Systems
 site_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
 
-copyright: 'Copyright &copy; 2010 - 2018 Universität Bonn - ILR - Economic Modelling of Agricultural Systems Group'
+copyright: 'Copyright &copy; 2010 - 2018 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group'
 
 repo_name: Universität Bonn - ILR - FarmDyn
 repo_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
@@ -18,7 +18,6 @@ pages:
        - Introduction: methodology/introduction.md
        - Dynamic Character: methodology/dynamics.md
        - Risk and Risk behavior: methodology/risk.md
-       - GHG Accounting: methodology/ghgAcc.md
        - Coefficient Generator: methodology/coeffGen.md
        - Technical Realization: methodology/technical.md
        - References: methodology/References.md

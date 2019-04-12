@@ -61,7 +61,7 @@ Congress, Parma (Italy).
 
 Schäfer, D., Seidel, C. & Britz, W. (2016): Estimating
 Dual Profit Functions to Depict Farmer Behavior in Agent-Based Models –
-a Meta-Modelling Approach, poster presented at the 56th
+a Meta-Modeling Approach, poster presented at the 56th
 Annual Conference of the German Association of Agricultural Economists
 (GEWISOLA), Bonn, 28-30 September 2016.
 

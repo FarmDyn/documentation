@@ -49,7 +49,7 @@ same time, Till Kuhn improved substantially the nutrient flow and
 fertilizer management handling in the model. A project financed by the
 DFG
 (http://www.ilr.uni-bonn.de/agpo/rsrch/dfg-dairystruct/dfgdairystruct\_e.htm)
-with a focus on Agent Based Modelling supports since 2015 that line of
+with a focus on Agent Based Modeling supports since 2015 that line of
 work. Since summer 2016, a project financed by the State of
 Nordrhine-Westfalia sponsors the combined application of crop-growth
 models, FARMDYN and ABMSIM, focusing on nutrient flows on-farm and
@@ -64,7 +64,7 @@ we will discuss the core methodology with regard to the overall concept
 of the tool and the layout of the template model, with detail on the
 different modules, such as the herd, cropping, fertilization or
 investment module. The third section discusses the dynamic examination
-of the modelling approach, followed in section four by a discussion of
+of the modeling approach, followed in section four by a discussion of
 the stochastic version and how different types of risk behaviour can be
 integrated. Section five describes the different GHG indicators and the
 calculation of Marginal Abatement Curves (MAC). The following sections
