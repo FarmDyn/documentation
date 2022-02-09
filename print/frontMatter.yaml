@@ -1,11 +1,7 @@
 ---
-title: 'FarmDyn'
-subtitle: 'A highly detailed template model for dynamic optimization of farms'
-author:
-  - name: Modeling of Agricultural Systems Group - ILR - University Bonn
+title: 'FarmDyn - A highly detailed template model for dynamic optimization of farms'
 date: 19.04.2018
-header-includes:
-     - \usepackage[utf8]{inputenc}
+documentclass: scrreprt
 abstract: |
     The dynamic single farm model FARMDYN documented in here presents a
     framework which allows simulating in farm management and investment
@@ -18,7 +14,7 @@ abstract: |
     model template building on Mixed-Integer Programming. It is complemented
     by a Graphical User Interface to steer simulations and to exploit
     results.
-    
+
     The framework is the outcome of several research activities. Its first
     version (named DAIRYDYN) was developed in the context of a research
     project financed by the German Science Foundation focusing in marginal

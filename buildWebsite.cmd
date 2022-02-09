@@ -25,8 +25,8 @@ echo and copied to the agpserv2 server once completed.
 
 
 @REM go to website directory
-pushd \\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku
+@REM pushd \\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku
 
 echo Copying new files to website directory
 @REM copy everything from the docs site directory to the website
-xcopy "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\site" "\\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku" /s/h/e/k/f/c
+@REM xcopy "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\site" "\\agpserv2\ilrweb\em\rsrch\farmdyn\FarmDynDoku" /s/h/e/k/f/c

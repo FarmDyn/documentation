@@ -6,3 +6,11 @@ bin
 Thumbs.db
 *.mp4
 media
+*.docx
+Archive_Structure
+FarmDyn_Docu
+FarmDyn_Docu_old
+OLD_Documents
+*.pdf
+*.gz
+*.tex

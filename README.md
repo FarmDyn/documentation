@@ -9,13 +9,10 @@ The latest version of the documentation will be available on
 
 ## Installation
 
-### University of Bonn users
 No need to install. Just head to
 
-`\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn`
+`N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn`
 
-### External users
-In the long run the documentation will be part of the FarmDyn SVN checkout. Until then, please write me a mail (or \@slack) if you would like to contribute.
 
 ## Getting up and running
 The documentation lives in the docs folder. Instead of a Word document, the documentation is written in Markdown. Markdown is a simple markup language. That means, instead of clicking buttons for making a text bold, italic or else, you can do it through simple commands. Please don't be afraid, as writing in Markdown does require almost no learning and should be as easy to use as Word. The main benefit over a Word file is that we can easily create a Website and a PDF from the same documentation source (among other benefits). You can read more about Markdown [here](https://www.markdownguide.org/getting-started).
@@ -51,7 +48,7 @@ The notation works as follows
 
 The file names will be relative to the `docs` folder.
 
-As you see, the following contents of the `mkdocs.yml` file
+See the following contents of the `mkdocs.yml` file for working examples of relative paths:
 ```yml
 pages:
     - FarmDyn: index.md
@@ -121,10 +118,16 @@ You may notice a couple of things here: in the first line, a file called `print/
 Another thing of interest is the next line `docs/index_print.md`. Sometimes, it may be appropriate to have some information on the website that does not need to be in a printable version. In this case, the original `docs/index.md` file features an overview image of the FarmDyn results exploiter. In case we do not want the image to be in the printable version, we can create a copy of the `index.md` file and append the wording `_print` for future reference. In this file, we delete the reference to the image (or may do other alterations). By referencing this other file in the `tableOfContents.txt` file, we now have the chance of adapting the printable version to our needs, while mostly using the same ressources as the website.
 
 ### Updating code blocks
+In the past, code blocks were simply copied into the documentation by hand. However, as the code frequently changes, this turned out to be cumbersome. We automated this process by using a little program called [embedmd](https://github.com/campoy/embedmd).
+
 Unlike all other edits, the code blocks won't be updated automatically (neither with the live dev server nor the building of the website).
 You can update all code blocks in the documentation by double-clicking the `reloadCodeSections.cmd` file.
 
+
 ![The reloadCodeSections.cmd file updates all code blocks in the documentation.](assets/folder_overview_code.png)
+
+Further details on how to use the program are outlined in the [**Code blocks**](#codeblocks) section in the **Basic Markdown writing reference** outlined below.
+
 
 ## Basic Markdown writing reference
 The most important reference for working with Markdown is the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
@@ -279,6 +282,7 @@ Reference-style:
 [logo]: docs/media/image1.png "Logo Title Text 2"
 
 ### Code blocks
+<a name="codeblocks"></a>
 
 ```no-highlight
 Inline `code` has `back-ticks around` it.
@@ -314,6 +318,8 @@ Let's say we want to insert the `herdSize_` equation from the `general_herd_modu
 <pre lang="no-highlight"><code>
 [embedmd]:# (N:/agpo/work1/FarmDyn_QM/gams/model/general_herd_module.gms GAMS /herdSize_[\S\s][^;]*?\.\./ /;/)
 </code></pre>
+
+In plain English, this tells the program: Look through the general_herd_module.gms file, until you find a line that begins with 'herdSize_' and ends with '..', while ANYTHING may be in between the two. If you found this starting line, copy everything until the first semi-colon ';'.
 
 Once you added such a markdown statement, make sure to double click the `reloadCodeSections.cmd` file as described above. The program will then pull in the code block and update all other ones.
 

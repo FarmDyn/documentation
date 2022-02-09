@@ -1,79 +1,127 @@
-site_name: FarmDyn Documentation
-site_description: FarmDyn - A highly detailed template model for dynamic optimization of farms
+site_name: FarmDyn
+site_description:  A highly detailed template model for dynamic optimization of farms
 site_author: ILR - Economic Modeling of Agricultural Systems
 site_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
 
-copyright: 'Copyright &copy; 2010 - 2018 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group'
+copyright: 'Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group'
 
 repo_name: Universität Bonn - ILR - FarmDyn
 repo_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
 
-pages:
-    - FarmDyn:
-      - FarmDyn: index.md
-      - About: about.md
-      - Getting Started: installation.md
-      - Working with the model: methodology/gui.md
-    - Methodology:
-       - Introduction: methodology/introduction.md
-       - Dynamic Character: methodology/dynamics.md
-       - Risk and Risk behavior: methodology/risk.md
-       - Coefficient Generator: methodology/coeffGen.md
-       - Technical Realization: methodology/technical.md
-       - References: methodology/References.md
-       - Appendix: methodology/appendix.md
-    - Modules:
-       - Introduction: template/introduction.md
-       - Herd Module: template/herd_module.md
-       - Feeding module: template/feeding_module.md
-       - Cropping, Land and Land Use: template/cropping__land_and_land_use.md
-       - Labour: template/labour.md
-       - Stables: template/stables.md
-       - Other Types of Buildings: template/other_type_of_buildings.md
-       - Farm Machinery: template/farm_machinery.md
-       - Investments, Financing and Cash Flow Definition: template/investments__financing_and_cash_flow_definition.md
-       - Manure: template/manure.md
-       - Synthetic Fertilizers: template/synthetic_fertilizers.md
-       - Plant Nutrition: template/plant_nutrition.md
-       - Environmental Accounting Module: template/environmental_accounting_module.md
-       - Biogas Module: template/biogas_module.md
-       - Fertilization Ordinance: template/fertilization_ordinance.md
-    - Publications:
-       - Publications: publications/publications.md
-    - Training Videos:
-       - Training Videos: training/videos.md
-    - Programming:
-       - Choosing an editor: programming/editor.md
-    - Others:
-       - Model Development: staff/development.md
-       - Downloads: others/downloads.md
 
-extra:
-  social:
-    - type: globe
-      link: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
+theme:
+    name: material
+    palette:
+      primary: blue grey
+      accent: blue grey
+    logo:  media/icon.png
+    features:
+      - navigation.tabs
+      - navigation.top
+
 
 extra_css:
-    - 'css/farmdyn.css'
-    - 'css/github-gist.css'
+    - css/farmdyn.css
+    - css/github-gist.css
+    - css/timeline.css
+
 
 extra_javascript:
-    - 'javascripts/highlight.pack.js'
-    - 'javascripts/init.js'
-    - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML'
+    - javascripts/highlight.pack.js
+    - https://use.typekit.net/bkt6ydm.js
+    - javascripts/init.js
+    - javascripts/mathjax.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 
 markdown_extensions:
     - admonition
-    - pymdownx.details
-    - toc:
-        permalink: True
-    - mdx_math:
-        enable_dollar_delimiter: True #for use of inline $..$
+    - attr_list
     - footnotes
-    - mdx_figcaption
+    - pymdownx.details
+#    - toc:
+#        permalink: true
+    - pymdownx.arithmatex:
+        generic: true
+#      - mdx_figcaption
 
-theme:
-  name: 'material'
-  logo:  media/icon.png
-  feature:
-    tabs: true
+
+nav:
+
+   - Home:
+     - Home: index.md
+
+   - Documentation:
+     - Data:
+       - Structure: FarmDynDocumentation/Data/data_flow.md
+       - Collection and raw data: FarmDynDocumentation/Data/Data_Collection.md
+       - Data processing: FarmDynDocumentation/Data/data_processing.md
+       - Database and model setup: FarmDynDocumentation/Data/database.md
+
+     - Model Description:
+       - Economics and Management:
+         - Objective: FarmDynDocumentation/ModelDescription/EconomicsAndManagement/objective.md
+         - Household Income and Cash Flow: FarmDynDocumentation/ModelDescription/EconomicsAndManagement/household_income_and_cash_flow.md
+         - Investment and Financing: FarmDynDocumentation/ModelDescription/EconomicsAndManagement/investment_and_financing.md
+         - Labour: FarmDynDocumentation/ModelDescription/EconomicsAndManagement/labour.md
+       - Buildings and Machines:
+         - Machines: FarmDynDocumentation/ModelDescription/BuildingsAndMachines/machinery.md
+         - Stables: FarmDynDocumentation/ModelDescription/BuildingsAndMachines/stables.md
+         - Manure Storage: FarmDynDocumentation/ModelDescription/BuildingsAndMachines/manure_storage.md
+         - Other Buildings: FarmDynDocumentation/ModelDescription/BuildingsAndMachines/other_buildings.md
+       - Crop Production:
+         - Cropping, Land and Land Use: FarmDynDocumentation/ModelDescription/CropProduction/cropping_land_and_land_use.md
+         - Plant Nutrition: FarmDynDocumentation/ModelDescription/CropProduction/plant_nutrition.md
+         - Fertilizer application: FarmDynDocumentation/ModelDescription/CropProduction/fertilizer_application.md
+       - Animal Production:
+         - Herd Dynamics: FarmDynDocumentation/ModelDescription/AnimalProduction/herd_dynamics.md
+         - Cattle: FarmDynDocumentation/ModelDescription/AnimalProduction/cattle.md
+         - Pigs: FarmDynDocumentation/ModelDescription/AnimalProduction/pigs.md
+       - Biogas: FarmDynDocumentation/ModelDescription/Biogas/biogas.md
+       - Environmental Accounting: FarmDynDocumentation/ModelDescription/EnvironmentalAccounting/environmental_accounting.md
+       - Biodiversity Assessment:
+         - Abstract: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment.md
+         - Paracchini-Britz-Score: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/paracchini_britz_score.md
+         - SMART Score: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/smart_score.md
+         - SALCA-BD Method: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/salca_method.md
+       - Policy Measures:
+         - Abstract: FarmDynDocumentation/ModelDescription/PolicyMeasures/abstract_policy_measures.md
+         - Fertilisation Ordinance: FarmDynDocumentation/ModelDescription/PolicyMeasures/fertilisation_ordinance.md
+         - Greening: FarmDynDocumentation/ModelDescription/PolicyMeasures/greening.md
+         - Agri-Environmental Schemes: FarmDynDocumentation/ModelDescription/PolicyMeasures/AES.md
+
+     - Key Features:
+       - Modularity: FarmDynDocumentation/KeyFeatures/modularity.md
+       - Dynamic Character: FarmDynDocumentation/KeyFeatures/dynamics.md
+       - Risk and Risk Behavior: FarmDynDocumentation/KeyFeatures/risk.md
+       - Calibration: FarmDynDocumentation/KeyFeatures/calibration.md
+       - Population simulation: FarmDynDocumentation/KeyFeatures/popsimu.md
+
+     - Technical Realisation:
+       - Overview of Technical Realisation: FarmDynDocumentation/TR/overview_technical_realisation.md
+       - MIP Solution Strategy: FarmDynDocumentation/TR/MIP_solution_strategy.md
+       - Reporting: FarmDynDocumentation/TR/reporting.md
+       - Systematic Sensitivity Analysis: FarmDynDocumentation/TR/systematic_sensitivity_analysis.md
+
+     - Download Documentation: FarmDynDocumentation/DownloadDocumentation.md
+
+   - User Guide:
+     - Installation: WorkingWithFarmDyn/Installation.md
+     - Graphical User Interface: WorkingWithFarmDyn/Gui.md
+     - Programming: WorkingWithFarmDyn/CodeDevelopment.md
+     - Training Videos: WorkingWithFarmDyn/Videos.md
+
+   - About Us:
+     - History: Team/timeline.md
+     - Team: Team/team.md
+     - Collaboration Partners: Team/collaboration_partners.md
+
+   - Publications:
+     - Publications: Publications/publications.md
+     - Publication Specific Code: Publications/publicationsCode.md
+
+#extra:
+#  social:
+#    - type: globe
+#      link: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm

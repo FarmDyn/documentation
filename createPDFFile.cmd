@@ -21,9 +21,9 @@ echo[
 echo Create a PDF file from the documentation
 
 @REM copy all media to media folder in top level dir
-mkdir \\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media
-xcopy "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\docs\media" "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media" /s/h/e/k/f/c/I
-xcopy "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\docs\media" "\\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media" /s/h/e/k/f/c/I
+@REM mkdir \\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media
+@REM xcopy "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\docs\media" "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media" /s/h/e/k/f/c/I
+@REM xcopy "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\docs\media" "\\agpserv6\em\work1\Pahmeyer\FarmDyn\media" /s/h/e/k/f/c/I
 
 
 SET SECTIONS_FILEPATH=print/tableOfContents.txt
@@ -32,9 +32,9 @@ setlocal enabledelayedexpansion
 set SECTIONS=
 for /f %%i In (%SECTIONS_FILEPATH%) DO set SECTIONS=!SECTIONS! %%i
 
-.\bin\Scripts\pandoc.exe --listings --toc %sections% -o print/FarmDyn_Documentation.pdf -H print/gams.tex
+.\bin\Scripts\pandoc.exe -f markdown-raw_tex --listings --toc %sections% -o print/FarmDyn_Documentation.pdf -H print/gams.tex
 
 @REM media directory
-rmdir \\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media /s /q
-rmdir \\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media /s /q
+@REM rmdir \\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media /s /q
+@REM rmdir \\agpserv7\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media /s /q
 pause

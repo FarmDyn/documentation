@@ -1,12 +1,13 @@
-# FarmDyn 
+# FarmDyn
 
 ## A dynamic mixed integer bio-economic farm scale model
 
 FARMDYN provides a **flexible, modular template** to simulate
 **different farming systems (dairy, mother cows, beef fattening, pig fattening, piglet
-production, arable farming, biogas plants)** at single farm scale. 
+production, arable farming, biogas plants)** at single farm scale.
 
-![](/media/FarmDyn.png)
+![](media/FarmDyn.png){: style="width:100%"}
+
 
 Universität Bonn<br/>
 Institute for Food and Resource Economics<br/>
@@ -34,21 +35,21 @@ Institute for Food and Resource Economics<br/>
 -   Highly differentiated modules for nitrogen fate, while covering
     German legislation on fertilizer use
 
-![Overview](media/figure1.png)
+![Overview](media/figure1.png){: style="width:100%"}
 
 The model is currently **parameterized for German conditions** using
 highly detailed farm planning data provided by
 [KTBL](https://www.ktbl.de/) in combination with farm structural
 statistics. It offers a complementary approach to other farm scale
 models used in the institute such as the farm group models integrated in
-[CAPRI](www.capri-model.org) or [FADN based farm-scale progamming
+[CAPRI](http://www.capri-model.org) or [FADN based farm-scale progamming
 models](http://www.ilr.uni-bonn.de/agpo/rsrch/fadntool/fadntool_e.htm)
 which both are comparative-static, calibrated against observed farm
 programs with Positive Mathematical Programming while being far less
 detailed with regard to technology, and not comprising explicit
 investement decisions.
 
-The model is realized in [GAMS](www.gams.com), solved with the industry
+The model is realized in [GAMS](https://www.gams.com), solved with the industry
 MIP solver
 [CPLEX](http://www-01.ibm.com/software/commerce/optimization/cplex-optimizer/),
 linked to a Graphical User Interface realized in
@@ -63,4 +64,4 @@ emisisons ceilings using a **computing server to solve several instances
 in parallel**. That approach has e.g. been used to estimate a
 statistical meta model for Marginal Abatement Costs of Green House Gases
 from dairy farms. Code development and testing follows agreed upon
-[guidelines](codingConventions.pdf).
+[guidelines](https://www.ilr.uni-bonn.de/em/rsrch/farmdyn/codingConventions.pdf).
