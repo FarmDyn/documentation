@@ -6,7 +6,7 @@ FARMDYN provides a **flexible, modular template** to simulate
 **different farming systems (dairy, mother cows, beef fattening, pig fattening, piglet
 production, arable farming, biogas plants)** at single farm scale.
 
-![](media/FarmDyn.png){: style="width:100%"}
+![](media/farmdyn.PNG){: style="width:100%"}
 
 
 Universität Bonn<br/>
