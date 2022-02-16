@@ -5,7 +5,8 @@ bin
 !.gitignore
 Thumbs.db
 *.mp4
-media
+./media
+FarmDyn/media
 *.docx
 Archive_Structure
 FarmDyn_Docu
