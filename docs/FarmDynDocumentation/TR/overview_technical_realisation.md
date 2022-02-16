@@ -1,7 +1,7 @@
 # Overview of Technical Realisation
 
-!!!abstract
-    The model uses GAMS for data transformations and model generation and applies the industry LP and MIP solver CPLEX for solution. The code adheres to strict coding guidelines, for instance with regard to naming conventions, code structuring and documentation, including a modular approach. A set of carefully chosen compilation and exploitation tests is used to check the code. The code is steered by a GUI based on GGIG (ref., Java code) which also support result exploitation.
+> **_Abstract_**  
+The model uses GAMS for data transformations and model generation and applies the industry LP and MIP solver CPLEX for solution. The code adheres to strict coding guidelines, for instance with regard to naming conventions, code structuring and documentation, including a modular approach. A set of carefully chosen compilation and exploitation tests is used to check the code. The code is steered by a GUI based on GGIG (ref., Java code) which also support result exploitation.
 
 
 The model template and the coefficient generator are realised in GAMS

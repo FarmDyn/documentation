@@ -8,7 +8,6 @@ copyright: 'Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Mode
 repo_name: Universität Bonn - ILR - FarmDyn
 repo_url: http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm
 
-
 theme:
     name: material
     palette:
@@ -54,7 +53,7 @@ nav:
 
    - Documentation:
      - Data:
-       - Structure: FarmDynDocumentation/Data/data_flow.md
+       - Data flow: FarmDynDocumentation/Data/data_flow.md
        - Collection and raw data: FarmDynDocumentation/Data/Data_Collection.md
        - Data processing: FarmDynDocumentation/Data/data_processing.md
        - Database and model setup: FarmDynDocumentation/Data/database.md
@@ -81,7 +80,7 @@ nav:
        - Biogas: FarmDynDocumentation/ModelDescription/Biogas/biogas.md
        - Environmental Accounting: FarmDynDocumentation/ModelDescription/EnvironmentalAccounting/environmental_accounting.md
        - Biodiversity Assessment:
-         - Abstract: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment.md
+         - Biodiversity Assessment: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment.md
          - Paracchini-Britz-Score: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/paracchini_britz_score.md
          - SMART Score: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/smart_score.md
          - SALCA-BD Method: FarmDynDocumentation/ModelDescription/BiodiversityAssessment/salca_method.md

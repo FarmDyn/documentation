@@ -1,9 +1,9 @@
 # Farm Machinery and Field Operations
 > **_Abstract_**  
-Field operations and associated machinery needs are depicted in high detail. For each crop required field operations and related machinery applications are included. The machinery requirements are based on the level of mechanization selected in the GUI. Based on the mechanization level and information on plot sizes and farm to field distances resource requirements and variable costs are calculated.
+Field operations and associated machinery needs are depicted in high detail. For each crop required field operations and related machinery applications are included. The machinery requirements are based on the level of mechanisation selected in the GUI. Based on the mechanisation level and information on plot sizes and farm to field distances resource requirements and variable costs are calculated.
 
-Different types of machines and field operations are implemented in FarmDyn, using data from two different databases: The *default-database* is manually implemented in FarmDyn. The data reports required field operations and related machine applications for grassland management, fertilization operations as well as specific crops for policy implementations (e.g. flowerstrips). In addition, it includes data for ~20 default crops. Based on the crop-data selection in the GUI, data on field operations and machinery needs can further be imported from a large scale *KTBL-database*. The *KTBL-database* includes more than 400 machines and 1500 field operations for ~145 crops. It distinguishes between conventional and organic farming systems, reflecting system specific field operations.
-Both databases consider different types of tillage and are differentiated by mechanization levels, which reflect substitution possibilities between labor and capital. Labour and resource requirements related to machine applications are further conditional on plot sizes and farm to field distances.
+Different types of machines and field operations are implemented in FarmDyn, using data from two different databases: The *default-database* is manually implemented in FarmDyn. The data reports required field operations and related machine applications for grassland management, fertilization operations as well as specific crops for policy implementations (e.g. flowerstrips). In addition, it includes data for ~20 default crops. Based on the crop-data selection in the Graphical User Interface (GUI), data on field operations and machinery needs can further be imported from a large scale *KTBL-database*. The *KTBL-database* includes more than 400 machines and 1500 field operations for ~145 crops. It distinguishes between conventional and organic farming systems, reflecting system specific field operations.
+Both databases consider different types of tillage and are differentiated by mechanisation levels, which reflect substitution possibilities between labor and capital. Labour and resource requirements related to machine applications are further conditional on plot sizes and farm to field distances.
 
 ## Machinery and Machine Attributes
 
@@ -42,9 +42,7 @@ sets
    ;
 ```
 
-[^Comment] ??? For further information see Appendix A1.
-
-Each machinery type is characterized by set of attributes *p\_machAttr*, for example:
+Each machinery type is characterised by the set of attributes *p\_machAttr*, for example:
 
 [embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/dat/mach_de.gms GAMS /table.*?p_mach/ /5\.0/)
 ```GAMS
@@ -112,9 +110,7 @@ set op_machType(operation,machType) "Links the operations to machinery";
  op_machType("circHarrowSow","sowMachine
 ```
 
-???? For more details see Appendix A2.
-
-The performance of field operations involves labour and diesel requirements, variable and fixed machinery costs.
+The performance of field operations involves labour and diesel requirements as well as variable and fixed machinery costs.
 An extraction is shown in the following:
 
 [embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/dat/cropop_de.gms GAMS /table\sop_attr/ /0\.18/)
@@ -284,8 +280,7 @@ table p_crop_op_per_tilla(crops,operation,labPeriod,till)
 
 ### KTBL Database
 
-Further field operations can be included from the *KTBL-database*. Here, each operation is assigned to an operation type and receives an unique ID. Field operations are linked to cropping activities on a monthly resolution  *p_crops_operationID*, considering the frequency of a field operation in the production.
-Data distinguish between different types of tillage and conventional and organic farming systems, reflecting system specific field operations. Further, different soil types and amounts (e.g. transport volumes, application quantities) are considered, reflecting their impact on resource requirements of field operations.Field operations are reported for seven mechanisation levels between 45 and 230kW.
+Further field operations can be included from the *KTBL-database*. Here, each operation is assigned to an operation type and receives an unique ID. Field operations are linked to cropping activities, *p_crops_operationID*, on a monthly resolution, considering the frequency of a field operation in the production. Data distinguish between different types of tillage and conventional and organic farming systems, reflecting system specific field operations. Further, different soil types and amounts (e.g. transport volumes, application quantities) are considered, reflecting their impact on resource requirements of field operations.Field operations are reported for seven mechanisation levels between 45 and 230 kW.
  Details on resource requirements and costs of each operation are expressed as function of plot sizes and farm to field distances, building on a polynomial regression function. For each operation and resource/cost *item*, regression coefficients **p_RegCoeff** are specified.  For field operations that are independent of plot sizes and distances (e.g. loading and cleaning operations), constant values **p_noRegCoeff** are reported. Based on information on soil type, mechanisation, plot sizes and distances entered in the GUI, resource requirement are calculated. Plot sizes of up to 40 ha and farm to field distances up to 30 km are considered.
 
 [embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_opIDInputReq\(curCrops,till,items,operationID\) = sum\(\(crops_operationID\(/ /;/)
@@ -313,7 +308,7 @@ p_opIDInputReq(curCrops,till,items,operationID) = sum((crops_operationID(curCrop
            );
 ```
 
-These information on required field operation and related resource requirements and cost in crop production determine
+These information on required field operation and related resource requirements and cost in crop production determine:
 
 1.  The **number of necessary field working days** and *monthly labour
     need* per ha (excluding the time used for fertilisation, which is
@@ -324,115 +319,7 @@ These information on required field operation and related resource requirements 
 3.  Related **variable costs**
 
 
-### Depreciation of machines included in *KTBL-database*
 
-Deprecation cost of machine applications in the *KTBL-database* are calculated at the level of a field operations. Field operations, however, often require more than one machine such that deprecation costs refer to multiple machines. To draw conclusions about the value of the machine park and necessary new acquisitions, data on cost of depreciation are required on level of a single machine. Therefore, total depreciation cost are allocated to individual machines, considering the respective depreciation type and usage. An extraction is shown in the following (at the example of machines depreciated by area use).
-
-First, total depreciation costs are assigned to *p_physDepr*.
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?curCrops/ /;/)
-```GAMS
-p_physDepr(curCrops,till,operation,"","","cost")
-       = p_opInputReq(curCrops,till,"deprec",operation);
-```
-
-For each machine of a field operation that is depreciated by area use, depreciation cost per hectare are calculated:
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?areaCost/ /;/)
-```GAMS
-p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
-      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
-      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
-```
-
-The total depreciation cost allocated to area use are summarized for each operation:   
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?"","","areaCost"/ /;/)
-```GAMS
-p_physDepr(curCrops,till,operation,"","","areaCost")
-       $ p_opInputReq(curCrops,till,"deprec",operation)
-     = sum(op_machType(operation,machType)
-           $ p_machAttr(machType,"ha"),
-                p_physDepr(curCrops,till,operation,machType,"","areaCost"));
-```
-
-In case the total depreciation allocated to area use costs exceed the total deprecation cost of a field operation, the depreciation costs of each machine are scaled
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?op_machType/ /;/)
-```GAMS
-p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
-      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
-      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
-```
-
-The depreciation costs allocated to area use are subtracted from total deprecation cost of a field operation:
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?op_machType/ /;/)
-```GAMS
-p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
-      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
-      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
-```
-The same procedure is repeated to allocate the remaining depreciation costs to machines depreciated over time and mass use and to machines that are not depreciated over specific use but have fixed annual depreciated costs.
-
-For each field operation, the total depreciation costs allocated to machine applications are summed to check for any remaining depreciation costs not allocated to any machine.
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?totCost/ /;/)
-```GAMS
-p_physDepr(curCrops,till,operation,"","","totCost")
-       = sum((op_machType(operation,machType),depCost),
-               p_physDepr(curCrops,till,operation,machType,"",depCost));
-```
-
-Any remaining depreciation costs are allocated to all machines of a field operation.
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?depCost/ /;/)
-```GAMS
-p_physDepr(curCrops,till,operation,machType,"",depCost));
-```
-
-Some field operations are not associated with any machine applications (e.g. drying and storing; covering of silo). Here, remaining depreciation costs can not be distributed to machines but reflect depreciation of associated buildings and facilities (storage facility, silo):
-
-[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?Buildings/ /;/)
-```GAMS
-p_physDepr(curCrops,till,operation,"Buildings and Facilities","","totcost")
-       $ (abs(p_physDepr(curCrops,till,operation,"","","error")) gt 1)
-      = abs(p_physDepr(curCrops,till,operation,"","","error"));
-```
-
-Total depreciation cost of a machine per hectare crop production are calculated over all field operations that are required to produce a crop under specific production system and all deprecation types, as some machines are depreciated by more than one deprecation type (e.g. area and mass use):
-
-Comment[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /Report.*?machType/ /;/)
-```GAMS
-*
-*    --- sum depreciation of a machType over all field operations of a crop (sys,till)
-*
-     p_physDepr(curCrops,till,"mach_crop",machType,"",depCost)
-       =sum(op_machType(operation,machType) $ p_physDepr(curCrops,till,operation,"","","cost"),
-          p_physDepr(curCrops,till,operation,machType,"",depCost));
-*
-*   --- total depreciation of a machine over all deprec types for a crop,sys,till
-*
-    p_physDepr(curCrops,till,"mach_crop",machType,"","totCost")
-       = sum(depCost,p_physDepr(curCrops,till,"mach_crop",machType,"",depCost));
-
-```
-The depreciation costs per hectare are assigned to the machinery requirements by each crop per hectare
-
-Comment[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_machNeed.*?invcost/ /;.*?Buildings/)
-```GAMS
-*
-*   --- machine costs per hectare
-*
-
-    p_machNeed(crops,till,"normal",machType,"invCost")
-       = p_physDepr(crops,till,"mach_crop",machType,"","totCost");
-
-*   --- builidng costs per hectare (e.g. deprecation of silos and storage facilities)
-    p_machNeed(crops,till,"normal","Buildings and Facilities","invCost")
-     = p_physDepr(crops,till,"mach_crop","","Buildings and Facilities","totcost");
-
-```
 ## Labour Requirements in Crop Production
 
 The labour needs per month are determined by summing up over all farm
@@ -476,14 +363,144 @@ $endif.data
  ;
 ```
 
+### Depreciation of Machines Included in *KTBL-Database*
+
+Deprecation cost of machine applications in the *KTBL-database* are calculated at the level of a field operations. Field operations, however, often require more than one machine such that deprecation costs refer to multiple machines. To draw conclusions about the value of the machine park and necessary new acquisitions, data on cost of depreciation are required on level of a single machine. Therefore, total depreciation costs are allocated to individual machines, considering the respective depreciation type and usage. An extraction is shown in the following (at the example of machines depreciated by area use).
+
+First, total depreciation costs are assigned to *p_physDepr*.
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?curCrops/ /;/)
+```GAMS
+p_physDepr(curCrops,till,operation,"","","cost")
+       = p_opInputReq(curCrops,till,"deprec",operation);
+```
+
+For each machine of a field operation that is depreciated by area use, depreciation costs per hectare are calculated:
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?areaCost/ /;/)
+```GAMS
+p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
+      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
+      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
+```
+
+The total depreciation costs allocated to area use are summarised for each operation:   
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?"","","areaCost"/ /;/)
+```GAMS
+p_physDepr(curCrops,till,operation,"","","areaCost")
+       $ p_opInputReq(curCrops,till,"deprec",operation)
+     = sum(op_machType(operation,machType)
+           $ p_machAttr(machType,"ha"),
+                p_physDepr(curCrops,till,operation,machType,"","areaCost"));
+```
+
+In case the total depreciation allocated to area use costs exceed the total deprecation costs of a field operation, the depreciation costs of each machine are scaled
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?op_machType/ /;/)
+```GAMS
+p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
+      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
+      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
+```
+
+The depreciation costs allocated to area use are subtracted from total deprecation costs of a field operation:
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?op_machType/ /;/)
+```GAMS
+p_physDepr(curCrops,till,op_machType(operation,machType),"","areaCost")
+      $ (p_machAttr(machType,"ha") $ p_physDepr(curCrops,till,operation,"","","cost"))
+      = p_machAttr(machType, "price")/p_machAttr(machType,"ha") + eps;
+```
+The same procedure is repeated to allocate the remaining depreciation costs to machines depreciated over time and mass use and to machines which are not depreciated over specific use but have fixed annual depreciation costs.
+
+For each field operation, the total depreciation costs allocated to machine applications are summed to check for any remaining depreciation costs not allocated to any machine.
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?totCost/ /;/)
+```GAMS
+p_physDepr(curCrops,till,operation,"","","totCost")
+       = sum((op_machType(operation,machType),depCost),
+               p_physDepr(curCrops,till,operation,machType,"",depCost));
+```
+
+Any remaining depreciation costs are allocated to all machines of a field operation.
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?depCost/ /;/)
+```GAMS
+p_physDepr(curCrops,till,operation,machType,"",depCost));
+```
+
+Some field operations are not associated with any machine applications (e.g. drying and storing; covering of silo). Here, remaining depreciation costs can not be distributed to machines but reflect depreciation of associated buildings and facilities (storage facility, silo):
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_physDepr.*?Buildings/ /;/)
+```GAMS
+p_physDepr(curCrops,till,operation,"Buildings and Facilities","","totcost")
+       $ (abs(p_physDepr(curCrops,till,operation,"","","error")) gt 1)
+      = abs(p_physDepr(curCrops,till,operation,"","","error"));
+```
+
+Total depreciation costs of a machine per hectare crop production are calculated over all field operations that are required to produce a crop under a specific production system and all deprecation types, as some machines are depreciated by more than one deprecation type (e.g. area and mass use):
+
+Comment[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /Report.*?machType/ /;/)
+```GAMS
+*
+*    --- sum depreciation of a machType over all field operations of a crop (sys,till)
+*
+     p_physDepr(curCrops,till,"mach_crop",machType,"",depCost)
+       =sum(op_machType(operation,machType) $ p_physDepr(curCrops,till,operation,"","","cost"),
+          p_physDepr(curCrops,till,operation,machType,"",depCost));
+*
+*   --- total depreciation of a machine over all deprec types for a crop,sys,till
+*
+    p_physDepr(curCrops,till,"mach_crop",machType,"","totCost")
+       = sum(depCost,p_physDepr(curCrops,till,"mach_crop",machType,"",depCost));
+
+```
+The depreciation costs per hectare are assigned to the machinery requirements by each crop per hectare
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /p_machNeed\(crops,till,"normal",machType,"invCost"\)//;/)
+```GAMS
+p_machNeed(crops,till,"normal",machType,"invCost")
+       = p_physDepr(crops,till,"mach_crop",machType,"","totCost");
+```
+
+## Investments in new machinery
+
+Depending on the depreciation type, investments in new machines are either depicted continuously, where *v\_buyMachFlex* is the fractional investment according to actual machine needs (e.g. operation hours, mass flows) or using a binary variable *v\_buyMach* for machines where lifetime is declared in years.
+
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machBuyFlex_\(cur/ /;/)
+```GAMS
+machBuyFlex_(curMachines(machType),machLifeUnit,tFull(t),nCur)
+        $ (   (v_machInv.up(machType,machLifeUnit,t,nCur) ne 0)
+            $ v_buyMachFlex.up(machType,t,nCur)  $ p_lifeTimeM(machType,machLifeUnit)
+            $ (not sameas(machLifeUnit,"years")) $ p_priceMach(machType,t) $ t_n(t,nCur))  ..
+
+        v_buyMachFlex(machType,t,nCur) * p_lifeTimeM(machType,MachLifeUnit)
+            =L= v_machNeed(machType,machLifeUnit,t,nCur) $ tCur(t)
+
+              + [sum( (t_n(t1,nCur1)) $ ( tCur(t1) $ isNodeBefore(nCur,nCur1)),
+                                 v_machNeed(machType,machLifeUnit,t1,nCur1))/card(tCur)
+                 ]  $ ( (not tCur(t)) and p_prolongCalc);
+```
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /buyMachLifeTimeT_\(cur/ /;/)
+```GAMS
+buyMachLifeTimeT_(curMachines(machType),t_n(tCur(t),nCur)) $ ((v_buyMach.up(machType,tCur,nCur) ne 0) $ p_lifeTimeM(machType,"years")
+                                                                   $ ( mod(t.pos,p_lifeTimeM(machType,"years")) eq 1) $ (Card(tCur) gt 1) ) ..
+
+         sum( (tFull(t1),nCur1) $ ( t_n(t1,nCur1)
+                                    $ (p_year(t1) + p_lifeTimeM(machType,"years") lt p_year(t))
+                                    $ (v_buyMach.up(machType,t1,nCur1) ne 0)),
+
+                  v_buyMach(machType,t1,nCur1)) =L= 1;
+```
 ## Endogenous Machine Inventory
 
 The inventory equation for machinery is shown in *machInv\_*, where
-*v\_machInv* is the available inventory by type, *machType,* in
+*v\_machInv* is the available inventory by type and *machType,* in
 operation hours. *v\_machNeed* is the machinery need of the farm in
 operating hours and *v\_buyMach* are investments in new machines.
 
-[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machInv_\(cur/ /;/)
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machInv_\(cur/ /;/)
 ```GAMS
 machInv_(curMachines(machType),machLifeUnit,tFull(t),nCur)
          $ (     (v_machInv.up(machType,machLifeUnit,t,nCur) ne 0)
@@ -511,10 +528,8 @@ machInv_(curMachines(machType),machLifeUnit,tFull(t),nCur)
 *        --- minus operating hours of weighted average over normal planning period
 *            if beyond the normal planning period
 *
-        - [sum( (t_n(t1,nCur1)) $ ( (p_year(t1) lt p_year(t)) $ tCur(t1) $ isNodeBefore(nCur,nCur1)),
-                          v_machNeed(machType,machLifeUnit,t1,nCur1)
-                                                                      * 1/(p_year(t)+5 - p_year(t1)) )
-          /sum( (t1) $ ( (p_year(t1) lt p_year(t)) $ tCur(t1)),         1/(p_year(t)+5 - p_year(t1)) )
+        - [sum( (t_n(t1,nCur1)) $ ( tCur(t1) $ isNodeBefore(nCur,nCur1)),
+                          v_machNeed(machType,machLifeUnit,t1,nCur1))/card(tCur)
            ]
                        $ ( (not tCur(t)) and p_prolongCalc)
        ;
@@ -524,13 +539,13 @@ The last expression is used when the farm program for the simulated
 period is used to estimate the machinery needs for all years until the
 stables are fully depreciated.
 
-The machinery need in each year is defined from activities or processes requiring machinery::
+Machinery need is also linked to activities in livestock production (e.g. small tractors):
 
-[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/GENERAL_HERD_MODULE.gms GAMS /machNeedHerds_\(c/ /;/)
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/GENERAL_HERD_MODULE.gms GAMS /machNeedHerds_\(cur/ /;/)
 ```GAMS
-machNeedHerds_(curMachines(machType),machLifeUnit,tCur(t),nCur)
-        $ (sum(actHerds(sumHerds,breeds,feedRegime,t,m),
-               p_machNeed(sumHerds,"plough","normal",machType,machLifeUnit)) $ t_n(t,nCur)) ..
+machNeedHerds_(curMachines(machType),machLifeUnit,t_n(tCur(t),nCur))
+        $ sum(actHerds(sumHerds,breeds,feedRegime,t,m),
+               p_machNeed(sumHerds,"plough","normal",machType,machLifeUnit)) ..
 
        v_machNeedHerds(machType,machLifeUnit,t,nCur)
 
@@ -541,50 +556,79 @@ machNeedHerds_(curMachines(machType),machLifeUnit,tCur(t),nCur)
           sum(actHerds(sumHerds,breeds,feedRegime,t,m) $ p_prodLength(sumHerds,breeds),
              v_herdSize(sumHerds,breeds,feedRegime,t,nCur,m)
               * p_machNeed(sumHerds,"plough","normal",machType,machLifeUnit)
-                          * 1/min(12,p_prodLength(sumHerds,breeds)) * 12/card(herdM));
+                          * 1/min(12,p_prodLength(sumHerds,breeds)));
 ```
-[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machines_\(c/ /;/)
+
+The total machinery need in each year is defined as sum from activities or processes requiring machinery:
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machines_\(cur/ /;/)
 ```GAMS
-machines_(curMachines(machType),machLifeUnit,tCur(t),nCur) $ (p_lifeTimeM(machType,machLifeUnit) $ t_n(t,nCur)) ..
+machines_(curMachines(machType),machLifeUnit,t_n(tCur(t),nCur))     $ p_lifeTimeM(machType,machLifeUnit) ..
+*
+*    --- less than total machinery need
+*
+       v_machNeed(machType,machLifeUnit,t,nCur) =G=
 *
 *      --- crops times their request for specific machine type
-*
-     + sum( c_s_t_i(curCrops(crops),plot,till,intens),
+*          crops and machines not included in the KTBL Regression in ha/ha: hour/ha ...
+*          machines inclueded in KTBL Regression: EUR depreciation costs
+       sum( c_p_t_i(curCrops(crops),plot,till,intens),
            v_cropHa(crops,plot,till,intens,t,nCur)
             * p_machNeed(crops,till,intens,machType,machLifeUnit))
+*
+*             --- yield depression effects (increase plant protection cost)
+*
 
-     + sum( (c_s_t_i(curCrops(crops),plot,till,intens),syntFertilizer,m),
-              v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)
-               * p_machNeed(syntFertilizer,"plough","normal",machType,machLifeUnit))
+     $$iftheni.pmp "%pmp%"=="true"
+      + sum( (curCrops(Crops),sys) $ [sum(c_p_t_i(crops,plot,till,intens) $ (sys_till(sys,till)
+                                       $ p_critShare(crops,sys,"dep1") $ (p_machNeed(crops,till,intens,machType,machLifeUnit) gt 0)),1)
+                                                                                  $ sameas(machType,"sprayer")],
+            sqr(v_sumCrop(crops,sys,t,nCur))
+                                         /[  (  p_nArabLand  $ (not grassCrops(crops))
+                                              + (p_nGrasLand+p_nPastLand) $ grassCrops(crops))
+                                                * smax((sys_till(sys,till),cropShareLevl),p_critShare(crops,sys,cropShareLevl))
+                                                ]
+     $$else.pmp
 
-*        ---- machine need for the application of N (manure/fertilizer)
+        + sum( (curCrops(Crops),sys,cropShareLevl) $ (sum(c_p_t_i(crops,plot,till,intens) $ sys_till(sys,till),
+                                                        p_machNeed(crops,till,intens,machType,machLifeUnit))
+                                                                                   $ sameas(machType,"sprayer")),
+              v_cropShareEffect(crops,sys,cropShareLevl,t,nCur)*p_cropShareLevl(crops,sys,cropShareLevl)
 
-$iftheni.man %manure% == true
+     $$endif.pmp
 
-     + sum((c_s_t_i(curCrops(crops),plot,till,intens),manApplicType_manType(ManApplicType,curManType),m)
+             *    sum(c_p_t_i(crops,plot,till,intens) $ sys_till(sys,till),p_machNeed(crops,till,intens,machType,machLifeUnit))
+                / sum(c_p_t_i(crops,plot,till,intens) $ (sys_till(sys,till) $ p_machNeed(crops,till,intens,machType,machLifeUnit)),1))
+
+*        ---- machine need for the application of N (syntfert)
+
+     + sum( (c_p_t_i(curCrops(crops),plot,till,intens),curInputs(syntFertilizer),m),
+               v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * (1 + m.pos*1.E-3)
+                  * p_machNeed(syntFertilizer,till,"normal",machType,machLifeUnit))
+
+*        ---- machine need for the application of manure
+
+     $$iftheni.man "%manure%"=="true"
+
+        + sum((c_p_t_i(curCrops(crops),plot,till,intens),manApplicType_manType(ManApplicType,curManType),m)
               $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
                 v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
                   * p_machNeed(ManApplicType,"plough","normal",machType,machLifeUnit))
 
-$endif.man
+     $$endif.man
 
-$iftheni.herd %herd%==true
+     $$iftheni.herd "%herd%"=="true"
 
       + v_machNeedHerds(machType,machLifeUnit,t,nCur)
            $ sum(actHerds(sumHerds,breeds,feedRegime,t,m),
                  p_machNeed(sumHerds,"plough","normal",machType,machLifeUnit))
-$endif.herd
-*
-*         --- total machinery need
-*
-              =L= v_machNeed(machType,machLifeUnit,t,nCur)
+     $$endif.herd
     ;
 ```
 
 A small set of machinery, such as the front loader, dung grab, shear
 grab or fodder mixing vehicles are depreciated by time and not by use:
 
-[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machInvT_\(c/ /;/)
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /machInvT_\(cur/ /;/)
 ```GAMS
 machInvT_(curMachines(machType),tFull(t),nCur)
         $ (      (v_machInv.up(machType,"years",t,nCur) ne 0)
@@ -607,32 +651,32 @@ machInvT_(curMachines(machType),tFull(t),nCur)
 *         --- old machines according to investment dates
 *             (will drop out of equation if too old)
 *
-          sum( tOld $ (   ((p_year(tOld) + p_lifeTimeM(machType,"years")) ge p_year(t))
+          sum( tOld $ (   ((p_year(tOld) + p_lifeTimeM(machType,"years")) gt p_year(t))
                               $ ( p_year(told)                            le p_year(t))),
                                  p_iniMachT(machType,tOld))
 
 *
 *         --- plus (old) investments - de-investments
 *
-       +  sum( t_n(t1,nCur1) $ (  ((p_year(t1)  + p_lifeTimeM(machType,"years") ) ge p_year(t))
+       +  sum( t_n(t1,nCur1) $ (  ((p_year(t1)  + p_lifeTimeM(machType,"years") ) gt p_year(t))
                                 $ ( p_year(t1)                                    le p_year(t))
                                 $ isNodeBefore(nCur,nCur1)),
                                                 v_buyMach(machType,t1,nCur1));
 ```
 
-The aforementioned set of machinery, depreciated by time and not usage, are linked to the existence of stables, i.e. stables cannot be
-used if machinery is not present:
+The aforementioned set of machinery, depreciated by time and not usage, are linked to the existence of stables, i.e. stables cannot be used if machinery is not present:
 
-[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/general_herd_module.gms GAMS /machInvStable_\(c/ /;/)
+[embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/general_herd_module.gms GAMS /machInvStable_\(c/ /;/)
 ```GAMS
-machInvStable_(curMachines(machType),stables,tCur(t),nCur) $ ( (v_machInv.up(machType,"years",t,nCur) ne 0)
-                                                                 $  (   sum( t_n(t1,nCur1) $ isNodeBefore(nCur,nCur1),
-                                                                            v_buyStables.up(stables,"long",t1,nCur1))
-                                                                    or  sum( tOld, p_iniStables(stables,"long",tOld)))
-                                                                  $ sum(stables_to_mach(stables,machType),1)
+machInvStable_(curMachines(machType),stables,tCur(t),nCur)
+       $ ( (v_machInv.up(machType,"years",t,nCur) ne 0)
+           $  (   sum( (t_n(t1,nCur1),hor) $ ( (isNodeBefore(nCur,nCur1) or sameas(nCur,nCur1)) and (p_year(t1) le p_year(t))),
+                      (v_buyStables.up(stables,hor,t1,nCur1) ne 0))
+              or  sum( tOld, p_iniStables(stables,"long",tOld)))
+           $ sum(stables_to_mach(stables,machType),1)
+           $ (p_lifeTimeM(machType,"years"))  $ p_priceMach(machType,t)  $ t_n(t,nCur))  ..
 
-                                                    $ p_lifeTimeM(machType,"years")  $ p_priceMach(machType,t)  $ t_n(t,nCur))  ..
-
-       sum(stables_to_mach(stables,machType), v_stableInv(stables,"long",t,nCur))
+       sum(stables_to_mach(stables,machType), v_stableUsed(stables,t,nCur)
+           -sum(m $ (p_stableLab(stables,m) gt eps),v_stableNotUsed(stables,t,nCur,m))/card(m))
           =L= v_machInv(machType,"years",t,nCur);
 ```
