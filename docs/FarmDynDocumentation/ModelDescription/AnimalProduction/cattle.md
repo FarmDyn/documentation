@@ -75,7 +75,7 @@ days of lactation.
     for each lactation phase, hence how much of yearly milk yield is
     produced by each cow on one day.
 
-    ![](N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media\HerdModule\Bild_3.png){: style="width:100%"}
+    ![](N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media/HerdModule/Bild_3.png){: style="width:100%"}
     :   Figure 3: Lactation Curves of Different Yearly Milk Yield Potentials and
                   Average Milk Yield in Different Lactation Phases.
     :   Remark: Calculation based on Huth (1995, pp.224-226).  
@@ -483,7 +483,7 @@ p_calvCoeff(dCows,"%basBreed%",mDist)
 
 For a cow with a lifespan of four lactations, the calving distribution is depicted in the following figure. Notice how the distribution widens with increasing amounts of lactations.
 
-![Calving Distribution](/../../../../../media/Bild_2.png)
+![Calving Distribution](../../../media/HerdModule/Bild_2.png)
 :    Figure 2: Calving Distribution of a Cow with Four Lactations, according to the Endogenous Calculation.
 :    Source: Own representation.
 

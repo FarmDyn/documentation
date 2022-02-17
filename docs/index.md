@@ -35,7 +35,7 @@ Institute for Food and Resource Economics<br/>
 -   Highly differentiated modules for nitrogen fate, while covering
     German legislation on fertilizer use
 
-![Overview](media/figure1.png){: style="width:100%"}
+![Overview](media/Figure1.PNG){: style="width:100%"}
 
 The model is currently **parameterized for German conditions** using
 highly detailed farm planning data provided by
