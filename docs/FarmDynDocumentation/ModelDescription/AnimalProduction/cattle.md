@@ -75,7 +75,7 @@ days of lactation.
     for each lactation phase, hence how much of yearly milk yield is
     produced by each cow on one day.
 
-    ![](N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media/HerdModule/Bild_3.png){: style="width:100%"}
+    ![](../../../media/HerdModule/Bild_3.png){: style="width:100%"}
     :   Figure 3: Lactation Curves of Different Yearly Milk Yield Potentials and
                   Average Milk Yield in Different Lactation Phases.
     :   Remark: Calculation based on Huth (1995, pp.224-226).  
