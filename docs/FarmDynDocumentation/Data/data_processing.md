@@ -1,6 +1,15 @@
 # Data processing
 
-Data processing in pre-simulation phase and after the configuration of the GUI to run a specified simulation.
+There are multiple stages in the modelling sequence where data is processed to fit
+the requirements of the model and the configuration of the user. Before the simulation phase, the collected data has to be harmonized in order to fulfil the requirements
+of the model with respect to e.g. time (yearly, monthly, bi-weekly), disaggregation
+of production stages of animals (calves, heifers, etc.), and many more. In addition,
+parts of the database can be selected in order to prevent large non-used databases.
+This pre-simulation processing is further described in the section *Build data*.
+During the simulation phase, the configuration made by the user in the Graphical
+User Interface triggers another data processing step, where the required data is
+retrieved from the databases and processed. This is described in the section
+*Coefficient generator*.
 
 ## Build data - User or KTBL defined crop files
 
