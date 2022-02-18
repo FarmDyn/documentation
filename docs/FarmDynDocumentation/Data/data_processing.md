@@ -8,12 +8,28 @@ parts of the database can be selected in order to prevent large non-used databas
 This pre-simulation processing is further described in the section *Build data*.
 During the simulation phase, the configuration made by the user in the Graphical
 User Interface triggers another data processing step, where the required data is
-retrieved from the databases and processed. This is described in the section
+retrieved from the databases and further processed. This is described in the section
 *Coefficient generator*.
 
-## Build data - User or KTBL defined crop files
+## Build data - User or KTBL defined data files
+
+As a long term goal, the FarmDyn crew plans to develop a flexible construction
+of the database in order to facilitate the use of FarmDyn for external users. Thereby,
+FarmDyn can be more easily adapted to other countries with different cost and policy
+structures.
+
+Currently, FarmDyn provides the option to construct data sets for the arable crops.
+We differentiate here between the "User defined" and "KTBL defined" construction
+of the crop file. The difference between both section will be described in the next section.
+
+### User defined crops
 
 
+
+
+
+
+### KTBL  crops
 
 
 ## Coefficient generator - Concept and file structure
