@@ -18,22 +18,24 @@ echo University of Bonn
 echo[
 echo[
 
+@REM add n: bin folder to path
+set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+
 echo Create a Word file from the documentation
 
 @REM copy all media to media folder in top level dir
-xcopy "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\docs\media" "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media" /s/h/e/k/f/c/I
-xcopy "\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\docs\media" "\\agpserv6\em\work1\Pahmeyer\FarmDyn\media" /s/h/e/k/f/c/I
+xcopy ".\docs\media" ".\FarmDyn\media" /s/h/e/k/f/c/I
 
-SET SECTIONS_FILEPATH=\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\print\tableOfContents.txt
+SET SECTIONS_FILEPATH=.\print\tableOfContents.txt
 REM Remove all newlines in SECTIONS
 setlocal enabledelayedexpansion
 set SECTIONS=
 for /f %%i In (%SECTIONS_FILEPATH%) DO set SECTIONS=!SECTIONS! %%i
 
 
-\\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin\Scripts\pandoc.exe --toc %sections% -o \\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\print\FarmDyn_Documentation2.docx
+pandoc --toc %sections% -o .\print\FarmDyn_Documentation2.docx
 
-@REM media directory
-@REM rmdir \\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\FarmDyn\media /s /q
-@REM rmdir \\agpserv6\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\media /s /q
+@REM remove media directory
+@REM rmdir .\FarmDyn\media /s /q
+@REM rmdir .\media /s /q
 pause

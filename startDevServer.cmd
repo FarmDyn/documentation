@@ -18,6 +18,9 @@ echo University of Bonn
 echo[
 echo[
 
+@REM add n: bin folder to path
+set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+
 @REM Open the browser pointing at localhost where site will be served
 start http://127.0.0.1:8000/
 
@@ -25,5 +28,5 @@ start http://127.0.0.1:8000/
 echo The documentation server will now build the documentation,
 echo please wait until you read 'Serving on http:...' below and then reload the page.
 
-.\bin\python.exe -m mkdocs serve
+python -m mkdocs serve
 pause

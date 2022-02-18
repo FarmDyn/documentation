@@ -21,7 +21,10 @@ echo[
 @REM get all .md files in the docs folder (and subfolders)
 @REM and do the code completion on every file in the folder
 
+@REM add n: bin folder to path
+set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+
 cd .\docs
-for /R %%f in (*.md) do ..\bin\Go\bin\embedmd.exe -w %%f
+for /R %%f in (*.md) do embedmd -w %%f
 cd ..
 pause
