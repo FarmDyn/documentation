@@ -22,7 +22,7 @@ echo The documentation website is build from the Markdown files
 echo and copied to the agpserv2 server once completed.
 
 @REM add n: bin folder to path
-set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+set PATH=%PATH%;N:\em\work1\FarmDyn\documentation\binaries;.\bin
 python -m mkdocs build
 
 

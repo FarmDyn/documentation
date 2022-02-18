@@ -22,7 +22,7 @@ echo[
 @REM and do the code completion on every file in the folder
 
 @REM add n: bin folder to path
-set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+set PATH=%PATH%;N:\em\work1\FarmDyn\documentation\binaries;.\bin
 
 cd .\docs
 for /R %%f in (*.md) do embedmd -w %%f

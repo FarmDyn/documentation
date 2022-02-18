@@ -19,7 +19,7 @@ echo[
 echo[
 
 @REM add n: bin folder to path
-set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+set PATH=%PATH%;N:\em\work1\FarmDyn\documentation\binaries;.\bin
 
 echo Create a PDF file from the documentation
 

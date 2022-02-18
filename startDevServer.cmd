@@ -19,7 +19,7 @@ echo[
 echo[
 
 @REM add n: bin folder to path
-set PATH=%PATH%;N:\em\work1\Pahmeyer\FarmDyn\FarmDynDoku\bin;.\bin
+set PATH=%PATH%;N:\em\work1\FarmDyn\documentation\binaries;.\bin
 
 @REM Open the browser pointing at localhost where site will be served
 start http://127.0.0.1:8000/
