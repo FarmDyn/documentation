@@ -1,6 +1,6 @@
 site
 pdf
-bin
+
 .*
 !.gitignore
 Thumbs.db
