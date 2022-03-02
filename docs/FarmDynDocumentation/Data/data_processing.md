@@ -20,11 +20,18 @@ structures.
 
 Currently, FarmDyn provides the option to construct data sets for the arable crops.
 We differentiate here between the "User defined" and "KTBL defined" construction
-of the crop file. The difference between both section will be described in the next section.
+of the crop file. In the GUI you can find the different options to generate
+the data files as seen in the picture below:
+
+![](../../media/Data/build_data.PNG){: style="width:100%"}
+Figure 1: Build data in the GUI
+Source: Own illustration
+
+Each option to generate a file for the database is presented in the following.
 
 ### User defined crops
 
-
+Currently,  
 
 
 
