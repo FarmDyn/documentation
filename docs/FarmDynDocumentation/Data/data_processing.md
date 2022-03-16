@@ -4,7 +4,7 @@ There are multiple stages in the modelling sequence where data is processed to f
 the requirements of the model and the configuration of the user. Before the simulation phase, the collected data has to be harmonized in order to fulfil the requirements
 of the model with respect to e.g. time (yearly, monthly, bi-weekly), disaggregation
 of production stages of animals (calves, heifers, etc.), and many more. In addition,
-parts of the database can be selected in order to prevent large non-used databases.
+parts of the database can be selected in order to process non-used parts of the database.
 This pre-simulation processing is further described in the section *Build data*.
 During the simulation phase, the configuration made by the user in the Graphical
 User Interface triggers another data processing step, where the required data is
@@ -15,7 +15,7 @@ retrieved from the databases and further processed. This is described in the sec
 
 As a long term goal, the FarmDyn crew plans to develop a flexible construction
 of the database in order to facilitate the use of FarmDyn for external users. Thereby,
-FarmDyn can be more easily adapted to other countries with different cost and policy
+FarmDyn can be more easily adapted to other countries with different price/cost and policy
 structures.
 
 Currently, FarmDyn provides the option to construct data sets for the arable crops.
@@ -27,16 +27,18 @@ the data files as seen in the picture below:
 Figure 1: Build data in the GUI
 Source: Own illustration
 
-Each option to generate a file for the database is presented in the following.
+Each option to generate a new file for the database is presented in the following.
 
-### User defined crops
+### User defined files
 
-Currently,  
+For each data file which is to be adapted to a certain region, the user can alter the default values given in the pre-set default file. For example, crops has the default data for Germany given in the file *cropsData_DE_Default.gms*, which can be copied and changed in order to fit to crop data from other countries/regions and their corresponding agronomic and policy related differences. This file is then used to generate a *.gdx* file, which can be chosen in the GUI to introduce the specific crops.
+
+![](../../media/Data/Data_User.PNG){: style="width:100%"}
+Figure 1: User defined crop file
+Source: Own illustration
 
 
-
-
-### KTBL  crops
+### KTBL defined files
 
 
 ## Coefficient generator - Concept and file structure
@@ -47,13 +49,14 @@ parameters for a specific region.
 
 The coefficient generator is divided in:
 
--   **Beef:**
+-   **Beef:**: length of production, costs per year and animal,
+    and average age of animals to determine exact LU
 
 -   **Buildings:** includes bunker silos for silage maize and
     potatoes.
 
--   **Calves:**
-
+-   **Calves:**: length of production, costs per year and animal,
+    and average age of animals to determine exact LU
 
 -   **Cows**: cows, heifers and calves are defined that have different
     milk yield potentials. Additionally, a maximum number of lactation
@@ -65,9 +68,10 @@ The coefficient generator is divided in:
 
 -   **Cropping**: defines different activities for cash-crop production
     with specific restrictions concerning crop rotation, fertilizer
-    demand and yield potentials. !!!!!!!!!!!!!!!!!!!!!!! cropping_intes, cropping_nutNeed
+    demand and yield potentials.
 
--   **Initial stables**:    
+-   **Initial stables**: Stable size and types, capacities and calculation
+    of required stables places.
 
 -   **Environmental accounting**: defines environmental impact due to
     manure and fertiliser application.
@@ -127,7 +131,7 @@ The coefficient generator is divided in:
     additional costs of specific coverage types of the surface manure
     reservoirs are defined for straw coverage and coverage with foil.
 
--   **Social_accounting:**
+-   **Social_accounting:**: conversion of animal output in calories and proteins
 
 -   **Stables:** stable types with stable places and required workload
     for the respective stables for all herd types
