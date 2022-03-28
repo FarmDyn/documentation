@@ -96,7 +96,7 @@ nav:
        - Risk and Risk Behavior: FarmDynDocumentation/KeyFeatures/risk.md
        - Calibration: FarmDynDocumentation/KeyFeatures/calibration.md
        - Farm populations: FarmDynDocumentation/KeyFeatures/popsimu.md
-       - Systematic Sensitivity Analysis: FarmDynDocumentation/TR/systematic_sensitivity_analysis.md
+       - Systematic Sensitivity Analysis: FarmDynDocumentation/KeyFeatures/systematic_sensitivity_analysis.md
 
      - Technical Realisation:
        - Overview of Technical Realisation: FarmDynDocumentation/TR/overview_technical_realisation.md
