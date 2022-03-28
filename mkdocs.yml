@@ -118,8 +118,8 @@ nav:
      - Collaboration Partners: Team/collaboration_partners.md
 
    - Publications:
-     - Publications: Publications/publications.md
-     - Publication Specific Code: Publications/publicationsCode.md
+     - Publications: publications/publications.md
+     - Publication Specific Code: publications/publicationsCode.md
 
 #extra:
 #  social:
