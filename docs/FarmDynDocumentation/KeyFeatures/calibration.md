@@ -1,39 +1,23 @@
-# Dynamic Character of FarmDyn
+# Calibration
 
-## The Fully Dynamic Version
+## General concept
 
-As described in earlier sections, the model template optimises the farm
-production process over time in a fully dynamic setting, i.e. all time points are simultaneously considered. Connecting
-different modules over time (t<sub>1</sub>-t<sub>n</sub>) allows considering biologic and economic path dependencies.
+In order to generate a reasonable baseline for policy analysis, FarmDyn provides the option to calibrate the model to observed farms. The calibration is implemented as a bi-level optimization approach. The bi-level optimization approach is segmented in an upper and lower problem. The upper problem represents the minimization of the deviation between observed values and previously fixed values. These fixed values against which the model is calibrated against, can be set on the one hand by the user and on the other hand are taken from key parameters in FarmDyn. The user can define crop rotations and the number of animals. Data on  prices for both input and output, yields, labour coefficients, feeding coefficients are used and adapted to steer the FarmDyn model to reproduce the observed crop rotations and animal numbers. The lower problem of the bi-level optimization process is the FarmDyn model itself.
 
-As can be seen from Figure 6, the temporal resolution varies across
-different parts of the template module. Cropping decisions are annually
-implemented, whereas the intra-year resolution of the herd size module
-can be flexibly chosen by the user with a minimal resolution of one month.
+For a general introduction of the calibration method in FarmDyn you can refer to:
 
-Concerning fodder composition, decision points in each year are every
-three months. This provides the decision maker a more flexible adjustment
-to feed requirements of the herd (conditional on lactation phase), his
-resources and prices respectively availability of pasture, silage and
-concentrates. Furthermore, as stated in the manure module, the
-applications of manure or synthetic fertilisers, as well as the stored
-manure amounts on farm are implemented on monthly level.
+Britz, W. (2021): Automated Calibration of Farm-Sale Mixed Linear Programming Models using Bi-Level Programming, *German Journal of Agricultural Economics*, 70(3): 165-181.
 
-The optimal production plan over time is not simulated in a recursive
-fashion from year to year, but all variables of the planning horizon are
-optimised at once. Consequently, decisions at some point in time also
-influence decisions before and not only after that point. For instance,
-an increase in the herd at some point might require increased raising
-processes before.
+## Small user guide
 
-## Short-Run and Comparative Static Version
+In the figure below you see the set-up of the calibration process. In the "File with calibration bounds" you can select your file in which the calibration targets for crop rotations and animal numbers are set. Further, you can set the calibration bounds for yields, output prices, costs, input prices, feed coefficients and labour coefficients. The values which can be steered by the user give a +/- percentage deviation of given FarmDyn parameters. Eventually, one can set the lower bound on the objective function. This is realized by using the overall farm profit from a "normal" solve, which then can be enables to define a lower bound on the objective function.
 
-The short-run version considers only one year and does not comprise a
-liquidation of the enterprise. The comparative static version replaces
-the herd dynamics by a steady state model where, for example, the cows
-replaced in the current year are equal to the heifers in the current
-year, which in turn are equal to the calves raised in the current year.
-In the comparative static mode, the vintage model for investments in
-buildings and machinery is replaced by a setting in which the investment
-costs are related to one year. Nevertheless, the binary character can be
-maintained.
+![](../../media/Calibration/Calibration.PNG){: style="width:100%"}
+Figure 1: GUI calibration options
+Source: Own illustration.
+
+The calibration results are stored in a *.gdx* container which can be called in the GUI to simulate the given farm.
+
+![](../../media/Calibration/CalibrationResults.PNG){: style="width:100%"}
+Figure 1: GUI calibration options
+Source: Own illustration.
