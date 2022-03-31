@@ -1,39 +1,22 @@
-# Dynamic Character of FarmDyn
+# Farm population
 
-## The Fully Dynamic Version
+## Introduction to the simulation of farm populations
 
-As described in earlier sections, the model template optimises the farm
-production process over time in a fully dynamic setting, i.e. all time points are simultaneously considered. Connecting
-different modules over time (t<sub>1</sub>-t<sub>n</sub>) allows considering biologic and economic path dependencies.
+FarmDyn is a single-farm level model. This provides an ideal option to assess certain policies or technologies given a few suitable case study farms. However, often the research question at hand wants to answer questions related to certain populations or want to examines the effect on many heterogenous farms. In research questions such as that, case study farms are not capable to capture all relevant aspects. In order to address exactly this heterogenous effect of different farms within a population or the population as a whole, FarmDyn offers to simulate farm populations. Farm populations are introduced as single farms with each one distinct from another. The relevant characteristics which distinguish each of the farms are the:
 
-As can be seen from Figure 6, the temporal resolution varies across
-different parts of the template module. Cropping decisions are annually
-implemented, whereas the intra-year resolution of the herd size module
-can be flexibly chosen by the user with a minimal resolution of one month.
+* Farm type
+* Output levels (crop yields and animal outputs)
+* Number of labor units on farms
+* Arable- and grasland endowments
+* Number of animals
+* Initial inventory of stables
 
-Concerning fodder composition, decision points in each year are every
-three months. This provides the decision maker a more flexible adjustment
-to feed requirements of the herd (conditional on lactation phase), his
-resources and prices respectively availability of pasture, silage and
-concentrates. Furthermore, as stated in the manure module, the
-applications of manure or synthetic fertilisers, as well as the stored
-manure amounts on farm are implemented on monthly level.
+## Implementation in the model
 
-The optimal production plan over time is not simulated in a recursive
-fashion from year to year, but all variables of the planning horizon are
-optimised at once. Consequently, decisions at some point in time also
-influence decisions before and not only after that point. For instance,
-an increase in the herd at some point might require increased raising
-processes before.
+The file to generate a farm population can be found under */dat* with an farm population example in the file *farmData\_de.gms*. In that file you can adjust the number of farms your populations has and assign values to the parameters from the list above. After filling in all relevant information in the file you can run the file to generate a *.gdx* container which can be used as the farm population in FarmDyn.
 
-## Short-Run and Comparative Static Version
+In a second step you can call upon the generated farm population in the GUI as seen in the figure below. You can choose here your relevant *Farm sample file* which opens up the option to choose certain farms to simulate or to automatically run all farms sequentially. Note, that you have to set the FarmDyn task from *Single farm run* to *Farm sample run* on the left hand side of the GUI.   
 
-The short-run version considers only one year and does not comprise a
-liquidation of the enterprise. The comparative static version replaces
-the herd dynamics by a steady state model where, for example, the cows
-replaced in the current year are equal to the heifers in the current
-year, which in turn are equal to the calves raised in the current year.
-In the comparative static mode, the vintage model for investments in
-buildings and machinery is replaced by a setting in which the investment
-costs are related to one year. Nevertheless, the binary character can be
-maintained.
+![](../../media/PopSimu/PopSimuGUI.PNG){: style="width:100%"}
+Figure 1: GUI Farm sample options
+Source: Own illustration.
