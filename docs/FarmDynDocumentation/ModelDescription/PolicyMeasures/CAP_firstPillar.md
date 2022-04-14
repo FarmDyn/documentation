@@ -1,4 +1,17 @@
-# Greening Programme
+# CAP - First pillar payments
+
+The current implementation of the CAP First Pillar measures in FarmDyn accounts only for the base payment and the payments related to greening, which are presented in the following.
+
+## Base payments
+
+As the de-coupled payments are related to the on-farm land, you can find them under the header "Land endowment" in the GUI as seen in the following figure.
+
+![](../../media/Data/deCapPay.PNG){: style="width:100%"}
+Figure 1: Decoupled payments in GUI
+Source: Own illustration
+
+
+## Greening Programme
 
 Starting in 2013, subsidies stemming from the Common Agricultural Policy by the European Commission were linked to more environmental friendly farming practices, the so called "greening". In this small section, we present shortly the greening measures and their implementation in the model.
 
@@ -12,7 +25,7 @@ The greening measures can be summarised in three broad categories:
 
 This section covers the crop diversification and designation of EFA measures. The allocation of land to grassland or arable land is exogenous in FarmDyn. Therefore, covering the conversion of grassland to arable land is not possible within the model and will not be further discussed in the documentation.
 
-## Crop Diversification
+### Crop Diversification
 
 Crop diversification mandates farmers to cultivate multiple crops from different crop groups within a season. The required share of each crop group in the diversification scheme is dependent on the total arable and grassland as well as on their relative share of agricultural land on-farm. The triggering size classes are captured by binary variables in the equation *trigger10ha\_* and *trigger30ha\_*.
 
@@ -67,7 +80,7 @@ green95_(cropGroups,cropGroups1,t_n(tCur(t),nCur))
 ```
 
 
-## Designation of Ecological Focus Areas
+### Designation of Ecological Focus Areas
 
 The designation of ecological focus areas (EFA) affects only farmers with more than 15 ha of arable land (*v_croppedPlotLand* in *trigger15Ha\_*), who have to ensure that a minimum of 5% of their arable land is managed as an EFA (*efa\_*). Each member state offers a list of potential candidates for EFA such as buffer
 strips, group of trees, fallow land, and catch crops/ nitrogen fixing crops, whereas each type of EFA has a different weighting factor (*p_efa*) in the calculation of the total EFA area. For example, catch crops and nitrogen fixing crops have a weighting of 0.3, so that for each hectare planted on arable land they
@@ -100,7 +113,7 @@ trigger15Ha_(t_n(tCur(t),nCur)) ..
  ;
 ```
 
-## Grass Land Exemptions
+### Grass Land Exemptions
 
 The presented requirements for crop diversification and EFA have exemptions for farms with a high share of grass land and/ or fallow lying land as long as the arable land does not exceed 30 ha (*triggerRestlandGras\_* and *triggerRestlandIdle\_*). If the share of permanent/ rotational grass land or idle land on the total land is more than 75% and consequently the arable land is less than 25% (*triggerGras75\_*, *triggerIdle75\_*), the farm does not have to comply with any of the above measures (crop diversification and EFA) to receive the greening premium.
 

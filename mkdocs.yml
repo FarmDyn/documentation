@@ -87,7 +87,7 @@ nav:
        - Policy Measures:
          - Abstract: FarmDynDocumentation/ModelDescription/PolicyMeasures/abstract_policy_measures.md
          - Fertilisation Ordinance: FarmDynDocumentation/ModelDescription/PolicyMeasures/fertilisation_ordinance.md
-         - Greening: FarmDynDocumentation/ModelDescription/PolicyMeasures/greening.md
+         - CAP First Pillar: FarmDynDocumentation/ModelDescription/PolicyMeasures/CAP_firstPillar.md
          - Agri-Environmental Schemes: FarmDynDocumentation/ModelDescription/PolicyMeasures/AES.md
 
      - Key Features:
