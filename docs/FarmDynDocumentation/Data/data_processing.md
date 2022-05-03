@@ -15,8 +15,7 @@ retrieved from the databases and further processed. This is described in the sec
 
 As a long term goal, the FarmDyn crew plans to develop a flexible construction
 of the database in order to facilitate the use of FarmDyn for external users. Thereby,
-FarmDyn can be more easily adapted to other countries with different price/cost and policy
-structures.
+FarmDyn can be more easily adapted to other countries with different price/cost and policy structures.
 
 Currently, FarmDyn provides the option to construct data sets for the arable crops.
 We differentiate here between the "User defined" and "KTBL defined" construction
@@ -39,6 +38,12 @@ Source: Own illustration
 
 
 ### KTBL defined files
+
+The KTBL database provides detailed data for 145 crops under conventional and organic production. To prevent large amounts of data from being included into FarmDyn, required crops can be selected within the build-data process. The file *build_data_KTBL.gms* includes the data from all crops available in the KTBL database (see Database) and generates subsets based on the crop selection. The corresponding data is stored in two *.gdx* files, which are later called by FarmDyn.
+
+![](../../media/Data/build_data_KTBL.PNG){: style="width:80%"}
+Figure 2: Crop selection for KTBL defined files
+Source: Own illustration
 
 
 ## Coefficient generator - Concept and file structure
