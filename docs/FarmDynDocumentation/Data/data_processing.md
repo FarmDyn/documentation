@@ -36,15 +36,13 @@ For each data file which is to be adapted to a certain region, the user can alte
 Figure 1: User defined crop file
 Source: Own illustration
 
-
 ### KTBL defined files
 
-The KTBL database provides detailed data for 145 crops under conventional and organic production. To prevent large amounts of data from being included into FarmDyn, required crops can be selected within the build-data process. The file *build_data_KTBL.gms* first includes data for all crops available in the KTBL database (see Database) and thereafter generates subsets based on the crop selection. The corresponding data is stored in two *.gdx* files, which are later used in the model run.
+The KTBL database provides detailed data for 145 crops under conventional and organic production. To prevent large amounts of data from being included into FarmDyn, required crops can be selected within the build-data process. The file *build_data_KTBL.gms* first includes data for all crops available in the KTBL database (described in the section *Database and model setup*.) and thereafter generates subsets based on the crop selection. The corresponding data is stored in two *.gdx* files, which are later used in the model run.
 
 ![](../../media/Data/BuildData_KTBL.PNG){: style="width:100%"}
 Figure 2: Crop selection for KTBL defined files
 Source: Own illustration
-
 
 ## Coefficient generator - Concept and file structure
 
