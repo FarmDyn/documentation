@@ -1,0 +1,49 @@
+/*
+.md-header {
+  background-color: rgb(45, 181, 132)
+}
+
+.md-nav__link--active, .md-nav__link:active, .md-nav__link--hover, .md-nav__link:hover {
+  color: rgb(45, 181, 132)
+}
+
+.md-main__inner {
+  padding-bottom: 3rem;
+}
+
+.md-tabs {
+  background-color: rgb(45, 181, 132)
+}
+*/
+a[title="Updating the documentation"] {
+  display: none;
+}
+
+.md-nav--secondary {
+  display: none ;
+}
+
+.modularity1 img {
+  width: 270px;
+  height: 160px;
+}
+.modularity1 table th:first-of-type {
+    width: 52%;
+}
+.modularity1 table th:nth-of-type(2) {
+    width: 24%;
+}
+.modularity1 table th:nth-of-type(3) {
+    width: 24%;
+}
+
+
+.modularity2 table th:first-of-type {
+    width: 25%;
+}
+.modularity2 table th:nth-of-type(2) {
+    width: 25%;
+}
+.modularity2 table th:nth-of-type(3) {
+    width: 50%;
+}
