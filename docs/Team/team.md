@@ -1,13 +1,13 @@
-# Team
+# History
 
-FarmDyn was developed by the Economic Modeling of Agricultural Systems Group of the Institute of Food and Resource Economics at the University of Bonn. This working group is continuously researching and developing the model. In addition, scientists from other institutions are working on and with FarmDyn in the context of various research projects. All scientists working on FarmDyn are briefly introduced below.
+FarmDyn was initially developed by the Economic Modeling of Agricultural Systems Group of the Institute of Food and Resource Economics at the University of Bonn. The model is under constant development and used for various research projects including external universities and research institutions. In the following the core group of FarmDyn developers is presented below.
 
-## Economic Modeling of Agricultural Systems Group
+
+## Core group
 
 ### PD Dr. agr. Wolfgang Britz
 ![](../media/Team/britz.jpg){: style="width:200px", align="left"}
-Wolfgang Britz is the head of the working group and contributes to all research on and around FarmDyn. He contributes significantly to the technical development of the model. In 2020, for example, he incorporated the bi-level calibration into the model.
-&nbsp;
+Wolfgang Britz is the head of the working group "Economic Modeling of Agricultural Systems" and contributes to all research on and around FarmDyn. He developed the model and still contributes significantly to the technical and content development of the model. Latest work in FarmDyn includes the development of the calibration module and extension of the risk module with an estimated utility function.
 
 &nbsp;
 
@@ -20,7 +20,7 @@ Wolfgang Britz is the head of the working group and contributes to all research 
 
 ### Dr. agr. Till Kuhn
 ![](../media/Team/kuhn.jpg){: style="width:200px", align="left"}
-Till Kuhn is a post-doc researcher in the working group specialised in environmental policies such as the Agri-Environmental Schemes and plant nutrition.
+Till Kuhn is a post-doc researcher in the working group "Data Science in Agricultural Economics" at the University of Bonn specialised in environmental policies such as the Agri-Environmental Schemes and Fertilization Ordinance. Latest work includes the implementation of novel technology (e.g. greenRelease) and agri-envrionmental policies.
 &nbsp;
 
 &nbsp;
@@ -36,7 +36,7 @@ Till Kuhn is a post-doc researcher in the working group specialised in environme
 
 ### Dr. agr. David Schäfer
 ![](../media/Team/schaefer.jpg){: style="width:200px", align="left"}
-David Schäfer is a post-doc researcher in the working group. His research currently focuses on the design of FarmDyn as a generic and modular model.
+David Schäfer is a post-doc researcher in the working group "Economics Modeling of Agricultural Systems" at the University of Bonn. Initially, he developed the pig and biogas modules and is focusing now on the development of FarmDyn as a generic and modular model to improve usability for external researchers.  
 &nbsp;
 
 &nbsp;
@@ -50,9 +50,9 @@ David Schäfer is a post-doc researcher in the working group. His research curre
 &nbsp;  
 
 
-### M. Sc. Christoph Pahmeyer
+### Dr. agr. Christoph Pahmeyer
 ![](../media/Team/pahmeyer.png){: style="width:200px", align="left"}
-Christoph Pahmeyer is a PhD Student in the working group contributing to the modelling of production economics and agricultural policies.
+Christoph Pahmeyer is a post-doc researcher working in the group "Data Science in Agricultural Economics" at the University of Bonn and at the Thünen-Institute in Braunschweig contributing to the modelling of production economics and agricultural policies.
 &nbsp;
 
 &nbsp;
@@ -68,7 +68,7 @@ Christoph Pahmeyer is a PhD Student in the working group contributing to the mod
 
 ### M. Sc. Julia Heinrichs
 ![](../media/Team/heinrichs.jpg){: style="width:200px", align="left"}
-Julia Heinrichs is a PhD Student in the working group. Her research aims to map systematic changes in production systems in FarmDyn and to capture their impact on the environment.
+Julia Heinrichs is a PhD Student in the working group "Economics Modeling of Agricultural Systems" at the University of Bonn. Her research aims to map systematic changes in production systems in FarmDyn and to capture their impact on the environment.
 &nbsp;
 
 &nbsp;
@@ -84,7 +84,8 @@ Julia Heinrichs is a PhD Student in the working group. Her research aims to map 
 
 ### M. Sc. Lennart Kokemohr
 ![](../media/Team/kokemohr.jpg){: style="width:200px", align="left"}
-Lennart Kokemohr is a PhD Student in the working group focusing on the modelling of beef farms.
+Lennart Kokemohr is a PhD Student working at the Norwegian institute RURALIS (Institutt for rural og- regionalforskning). His research focuses on the development of environmental accounting schemes in the model in connection to various cattle farming types.
+
 &nbsp;
 
 &nbsp;
@@ -98,14 +99,3 @@ Lennart Kokemohr is a PhD Student in the working group focusing on the modelling
 &nbsp;
 
 &nbsp;
-
-
-## Wageningen University & Research
-
-The two research institutions Wageningen Economic Research and Wageningen Environmental Research are involved in the work with FarmDyn via the MIND STEP Project.
-
-### Dr. John Helming
-John Helming is a senior researcher at the Wageningen Economic Research institution and an expert in applied economic modelling and environmental and agricultural policy analysis. He contributes to FarmDyn by ...  
-
-### Dr. Marc Müller
-Marc Müller is a Microeconomicst and Model Developer at the Wageningen Economic Research institution. He develops farm-scale models to analyse the EU’s common agricultural policies under changing framework conditions. He contributes to FarmDyn by ...
