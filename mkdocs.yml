@@ -113,9 +113,9 @@ nav:
      - Training Videos: WorkingWithFarmDyn/Videos.md
 
    - About Us:
-     - History: Team/timeline.md
      - Team: Team/team.md
      - Collaboration Partners: Team/collaboration_partners.md
+     - Current and Past Projects: Team/projects.md
 
    - Publications:
      - Publications: publications/publications.md
