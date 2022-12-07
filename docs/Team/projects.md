@@ -12,6 +12,7 @@ From it's development in the DFG project "The relation between indicators for th
 ##PhenoRob (2020-2024)
 
 ##MIND STEP (2019-2023)
+![](../media/Projects/MindStep.jpg){: style="width:200px", align="left"}
 The European Union’s future Common Agricultural Policy (CAP) plays a pivotal role in developing a sustainable agricultural sector. The future CAP will be more flexible and adaptable to the needs of EU Member States and the individual decision making (IDM) units in the sector. To achieve this Member States develop strategic plans for the CAP that should define measurable objectives and means to achieve them. The EU-funded MIND STEP project will make use of agricultural and biophysical data and include individual decision making (IDM) unity in new and existing policy models for impact assessments. Using agricultural statistics and big datasets, the new IDM models will be estimated and calibrated, drawing on established economic and evolving machine learning techniques.
 
 
