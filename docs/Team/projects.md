@@ -3,31 +3,25 @@
 From it's development in the DFG project "The relation between indicators for the crediting of emission rights and abatement costs - a systematic modeling approach for dairy farms", FarmDyn has constantly progressed in various projects. Initially only simulating a dairy farm model parameterized for the German condition, it is now covering a variety of farm branches with parameterizations for the Netherlands, Norway, Germany and Switzerland. In the following you will find the current and past projects, where FarmDyn was further developed or was used.
 
 
-## Current Projects
+# Current Projects
 
-#BrightSpace (2022-2027)
+##BrightSpace (2022-2027)
 
-Designing a Roadmap for Effective and Sustainable Strategies for Assessing and Addressing the Challenges of EU Agriculture to Navigate within a Safe and Just Operating Space
+##LAMASUS - Land management for sustainability (2022-2026)
 
-#LAMASUS - Land management for sustainability (2022)
+##PhenoRob (2020-2024)
 
-
-
-#PhenoRob (2020-2024)
-
-
-
-#MIND STEP (2019-2023)
+##MIND STEP (2019-2023)
 The European Union’s future Common Agricultural Policy (CAP) plays a pivotal role in developing a sustainable agricultural sector. The future CAP will be more flexible and adaptable to the needs of EU Member States and the individual decision making (IDM) units in the sector. To achieve this Member States develop strategic plans for the CAP that should define measurable objectives and means to achieve them. The EU-funded MIND STEP project will make use of agricultural and biophysical data and include individual decision making (IDM) unity in new and existing policy models for impact assessments. Using agricultural statistics and big datasets, the new IDM models will be estimated and calibrated, drawing on established economic and evolving machine learning techniques.
 
 
-#Transform2Bio
+##Transform2Bio
 
-#CLIMPLEMENT ( )
+##CLIMPLEMENT ( )
 
 Climplement aims to develop knowledge and processes to ensure successful implementation and diffusion of on-farm GHG reducing management models in Norwegian agriculture.
 
-# Past Projects
+#Past Projects
 
 ##LIFT (2018-2022)
 FARMDYN was used in the H2020 project LIFT (Low-Input Farming and Territories - Integrating knowledge for improving ecosystem-based farming) by the team in Bonn and a team at INRA, Rennes, to compare different farming systems with regard to sustainability indicators.

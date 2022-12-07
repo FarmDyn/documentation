@@ -2,6 +2,8 @@
 
 ## PhD Theses
 
+PAHMEYER, CHRISTOPH (2022): [Advances in technology evaluation and decision support studies using bio-economic farm models] (https://bonndoc.ulb.uni-bonn.de/xmlui/handle/20.500.11811/9746) Dissertation, University of Bonn
+
 SCHÄFER, DAVID MATTHIAS (2021): [Biogas production in the light of the German Fertilization Ordinance : An economic and environmental assessment at farm and regional scale.](https://bonndoc.ulb.uni-bonn.de/xmlui/handle/20.500.11811/9424)
 
 KUHN, TILL (2019): [The revision of the German Fertilization Ordinance in 2017: Analyzing economic and environmental impacts at farm-level.](https://bonndoc.ulb.uni-bonn.de/xmlui/handle/20.500.11811/8012) Dissertation, University of Bonn.
@@ -12,6 +14,10 @@ LENGERS, BERND (2013): [The relation between indicators for the crediting of emi
 
 
 ## Journal publications
+
+KOKEMOHR, L., ESCOBAR, N., MERTENS, A., MOSNIER, C., PIRLO, G., VEYSSET, P., KUHN, T.: [Life Cycle Sustainability Assessment of European beef production systems based on a farm-level optimization model] (https://www.sciencedirect.com/science/article/abs/pii/S0959652622041245?via%3Dihub), Journal of Cleaner Production 379(1): 134552
+
+KUHN, T., MÖHRING, N., TÖPEL, A., JAKOB, F., BRITZ, W., BRÖRING, S., PICH, A., SCHWANEBERG, U., RENNINGS, M. (2022): [Using a bio-economic farm model to evaluate the economic potential and pesticide load reduction of the greenRelease technology](https://www.sciencedirect.com/science/article/abs/pii/S0308521X22000907?via%3Dihub), Agricultural Systems 201:103454
 
 BRITZ, W., CIAIAN, P., GOCHT, A., KANELLOPOULOS, A., KREMMYDAS, D., MÜLLER, M., PETSAKOS, A., REIDSMA, P. (2021): [A design for a generic and modular bio-economic farm model](https://www.sciencedirect.com/science/article/pii/S0308521X2100086X?via%3Dihub), Agricultural Systems 191(June 2021): 103133.
 
