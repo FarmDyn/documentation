@@ -1,4 +1,4 @@
-# History
+# Introduction
 
 FarmDyn was initially developed by the Economic Modeling of Agricultural Systems Group of the Institute of Food and Resource Economics at the University of Bonn. The model is under constant development and used for various research projects including external universities and research institutions. In the following the core group of FarmDyn developers is presented below.
 
