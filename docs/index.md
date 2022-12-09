@@ -15,29 +15,33 @@ Institute for Food and Resource Economics<br/>
 
 ## Main characteristics
 
--   **Fully dynamic**, simulations typically cover several decades,
-    alternatively comparative-static or short run version
+-   Multiple dynamics including **comparative-static**,
+    short run, or fully dynamic, with simulations covering several decades
 -   Integer variables capture **indivisibilities in investments**
     (machinery, buildings) and **labour use**
 -   Selected farm management decisions (e.g. feeding, manure management,
     labour use) depicted with a **sub-annual temporal resolution**,
-    partially bi-weekly
--   **Deterministic or stochastic** programming version. The latter
-    treats all variables as state dependent, allows for sceneario tree
-    reduction and covers different risk measures (value at risk, MOTAD
-    ...)
+    partially bi-weekly  
 -   Farm labour, machinery and stable use are modelled in rich detail
--   Arable cropping can be differentiated by tillage type and intensity
-    Different intensities are also available for grassland management
--   For dairy farming, the model distinguishes several herds by milk
-    yield potential and lactation phase
--   The machinery park is available in different mechanization levels
--   Highly differentiated modules for nitrogen fate, while covering
-    German legislation on fertilizer use
+-   **Highly detailed farm branch activities** (e.g. intensities for arable and grass crops,
+    differentiated feeding schemes for all animal types accounting for lactation/feeding
+    phase, etc.)
+-   The machinery park is available in **different mechanization levels**
+-   **Environmental accounting modules** including the flow from different nitrogen compounds, CO2eq, phosphorus compounds
+-   A wide range of **agri- and agrienvironmental policies** including CAP, German implementation
+    of Nitrate Directive, agri-environmental schemes, etc.
+-   Multiple **biodiversity indicators**     
+-   Parameterized for **multiple countries** besides Germany it includes Switzerland, Norway, Netherlands
+-   **Deterministic or stochastic** programming version. The latter
+        treats all variables as state dependent, allows for sceneario tree
+        reduction and covers different risk measures (value at risk, MOTAD
+        ...)
+
+
 
 ![Overview](media/Figure1.PNG){: style="width:100%"}
 
-The model is currently **parameterized for German conditions** using
+For the German version, the model is parameterized  using
 highly detailed farm planning data provided by
 [KTBL](https://www.ktbl.de/) in combination with farm structural
 statistics. It offers a complementary approach to other farm scale
