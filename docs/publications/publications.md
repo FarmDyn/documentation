@@ -15,7 +15,9 @@ LENGERS, BERND (2013): [The relation between indicators for the crediting of emi
 
 ## Journal publications
 
-KOKEMOHR, L., ESCOBAR, N., MERTENS, A., MOSNIER, C., PIRLO, G., VEYSSET, P., KUHN, T.: [Life Cycle Sustainability Assessment of European beef production systems based on a farm-level optimization model](https://www.sciencedirect.com/science/article/abs/pii/S0959652622041245?via%3Dihub), Journal of Cleaner Production 379(1): 134552
+HUBER, R., TARRUELLA, M., SCHÄFER, D., FINGER, R., (2023): [Marginal climate change abatement costs in Swiss dairy production considering farm heterogeneity and interaction effects](https://www.sciencedirect.com/science/article/pii/S0308521X23000446?via%3Dihub), Agricultural Systems (207): 103639
+
+KOKEMOHR, L., ESCOBAR, N., MERTENS, A., MOSNIER, C., PIRLO, G., VEYSSET, P., KUHN, T. (2022): [Life Cycle Sustainability Assessment of European beef production systems based on a farm-level optimization model](https://www.sciencedirect.com/science/article/abs/pii/S0959652622041245?via%3Dihub), Journal of Cleaner Production 379(1): 134552
 
 KUHN, T., MÖHRING, N., TÖPEL, A., JAKOB, F., BRITZ, W., BRÖRING, S., PICH, A., SCHWANEBERG, U., RENNINGS, M. (2022): [Using a bio-economic farm model to evaluate the economic potential and pesticide load reduction of the greenRelease technology](https://www.sciencedirect.com/science/article/abs/pii/S0308521X22000907?via%3Dihub), Agricultural Systems 201:103454
 
