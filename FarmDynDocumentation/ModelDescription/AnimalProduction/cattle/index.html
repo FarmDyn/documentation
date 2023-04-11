@@ -1,0 +1,2452 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/AnimalProduction/cattle/">
+      
+      
+        <link rel="prev" href="../herd_dynamics/">
+      
+      
+        <link rel="next" href="../pigs/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Cattle - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cattle-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cattle
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="true">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Cattle
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Cattle
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cattle-feeding" class="md-nav__link">
+    Cattle feeding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sexing" class="md-nav__link">
+    Sexing
+  </a>
+  
+    <nav class="md-nav" aria-label="Sexing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grassland" class="md-nav__link">
+    Grassland
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cattle-feeding" class="md-nav__link">
+    Cattle feeding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sexing" class="md-nav__link">
+    Sexing
+  </a>
+  
+    <nav class="md-nav" aria-label="Sexing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grassland" class="md-nav__link">
+    Grassland
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cattle-module">Cattle Module</h1>
+<blockquote>
+<p><strong><em>Abstract</em></strong>
+The cattle module is closely related to the general herd module. It
+describes the demographic relations between cattle types (dairy cows,
+mother cows, male and female calves, heifers, young bulls) on the farm.
+The cattle feed requirements are calculated considering the animals performance and the lactation phase of cows.
+The requirements can be met via a mix from own produced and purchased fodder, concentrates and grazing from pastures.</p>
+</blockquote>
+<p>The set <em>phase</em> lists the different phases and the month during the year they are in.</p>
+<p>set phase "lactation phase / dry / general / months in year" /
+    LC30_1,LC92_1,LC213_1,LC305_1,dry_1,
+    LC30_2,LC92_2,LC213_2,LC305_2,dry_2,
+    LC30_3,LC92_3,LC213_3,LC305_3,dry_3,
+    LC30_4,LC92_4,LC213_4,LC305_4,dry_4,
+    LC30_5,LC92_5,LC213_5,LC305_5,dry_5,
+    LC30_6,LC92_6,LC213_6,LC305_6,dry_6,
+    GEN,0_2,3_/;</p>
+<p>The set <em>reqsPhase</em> lists the different rquirement phases. The "LC" labeled elements are the requirement phases for different lactation phases, the element "dry" refers to the dry period where cows are not lactating, the element "gen" is for heifers and bulls that are not lactating and the elements "0_2" and "3_" are for calves.</p>
+<p>set reqsPhase / LC30,LC92,LC213,LC305,dry,GEN,0_2,3_/;</p>
+<p>The cross-set <em>phase_reqsPhase</em> links the monthly  phases to the general requirement phases.</p>
+<p>set phase_reqsPhase(phase,reqsPhase) /</p>
+<pre><code>(LC30_1,LC30_2,LC30_3,LC30_4,LC30_5,LC30_6).LC30
+(LC92_1,LC92_2,LC92_3,LC92_4,LC92_5,LC92_6).LC92
+(LC213_1,LC213_2,LC213_3,LC213_4,LC213_5,LC213_6).LC213
+(LC305_1,LC305_2,LC305_3,LC305_4,LC305_5,LC305_6).LC305
+(dry_1,dry_2,dry_3,dry_4,dry_5,dry_6).dry
+GEN.GEN,
+</code></pre>
+<p>*
+*     -- for calves raising processes, first two months and rest
+*
+    0_2.0_2,3_.3_</p>
+<p>/;
+The set <em>phase_startPhase</em> lists the starting monthly  phases to the general requirement phases.</p>
+<p>set phase_startPhase(phase,reqsPhase) /
+      (LC30_1).LC30
+      (LC92_1).LC92
+      (LC213_1).LC213
+      (LC305_1).LC305
+      (dry_1).dry
+/;</p>
+<h2 id="cattle-feeding">Cattle feeding</h2>
+<p>The feeding of cattle consists of two major elements:</p>
+<ol>
+<li>
+<p><strong>Requirement functions</strong> and related constraints in the model
+    template</p>
+</li>
+<li>
+<p><strong>Feeding activities</strong>, which ensure that requirements are covered
+    and link the animal to the cropping sector as well as to purchases
+    of concentrates</p>
+</li>
+</ol>
+<p>The requirements are defined in <em>coeffgen\requ.gms</em>. Requirements for
+dairy cows are differentiated by annual milk yield and by lactation
+period. The model differentiates 5 lactation periods with different
+lengths (30 - 70 - 100 - 105 - 60 days, where the last 60 days are
+the dry period). The periods are labelled according to their last day,
+e.g. <em>LC200</em> is the period from day 101 to day 200, <em>LC305</em> is the
+period from the 201<sup>st</sup> to the 305<sup>th</sup> day and <em>dry</em> denotes the last 60
+days of lactation.</p>
+<details class="note">
+<summary>Excurse - Computation of Output Coefficients for each Lactation Phase</summary>
+<p>This excurse describes the derivation of the output coefficient
+for each lactation phase, hence how much of yearly milk yield is
+produced by each cow on one day.</p>
+<p><img alt="" src="../../../../media/HerdModule/Bild_3.png" style="width:100%" />
+:   Figure 3: Lactation Curves of Different Yearly Milk Yield Potentials and
+              Average Milk Yield in Different Lactation Phases.
+:   Remark: Calculation based on Huth (1995, pp.224-226).<br />
+:   Source: Own illustration.  </p>
+<p>Using the above shown lactation functions, the daily fraction of the
+yearly milk yield in each lactation phase can be derived. The mean
+over the four milk yield potentials of the coefficients are shown in
+Table 1.</p>
+<p>Table 1: Daily Fraction of Whole Lactation Milk
+Yield in Different Lactation Phases.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>LC30</th>
+<th>LC100</th>
+<th>LC200</th>
+<th>LC3005</th>
+<th>Dry</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily fraction</td>
+<td>0.00356</td>
+<td>0.0043</td>
+<td>0.00333</td>
+<td>0.00233</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Remark: Own calculation based on Huth (1995, pp.224-226).</p>
+<p>Following these outputs, e.g. on each of the first 30 days of
+lactation, the cow produces 0.356 % of the yearly milk yield (e.g. 28
+kg per day for a cow which produces 8000 kg per year). In a next
+step, these coefficients are used to calculate the sum of milk output
+in each lactation phase to further calculate feed requirements
+stemming from the herds in each phase.</p>
+</details>
+<p>The daily milk yield in each period is based on the following statements
+which define milk yield in ton per year, stored on the general output
+coefficient parameter <em>p_OCoeff</em>. The coefficient is scaled to match
+total yearly milk yield.</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">p_mlkPerDay(dcows,curBreeds,&quot;LC30&quot;)  $ herds_breeds(dcows,curBreeds) = 0.003555556 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC92&quot;)  $ herds_breeds(dcows,curBreeds) = 0.004333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC213&quot;) $ herds_breeds(dcows,curBreeds) = 0.003333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC305&quot;) $ herds_breeds(dcows,curBreeds) = 0.002333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+</code></pre>
+<!-- Keep? -->
+<pre><code class="language-GAMS">p_mlkPerDay(dcows,curBreeds,&quot;LC30&quot;)  $ herds_breeds(dcows,curBreeds) = 0.003555556 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC92&quot;)  $ herds_breeds(dcows,curBreeds) = 0.004333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC213&quot;) $ herds_breeds(dcows,curBreeds) = 0.003333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+p_mlkPerDay(dcows,curBreeds,&quot;LC305&quot;) $ herds_breeds(dcows,curBreeds) = 0.002333333 * sum(t $ (t.pos eq 1), p_OCoeff(dcows,&quot;milk&quot;,curBreeds,t) * 1000);
+</code></pre>
+<p>The model differentiates between requirements for energy in net-energy for lactation, raw protein and maximum dry matter. The feeding requirements are described by the parameter <code>p_reqsPhase</code> for each herd and a certain requirement phase. As described earlier, the requirement phases of cows are differentiated into specific, fixed stages during lactation. For bulls, heifers, and calves, the amount of feeding/requirement phases are defined over the GUI. For each feeding phase, the daily requirements during the production process are identical.</p>
+<p>The requirement functions account for differing start and final weights, as well as daily weight gains of the animals. The underlying regression models were kindly provided by the Institut für Tierernährung und Futterwirtschaft of the Bayerische Landesandstalt für Landwirtschaft (LfL)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<p>The requirements per requirement phase <code>p_reqsPhase</code> are subsequently converted into values per month, in order to ensure that the animals are correctly fed throughout the requirement period.</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">p_reqsPhaseMonths(herds,curBreeds,feedRegime,reqsPhase,reqs) $ p_reqsPhaseLength(herds,curBreeds,reqsPhase)
+      = p_reqsPhase(herds,curBreeds,reqsPhase,reqs)/p_reqsPhaseLength(herds,curBreeds,reqsPhase) * 30.5;
+</code></pre>
+<p>The monthly requirements per planning period, <code>p_reqsPhaseMonths</code>, enter the equation structure of the model. The equations are differentiated by herd, year,
+planning period and state-of-nature (SON), and ensure the requirements are
+covered by an appropriate feed mix made out of different feeding
+stuff. The composition of the feed mix is determined endogenously. The total feed requirements for a farm in the different intra-yearly planning periods depend on the
+distribution of calving dates in the cow herd, therefore, cows of the
+same milk yield potential can be in different lactation phases during
+the year. The requirements of tons of feed, <em>v_feeding</em>, are
+differentiated by herd, breed, planning period (lactation phase of cow), SON and year, if the requirement phases are not defined for
+specific time spans after the herd start:</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">reqs_(actHerds(possHerds,breeds,feedRegime,tCur(t),m),reqsPhase,reqs,nCur)
+        $ (    p_reqsPhaseLengthMonths(possHerds,breeds,&quot;gen&quot;)
+             $ p_reqsPhaseMonths(possHerds,breeds,feedRegime,reqsphase,reqs)
+             $ t_n(t,nCur)) ..
+*
+*      --- herd size times requirements per head, minus year and SON specific reduction in milk yield
+
+
+         v_herdSize(possHerds,breeds,feedRegime,t,nCur,m)
+                 * p_reqsPhaseMonths(possHerds,breeds,feedRegime,reqsPhase,reqs)
+*
+*                       --- these corrections are endogenous during automatic calibration, otherwise fixed to
+*                           loaded calibration results or equal to unity
+*
+                        *(   v_reqsCorr(possHerds,breeds,&quot;Ener&quot;) $ (sameas(reqs,&quot;NEL&quot;) or sameas(reqs,&quot;ME&quot;))
+                           + v_reqsCorr(possHerds,breeds,&quot;Prot&quot;) $ (sameas(reqs,&quot;XP&quot;)  or sameas(reqs,&quot;nXP&quot;))
+                           + v_reqsCorr(possHerds,breeds,&quot;Rest&quot;) $ (not (    sameas(reqs,&quot;XP&quot;)  or sameas(reqs,&quot;nXP&quot;)
+                                                                          or sameas(reqs,&quot;NEL&quot;) or sameas(reqs,&quot;ME&quot;)))
+                         )
+*
+*      --- must be covered by feeding times the content of the feed stuff
+*
+          =L=   sum( feedRegime_feeds(feedRegime,curFeeds(feeds)) $ actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),
+                   v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,t,nCur) * p_feedContFMton(feeds,reqs))
+             ;
+</code></pre>
+<p>Alternatively, requirements can be linked to the start point of an
+animal process to break down the total requirement during the length of
+the production processes in phases. The equation is only switched on if
+the parameter <code>p_reqsPhaseLength</code> is non-zero:</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">reqsPhase_(possHerds,breeds,feedRegime,reqs,reqsPhase,m,t_n(tCur(t),nCur))
+             $ ( actHerds(possHerds,breeds,feedRegime,t,m)
+                  $ (not p_reqsPhaseLengthMonths(possHerds,breeds,&quot;gen&quot;))
+                  $ p_reqsPhase(possHerds,breeds,reqsPhase,reqs)) ..
+*
+*         --- herds which started in the months before the production length
+*
+*                   -- number of months that herd in that requirement phase during that period
+*                      multiplied with monthly requirements
+*
+              sum(actHerds(possHerds,breeds,feedRegime,t,m) $ p_reqsPhaseMonths(possHerds,breeds,feedRegime,reqsPhase,reqs),
+                     v_herdsReqsPhase(possHerds,breeds,feedRegime,reqsphase,m,t,nCur)
+                       * p_reqsPhaseMonths(possHerds,breeds,feedRegime,reqsPhase,reqs)
+
+*
+*                       --- these corrections are endogenous during automatic calibration, otherwise fixed to
+*                           loaded calibration results or equal to unity
+*
+                        *(   v_reqsCorr(possHerds,breeds,&quot;Ener&quot;) $ (sameas(reqs,&quot;NEL&quot;) or sameas(reqs,&quot;ME&quot;))
+                           + v_reqsCorr(possHerds,breeds,&quot;Prot&quot;) $ (sameas(reqs,&quot;XP&quot;)  or sameas(reqs,&quot;nXP&quot;))
+                           + v_reqsCorr(possHerds,breeds,&quot;Rest&quot;) $ (not (    sameas(reqs,&quot;XP&quot;)  or sameas(reqs,&quot;nXP&quot;)
+                                                                          or sameas(reqs,&quot;NEL&quot;) or sameas(reqs,&quot;ME&quot;)))
+                         ))
+*
+*      --- must be covered by feeding times the content of the feed stuff
+*
+          =L=   sum((actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),feedRegime_feeds(feedRegime,curFeeds(feeds))),
+                   v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,t,nCur) * p_feedContFMton(feeds,reqs))
+          ;
+</code></pre>
+<p>In a next step feeding amounts are aggregated to total feed use,
+<em>v_feeduse</em>, per each product and for each year, feed and planning
+period.</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">feedUse_(curFeeds(feedsY),t_n(tCur(t),nCur))  ..
+
+       v_feedUse(feedsY,t,nCur)
+
+           =e= sum(actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m) $ feedRegime_feeds(feedRegime,feedsY),
+                            v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feedsY,t,nCur));
+</code></pre>
+<p>For own produced feed which is not storable and shows a variable
+availability over the year, such as grass from pasture, an aggregation to
+the intra-year periods is done.</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">feedUseM_(curFeeds(feedsM),m,t_n(tCur(t),nCur)) $ sum(actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),1) ..
+
+       v_feedUseM(feedsM,m,t,nCur)
+
+           =e= sum( actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m) $ feedRegime_feeds(feedRegime,feedsM),
+                                           v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feedsM,t,nCur));
+</code></pre>
+<p>Feed is further differentiated into bought- (<em>v_feedUseBuy</em>) and self-produced (<em>v_feedUseProds</em>) feed.
+*
+* ---- Adding up the bought and own produced feed for cattle
+*
+     feedUseSource_(curFeeds(feedsY),t_n(tCur(t),nCur)) ..
+         v_feedUse(feedsY,t,nCur)   =E=
+                                          v_feedUseProds(feedsY,t,nCur) $ (sum(sameas(prodsYearly,feedsY),1))
+                                        + v_feedUseBuy(feedsY,t,nCur)   $ (sum(sameas(curInputs,feedsY),1)) ;</p>
+<p>In <em>sumReqs_</em> the total requirements <em>v_sumReqs</em> are linked to the total feed as in <em>v_feeduse</em> and <em>v_feedUseM</em>.                                      <br />
+*
+*   --- add requirements over herds, total and bought ones
+*
+    sumReqs_(reqs,t_n(tCur(t),nCur)) ..</p>
+<pre><code>     v_sumReqs(reqs,t,nCur)*1000 =E=
+                          sum( curFeeds(feedsY),     v_feedUse(feedsY,t,nCur)   * p_feedContFMton(feedsY,reqs))
+                        + sum( (curFeeds(feedsM),m), v_feedUseM(feedsM,m,t,nCur)* p_feedContFMton(feedsM,reqs));
+</code></pre>
+<p>In <em>sumReqsBought_</em> the links the total requirements from bought feedstuff, <em>v_sumReqsBought</em>, are summed up.                                      </p>
+<pre><code>sumReqsBought_(reqs,t_n(tCur(t),nCur)) ..
+
+     v_sumReqsBought(reqs,t,nCur)*1000
+           =E= sum( (sameas(feedsY,curInputs),sys) $ (p_inputprice%l%(curInputs,sys,t) $ curFeeds(feedsY)),
+                               v_buy(curInputs,sys,t,nCur)*p_feedContFMton(feedsY,reqs));
+</code></pre>
+<p><em>herdsByFeedRegime_</em> distributes the herds as in <em>v_herdSize</em> to the requirement phases in <em>v_herdsReqsPhase</em>.                                     </p>
+<pre><code>herdsByFeedRegime_(possHerds,curBreeds,feedRegime,t_n(tCur(t),nCur),m)
+       $ (actHerds(possHerds,curBreeds,feedRegime,t,m)
+            $ sum(reqsPhase $ (not sameas(reqsPhase,"gen")), p_reqsPhaseLengthMonths(possHerds,curBreeds,reqsPhase))) ..
+
+    v_herdSize(possHerds,curBreeds,feedRegime,t,nCur,m)
+
+         =E= sum(reqsPhase $ p_reqsPhase(possHerds,curBreeds,reqsPhase,"DMMX"),
+                v_herdsReqsPhase(possHerds,curBreeds,feedRegime,reqsphase,m,t,nCur)
+                );
+</code></pre>
+<p><em>herdsReqsPhase_</em> determines the herds  in a current time point (<em>v_herdstart</em>) and maps them to their current requirement phase and there current production cycle <em>v_herdsReqsPhase</em> (e.g. dry cows in second lactation).</p>
+<pre><code>herdsReqsPhase_(possHerds,breeds,reqsPhase,m,t_n(tCur,nCur))
+     $ ( (not p_reqsPhaseLengthMonths(possHerds,breeds,"gen"))
+           $ sum(feedRegime, actHerds(possHerds,breeds,feedRegime,tCur,m))
+             $ p_reqsPhase(possHerds,breeds,reqsPhase,"DMMX")  ) ..
+
+      sum(actHerds(possHerds,breeds,feedRegime,tCur,m),
+            v_herdsReqsPhase(possHerds,breeds,feedRegime,reqsphase,m,tCur,nCur))
+</code></pre>
+<ul>
+<li>--- herds which started in the months before the production length, in case for piglets a separate construct is used
+        =E=
+          sum(phase_reqsPhase(phase,reqsPhase) $ p_reqsPhaseStart(possHerds,breeds,phase),
+            sum( (t1,nCur1,m1) $ ( t_n(t1,nCur1) $ isNodeBefore(nCur,nCur1)
+                              $ [ (     ( -p_mDist(tCur,m,t1,m1)+1-p_reqsPhaseStart(possHerds,breeds,phase)       ge 0)
+                                   $    ( -p_mDist(tCur,m,t1,m1)+1-p_reqsPhaseStart(possHerds,breeds,phase)
+                                      - p_reqsPhaseLengthMonths(possHerds,breeds,reqsPhase) lt 0) $ (p_mDist(tCur,m,t1,m1) le 0)<pre><code>                           $    (-p_mDist(tCur,m,t1,m1) le (p_prodLength(possHerds,breeds)-1))
+
+                          )
+
+                      or  (
+                               ( -p_mDist(tCur,m,t1,m1)+13-p_reqsPhaseStart(possHerds,breeds,phase)    ge 0)
+                           $   ( -p_mDist(tCur,m,t1,m1)+13-p_reqsPhaseStart(possHerds,breeds,phase)
+                                  - p_reqsPhaseLengthMonths(possHerds,breeds,reqsPhase) lt 0)    )   $ p_compStatHerd
+                         ]
+                        $ sum(feedRegime,actHerds(possHerds,breeds,feedRegime,t1,m1))
+                       ),
+
+            v_herdStart(possHerds,breeds,t1,nCur1,m1)
+</code></pre>
+<p>*
+*                   --- minus, in case of cows, slaughtered before reaching the final age
+*
+               -sum( (slgtCows,cows) $ (sum(feedRegime, actHerds(slgtCows,breeds,feedRegime,t1,m1))
+                    $ sameas(cows,possHerds) $ (slgtCows.pos eq cows.pos)),
+                         v_herdStart(slgtCows,breeds,t1,nCur1,m1))
+       ));</p>
+</li>
+</ul>
+<p>In <em>feedUseHerds_</em> the monthly feeding <em>v_feeding</em> is summed up to yearly feeding <em>v_feedUseHerds</em></p>
+<pre><code>feedUseHerds_(possHerds,curFeeds(feeds),t_n(tCur(t),nCur)) $ sum(actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),1) ..
+
+   v_feedUseHerds(possHerds,feeds,t,nCur)
+
+       =e= sum(actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m)$ feedRegime_feeds(feedRegime,feeds),
+                             v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,t,nCur));
+</code></pre>
+<p><em>maxChlorella_</em> restricts the maximum dry-matter intake of animals in the form of chlorella-algae to 10% of the total dry matter intake.</p>
+<p>maxChlorella_(possHerds,t_n(tCur(t),nCur)) $ (curFeeds("Chlorella")
+           $ sum(actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),1)) ..</p>
+<pre><code>v_feedUseHerds(possHerds,"Chlorella",t,nCur) =L=
+  0.1 * sum((actHerdsF(possHerds,breeds,feedRegime,reqsPhase,m),feeds)$ feedRegime_feeds(feedRegime,feeds),
+                        v_feeding(possHerds,breeds,feedRegime,reqsPhase,m,feeds,t,nCur));
+</code></pre>
+<p>In <em>sumHerdsYY_</em> calculates the yearly herd-size by summing up <em>v_herdSize</em> over feedRegime and month.</p>
+<p>sumHerdsYY_(sumHerdsY,breeds,t_n(t,nCur)) $ ( (tCur(t) or tBefore(t))
+                                     $  sum(actHerds(sumHerdsY,breeds,feedRegime,t,m),1)) ..</p>
+<pre><code>   v_sumherd(sumHerdsY,breeds,t,nCur)
+      =e= sum((feedRegime,m) $ actHerds(sumHerdsY,breeds,feedRegime,t,m),
+                           v_herdSize(sumHerdsY,breeds,feedRegime,t,nCur,m));
+</code></pre>
+<p>The equation <em>avgLactations_</em> orders the herdsize times the pre-determined average lactation length from the GUI, <em>p_nLactations</em>, into a linear combination of integer lactation lenghts as in <em>p_nLac</em>.</p>
+<p>*
+*   --- recover average lactations (e.g. 3.7) from short (e.g. 3 lactations) and long (e.g. 4 lactations) cows
+*
+    avgLactations_(breeds,t_n(t,nCur)) $ sum((feedRegime,m), actHerds("cows",breeds,feedRegime,t,m)) ..</p>
+<pre><code>     sum( (dCows,feedRegime,m) $ actHerds(dCows,breeds,feedRegime,t,m),
+           v_herdSize(dCows,breeds,feedRegime,t,nCur,m)*p_nLactations)
+    =E=
+
+      sum( (dCows,feedRegime,m) $ actHerds(dCows,breeds,feedRegime,t,m),
+           v_herdSize(dcows,breeds,feedRegime,t,nCur,m)*p_nLac(dCows));
+</code></pre>
+<p>The number of new calves <em>v_herdStart</em> is differentiated by gender and
+breed, in a year <em>t</em>, and specific month <em>m</em>, and depends on the herd
+size of cows of each breed and a specific calving coefficient. The left hand side adds up all male and female calves, if cross-breeding is switched on, adding the cross-breeds.
+<em>ActHerds</em> is a flag set to define which herds might enter the solution
+for a specific year.</p>
+<!-- This is the embedmd for lines 361 - 389 in cattle_module.gms (asked for in the word doc) -->
+<pre><code class="language-GAMS">newCalves_(dairyBreeds,t,nCur,m) $ ( sum( (calvs,feedRegime), actHerds(calvs,dairyBreeds,feedRegime,t,m))
+                        $ (p_Year(t) le p_year(&quot;%lastYear%&quot;)) $ t_n(t,nCur) $ (not sameas(dairyBreeds,&quot;%crossBreed%&quot;))) ..
+*
+*      --- new born calves (for females by genetic potential for milk yield) are born
+*          from the current herd of cows
+*
+                  v_herdStartBornCalvsRais(&quot;fCalvsRais&quot;,dairyBreeds,t,nCur,m)  $ sum(feedRegime,actHerds(&quot;fCalvsRais&quot;,dairyBreeds,feedRegime,t,m))
+                + v_herdStart(&quot;fCalvsSold&quot;,dairyBreeds,t,nCur,m)  $ sum(feedRegime,actHerds(&quot;fCalvsSold&quot;,dairyBreeds,feedRegime,t,m))
+                + v_herdStart(&quot;mCalvsSold&quot;,dairyBreeds,t,nCur,m)  $ sum(feedRegime,actHerds(&quot;mCalvsSold&quot;,dairyBreeds,feedRegime,t,m))
+                + v_herdStartBornCalvsRais(&quot;mCalvsRais&quot;,dairyBreeds,t,nCur,m)  $ sum(feedRegime,actHerds(&quot;mCalvsRais&quot;,dairyBreeds,feedRegime,t,m))
+              $$iftheni.crossBreed &quot;%crossBreeding%&quot;==&quot;true&quot;
+                + v_herdStartBornCalvsRais(&quot;fCalvsRais&quot;,&quot;%crossBreed%&quot;,t,nCur,m) $ (sum(feedRegime,actHerds(&quot;fCalvsRais&quot;,&quot;%crossBreed%&quot;,feedRegime,t,m)) $ sameas(dairyBreeds,&quot;%crossBreedBase%&quot;))
+                + v_herdStart(&quot;fCalvsSold&quot;,&quot;%crossBreed%&quot;,t,nCur,m) $ (sum(feedRegime,actHerds(&quot;fCalvsSold&quot;,&quot;%crossBreed%&quot;,feedRegime,t,m)) $ sameas(dairyBreeds,&quot;%crossBreedBase%&quot;))
+                + v_herdStart(&quot;mCalvsSold&quot;,&quot;%crossBreed%&quot;,t,nCur,m) $ (sum(feedRegime,actHerds(&quot;mCalvsSold&quot;,&quot;%crossBreed%&quot;,feedRegime,t,m)) $ sameas(dairyBreeds,&quot;%crossBreedBase%&quot;))
+                + v_herdStartBornCalvsRais(&quot;mCalvsRais&quot;,&quot;%crossBreed%&quot;,t,nCur,m) $ (sum(feedRegime,actHerds(&quot;mCalvsRais&quot;,&quot;%crossBreed%&quot;,feedRegime,t,m)) $ sameas(dairyBreeds,&quot;%crossBreedBase%&quot;))
+             $$endif.crossBreed
+
+          =e= sum( (cows,t1,nCur1,m1,mDist) $ (sum(feedRegime,actHerds(cows,dairyBreeds,feedRegime,t1,m1))
+                  $ (      (mDist.pos  eq -p_mDist(t,m,t1,m1))
+                         or (mDist.pos eq -p_mDist(t,m,t1,m1)+12) $ p_compStatHerd)
+                       $ t_n(t1,nCur1) $ herds_breeds(cows,dairyBreeds) $ sameScen(nCur,nCur1)),
+                         ( v_herdStart(cows,dairyBreeds,t1,nCur1,m1)
+                          -sum(slgtCows $((cows.pos eq slgtCows.pos) $ sum(feedRegime,actHerds(slgtcows,dairyBreeds,feedRegime,t1,m1))),
+                                           v_herdStart(slgtCows,dairyBreeds,t1,nCur1,m1)))
+                           * p_calvCoeff(cows,dairyBreeds,mDist))
+;
+</code></pre>
+<p>The calving coefficients are defined in the <em>Cows</em> tab of the Graphical User Interface (GUI).
+Here, the amount of births per lactation, living calves per birth, calf losses, and days between births can be set for the different breeds Holstein-Friesian (HF), Simmental (SI, which stands a placeholder for the individual breed defined in the GUI), and mother cows. The values are stored in the parameter <em>p_calvAttr</em>.</p>
+<p>The amount of calves born in a given month is derived from the information entered in the GUI with the help of an entropy estimator. For the sake of simplicity, but without loss of generality, it is assumed that birth is equally likely in the two months surrounding the average calving interval.</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">set curCycleLength / l11*l15 /;
+*
+*  --- entropy estimator
+*
+   variable v_ent &quot;Entropy&quot;;
+   positive variables         v_prob(cowTypes,curCycleLength)
+
+   parameter p_cycleLength(curCycleLength);
+   p_cycleLength(curCycleLength) = 10 + curCycleLength.pos;
+
+
+   equation e_ent                    &quot;Entropy definition&quot;
+            e_daysBetweenBirths      &quot;Recover given information on inter calving interval&quot;
+            e_sumUnity               &quot;Probs add up to unity&quot;
+   ;
+
+   e_ent .. -v_ent =E=  sum( (cowTypes,curCycleLength),v_prob(cowTypes,curCycleLength)
+                                 * log(v_prob(cowTypes,curCycleLength)/card(curCycleLength)));
+
+   e_daysBetweenBirths(cowTypes) ..
+        p_calvAttr(cowTypes,&quot;daysBetweenBirths&quot;)/30.5
+                 =E=  sum(curCycleLength, v_prob(cowTypes,curCycleLength)* p_CycleLength(curCycleLength));
+
+   e_sumUnity(cowTypes) $ (not sameas(cowTypes,&quot; &quot;)) ..  sum(curCycleLength, v_prob(cowTypes,CurCycleLength)) =E= 1;
+
+   v_prob.up(cowTypes,curCycleLength) = 1;
+   v_prob.lo(cowTypes,curCycleLength) = 1.E-5;
+
+   v_prob.fx(cowTypes,curCycleLength) $ (p_calvAttr(cowTypes,&quot;daysBetweenBirths&quot;)/30.5 lt p_CycleLength(curCycleLength)-1) = 1.E-6;
+   v_prob.fx(cowTypes,curCycleLength) $ (p_calvAttr(cowTypes,&quot;daysBetweenBirths&quot;)/30.5 gt p_CycleLength(curCycleLength)+1) = 1.E-6;
+
+   v_prob.l(cowTypes,CurCycleLength)  = 1/card(CurCycleLength);
+
+   model m_ent / e_ent,e_daysBetweenBirths,e_sumUnity /;
+   m_ent.solprint = 2;
+$ifi &quot;%debugOutput%&quot;==&quot;true&quot; m_ent.solprint = 1;
+
+   solve m_ent maximizing v_ent using NLP;
+</code></pre>
+<p>The calving probabilities are then mapped to the actual endogenous calving distribution in the parameter <em>p_calvCoeff</em> which is subsequently used in the <em>herdStart_</em> equation.  </p>
+<!-- The following embedmd seems to be overtaken -->
+<p><a href="#" title="N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/cattle_module.gms GAMS /maleFemaleRel_.*?nCur/ /;/">^Comment</a>:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/ini_herds.gms GAMS /p_calvCoeff<span class="arithmatex">\(dCows,"%basBreed%",mDist\)</span>/ /;/)</p>
+<pre><code class="language-GAMS">p_calvCoeff(dCows,&quot;%basBreed%&quot;,mDist)
+     $ ( (mDist.pos ge 12)
+          $ (mDist.pos/12 le (ceil(p_nlac(dcows)))*p_calvAttr(&quot;%cowType%&quot;,&quot;daysBetweenBirths&quot;)/365))
+            = sum( curCycleLength $ (mod(mDist.pos-1,curCycleLength.pos+11) eq 0),
+                p_livingCalvesPerYear(dCows,&quot;%basBreed%&quot;) * v_prob.l(&quot;%cowType%&quot;,curCycleLength)  );
+</code></pre>
+<p>For a cow with a lifespan of four lactations, the calving distribution is depicted in the following figure. Notice how the distribution widens with increasing amounts of lactations.</p>
+<p><img alt="Calving Distribution" src="../../../../media/HerdModule/Bild_2.png" />
+:    Figure 2: Calving Distribution of a Cow with Four Lactations, according to the Endogenous Calculation.
+:    Source: Own representation.</p>
+<p>The equation <em>calvesRaisBal_</em> adds the possibility to buy calves for raising from the market (<em>v_herdStart(calvesBought)</em>) besides the own produced calves (<em>v_herdStartBornCalvsRais</em>) by adding them to the herd of raised calves as in <em>v_herdStart</em></p>
+<pre><code>calvesRaisBal_(calvsRais,dairyBreeds,t_n(t,nCur),m)
+      $ ( sum(actHerds(calvs,dairyBreeds,feedRegime,t,m),1) $ (p_Year(t) le p_year("%lastYear%"))) ..
+
+    v_herdStart(calvsRais,dairyBreeds,t,nCur,m)
+
+       =E=
+
+          v_herdStartBornCalvsRais(calvsRais,dairyBreeds,t,nCur,m)
+
+        + sum(calvesBought $ ((calvsRais.pos eq calvesBought.pos) $ actHerds(calvesBought,dairyBreeds,"",t,m)),
+            v_herdStart(calvesBought,dairyBreeds,t,nCur,m))  $ (not sameas(dairyBreeds,"%crossBreed%"))
+;
+</code></pre>
+<h2 id="sexing">Sexing</h2>
+<p>The GUI allows the use of sexing. To do this, the corresponding fields must be clicked on in the Cows tab under Breeding and costs must be specified.
+Sexing changes the male-female balance equation (see <em>gams\model\cattle_module.gms</em>):</p>
+<!-- Keep? -->
+<pre><code class="language-GAMS">maleFemaleRel_(breeds, t_n(t,nCur),m) $ (sum(actHerds(calvs,breeds,feedRegime,t,m),1)
+                                                        $ (p_Year(t) le p_year(&quot;%lastYear%&quot;))) ..
+
+                 [
+                   v_herdStartBornCalvsRais(&quot;fCalvsRais&quot;,breeds,t,nCur,m) $ sum(feedRegime,actHerds(&quot;fCalvsRais&quot;,breeds,feedRegime,t,m))
+                 + v_herdStart(&quot;fCalvsSold&quot;,breeds,t,nCur,m) $ sum(feedRegime,actHerds(&quot;fCalvsSold&quot;,breeds,feedRegime,t,m))
+                 ] /0.495
+
+                 - v_sexingF(breeds,t,nCur,m)*0.5
+                 + v_sexingM(breeds,t,nCur,m)*0.5
+
+             =E=
+                 + v_sexingF(breeds,t,nCur,m)*0.5
+                 - v_sexingM(breeds,t,nCur,m)*0.5
+
+             +[
+                   v_herdStartBornCalvsRais(&quot;mCalvsRais&quot;,breeds,t,nCur,m) $ sum(feedRegime,actHerds(&quot;mCalvsRais&quot;,breeds,feedRegime,t,m))
+                 + v_herdStart(&quot;mCalvsSold&quot;,breeds,t,nCur,m) $ sum(feedRegime,actHerds(&quot;mCalvsSold&quot;,breeds,feedRegime,t,m))
+              ] / 0.505;
+</code></pre>
+<p>If sexing is switched off, the number of female siblings (LHS) must be (approximately) equal to the males ones (RHS). Sexing an insemination to male will take 0.5 female out and increase the number of males of 0.5. Female sexing leads to the opposite effect.</p>
+<h3 id="grassland">Grassland</h3>
+<p>One of the particularities of cattle is the utilization of grassland for production. Through the process of enteric fermentation cattle, like other ruminants, is able to utilize cellulose as feed. Because grasslandis specific to cattle some of the related equations that depict grasslands in the model are part of the cattle module. In the model, grasslands  can be harvested and stored as silage or hay that then can be fed over the year or it can be used as pasture where the harvested material has to be consumed by the grazing herd directly. <br />
+The total annual amount of grazed material is calculated in <em>prodsMY_</em>. <em>v_prodsIntr</em> is the monthly sum of the  output from grazing.</p>
+<p>*
+*   --- production of non-marketable feed per intra-year planning period
+*
+    prodsMY_(curProds(prodsMonthly),t_n(tCur(t),nCur),m) $ sum( (c_p_t_i(curCrops(crops),plot,till,intens))
+                                                        $ (v_cropHa.up(crops,plot,till,intens,tCur,nCur) ne 0),
+                                                          sum(plot_soil(plot,soil),p_OCoeffM%l%(crops,soil,till,intens,prodsMonthly,m,t))
+                                                         $ curProds(prodsMonthly)) ..</p>
+<pre><code>   v_prodsIntr(prodsMonthly,t,nCur,m)
+     =e= sum( c_p_t_i(curCrops(crops),plot,till,intens),
+                  v_cropHa(crops,plot,till,intens,t,nCur)
+                     * sum(plot_soil(plot,soil) $ p_OCoeffM%l%(crops,soil,till,intens,prodsMonthly,m,t),
+                                    p_OCoeffM(crops,soil,till,intens,prodsMonthly,m,t)));
+</code></pre>
+<p>The monthly grazing output <em>v_prodsIntr</em> has to be completely used as feed, <em>v_feedUseM</em>.    </p>
+<p>*
+*   --- these products must be exhausted by feed use
+*
+    prodsM_(curProds(prodsMonthly),m,t_n(tCur(t),nCur)) ..</p>
+<pre><code>   sum(sameas(prodsMonthly,curFeeds(feedsM)),v_feedUseM(feedsM,m,t,nCur))
+
+     =e=
+</code></pre>
+<ul>
+<li>--- crop output
+           v_prodsIntr(prodsMonthly,t,nCur,m) $ sum( c_p_t_i(curCrops(crops),plot,till,intens)
+                $ (v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0),
+                  sum(plot_soil(plot,soil),p_OCoeffM%l%(crops,soil,till,intens,prodsMonthly,m,t))) ;</li>
+</ul>
+<p>In <em>herdExcrPast_</em> the grazing herds are distributed to the grazing types based on their daily time on the pasture. The grazing regime "<em>fullGraz</em>" corresponds to the animals staying the whole day on pasture while <em>partGraz</em> corresponds to the animals staying half the day on pasture. This is considered trough the multipliers 1 and 0.5, respectively. Which herd grazes on which plot at which time is finally depicted in the variable <em>v_herdExcrPast</em>.   </p>
+<p>*
+*   -- distribute grazing herds to grazing plots
+*      (nutrient balancing equation in templ.gms should lead to a reasonable allocation)
+*
+    herdExcrPast_(possHerds,grazRegime,t_n(tCur(t),nCur),m) $ (sum(grasscrops $ (p_grazMonth(grassCrops,m)&gt;0),1)
+                                                                $ sum(actHerds(possHerds,breeds,grazRegime,t,m)
+                                                                   $ sum(nut2,p_nutExcreDueV(possHerds,grazRegime,nut2)),1)) ..</p>
+<pre><code>    sum(c_p_t_i(curCrops(pastcrops),plot,till,intens)$(p_grazMonth(pastCrops,m)&gt;0),
+       v_herdExcrPast(curCrops,plot,till,intens,possHerds,grazRegime,tCur,nCur,m)) =e=
+
+                   sum(actHerds(possHerds,breeds,grazRegime,t,m)
+                          $ sum(nut2,p_nutExcreDueV(possHerds,grazRegime,nut2)),
+                             v_herdSize(possHerds,breeds,grazRegime,t,nCur,m)
+
+                               * (     1   $ sameas(grazRegime,"fullGraz")
+                                     + 0.5 $ sameas(grazRegime,"partGraz")));
+</code></pre>
+<p>Based on the herds grazign for each grazing type the aoccrding nutrient excretion is calculated in <em>nut2ManurePast_</em>. The number of animals grazing on each grazign type in the variable <em>v_herdExcrPast</em> is multiplied by the animal specific nutrient excretion in <em>p_nutExcreDueV</em>. The nutrients excreted on each type are shown in the variable <em>v_nut2ManurePast</em>.                   </p>
+<p>*
+* --- derive for each plot the resulting nutrient excretion
+*
+   nut2ManurePast_(c_p_t_i(curCrops(pastcrops),plot,till,intens),allNut,t_n(tCur(t),nCur),m)
+                                                $ ( (p_grazMonth(pastCrops,m)&gt;0)
+                                                    $ sum(actHerds(possHerds,breeds,grazRegime,t,m),1)) ..</p>
+<pre><code> v_nut2ManurePast(pastcrops,plot,till,intens,allNut,t,nCur,m)
+    =E=  sum((possHerds,grazRegime) $ sum(actHerds(possHerds,breeds,grazRegime,t,m),1),
+                   v_herdExcrPast(pastcrops,plot,till,intens,possHerds,grazRegime,t,nCur,m)
+                                              * p_nutExcreDueV(possHerds,grazRegime,allNut)) * 1/card(m);
+</code></pre>
+<p>The total amount of excreted nutrients on pastures is summarized in the variable <em>v_nutExcrPast</em></p>
+<p>*
+*  --- add up over excretion allocated to individual grazing activities
+*
+   nutExcrPast_(allNut,t_n(tCur(t),nCur),m)$(  sum(pastcrops $(p_grazMonth(pastCrops,m)&gt;0),1)
+                                                $ sum(actHerds(possHerds,breeds,grazRegime,t,m),1)) ..</p>
+<pre><code>   v_nutExcrPast(allNut,t,nCur,m) =e= sum(c_p_t_i(curCrops(pastcrops),plot,till,intens)
+                                               $ ((p_grazMonth(pastCrops,m)&gt;0)
+                                               $ sum(actHerds(possHerds,breeds,grazRegime,t,m),1)),
+                                           v_Nut2ManurePast(pastcrops,plot,till,intens,allNut,t,nCur,m));
+</code></pre>
+<p>For the calculation of methane emissions from pasture the physical amount of excreta is calculated in <em>manQuantPast_</em>. The calculation is analogue to the nutrient calculation in <em>nut2ManurePast_</em>.</p>
+<p>*
+*   --- manure quantity excreted on pasture for emission calculation
+*</p>
+<pre><code>manQuantPast_(pastcrops,plot,till,intens,curManChain(manChain),t_n(tCur(t),nCur),m)
+      $ (c_p_t_i(pastcrops,plot,till,intens) $ (p_grazMonth(pastCrops,m)&gt;0) ) ..
+
+    v_manQuantPast(pastcrops,plot,till,intens,manChain,t,nCur,m)  =e=
+
+             sum((possHerds,grazRegime) $ (sum(actHerds(possHerds,breeds,grazRegime,t,m),1)
+                                              $ manChain_herd(curManChain,possHerds)
+                                              $c_p_t_i(pastcrops,plot,till,intens)),
+                             v_herdExcrPast(pastcrops,plot,till,intens,possHerds,grazRegime,t,nCur,m)
+                                                        * p_manQuantMonth(possHerds,curManChain)) * 1/card(m);
+</code></pre>
+<p>Grasslands are a distinct landuse-type in the model. Therefore, per default they are exempted from arable lands by limiting their acreage in <em>v_cropHa</em> to the endowment of grasslands given by the number of plots <em>v_buyPlot</em> and their respective size <em>p_buyPlotSize</em>. If chosen via the interface, grassland maybe used as cut grasland for hay and silage can be grown on arable lands. In that case only grazing use of grassland is limited to the endowment of grassland.</p>
+<p>*
+*  --- Equation to ensure that there is no gras on arable land
+*
+   fixGrasLand_(t_n(tCur(t),nCur)) ..</p>
+<pre><code>  $$iftheni.grasOnArab "%grasOnArab%"=="true"
+</code></pre>
+<p>*
+<em>         --- grasslands for cutting allowed on arable land: exclude that pasture use exceed available
+*             land equipped with fences
+*
+          sum( c_p_t_i(grassCrops(curCrops),plot,till,intens) $ (past(curCrops) or mixPast(curCrops)), v_cropHa(curCrops,plot,till,intens,t,nCur)  )
+      $$else.grasOnArab
+          sum( c_p_t_i(grassCrops(curCrops),plot,till,intens), v_cropHa(curCrops,plot,till,intens,t,nCur)  )
+      $$endif.grasOnArab
+                                =l=
+          sum(plot $ (not plot_landType(plot,"arab")), p_plotSize(plot)
+             + sum( (t1,nCur1) $ (t_n(t1,nCur1) $ tcur(t1) $ isNodeBefore(nCur,nCur1) $ (ord(t1) le ord(t))), v_buyPlot(plot,t1,nCur1)</em>p_buyPlotSize))
+             ;</p>
+<p>A further differentiation of grasslands are pastures that are non-machineable meaning they can only be used through grazing animals. ???</p>
+<p>*
+*  --- Equation to ensure no cut grasland on pastureland
+*
+   fixPastLand_(t_n(tCur(t),nCur))  ..</p>
+<pre><code>   sum( c_p_t_i(curCrops,plot,till,intens) $ (gras(curCrops) or mixPast(curCrops)), v_cropHa(curCrops,plot,till,intens,t,nCur)  )
+                            =l=
+  $$iftheni.grasOnArab "%grasOnArab%"=="true"
+      sum(plot $ (not plot_landType(plot,"past")), p_plotSize(plot)
+         + sum( (t1,nCur1) $ (t_n(t1,nCur1) $ tcur(t1) $ isNodeBefore(nCur,nCur1) $ (ord(t1) le ord(t))), v_buyPlot(plot,t1,nCur1)*p_buyPlotSize))
+  $$else.grasOnArab
+      sum(plot_landType(plot,"gras") $ (not plot_landType(plot,"past")), p_plotSize(plot)
+         + sum((t1,nCur1) $ (t_n(t1,nCur1) $ tcur(t1) $ isNodeBefore(nCur,nCur1) $ (ord(t1) le ord(t))), v_buyPlot(plot,t1,nCur1)*p_buyPlotSize)
+      )
+  $$endif.grasOnArab
+   ;
+</code></pre>
+<p>The helper equations <em>hasHerdOrderDairy_</em> and <em>hasHerdOrderMotherCows_</em> make sure that if no herd is present in year t-1, no herd is there in the current year.</p>
+<p>*
+*   --- if no herd in t-1, then also no herd in the current year
+*       (for dairy and mother cows)
+*
+$iftheni.dh %dairyherd%==true
+    hasHerdOrderDairy_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..</p>
+<pre><code>   v_HasBranch("dairy",t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasBranch("dairy",t-1,nCur1));
+</code></pre>
+<p>$endif.dh</p>
+<p>$iftheni.mc "%farmBranchMotherCows%"=="on"
+    hasHerdOrderMotherCows_(tCur(t),nCur) $ (tCur(t-1) $ t_n(t,nCur)) ..</p>
+<pre><code>   v_HasBranch("motherCows",t,nCur) =L= sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_hasBranch("motherCows",t-1,nCur1));
+</code></pre>
+<p>$endif.mc</p>
+<p>Further helper equations make sure that the initial cattle herd that is build up in pre-runs is equal to the herds in the starting year of the simulation.
+Therefore, the first simulated year is determined depending on the model dynamics in the following:</p>
+<p>*
+*   --- steady state before the actual simulation starts
+*
+$iftheni.compStat "%Dynamics%"=="Comparative-static"</p>
+<p>$eval firstYear1 %firstYear%</p>
+<p>$elseifi.compStat "%Dynamics%"=="Short run"</p>
+<p>$eval firstYear1 %firstYear%</p>
+<p>$else.compStat</p>
+<p>$eval firstYear1 %firstYear%+1</p>
+<p>$endif.compStat</p>
+<p>The equations <em>herdsBefore_</em> and <em>herdsStartBefore_</em> then force the herd-size of the pre-run into the first year of the simulation.</p>
+<pre><code>herdsBefore_(possHerds(herds),breeds,feedRegime,tbefore,t,nCur,m) $ (  actHerds(herds,breeds,feedRegime,tBefore,m)
+                                                          $ actHerds(herds,breeds,feedRegime,t,m)
+                     $ (sameas(t,"%firstYear%") $ t_n(t,nCur))
+                                               $ (
+   $$iftheni %cowherd%==true
+                                                       sameas(herds,"cows")
+                                                   or  sum(sameas(herds,heifs),1)
+                                                   or  sameas(herds,"slgtCows")
+                                                   or  sameas(herds,"remonte")
+                                                   or  sameas(herds,"motherCow")
+
+
+                                                   or  remonte(herds)
+                                                   or  sameas(herds,"fCalvsRais")
+                                                   or  sameas(herds,"mCalvsRais")
+                                                   or  sameas(herds,"fCalvsSold")
+                                                   or  sameas(herds,"mCalvsSold")
+
+        $$ifi "%farmBranchBeef%"=="on"             or
+   $$endif
+
+   $$ifi "%farmBranchBeef%"=="on"                      sum(sameas(herds,bulls),1)
+   $$ifi "%farmBranchBeef%"=="on"                  or  sameas(herds,"bullsSold")
+   $$ifi "%farmBranchBeef%"=="on"                  or  sameas(herds,"bullsBought")
+   $$ifi "%farmBranchMotherCows%"=="on"            or sum(sameas(herds,bulls),1)
+                                           )) ..
+
+
+
+  sum(t_n(tBefore,nCur1) $ sameScen(nCur1,nCur) ,v_herdSize(herds,breeds,feedRegime,tBefore,nCur1,m))
+      =E= v_herdSize(herds,breeds,feedRegime,t,nCur,m);
+
+herdsStartBefore_(possHerds(herds),breeds,tbefore,t,nCur,m) $ (sum(feedRegime,actHerds(herds,breeds,feedRegime,tBefore,m))
+                            $ (sameas(t,"%firstYear%") or sameas(t,"%firstYear1%")) $ t_n(t,nCur)
+                                               $  (
+                                                        sameas(herds,"MotherCow")
+                                   $$ifi defined heifs  or sum(sameas(herds,heifs),1)
+                                   $$ifi defined bulls  or sum(sameas(herds,bulls),1)
+                                                     or sameas(herds,"remonteMotherCows")
+                                                  )
+                                               ) ..
+</code></pre>
+<ul>
+<li>--- steady state: starting herds before the first fully simulated year are equal to that one
+*
+      sum(t_n(tBefore,nCur1) $ sameScen(nCur1,nCur),v_herdStart(herds,breeds,tBefore,nCur1,m))
+              =E=  v_herdStart(herds,breeds,t,nCur,m);</li>
+</ul>
+<h2 id="references">References</h2>
+<p>Huth, F.W. (1995): Die Laktation des Rindes -- Analyse, Einfluß, Korrektur. Eugen Ulmer GmbH &amp; Co. Stuttgart</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The regression models originate from the <a href="http://www.zifo-bayern.de/">"Zifo2" Target-value fodder optimization program</a> of the LfL Bayern.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

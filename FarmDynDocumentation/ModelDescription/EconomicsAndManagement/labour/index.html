@@ -1,0 +1,2036 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/EconomicsAndManagement/labour/">
+      
+      
+        <link rel="prev" href="../investment_and_financing/">
+      
+      
+        <link rel="next" href="../../BuildingsAndMachines/machinery/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Labour - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#labour" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Labour
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="true">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Labour
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Labour
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-concept" class="md-nav__link">
+    General Concept
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-need-for-the-farm-branches-and-general-management" class="md-nav__link">
+    Labour Need for the Farm Branches and General Management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-need-for-herd-cropping-operations-and-off-farm-work" class="md-nav__link">
+    Labour Need for Herd, Cropping, Operations and Off-Farm Work
+  </a>
+  
+    <nav class="md-nav" aria-label="Labour Need for Herd, Cropping, Operations and Off-Farm Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herd-activities-and-cropping" class="md-nav__link">
+    Herd Activities and Cropping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#farm-operations" class="md-nav__link">
+    Farm Operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#off-farm-work" class="md-nav__link">
+    Off-Farm Work
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-concept" class="md-nav__link">
+    General Concept
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-need-for-the-farm-branches-and-general-management" class="md-nav__link">
+    Labour Need for the Farm Branches and General Management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-need-for-herd-cropping-operations-and-off-farm-work" class="md-nav__link">
+    Labour Need for Herd, Cropping, Operations and Off-Farm Work
+  </a>
+  
+    <nav class="md-nav" aria-label="Labour Need for Herd, Cropping, Operations and Off-Farm Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herd-activities-and-cropping" class="md-nav__link">
+    Herd Activities and Cropping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#farm-operations" class="md-nav__link">
+    Farm Operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#off-farm-work" class="md-nav__link">
+    Off-Farm Work
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="labour">Labour</h1>
+<blockquote>
+<p><strong><em>Abstract</em></strong><br />
+The labour module optimises work use on- and off-farm with a monthly resolution, depicting detailed labour needs for different farm operations, herds and stables, management requirements for each farm branch, and the farm as a whole. Off-farm work distinguishes between half- and full-time work (binaries) and working flexibly for a low wage rate.</p>
+</blockquote>
+<h2 id="general-concept">General Concept</h2>
+<p>The template differentiates between three types of labour on farm:</p>
+<ol>
+<li>
+<p><strong>General management and further activities for the whole farm,</strong>
+    <em>p_labManag("farm","const"</em>) - needed as long as the farm is not abandoned;
+    <em>v_hasFarm</em> = 1 - <em>binary variable</em> and not depending on the level of individual farm activities.</p>
+</li>
+<li>
+<p><strong>Management activities and further activities depending on the size</strong>
+    Of farm branches such as arable cropping, dairying, beef fattening, pig fattening, and piglet production.
+    The necessary working hours are broken down into a base need, <em>const</em> which is linked to having the respective farm branch, <em>v_hasBranch</em> (integer) and a linear term depending on its size, <em>slope</em>.</p>
+</li>
+<li>
+<p><strong>Labour needs for certain farm operations</strong> (aggregated to
+    <em>v_labTot</em>).</p>
+</li>
+</ol>
+<p>The sum of total labour needs cannot exceed total yearly available labour from on-farm sources plus hired workers (see following equation). It is further assumed that household members which work off-farm require more leisure time than members who work on-farm. As discussed below, there are further restrictions with regard to monthly labour and available field working days.</p>
+<pre><code class="language-GAMS">TimeTot_(t_n(tCur(t),nCur)) ..
+*
+*       --- total on- and off-farm labour
+*
+        v_labTot(t,nCur)
+
+         =L=
+*
+*                         ---- max work time if all family members work on the farm
+*
+                          p_yearlyLabH(t)
+*
+*                         ---- Difference between maximal willingness to work on farm and what is required for off-farm work
+*                              Assumes that family members working off-farm want more leisure
+*
+                          - v_labOnFarmLost(t,nCur) $ sum(workOpps(workType), (v_labOff.up(t,nCur,workType) ne 0))
+*
+*                         ---- labour hours of hired farm workers
+*
+                          $$ifi &quot;%allowHiring%&quot;==&quot;true&quot; + v_hireWorkers(tcur,nCur) * %workHoursHired%
+        ;
+</code></pre>
+<p>The maximal yearly working hours, <i>p_yearlyLabH</i> are defined in the statement shown below. The maximal labour hours for the first, second and further labour units can be entered via the graphical user interface.  </p>
+<pre><code class="language-GAMS">p_yearlyLabH(t)   =  %AkhFirst%   * min(1,%Aks%)
+                      + %AkhSecond%  * min(1,%Aks%-1) $ (%Aks% &gt; 1)
+                      + %AkhFurther% * (%Aks%-2)      $ (%Aks% &gt; 2);
+</code></pre>
+<p>The maximum work hours per month is defined in the following statement represented by the parameter <i>p_monthlyLabH</i>:</p>
+<pre><code class="language-GAMS">p_monthlyLabH(t,m) =  p_yearlyLabH(t) / 365 * p_daysPerMonth(m) * (1+%flexHoursFamily%/100);
+</code></pre>
+<p>The template considers the sum of labour needs <i>v_labTotM</i> for each month <i>m</i>. On-farm labour needs are related to certain farm activities on field and in stable. Off-farm labour hours distinguish between contracts for full-time or part-time jobs, and off-farm work on an hourly basis. The variables which enter in the equation <i>labTotM_</i> are explained in the next sub-section starting with the fixed labour requirements related to the farm branches.</p>
+<pre><code class="language-GAMS">labTotM_(t_n(tCur(t),nCur),m)  ..
+*
+*        --- sum of work in hours in current month
+*
+       v_LabTotM(t,nCur,m) =e=
+*
+*      --- labour use for crops
+*
+        +  v_labCropSM(t,nCur,m)
+*
+*      --- labour use for herds
+*
+$ifi %herd%==true  + v_labHerdM(t,nCur,m)
+*
+*      --- Management hours (for total farm and the different brenaches)
+*
+       + v_labManag(t,nCur)/card(m)
+*
+*        --- off farm labour - per month: p_workTime are weekly hours,
+*            p_commTime is the commuting time in weekly hours, assumption of
+*            44 weeks work in each year (binary variables)
+*
+       + v_labOffFixed(t,nCur)/card(m)
+*
+*        --- small scale work on a hourly basis (continous)
+*
+       + v_labOffHourly(t,nCur)/card(m)
+*
+*        --- labour use for biogas plant
+*
+$ifi %biogas%== true + sum((curBhkw(bhkw)), v_labBioGas(bhkw,t,nCur,m))
+       ;
+</code></pre>
+<h2 id="labour-need-for-the-farm-branches-and-general-management">Labour Need for the Farm Branches and General Management</h2>
+<p>FarmDyn accounts for labour needs farm branch specific management and general management. This includes organization of purchasing and selling activities, required documentation for administrative bodies etc. The following equation <i>labManag_</i> shows the calculation of the total labour management on-farm. It accounts for the general management by multiplying the binary variable <i>v_hasFarm</i> and a predefined parameter, irrespective of the size of the farm. In addition, management related to one of the seven farm branches in FarmDyn (arable cropping, dairy, beef fattening, mother cow, fatteners, sows, and biogas) is considered to be linearly dependent on the size of that specific branch <i>v_branchSize</i>, e.g. in the case of dairy cows on the number of cows on farm. The variables <i>v_hasFarm</i> and <i>v_hasBranch</i> are determined by the activities mapped to the branch.</p>
+<pre><code class="language-GAMS">labManag_(t_n(tCur(t),nCur)) ..
+
+       v_labManag(t,nCur) =e=
+*
+*       -- hours independent from number of branches or farm size
+*
+        + v_hasFarm(t,nCur) * p_labManag(&quot;Farm&quot;,&quot;const&quot;)
+*
+*       --- hours required for branches: block load plus
+*           hours increasing in branch size
+*
+        + sum(branches $ sum(branches_to_acts(branches,acts), 1),
+                v_hasBranch(branches,t,nCur)  * p_labManag(branches,&quot;const&quot;)
+             +  v_branchSize(branches,t,nCur) * p_labManag(branches,&quot;slope&quot;));
+</code></pre>
+<h2 id="labour-need-for-herd-cropping-operations-and-off-farm-work">Labour Need for Herd, Cropping, Operations and Off-Farm Work</h2>
+<h3 id="herd-activities-and-cropping">Herd Activities and Cropping</h3>
+<p>The labour need for animals, <i>v_herdLabM,</i> is defined by an animal type specific requirement parameter, <i>p_herdLab,</i> in hours per animal and month (see in the next equation, working hours per animal and month) and by the time requirement per stable place, which differs with the stable type. This formulation allows labour saving scale effects related to the stable size:</p>
+<pre><code class="language-GAMS">labHerdM_(tCur(t),nCur,m) $ t_n(t,nCur) ..
+       v_labHerdM(t,nCur,m) =e=
+*
+*        --- labour for animal activities, expressed per animal and month
+*            of standing herd
+*
+        sum(actHerds(sumHerds,breeds,feedRegime,t,m),
+              v_herdSize(sumHerds,breeds,feedRegime,t,nCur,m) * p_herdLab(sumHerds,feedRegime,m))
+*
+*        --- labour for animal activities, per starting animal (hours for giving birth and similar)
+*
+      +  sum( (sumHerds,breeds) $ sum(feedRegime, actHerds(sumHerds,breeds,feedRegime,t,m)),
+                v_herdStart(sumHerds,breeds,t,nCur,m)* p_herdLabStart(sumHerds,m))
+*
+*        --- fixed amount of hours for stables (maintenance, cleansing),
+*            captures also labour saving effects of large stables
+*
+     + sum(stables $ (    sum( (t_n(t1,nCur1),hor) $ ((isNodeBefore(nCur,nCur1) or sameas(nCur,nCur1))  and (p_year(t1) le p_year(t))),
+                               (v_buyStables.up(stables,hor,t1,nCur1) ne 0))
+                       or sum( (tOld,hor), p_iniStables(stables,hor,tOld))),
+                                (v_stableUsed(stables,t,nCur)-v_stableNotUsed(stables,t,nCur,m)) * p_stableLab(stables,m) $ (p_stableLab(stables,m) gt eps) );
+</code></pre>
+<p>A similar equation exists for crops. The parameter <i>p_cropLab</i> defines the labour hours per hectare and month for each crop.
+In addition, the parameters <i>p_manDistLab</i> and <i>p_syntDistLab</i> multiplied by the <i>N type</i> applied to each crop
+are added to the overall crop labour demand for the application of synthetic fertiliser and manure:</p>
+<pre><code class="language-GAMS">labCropSM_(t_n(tCur(t),nCur),m) ..
+
+       v_labCropSM(t,nCur,m) =e=
+*
+*        --- labour need for crops, expressed per ha of land
+*                                                                                +
+         sum( c_p_t_i(curCrops(crops),plot,till,intens),
+                v_cropHa(crops,plot,till,intens,t,nCur) * p_cropLab(crops,till,intens,m))
+
+
+$iftheni.man %manure% == true
+*
+*        --- labour need for application of manure
+*            (considers all field operations not out-sourced as contract work,
+*             with the exemption of manure and synt fertizer application)
+*
+       + sum((c_p_t_i(curCrops(crops),plot,till,intens),manApplicType_manType(ManApplicType,curManType))
+              $ ((v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0)
+              $ ( v_manDist.up(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) ne 0)),
+               v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * p_manDistLab(ManApplicType))
+$endif.man
+*
+*        --- labour need for spreading synthetic fertilizer
+*
+       + sum((c_p_t_i(crops,plot,till,intens),curInputs(syntFertilizer)),
+               v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * p_syntDistLab(syntFertilizer));
+</code></pre>
+<h3 id="farm-operations">Farm Operations</h3>
+<p>Field working days define the number of days available in a labour period of half a month, <i>labPeriod,</i> during which soil conditions allow specific types of operations, <i>labReqLevl</i>:</p>
+<pre><code class="language-GAMS">fieldWorkHours_(plot,labReqLevl,labPerSum,t_n(tCur(t),nCur)) $ (p_plotSize(plot) $ plot_landType(plot,&quot;arab&quot;)) ..
+
+       v_fieldWorkHours(plot,labReqLevl,labPerSum,t,nCur)
+
+         =e=
+*
+       sum(labPerSum_ori(labPerSum,LabPeriod),
+*
+*       --- operations requiring a tractor, with the exemption top of
+*           fertilizer dsitribution
+*
+        sum( c_p_t_i(curCrops(crops),plot,till,intens),
+             v_cropHa(crops,plot,till,intens,t,nCur)
+                 * p_fieldWorkHourNeed(crops,till,intens,labPeriod,labReqLevl)
+*
+*       --- distribution of synthetic fertilizer
+
+       +   sum( (curInputs(syntFertilizer),labPeriod_to_month(labPeriod,m)),
+                  v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)
+                    * p_machNeed(syntFertilizer,till,&quot;normal&quot;,&quot;tractor&quot;,&quot;hour&quot;) ) * sameas(labReqLevl,&quot;rf3&quot;)
+           )
+        );
+</code></pre>
+<p>The number of field working hours cannot exceed a limit which is defined by the available field working days, <i>p_fieldWorkingDays.</i> Field working days depend on climate zone, soil type (<i>light, middle, heavy</i>) and distribution of available tractors to the soil type, <i>v_tracDist</i>. It is assumed that farm staff will be willing to work up to 15 hours a day, still with the total work load per month being restricted:</p>
+<pre><code class="language-GAMS">tracRestrFieldWorkHours_(plot,labReqLevl,labPerSum,t_n(tCur(t),nCur)) $ (p_plotSize(plot) $ plot_landType(plot,&quot;arab&quot;)) ..
+
+       v_fieldWorkHours(plot,labReqLevl,labPerSum,t,nCur)
+
+        =L=
+             sum(labPerSum_ori(labPerSum,LabPeriod),
+               sum(plot_soil(plot,soil),
+                      sum(curClimateZone, p_fieldWorkingDays(labReqLevl,labPeriod,curClimateZone,soil)) * 12)
+                              * v_tracDist(plot,labPerSum,t,nCur));
+</code></pre>
+<h3 id="off-farm-work">Off-Farm Work</h3>
+<p>Farm family members can optionally work half- or full-time, <i>v_workoff</i>, or on an hourly basis off-farm, <i>v_workHourly</i>. Half- and full-time work are realised as integer variables. In the normal setting the wage per hour for working half time exceeds the wage of short time hourly work. Moreover, the wage per hour of full time work is higher than of working half time. For half- and full-time work commuting time can be considered:</p>
+<pre><code class="language-GAMS">  offFarmHoursPerYearFixed_(t_n(tCur(t),nCur)) $  sum(workOpps(workType), (v_labOff.up(t,nCur,workType) ne 0)) ..
+
+       v_labOffFixed(t,nCur) =e=
+*
+*        --- off farm labour - per month: considers the work time (flexible contracts up to 40 hours a week)
+*                                         plus the commuting time (3 days for contract up to 20 hours, 5 days above)
+
+         + sum( workOpps(workType),
+              v_labOffF(t,nCur,workType) + v_labOff(t,nCur,workType)*p_commTime(workType)*44);
+</code></pre>
+<p>The set <i>workType</i> lists the possible combinations:</p>
+<pre><code class="language-GAMS">p_workTime(workType) =   (p_workT(&quot;Half&quot;)+p_workT(&quot;Full&quot;)*floor(workType.pos/2))  $ ( mod(workType.pos,2) eq 1)
+                         +  p_workT(&quot;Full&quot;)*(workType.pos/2 )                       $ ( mod(workType.pos,2) eq 0);
+</code></pre>
+<p>It is assumed that decisions about how much to work flexibly on an hourly basis are taken on a yearly basis (i.e. the same number of hours is inputted in each month).</p>
+<p>The total number of hours worked off-farm is defined as:</p>
+<pre><code class="language-GAMS">offFarmWorkTot_(t_n(tCur(t),nCur)) ..
+*
+       v_labOffTot(t,nCur) =e=
+*
+*         --- some hours at a very low wage rate
+*
+          v_labOffHourly(t,nCur)
+*
+*         --- contract between 20 and 40 hours a week, including commuting time
+*
+        + v_labOffFixed(t,nCur) $ sum(workOpps(workType), (v_labOff.up(t,nCur,workType) ne 0));
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

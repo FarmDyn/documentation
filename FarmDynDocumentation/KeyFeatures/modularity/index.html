@@ -1,0 +1,2029 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/KeyFeatures/modularity/">
+      
+      
+        <link rel="prev" href="../../ModelDescription/PolicyMeasures/AES/">
+      
+      
+        <link rel="next" href="../dynamics/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Modularity - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modularity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Modularity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="true">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Modularity
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Modularity
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-concept-in-farmdyn" class="md-nav__link">
+    Modularity Concept in FarmDyn
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-data-and-reporting-structure" class="md-nav__link">
+    Modularity, Data and Reporting Structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-current-grouped-modules-and-the-individual-modules" class="md-nav__link">
+    List of Current Grouped Modules and the Individual Modules
+  </a>
+  
+    <nav class="md-nav" aria-label="List of Current Grouped Modules and the Individual Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grouped-modules" class="md-nav__link">
+    Grouped Modules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#individual-modules" class="md-nav__link">
+    Individual Modules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-concept-in-farmdyn" class="md-nav__link">
+    Modularity Concept in FarmDyn
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-data-and-reporting-structure" class="md-nav__link">
+    Modularity, Data and Reporting Structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-current-grouped-modules-and-the-individual-modules" class="md-nav__link">
+    List of Current Grouped Modules and the Individual Modules
+  </a>
+  
+    <nav class="md-nav" aria-label="List of Current Grouped Modules and the Individual Modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grouped-modules" class="md-nav__link">
+    Grouped Modules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#individual-modules" class="md-nav__link">
+    Individual Modules
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="modularity">Modularity</h1>
+<h2 id="modularity-concept-in-farmdyn">Modularity Concept in FarmDyn</h2>
+<p>Russel (2012) describes the general idea of modularity as following:
+"Modularity describes specific relationships between a whole system
+and its particular components. A modular system consists of smaller
+parts (modules) that fit together within a predefined system of architecture.
+Modules feature standardized interfaces, which facilitate their
+integration with the overarching system architecture. A key feature of
+each module is that it should encapsulate (or ‘black box’) its messy
+internal details […] to display only a consistent interface. The designers
+of modular systems are therefore able to swap modules in a ‘plug-and-play’
+manner, which increases the system’s flexibility.”</p>
+<p>In line with this broad definition and the description of preferred generic and modular
+implementations of bio-economic farm-scale models (Britz et al. 2021), FarmDyn is
+structured as a modular system where each module comprises a block of equations
+and variables which can be activated depending on the user case. Practically,
+each module captures a specific farm management or methodology domain within
+a file. Further, the definition of parameters is either
+done in a module if it is only used in that specific file or is organized
+globally in the set and parameter declaration module, <em>templ_decl.gms</em>. Each module can be either
+a stand alone module or is linked to other modules and grouped together to build
+a specific aspect of the farm, e.g. the farm branch, or the <em>core model</em>. To illustrate
+the idea of the modular structure and the different groupings, we can look at the
+following graph:</p>
+<p><img alt="" src="../../../media/Modularity/Modular_Graphs.png" style="width:100%" />
+Figure 1: Depiction of the modular structure of a dairy farm which has to
+comply with the greening obligation and is able to use agri-environmental measures on-farm.
+Source: Own illustration.</p>
+<p>The <em>core model</em> is composed of three modules, which are always activated regardless
+of any other set-up option in the Graphical User Interface (GUI). The three modules build
+the base of almost all real-life farms with an <em>economic module</em>, also containing
+the objective function, the <em>labour module</em> for the simulation of on- and off-farm
+labour use, and the <em>general cropping module</em>, which determines the land use of
+arable and grassland on-farm.</p>
+<p>Other grouped modules build the basis for the different branches in FarmDyn. This
+includes the <em>dairy branch</em>, the <em>mothercows branch</em>, the <em>beef branch</em>,
+the <em>sows branch</em>, the <em>fattners branch</em>, and the <em>biogas branch</em>. Each of the
+branches is based on at least two modules, with some of the branches sharing
+a module, such as all livestock branches sharing the <em>general herd module</em>.</p>
+<p>Next to the grouped modules, there are stand-alone modules which comprise only
+a specific topic, such as the <em>greening module</em> or the <em>agri-environmental scheme module.</em></p>
+<h2 id="modularity-data-and-reporting-structure">Modularity, Data and Reporting Structure</h2>
+<p>The modular structure does not only require domain separated variables and equations
+files, but has to be reflected in the data base/ processing as well as the
+reporting of simulation results. This is illustrated by the following modified figure,
+by Britz et al. (2021):</p>
+<p><img alt="" src="../../../media/Modularity/Modular_DataReporting.png" style="width:100%" />
+Figure 2: Variable and equation part (core model) embedded in the data and reporting
+structure.
+Source: Taken and modified from Britz et al. (2021)</p>
+<p>The figure shows that each module or group of modules provides their own data set
+including the pre-processing of the data and additional options for the model
+set-up in the GUI. Further, in addition to the provided data set each module comes
+together with a result and reporting section to facilitate the result analysis.</p>
+<!-- ## Modularity as a key to multiple projects and collaborations -->
+
+<h2 id="list-of-current-grouped-modules-and-the-individual-modules">List of Current Grouped Modules and the Individual Modules</h2>
+<h3 id="grouped-modules">Grouped Modules</h3>
+<!--
+
+|Name | Type | File/s|
+|------------|------|-------|
+|![](../../media/Modularity/CoreModel.png){: style="width:250px; height:125px"}| Core Model| templ.gms, labour_module.gms, general_cropping_module.gms|  
+|![](../../media/Modularity/dairy.png){: style="width:250px; height:125px"}| Branch | general_herd_module.gms, cattle_module.gms, manure_module.gms|
+|![](../../media/Modularity/mothercow.png){: style="width:250px; height:125px"}| Branch| general_herd_module.gms, cattle_module.gms, manure_module.gms|  
+|![](../../media/Modularity/beef.png){: style="width:250px; height:125px"}| Branch| general_herd_module.gms, cattle_module.gms, manure_module.gms|  
+|![](../../media/Modularity/sows.png){: style="width:250px; height:125px"}| Branch|  general_herd_module.gms, pig_module.gms, manure_module.gms|  
+|![](../../media/Modularity/fattners.png){: style="width:250px; height:125px"}| Branch|general_herd_module.gms, pig_module.gms, manure_module.gms|  
+|![](../../media/Modularity/Biogas1.png){: style="width:250px; height:125px"}| Branch| biogas_module.gms, manure_module.gms|  
+
+-->
+<div class="modularity1">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>File/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../../media/Modularity/CoreModel.png" alt=""></td>
+<td>Core Model</td>
+<td>templ.gms labour_module.gms general_cropping_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/dairy.png" alt=""></td>
+<td>Branch</td>
+<td>general_herd_module.gms cattle_module.gms manure_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/mothercow.png" alt=""></td>
+<td>Branch</td>
+<td>general_herd_module.gms cattle_module.gms manure_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/beef.png" alt=""></td>
+<td>Branch</td>
+<td>general_herd_module.gms cattle_module.gms manure_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/sows.png" alt=""></td>
+<td>Branch</td>
+<td>general_herd_module.gms pig_module.gms manure_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/fattners.png" alt=""></td>
+<td>Branch</td>
+<td>general_herd_module.gms pig_module.gms manure_module.gms</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/Biogas1.png" alt=""></td>
+<td>Branch</td>
+<td>biogas_module.gms manure_module.gms</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<h3 id="individual-modules">Individual Modules</h3>
+<!--
+| Module Name | File (* - gms*)| Description|
+|----------------|------|-------|
+|![](../../media/Modularity/Economic.png){: style="width:150px; height:125px"} |templ* | The template/economic module is the leading file to collect all other modules. In addition, the primary economic aspects of the model are defined in the module. This includes: (1) the objective function, (2) the cash flow structure, (3) the income tax calculation, (4) the premium payments, (5) the sales and production levels, (6) the variable cost structure, and (7) the investment costs.  |
+|![](../../media/Modularity/GeneralCropping.png){: style="width:150px; height:125px"} |general_cropping_module*| The cropping module optimises the cropping pattern subject to land availability, reflecting yields, prices, machinery and fertilising needs, and other variable costs for a selectable list of arable crops. The crops can be differentiated by production system (conventional, organic), tillage (plough, minimal tillage, no tillage) and intensity level (normal and reduced fertilisation in 20 % steps). Machinery use is linked to field working-day requirements depicted with a bi-weekly resolution during the relevant months. Crop rotational constraints can be either depicted by introducing crop rotations or by simple maximal shares. The model can capture plots which are differentiated by soil and land type (grassland, arable land and pasture), size and distance. |
+|![](../../media/Modularity/labour.png){: style="width:150px; height:125px"} |labour_module* | The labour module optimises work use on- and off-farm with a monthly resolution, depicting detailed labour needs for different farm operations, herds and stables, management requirements for each farm branch, and the farm as a whole. Off-farm work distinguishes between half- and full-time work (binaries) and working flexibly for a low wage rate. |
+|![](../../media/Modularity/generalherd.png){: style="width:150px; height:125px"} |general_herd_module* | The general herd module captures all facets of a herd which are not animal type specific: (1) It integrates the intra- and inter-year dynamic of the herd for all types of animals: dairy, mothercows, heifers, bulls, male and female calves, sows, fattners, and piglets. (2) It determines the required stable space based on the herd size and steers the buying decision and contains the stable inventory. (3) It implements the excretion quantities and their associated nutrient quantities for all animal types on a monthly basis. |
+|![](../../media/Modularity/cattle.png){: style="width:150px; height:125px"} |cattle_module* | The cattle module is closely related to the general herd module. It describes the demographic relations between cattle types (dairy, mothercows, male and female calves, heifers, young bulls) on the farm. The cattle feed requirements are calculated considering the animals performance and the lactation phase of cows. The requirements can be met via a mix from own produced and purchased fodder, concentrates and grazing from pastures. |
+|![](../../media/Modularity/pig.png){: style="width:150px; height:125px"} |pig_module* | The pig module captures the feeding activities for all pig types (piglets, sows, fattners) based on their production phase. It considers both purchased and own produced fodders. It further calculates the number of new piglets at the start of the simulation based on the number of sows.  |
+|![](../../media/Modularity/manure.png){: style="width:150px; height:125px"} |manure_module* | The manure module captures all relevant movements of organic fertiliser and their nutrients after excretion. This includes the investment in storage, the type of storage (subfloor storage or silo), the storage capacity for all organic fertiliser sources (cattle, pigs, biogas plant, imports), their respective nutrients, losses of nutrients due to emissions, and exporting organic fertiliser.|
+|![](../../media/Modularity/Biogas2.png){: style="width:150px; height:125px"} |biogas_module* | The biogas module defines the economic and technological relations between components of a biogas plant with a monthly resolution, as well as links to the farm. Thereby, it includes the statutory payment structure and their respective restrictions according to the German Renewable Energy Acts (EEGs) from 2004 up to 2014. The biogas module differentiates between three different sizes of biogas plants and accounts for three different life spans of investments connected to the biogas plant. Data for the technological and economic parameters used in the model are derived from KTBL (2013) and FNR (2013). The equations within the template model related to the biogas module are presented in the following section. |
+|![](../../media/Modularity/envacc.png){: style="width:150px; height:125px"} |env_acc_module_de* | The environmental accounting module utilises commonly applied methodology for the quantification of methane (CH4), ammonia (NH3), nitrous dioxide (N2O), nitrogen oxides (NOx) and elemental nitrogen (N2), as well as particulate matter formation (PM10 and PM2.5), as laid down in IPCC (2019) and EMEP (2013, 2016). N and P lost through erosion, run-off and leaching are calculated using methodology from Richner et al. (2014) and Prasuhn (2006). Upstream emissions from the provision of mayor farm inputs and services can be included via the ecoinvent database c. Emissions are characterised at midpoint level using characterisation factors from Huijbregts et al. (2016). |
+|![](../../media/Modularity/FO.png){: style="width:150px; height:125px"} |fertord_module* | The fertilisation ordinance (FO) module integrates the national implementation of the Nitrates Directive into Farmdyn. It covers the most prominent measures of the FO, namely: (1) the nutrient balance restrictions, (2) an organic nitrogen application threshold, (3) the binding fertiliser planning, (4) the required manure storage capacities, (5) the banning periods for fertiliser application, (6) the restriction of fertiliser application in autumn, (7) the low-emission manure application techniques and (8) the obligatory catch crop cultivation.|
+|![](../../media/Modularity/fincash.png){: style="width:150px; height:125px"} |fin_cashflow* | The financial cash flow captures all types of credits, repayments, interest payments and received interests. It is only active in a fully dynamic version.|
+|![](../../media/Modularity/socialacc.png){: style="width:150px; height:125px"} |social_acc_module* | The social accounting module contains information about the protein and calorie production on-farm both used for feeding and also as human edible quantitiy. |
+|![](../../media/Modularity/greening.png){: style="width:150px; height:125px"} |greening_module* | The greening module captures the greening requirements of the Common Agricultural Policy of the European Union (CAP). It integrates the key measures crop diversification (considering multiple requirement tiers based on arable and grass land endowment) and ecological focus areas (mainly legumes) into FarmDyn. |
+|![](../../media/Modularity/AES.png){: style="width:150px; height:125px"} |aes_module_de* | The agri-environmental scheme (AES) module contains optional measures for farmers from the CAP Pillar II. The AES design in FarmDyn follows the structure of the German state of North Rhine-Westphalia including (1) diverse crop rotation options, (2) payments for flower strips and (3) catch crop cultivation.   |
+|![](../../media/Modularity/stochprog.png){: style="width:150px; height:125px"} |stochprog_module* |  |
+
+-->
+
+<div class="modularity2">
+
+<table>
+<thead>
+<tr>
+<th>Module Name</th>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../../media/Modularity/Economic.png" alt=""></td>
+<td>templ.gms</td>
+<td>The template/economic module is the leading file to collect all other modules. In addition, the primary economic aspects of the model are defined in the module. This includes: (1) the objective function, (2) the cash flow structure, (3) the income tax calculation, (4) the premium payments, (5) the sales and production levels, (6) the variable cost structure, and (7) the investment costs.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/GeneralCropping.png" alt=""></td>
+<td>general_cropping_module.gms</td>
+<td>The cropping module optimises the cropping pattern subject to land availability, reflecting yields, prices, machinery and fertilising needs, and other variable costs for a selectable list of arable crops. The crops can be differentiated by production system (conventional, organic), tillage (plough, minimal tillage, no tillage) and intensity level (normal and reduced fertilisation in 20 % steps). Machinery use is linked to field working-day requirements depicted with a bi-weekly resolution during the relevant months. Crop rotational constraints can be either depicted by introducing crop rotations or by simple maximal shares. The model can capture plots which are differentiated by soil and land type (grassland, arable land and pasture), size and distance.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/labour.png" alt=""></td>
+<td>labour_module.gms</td>
+<td>The labour module optimises work use on- and off-farm with a monthly resolution, depicting detailed labour needs for different farm operations, herds and stables, management requirements for each farm branch, and the farm as a whole. Off-farm work distinguishes between half- and full-time work (binaries) and working flexibly for a low wage rate.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/generalherd.png" alt=""></td>
+<td>general_herd_module.gms</td>
+<td>The general herd module captures all facets of a herd which are not animal type specific: (1) It integrates the intra- and inter-year dynamic of the herd for all types of animals: dairy, mothercows, heifers, bulls, male and female calves, sows, fattners, and piglets. (2) It determines the required stable space based on the herd size and steers the buying decision and contains the stable inventory. (3) It implements the excretion quantities and their associated nutrient quantities for all animal types on a monthly basis.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/cattle.png" alt=""></td>
+<td>cattle_module.gms</td>
+<td>The cattle module is closely related to the general herd module. It describes the demographic relations between cattle types (dairy, mothercows, male and female calves, heifers, young bulls) on the farm. The cattle feed requirements are calculated considering the animals performance and the lactation phase of cows. The requirements can be met via a mix from own produced and purchased fodder, concentrates and grazing from pastures.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/pig.png" alt=""></td>
+<td>pig_module.gms</td>
+<td>The pig module captures the feeding activities for all pig types (piglets, sows, fattners) based on their production phase. It considers both purchased and own produced fodders. It further calculates the number of new piglets at the start of the simulation based on the number of sows.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/manure.png" alt=""></td>
+<td>manure_module.gns</td>
+<td>The manure module captures all relevant movements of organic fertiliser and their nutrients after excretion. This includes the investment in storage, the type of storage (subfloor storage or silo), the storage capacity for all organic fertiliser sources (cattle, pigs, biogas plant, imports), their respective nutrients, losses of nutrients due to emissions, and exporting organic fertiliser.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/Biogas2.png" alt=""></td>
+<td>biogas_module.gms</td>
+<td>The biogas module defines the economic and technological relations between components of a biogas plant with a monthly resolution, as well as links to the farm. Thereby, it includes the statutory payment structure and their respective restrictions according to the German Renewable Energy Acts (EEGs) from 2004 up to 2014. The biogas module differentiates between three different sizes of biogas plants and accounts for three different life spans of investments connected to the biogas plant. Data for the technological and economic parameters used in the model are derived from KTBL (2013) and FNR (2013). The equations within the template model related to the biogas module are presented in the following section.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/envacc.png" alt=""></td>
+<td>env_acc_module_de.gms</td>
+<td>The environmental accounting module utilises commonly applied methodology for the quantification of methane (CH4), ammonia (NH3), nitrous dioxide (N2O), nitrogen oxides (NOx) and elemental nitrogen (N2), as well as particulate matter formation (PM10 and PM2.5), as laid down in IPCC (2019) and EMEP (2013, 2016). N and P lost through erosion, run-off and leaching are calculated using methodology from Richner et al. (2014) and Prasuhn (2006). Upstream emissions from the provision of mayor farm inputs and services can be included via the ecoinvent database c. Emissions are characterised at midpoint level using characterisation factors from Huijbregts et al. (2016).</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/FO.png" alt=""></td>
+<td>fertord_module.gms</td>
+<td>The fertilisation ordinance (FO) module integrates the national implementation of the Nitrates Directive into Farmdyn. It covers the most prominent measures of the FO, namely: (1) the nutrient balance restrictions, (2) an organic nitrogen application threshold, (3) the binding fertiliser planning, (4) the required manure storage capacities, (5) the banning periods for fertiliser application, (6) the restriction of fertiliser application in autumn, (7) the low-emission manure application techniques and (8) the obligatory catch crop cultivation.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/fincash.png" alt=""></td>
+<td>fin_cashflow.gms</td>
+<td>The financial cash flow captures all types of credits, repayments, interest payments and received interests. It is only active in a fully dynamic version.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/socialacc.png" alt=""></td>
+<td>social_acc_module.gms</td>
+<td>The social accounting module contains information about the protein and calorie production on-farm both used for feeding and also as human edible quantitiy.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/greening.png" alt=""></td>
+<td>greening_module.gms</td>
+<td>The greening module captures the greening requirements of the Common Agricultural Policy of the European Union (CAP). It integrates the key measures crop diversification (considering multiple requirement tiers based on arable and grass land endowment) and ecological focus areas (mainly legumes) into FarmDyn.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/AES.png" alt=""></td>
+<td>aes_module_de.gms</td>
+<td>The agri-environmental scheme (AES) module contains optional measures for farmers from the CAP Pillar II. The AES design in FarmDyn follows the structure of the German state of North Rhine-Westphalia including (1) diverse crop rotation options, (2) payments for flower strips and (3) catch crop cultivation.</td>
+</tr>
+<tr>
+<td><img src="../../../media/Modularity/stochprog.png" alt=""></td>
+<td>stochprog_module.gms</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../javascripts/init.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

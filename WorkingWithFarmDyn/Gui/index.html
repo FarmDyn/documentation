@@ -1,0 +1,2303 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/WorkingWithFarmDyn/Gui/">
+      
+      
+        <link rel="prev" href="../Installation/">
+      
+      
+        <link rel="next" href="../CodeDevelopment/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Graphical User Interface - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-graphical-user-interface-gui" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Graphical User Interface
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../FarmDynDocumentation/Data/data_flow/" class="md-tabs__link">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../Installation/" class="md-tabs__link md-tabs__link--active">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="false">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/ModelDescription/PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FarmDynDocumentation/DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="true">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Graphical User Interface
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Graphical User Interface
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#work-step-and-task-selection-left-hand-side" class="md-nav__link">
+    Work Step and Task Selection (Left Hand Side)
+  </a>
+  
+    <nav class="md-nav" aria-label="Work Step and Task Selection (Left Hand Side)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-data" class="md-nav__link">
+    Built Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-farm-runs" class="md-nav__link">
+    Single Farm Runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiments" class="md-nav__link">
+    Experiments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-specific-settings" class="md-nav__link">
+    Run Specific settings
+  </a>
+  
+    <nav class="md-nav" aria-label="Run Specific settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-settings" class="md-nav__link">
+    General Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#farm-settings" class="md-nav__link">
+    Farm Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animals-pigs-cows-calves-heifers-and-bulls" class="md-nav__link">
+    Animals (Pigs, Cows, Calves, Heifers and Bulls)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gras" class="md-nav__link">
+    Gras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crops" class="md-nav__link">
+    Crops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biogas" class="md-nav__link">
+    Biogas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-and-input-prices" class="md-nav__link">
+    Output and Input Prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmental-impacts-and-restrictions" class="md-nav__link">
+    Environmental Impacts and Restrictions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gams-and-solver" class="md-nav__link">
+    GAMS and Solver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doe-and-factor-ranges" class="md-nav__link">
+    DOE and Factor Ranges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saving-run-specific-settings" class="md-nav__link">
+    Saving Run Specific Settings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualising-and-analysing-results-in-the-gui" class="md-nav__link">
+    Visualising and Analysing Results in the GUI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-projects" class="md-nav__link">
+    Working with Projects
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-new-project" class="md-nav__link">
+    Setting up a New Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-projects" class="md-nav__link">
+    Switching Projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-projects" class="md-nav__link">
+    Editing Projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-information-on-the-project-workflow" class="md-nav__link">
+    Important Information on the Project Workflow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#work-step-and-task-selection-left-hand-side" class="md-nav__link">
+    Work Step and Task Selection (Left Hand Side)
+  </a>
+  
+    <nav class="md-nav" aria-label="Work Step and Task Selection (Left Hand Side)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#built-data" class="md-nav__link">
+    Built Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-farm-runs" class="md-nav__link">
+    Single Farm Runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiments" class="md-nav__link">
+    Experiments
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-specific-settings" class="md-nav__link">
+    Run Specific settings
+  </a>
+  
+    <nav class="md-nav" aria-label="Run Specific settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-settings" class="md-nav__link">
+    General Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#farm-settings" class="md-nav__link">
+    Farm Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animals-pigs-cows-calves-heifers-and-bulls" class="md-nav__link">
+    Animals (Pigs, Cows, Calves, Heifers and Bulls)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gras" class="md-nav__link">
+    Gras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crops" class="md-nav__link">
+    Crops
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biogas" class="md-nav__link">
+    Biogas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-and-input-prices" class="md-nav__link">
+    Output and Input Prices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environmental-impacts-and-restrictions" class="md-nav__link">
+    Environmental Impacts and Restrictions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gams-and-solver" class="md-nav__link">
+    GAMS and Solver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doe-and-factor-ranges" class="md-nav__link">
+    DOE and Factor Ranges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saving-run-specific-settings" class="md-nav__link">
+    Saving Run Specific Settings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualising-and-analysing-results-in-the-gui" class="md-nav__link">
+    Visualising and Analysing Results in the GUI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-projects" class="md-nav__link">
+    Working with Projects
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-a-new-project" class="md-nav__link">
+    Setting up a New Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switching-projects" class="md-nav__link">
+    Switching Projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editing-projects" class="md-nav__link">
+    Editing Projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#important-information-on-the-project-workflow" class="md-nav__link">
+    Important Information on the Project Workflow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-graphical-user-interface-gui">The Graphical User Interface (GUI)</h1>
+<p><img alt="" src="../../media/GUI/Bild_1.png" style="width:100%" /></p>
+<p>The Graphical User Interface (GUI) is based on GGIG (GAMS Graphical Interface Generator, Britz 2014). It serves three main purposes:</p>
+<p><strong>1. To prepare the data base for the model runs</strong></p>
+<p><strong>2. To steer model runs</strong></p>
+<p><strong>3. To exploit results from one or several model runs</strong></p>
+<p>The creation of a visual user interface is also described as "visual debugging" (Grimm, 2002) to allow for an easy adjustment of parameters and quantitative and graphical examinations. With the help of only a few adjustments one can define single or multiple model farm runs for the interesting farm types with their specifications. Thereby, the former described coefficient generator helps to condense the necessary information for farm run definition by adjusting and calculating all production specific parameters to be consistent with the defined farm type (initial arable land, grass land, initial stables, initial manure storages, initial machine endowment...). After simulating the experiments, the GUI enables the user to systematically analyse the simulated model variables and results.</p>
+<p>A separate user handbook for the general use of the GUI is available at:</p>
+<p>Britz, W. (2010), GGIG Graphical Interface Generator User Guide,
+Institute for Food and Resource Economics, University Bonn, 147 pages,
+<a href="http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf">http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf</a></p>
+<p>In the following, the different tabs of the GUI are shown and shortly described.</p>
+<h2 id="work-step-and-task-selection-left-hand-side">Work Step and Task Selection (Left Hand Side)</h2>
+<h3 id="built-data">Built Data</h3>
+<p>In the <strong>Build data</strong> work step, the user can select raw data for the model run. Under the task <strong>Build data from user input</strong>, standard crops are available or the user can read in own data. <strong>Build data from KTBL</strong> provides a link to the German agricultural database of the "Kuratorium für Technik und Bauwesen in der Landwirtschaft" (KTBL). This task can be used to select KTBL data for various crops for the model run. To finish the "Build data" work step, the model must be started by clicking on <strong>Start Gams</strong>. A GAMS RC 0 indicates that the selection of raw data has worked.</p>
+<p><img alt="" src="../../media/GUI/Bild_2.png" style="width:100%; height:450px" /></p>
+<h3 id="single-farm-runs">Single Farm Runs</h3>
+<p>In the <strong>Single farm runs</strong> work step, all run specific settings are to be set manually in the GUI. As these settings are very extensive, they will be explained in detail in the next sub-chapter. Again, a single farm run can be started by clicking on <strong>Start Gams</strong> and a GAMS RC 0 indicates a complete and successful model run.</p>
+<p><img alt="" src="../../media/GUI/Bild_3.png" style="width:100%; height:500px" /></p>
+<p>The workstop <strong>Single farm runs</strong> provides also the option to run a farm sample,
+i.e. that not only one specific and predefined farm is simulated but multiple
+predefined farms can be run.</p>
+<h3 id="experiments">Experiments</h3>
+<p>In the <strong>Experiment</strong> work step, the user can define ranges for selected settings which are varied based on stratified random sampling using Design of Experiments for a defined number of experiment. For each experiment, a single farm run is solved. These single farm runs are typically solved in parallel. After they are finalized, their results are combined into one result set. The experiment tasks distinguish different farm branches. Additionally, an experiment to estimate the profit function can be selected. The Run Specific Settings are broadly similar to those of the Single Farm Run. In addition, there is the "DOE" and, depending on the selected task, the "Factor Ranges" and "Input prices in experiments" tab. These three are also explained in the next sub-chapter. An experiment model run is started with the same procedure as the other work steps.</p>
+<p><img alt="" src="../../media/GUI/Bild_4.png" style="width:100%" /></p>
+<h2 id="run-specific-settings">Run Specific settings</h2>
+<p>In the following, the run specific settings of all tabs of the GUI are explained. In addition, a subchapter deals with how this information can be stored.</p>
+<h3 id="general-settings">General Settings</h3>
+<p><img alt="" src="../../media/GUI/Bild_1.png" style="width:100%" /></p>
+<p>The general settings are subdivided into five components:</p>
+<ol>
+<li>
+<p>Branches: The model run is named by the scenario description. FarmDyn uses this name to store the results of a model run. Therefore, it is important to change the name for a new model run to ensure that previous results are not overwritten. Additionally, the user can define active farm branches and the herd size definition for the current model run.</p>
+</li>
+<li>
+<p>Data: The user can determine regional data for the calculations in the model.</p>
+</li>
+<li>
+<p>Simulation Control: Additional settings regarding the model stochastics, the use of labour (off-farm work, hiring workers) and  the use of land (selling and leasing land) can be made.</p>
+</li>
+<li>
+<p>Calibration: FarmDyn can be calibrated on case study data if desired. By default, the check mark for calibrate is <strong>not</strong> set. FarmDyn in this case can either read in results from previous calibrations to use them for different simulations or resort to “farm_empty” (the standard parameter). To perform a calibration on case study data, a checkmark must be set for calibrate. Additionally, a file with calibration targets must be stored under <em>gams/calibFiles</em> and be selected in the GUI as the "file with calibration bounds". The calibration bounds must be manually defined. <img alt="" src="../../media/GUI/Bild_5.png" style="width:100%" /></p>
+</li>
+<li>
+<p>Time and Investments: The user can define the model dynamics, the simulation period, the construction year of stables and the age of machinery. The model allows choosing between the following four mode to describe dynamics (or not): <img alt="" src="../../media/GUI/Bild_6.png" style="width:100%" /></p>
+</li>
+</ol>
+<h3 id="farm-settings">Farm Settings</h3>
+<p><img alt="" src="../../media/GUI/Bild_7.png" style="width:100%" /></p>
+<p>The farm settings are subdivided into three components:</p>
+<ol>
+<li>
+<p>Land Endowments: The land endowment of the farm is specified. The user can decide in which way this information should be provided, e. g. as <em>Total arab and grass land</em> or <em>Land endowment per animal</em>. The requested information must then simply be filled in.</p>
+</li>
+<li>
+<p>Labour Endowments: This is where labour force available in the simulation is defined.</p>
+</li>
+<li>
+<p>Income and Taxes: The user can determine the tax system.</p>
+</li>
+</ol>
+<h3 id="animals-pigs-cows-calves-heifers-and-bulls">Animals (Pigs, Cows, Calves, Heifers and Bulls)</h3>
+<p>Depending on the chosen farm branches different tabs to further specify the simulated farm are activated. For pigs and sows only one tab exists, <em>Pigs</em>. In this tab, the user can specify the initial herd sizes. For cattle there are several tabs (<em>Cows</em>, <em>Calves</em>, <em>Heifers</em> and <em>Bulls</em>). These also allow the definition of the initial herd size. In addition, they allow further settings, which are explained below. Generally, the initial herd sizes are used to determine the stable endowment and manure storage capacities on the farm.</p>
+<p>In the tab <em>Cows</em>, the cows breed, the milk yield, the herd size, premiums, manure management in the stable, breeding attributes, grazing periods and calving and cow attributes are to be specified by the user. The grazing period is distinguished into grazing (animals outside day and night) and partial grazing (animals in stable over night).</p>
+<p><img alt="" src="../../media/GUI/Bild_8.png" style="width:100%" /></p>
+<p>The other cattle related tabs allow for the specification of the length of different growth periods and the respective start and end-weight, prices and the dress percentage of the potentially slaughtered animals. Similar to the cows, the grazing period and manure management system have to be specified. The tab <em>Heifers</em> is shown below as an example:</p>
+<p><img alt="" src="../../media/GUI/Bild_9.png" style="width:100%" /></p>
+<h3 id="gras">Gras</h3>
+<p><img alt="" src="../../media/GUI/Bild_10.png" style="width:100%" /></p>
+<p>The gras tab is subdivided into two components:</p>
+<ol>
+<li>
+<p>Grassland, feed attributes: The user can change the different ingredients of the harvested products. The products are silage gras, grazed gras and hay. The products are further divided by the time of harvest: early, middle and late.</p>
+</li>
+<li>
+<p>Grassland, yield and yield distribution: This table specifies the month of harvest of the respective products, the total yield in dry matter (DM) and the distribution of the yield over the harvest month. Up to 10 different grassland usage options are derivable with differing management, yields and harvested products.</p>
+</li>
+</ol>
+<h3 id="crops">Crops</h3>
+<p><img alt="" src="../../media/GUI/Bild_11.png" style="width:100%" /></p>
+<p>The crops tab is subdivided into five components:</p>
+<ol>
+<li>
+<p>Crops: A selection of crops predefined in the Build data work step can be seen. From these, the crops relevant to the present model run must be selected.</p>
+</li>
+<li>
+<p>Yield: This field shows default yields which the user can change manually.</p>
+</li>
+<li>
+<p>Management system, rotation: The user can make further settings concerning the crop intensity, the cultivation system, the technology, the tillage system, the use of crop rotations and the handling of catch crops.  </p>
+</li>
+<li>
+<p>Fertilization: Additional information on fertilizer planning can be provided.</p>
+</li>
+<li>
+<p>Plots and soil: The number of plots, the mechanization level and the climatic zone can be predefined.</p>
+</li>
+</ol>
+<h3 id="biogas">Biogas</h3>
+<div class="admonition danger">
+<p class="admonition-title">Information:</p>
+<p>The biogas module has not been tested under the current FarmDyn version, therefore run time errors are very likely to occur when it is used.</p>
+</div>
+<p><img alt="" src="../../media/GUI/Bild_12.png" style="width:100%" /></p>
+<p>The biogas tab is subdivided into four components:</p>
+<ol>
+<li>
+<p>Investment options/ activated EEGs: The user can specify the underlying Renewable Energy Act (EEG) version and the biogas plant size.</p>
+</li>
+<li>
+<p>Input use: The inputs provided for biogas use can be determined.</p>
+</li>
+<li>
+<p>Existing plant: This tab allows the set up of an existing biogas plant with the options to choose the size, the valid EEG and the construction year. However, to use this function the plant size and EEG has to be activated in the "Investment options" panel.</p>
+</li>
+<li>
+<p>Scenario premium setup: Additional settings regarding the scenario premiums can be defined here.</p>
+</li>
+</ol>
+<h3 id="output-and-input-prices">Output and Input Prices</h3>
+<p>In these two tabs, standard input and output prices are shown, which the user can adjust if necessary. It is also determined whether roughages may be bought and sold and the conditions for contract work are specified:</p>
+<p><img alt="" src="../../media/GUI/Bild_13.png" style="width:100%" /></p>
+<p><img alt="" src="../../media/GUI/Bild_14.png" style="width:100%" /></p>
+<h3 id="environmental-impacts-and-restrictions">Environmental Impacts and Restrictions</h3>
+<p><img alt="" src="../../media/GUI/Bild_15.png" style="width:100%" /></p>
+<p>The environmental impact and restrictions tab is subdivided into five components:</p>
+<ol>
+<li>
+<p>Social impact assessment: A social impact assessment can be included in the model run if desired. For this purpose, a data basis must be determined.</p>
+</li>
+<li>
+<p>Compulsory CAP: The compulsory policy measure "Greening" of the Common Agricultural Policy (CAP) of the European Union is activated by default. Corresponding data is read into the model.</p>
+</li>
+<li>
+<p>Agri-environmental policy: In addition to the Greening policy, FarmDyn allows the modelling of further agri-environmental policies. By setting the corresponding check marks, new fields open up to read in data for these policies and to make further settings.</p>
+</li>
+<li>
+<p>Environmental impact assessment: In this tab, environmental accounting can be included in the model calculations. To do this, again the corresponding data must be read in. If desired, FarmDyn can also calculate various post-model biodiversity indicators to assess the impact of the modelled farm programme on regional biodiversity. This option must be activated by setting a check mark.</p>
+</li>
+</ol>
+<!-- Auswahlmöglichkeit der Indikatoren fehlt im GUI -->
+
+<ol>
+<li>Fertilizer ordinance: In this tab, the modelled farm can be restricted to different German fertilizer ordinances (2007, 2017 and 2020). The user is able to set limits and thresholds himself.</li>
+</ol>
+<h3 id="gams-and-solver">GAMS and Solver</h3>
+<p>This tab defines the chosen solver to optimise the fully dynamic MIP problem and further precision adjustments. Furthermore options for the resulting listing files and debug options are offered depending on the user type. In general it is recommended to use CPLEX as the MIP solver.</p>
+<p><img alt="" src="../../media/GUI/Bild_16.png" style="width:100%" /></p>
+<h3 id="doe-and-factor-ranges">DOE and Factor Ranges</h3>
+<p>In the <em>design of experiments</em> one can select the number of farms that are supposed
+to be simulated. Further, other options are available to setup the experiment from
+a more technical viewpoint such as the number of parallel farm simulations, loading
+of previous results etc.</p>
+<p>Based on the selected farm branch on the left hand side under <em>FarmDyn tasks</em>,
+factor options are presented in a list. They differentiate between general factors
+(e.g. investment prices <em>invPrice</em> or wage rates <em>wageRateFull</em>), branch specific
+factors (e.g. number of cows <em>nCows</em> or grassland <em>nGrasLand</em>), and crop specifics
+price factors (e.g. winterWheat prices <em>WinterWheatPrice</em>, etc.)</p>
+<p><img alt="" src="../../media/GUI/Bild_17.1.png" style="width:100%" />
+<img alt="" src="../../media/GUI/Bild_17.2.png" style="width:100%" /></p>
+<p>After the selection of factors for the experiments, one has to define their ranges
+which are to vary between each simulation. From the predefined factor range a value
+is chosen based on a stratified random sampling (Latin-Hyper cube) approach.</p>
+<p><img alt="" src="../../media/GUI/Bild_18.png" style="width:100%" /></p>
+<p><img alt="" src="../../media/GUI/Bild_19.png" style="width:100%" /></p>
+<h3 id="saving-run-specific-settings">Saving Run Specific Settings</h3>
+<p>By default, FarmDyn saves the run specific settings in an .ini file - "dairydyn.ini". This can be seen in the main menu of the GUI at the bottom left:</p>
+<p><img alt="" src="../../media/GUI/Bild_20.png" style="width:100%" /></p>
+<p>Via <strong>Settings</strong> in the toolbar at the top left, the user has the possibility to save the current settings in another .ini file, so that they will not be overwritten by FarmDyn the next time the GUI is used. To do this, the user must click on the field <strong>save current settings to ini file</strong>:</p>
+<p><img alt="" src="../../media/GUI/Bild_21.png" style="width:100%" /></p>
+<p>The run specific settings from an .ini file can also be read back into the GUI under <strong>Settings</strong> and then <strong>Load settings from ini file</strong>:</p>
+<p><img alt="" src="../../media/GUI/Bild_22.png" style="width:100%" /></p>
+<p>In addition, FarmDyn stores the run specific settings after a successful model run in a GAMS include file. By default, this is located under <em>gams/incgen</em> and is called "runInc.gms". To be on the safe side, it is recommended to copy and rename the "runInc.gms" file in addition to saving the run specific settings in an .ini file so that it is not overwritten in a new model run. If an .ini file is damaged or lost, it is possible to load the run specific settings from the runInc file in the GUI. To do this, the user must click on <strong>Add settings from include file</strong> under <strong>Settings</strong>:</p>
+<p><img alt="" src="../../media/GUI/Bild_23.png" style="width:100%" /></p>
+<h2 id="visualising-and-analysing-results-in-the-gui">Visualising and Analysing Results in the GUI</h2>
+<p>After a successful simulation (GAMS RC 0, status "normal completion") the results are saved in a GDX file under <em>results/expFarms</em>.</p>
+<p>The results can be viewed with any GDX Viewer. However, the GUI of FarmDyn also offers a result analysis tool with which the user can plot the results in tables or graphs. There are numerous possibilities to adapt the tables and graphs to one's own analysis goals. In addition, the data in the GUI's result analysis tool can also be copied or exported.</p>
+<p>To be redirected to the result analysis section, one has to press <strong>Exploit results</strong> to the right of <strong>Start Gams</strong>. Now, the scenarios for which results should be analysed can be selected. Keep in mind that results are stored with the scenario description given under <em>General Settings - Branches</em>:</p>
+<p><img alt="" src="../../media/GUI/Bild_24.png" style="width:100%" /></p>
+<p>Another click on <strong>Show results</strong> then opens the actual results analysis section.</p>
+<p><img alt="" src="../../media/GUI/Bild_25.png" style="width:100%" /></p>
+<p>The result analysis is based on a set of pre-defined reports, grouped by themes. Currently, the following themes (and reports) are available:</p>
+<ul>
+<li>Farm program - Animal, mean (incl. herd summary, feeding by herds and stable utilization)</li>
+<li>Farm program - Animal, time series (incl. herd summary, feeding by herds and stable utilization)</li>
+<li>Farm program - Crops, mean (incl. crop summary and tillage type)</li>
+<li>Farm program - Crops, time series (incl. crop summary and tillage type)</li>
+<li>Assets, mean (incl. buildings and machines)</li>
+<li>Assets, time series (incl. buildings and machines)</li>
+<li>Work, mean (incl. work and off-farm work)</li>
+<li>Work, time series (incl. work and off-farm work)</li>
+<li>Economics, mean (incl. revenues, costs, cash balance, production and related revenues)</li>
+<li>Economic, time series (incl. revenues, costs, cash balance, production and related revenues)</li>
+<li>Nitrogen (incl. mean and time series information per ha and as N balance)</li>
+<li>Phosphate (incl. mean and time series information per ha and as P2O5 balance)</li>
+<li>Environmental policy (incl. core variables, emissions, N balance and P balance)</li>
+<li>Biodiversity (incl. SMART, SALCA, SALCA crop perspective and Paracchini)</li>
+<li>Algorithm (incl. model attributes)</li>
+</ul>
+<p>A blue-grey eye can be seen at the top left. This allows you to switch back and forth between the different results tables.</p>
+<p><img alt="" src="../../media/GUI/Bild_26.png" style="width:100%" /></p>
+<p><img alt="" src="../../media/GUI/Bild_27.png" style="width:100%" /></p>
+<p>The results analysis section has other useful functions that support the results analysis. A toolbar can be seen at the top right:</p>
+<p><img alt="" src="../../media/GUI/Bild_28.png" style="width:100%" /></p>
+<p>The tools from left to right allow to copy the data, export the data, customize the table view and to pivot the table.</p>
+<h2 id="working-with-projects">Working with Projects</h2>
+<p>When applying FarmDyn to a set of different case studies, keeping track of the individual case study settings in the <code>.ini</code> files may become tedious.</p>
+<p>In order to ease the handling, you can define so called projects. These projects can be managed from the user interface. The concept of projects is similar for any model using <a href="http://www.ilr.uni-bonn.de/em/staff/britz/ggig_e.htm">GGIG</a> (FarmDyn, Capri etc.), so one can also refer to the official <a href="http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf">user guide</a>.</p>
+<h3 id="setting-up-a-new-project">Setting up a New Project</h3>
+<p>To create a new project, the user needs to be logged in with the user type <strong>Administrator</strong>. The current user type can be seen in the status bar at the bottom left of the GUI window:</p>
+<p><img alt="" src="../../media/GUI/Bild_29.png" style="width:100%" /></p>
+<p>The user type can be changed by clicking on <strong>Settings</strong> in the menu bar at the top left and then on <strong>Edit Settings</strong>. A new project can then be created in the user type <strong>administrator</strong> by clicking on <strong>File</strong> in the toolbar and then <strong>New Project</strong>. The following dialog box then opens:</p>
+<p><img alt="" src="../../media/GUI/Bild_30.png" style="width:100%" /></p>
+<p>The dialog comprises four tabs. The first tab “Core info” shown above comprises information on the project itself. The entries “Pdf”, “Mailto” and “Webpage” generate new items in the top menu bar and provide information on the application context to the user.</p>
+<p>The second tab “Defaults” comprises a list of GUI controls of the tool with their title and its default setting:</p>
+<p><img alt="" src="../../media/GUI/Bild_31.png" style="width:100%" /></p>
+<p>The left hand side shows the title of the control, the right hand side comprises a text field with the default settings as stored in the XML-definition file for the GUI. This default can be overwritten with a project specific one. Only these differences are stored.</p>
+<p>Similarly, the two remaining tables show under “System settings” the location of system directories, and under "SVN" optional project specific SVN settings.</p>
+<p>Once you press the <strong>Generate project</strong> button, a new file called <code>project_YourProjectName_default.ini</code>, where "YourProjectName" will be replaced by the name you entered for the project, will be created in FarmDyn's <em>GUI</em> directory.</p>
+<h3 id="switching-projects">Switching Projects</h3>
+<p>To switch between projects klick on <strong>File</strong> -&gt; <strong>Set Project</strong> -&gt; <strong>Project Name</strong> in the menu bar at the top left:</p>
+<p><img alt="" src="../../media/GUI/Bild_32.png" style="width:100%" /></p>
+<p>The currently selected project will be displayed in the status bar at the bottom left corner:</p>
+<p><img alt="" src="../../media/GUI/Bild_33.png" style="width:100%" /></p>
+<h3 id="editing-projects">Editing Projects</h3>
+<p>This option is also only possible in the user type <strong>administrator</strong> (see <a href="#Setting-up-a-New-Project">here</a>).</p>
+<p>An existing project can then be edited by choosing <strong>File</strong> -&gt; <strong>Edit Project</strong> -&gt; <strong>Project Name</strong>. The project dialog as described under <a href="#Setting-up-a-New-Project"><em>Setting up a new Project</em></a> will then be opened. The necessary changes can be done there.</p>
+<p>The changes have to be saved by clicking on the <strong>Update project</strong> button. Notice that the dialog window will not close automatically after the changes were saved.</p>
+<h3 id="important-information-on-the-project-workflow">Important Information on the Project Workflow</h3>
+<p>Please notice that the projects default settings from the GUI tabs <strong>cannot</strong> be changed. The idea is as follows: In the project settings, the default values displayed in the GUI tabs are stored. However, changing these settings in the GUI will not affect the project defaults. This way sensitivity analysis or tests with certain settings can be done without losing the default project values and without breaking any important project specifics. If the tests turn out to be working fine, you may update the project defaults as described <a href="#Editing-Projects"><em>above</em></a>.</p>
+<h2 id="references">References</h2>
+<p>Britz, W. (2010): GGIG Graphical Interface Generator User Guide, Institute for Food and Resource Economics, University Bonn, 147 pages, <a href="http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf">http://www.ilr.uni-bonn.de/em/rsrch/ggig/GGIG_user_Guide.pdf</a>.</p>
+<p>Britz, W. (2014): A New Graphical User Interface Generator for Economic Models and its Comparison to Existing Approaches, German Journal of Agricultural Economics, 63(4): 271-285.</p>
+<p>(Grimm, 2002)</p>
+<!-- Reference missing -->
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../javascripts/init.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

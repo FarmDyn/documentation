@@ -1,0 +1,2739 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/EnvironmentalAccounting/environmental_accounting/">
+      
+      
+        <link rel="prev" href="../../Biogas/biogas/">
+      
+      
+        <link rel="next" href="../../BiodiversityAssessment/abstract_biodiversity_assessment/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Environmental Accounting - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#environmental-accounting-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Environmental Accounting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Environmental Accounting
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Environmental Accounting
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gaseous-emissions" class="md-nav__link">
+    Gaseous emissions
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaseous emissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-enteric-fermentation" class="md-nav__link">
+    Methane Emissions from Enteric Fermentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-manure-storage" class="md-nav__link">
+    Methane Emissions from Manure Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-excreta-on-pastures" class="md-nav__link">
+    Methane emissions from excreta on pastures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-stable-and-storage" class="md-nav__link">
+    N Emissions from Stable and Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-pasture" class="md-nav__link">
+    N Emissions from Pasture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-manure-application" class="md-nav__link">
+    N Emissions from Manure Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-mineral-fertiliser-application" class="md-nav__link">
+    N Emissions from Mineral Fertiliser Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-crop-residues" class="md-nav__link">
+    N Emissions from Crop Residues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co2-emissions-from-liming" class="md-nav__link">
+    CO2 Emissions from Liming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emissions-from-production-of-external-inputs-and-services" class="md-nav__link">
+    Emissions from Production of External Inputs and Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particulate-matter-formation" class="md-nav__link">
+    Particulate Matter Formation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nitrate-leaching-losses" class="md-nav__link">
+    Nitrate Leaching Losses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phosphorus-losses" class="md-nav__link">
+    Phosphorus Losses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#humus-balance" class="md-nav__link">
+    Humus Balance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-assessment" class="md-nav__link">
+    Impact Assessment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gaseous-emissions" class="md-nav__link">
+    Gaseous emissions
+  </a>
+  
+    <nav class="md-nav" aria-label="Gaseous emissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-enteric-fermentation" class="md-nav__link">
+    Methane Emissions from Enteric Fermentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-manure-storage" class="md-nav__link">
+    Methane Emissions from Manure Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methane-emissions-from-excreta-on-pastures" class="md-nav__link">
+    Methane emissions from excreta on pastures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-stable-and-storage" class="md-nav__link">
+    N Emissions from Stable and Storage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-pasture" class="md-nav__link">
+    N Emissions from Pasture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-manure-application" class="md-nav__link">
+    N Emissions from Manure Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-mineral-fertiliser-application" class="md-nav__link">
+    N Emissions from Mineral Fertiliser Application
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-emissions-from-crop-residues" class="md-nav__link">
+    N Emissions from Crop Residues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co2-emissions-from-liming" class="md-nav__link">
+    CO2 Emissions from Liming
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emissions-from-production-of-external-inputs-and-services" class="md-nav__link">
+    Emissions from Production of External Inputs and Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particulate-matter-formation" class="md-nav__link">
+    Particulate Matter Formation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nitrate-leaching-losses" class="md-nav__link">
+    Nitrate Leaching Losses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phosphorus-losses" class="md-nav__link">
+    Phosphorus Losses
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#humus-balance" class="md-nav__link">
+    Humus Balance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impact-assessment" class="md-nav__link">
+    Impact Assessment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="environmental-accounting-module">Environmental Accounting Module</h1>
+<blockquote>
+<p><strong><em>Abstract</em></strong><br />
+The environmental accounting module utilises commonly applied methodology for the quantification of methane (CH4), ammonia (NH3), nitrous dioxide (N2O), nitrogen oxides (NOx) and elemental nitrogen (N2), as well as particulate matter formation (PM10 and PM2.5), as laid down in IPCC (2019) and EMEP (2013, 2016). N and P lost through erosion, run-off and leaching are calculated using methodology from Richner et al. (2014) and Prasuhn (2006). Upstream emissions from the provision of mayor farm inputs and services can be included via the ecoinvent database c. Emissions are characterised at midpoint level using characterisation factors from Huijbregts et al.(2016).</p>
+</blockquote>
+<h2 id="gaseous-emissions">Gaseous emissions</h2>
+<p>All calculations related to the environmental accounting are listed in <em>model\env_acc_module_de.gms</em> while the respective emission factors, characterisation factors and other input data are specified in <em>coeffgen\env_acc_de.gms</em>. An overview of the methodology, data and the respective (primary) sources used are presented in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Source/Sub-source</th>
+<th>Pollutant</th>
+<th>Methodology</th>
+<th>Tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enteric fermentation</td>
+<td>CH4</td>
+<td>IPCC (2019)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Manure management</td>
+<td>CH4</td>
+<td>IPCC (2019)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>NH3, N2O, NOx, N2</td>
+<td>EEA (2016)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>Particulate matter</td>
+<td>EEA (2013)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Pasture</td>
+<td>CH4</td>
+<td>IPCC (2019)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>NH3</td>
+<td>EEA (2016)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>N2O, NOx, N2</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field &amp; Pasture / Manure application</td>
+<td>NH3</td>
+<td>EEA (2016)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>N2O, NOx, N2</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field &amp; Pasture / Fertilizer application</td>
+<td>NH3</td>
+<td>EEA (2016)</td>
+<td>2</td>
+</tr>
+<tr>
+<td></td>
+<td>N2O, NOx, N2</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field / Lime application</td>
+<td>CO2</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field / Crop residues</td>
+<td>N2O, N2</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field</td>
+<td>Particulate matter</td>
+<td>EEA (2016)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Field &amp; Pasture</td>
+<td>NO3-</td>
+<td>Richner et al(2014)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>P</td>
+<td>Prasuhn (2006)</td>
+<td></td>
+</tr>
+<tr>
+<td>Indirect N2O</td>
+<td>N2O</td>
+<td>IPCC (2019)</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>The considered emissions are listed in the set <em>emissions</em>, the included sources in the set <em>sources</em>. The cross set <em>source_emissions</em> links emissions to relevant sources. The set <em>emCat</em> lists midpoint emission categories according to Huijbregts et al.(2016).</p>
+<pre><code class="language-GAMS">set emissions / NO3,NH3,N2O,NOx,N2,N2Oind,CH4,CO2,TSP,PM25,PM10,P
+$iftheni.upstream &quot;%upstreamEF%&quot; == &quot;true&quot;
+                  m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                  U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                  PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq
+$endif.upStream
+               /;
+</code></pre>
+<pre><code class="language-GAMS">set source
+   /
+                                             entFerm
+                                             staSto
+                                             past
+                                             manAppl
+                                             minAppl
+                                             field
+                                             input
+    $$iftheni.upStream &quot;%upstreamEF%&quot; == &quot;true&quot;
+                                             machine
+                                             building
+                                             stable
+                                             silo
+                                             straw
+    $$endif.upStream
+    /;
+</code></pre>
+<pre><code class="language-GAMS">set source_emissions(source,emissions) /
+                                           staSto.(NH3,N2O,NOx,N2,N2Oind,CH4,TSP,PM25,PM10)
+                                           past.(NH3,N2O,NOx,N2,N2Oind,CH4)
+                                           manAppl.(NH3,N2O,NOx,N2,N2Oind)
+                                           minAppl.(NH3,N2O,NOx,N2,N2Oind)
+                                           field.(NO3,N2Oind,CO2, N2O,TSP,PM25,PM10,P)
+                                           entFerm.CH4
+
+  $$iftheni.upStream &quot;%upstreamEF%&quot; == &quot;true&quot;
+                                            input.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+                                          machine.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+                                         building.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+                                           stable.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+                                             silo.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+                                            straw.(m2aA_eq,CO2_eq,oil_eq,FETP_DCB_eq,P_eq,HTP_DCB_eq,
+                                                   U235_eq,METP_DCB_eq,N_eq,Fe_eq,m2_eq,CFC11_eq,
+                                                   PM10_eq,NMVOC_eq,SO2_eq,TETP_DCB_eq,m2aU_eq,m3_eq)
+$$endif.upStream
+                                           / ;
+</code></pre>
+<pre><code class="language-GAMS">set emCat &quot;Emission categories according to ReCiPe(2016)&quot;
+  /
+       ALOP           &quot;agricultural land occupation&quot;
+       GWP            &quot;climate change&quot;
+       FDP            &quot;fossil depletion&quot;
+       FETPinf        &quot;freshwater ecotoxicity&quot;
+       FEP            &quot;freshwater eutrophication&quot;
+       HTPinf         &quot;human toxicity&quot;
+       IRP_HE         &quot;ionising radiation&quot;
+       METPinf        &quot;marine ecotoxicity&quot;
+       MEP            &quot;marine eutrophication&quot;
+       MDP            &quot;metal depletion&quot;
+       NLTP           &quot;natural land transformation&quot;
+       ODPinf         &quot;ozone depletion&quot;
+       PMFP           &quot;particulate matter formation&quot;
+       POFP           &quot;photochemical oxidant formation&quot;
+       TAP            &quot;terrestrial acidification&quot;
+       TETPinf        &quot;terrestrial ecotoxicity&quot;
+       ULOP           &quot;urban land occupation&quot;
+       WDP            &quot;water depletion&quot;
+/;
+</code></pre>
+<pre><code class="language-GAMS">* --- all monthly emissions, differentiated by emissions from herds, cropping and not allocatable emissions
+*
+
+  emissions_(chain_source(curChain,source),emissions,t_n(t,nCur)) $ (tCur(t) $ source_emissions(source,emissions)  $ envAcc )  ..
+
+     v_emissions(curChain,source,emissions,t,nCur)
+
+       =E=
+$iftheni.h %herd% == true
+       sum((singleHerds(herds),breeds)$ ( sum(actHerds(herds,breeds,feedRegime,t,m),1) $ source_emiHerd(source,emissions)),
+                                                 v_emiherds(herds,breeds,curChain,source,emissions,t,nCur))
+$endif.h
+           + sum(curCrops $ source_emiCrops(source,emissions), v_emiCrops(curCrops,curChain,source,emissions,t,nCur) )
+
+           + v_emiOther(curChain,source,emissions,t,nCur)
+
+;
+</code></pre>
+<p>The actual calculation of the emissions is realised in the equation <em>emissions_</em> presented above. The time resolution allows for reporting of emissions on a monthly basis. In this equation all emissions from different sources (herds, cropping and other emissions) are summed up. The different compartments of the equation represent the order of emission accounting, by emissions and sources, based on IPCC (2019). Using conditional <em>sameas</em> statements, only relevant emissions and sources are activated in the respective equations. Here we present all different equations building up the three compartments of the general equation <em>emissions_</em>.</p>
+<h3 id="methane-emissions-from-enteric-fermentation">Methane Emissions from Enteric Fermentation</h3>
+<p>Among the emissions directly related to the herds <em>v_emiherds</em>, methane emissions from enteric fermentation (in kg of CH4) are calculated based based on Dong et al. (2006, p.10,31). The actual feed  intake of different herds, <em>v_feeduse</em>, measured in gross energy, is used to calculate emissions. CH4 conversion factors, <em>p_Ym</em>, represent animal specific emission rates, for cattle and pig herds, in % of gross energy converted to methane.   </p>
+<pre><code class="language-GAMS">* --- emissions directly relateable to herds per herd
+*
+$iftheni.h %herd% == true
+
+ emiherds_(singleHerds(herds),breeds,chain_source(curChain,source),emissions,t_n(t,nCur)) $ (tCur(t) $ source_emiHerd(source,emissions)
+                                $ envAcc $ sum(actHerds(herds,breeds,feedRegime,t,m),1)) ..
+
+    v_emiherds(herds,breeds,curChain,source,emissions,t,nCur)
+
+      =E=
+*     --- Calculation of CH4 emissions from enteric fermentation linked to gross energy intake (IPCC, 2006, eq. 10.21)
+*         in kg CH4 per month (yearly emissions averaged for monthly reporting),
+
+        + [  (
+   $$iftheni.ch %cattle% == true
+
+    +  sum(curFeeds(feeds),p_feedContFMton(feeds,&quot;GE&quot;)
+                 * sum((feedregime,reqsPhase,m) $ (feedRegime_feeds(feedRegime,curFeeds)
+                                                      $ actHerdsf(herds,breeds,feedRegime,reqsphase,m)),
+                            v_feeding(herds,breeds,feedRegime,reqsPhase,m,curfeeds,t,nCur) *
+                                  [     p_Ym(&quot;dcows&quot;,&quot;&quot;) $  sum(sameas(herds,dcows),1)
+                                     +  p_Ym(&quot;mcows&quot;,&quot;&quot;) $  sum(sameas(herds,mcows),1)
+               $$ifi defined heifs   +  p_Ym(&quot;heifs&quot;,&quot;&quot;) $  sum(sameas(herds,heifs),1)
+               $$ifi defined bulls   +  p_Ym(&quot;bulls&quot;,&quot;&quot;) $  sum(sameas(herds,bulls),1)
+                                     +  p_Ym(&quot;calvs&quot;,&quot;&quot;) $  sum(sameas(herds,calvs),1) ]))
+
+   $$endif.ch
+   $$iftheni.fat &quot;%farmBranchfattners%&quot; == &quot;on&quot;
+                   +  sum((sameas(herds,fatHerd),feedregime,m) $ (actHerds(fatHerd,breeds,feedRegime,t,m)
+                                    $ p_feedReqPig%l%(fatHerd,feedRegime,&quot;energ&quot;)),
+                             p_feedReqPig(fatHerd,feedRegime,&quot;energ&quot;)  * 1000 * v_herdsize(fatHerd,breeds,feedRegime,t,nCur,m) * p_YM(&quot;fatHerd&quot;,&quot;&quot;))
+   $$endif.fat
+   $$iftheni.sows &quot;%farmBranchSows%&quot; == &quot;on&quot;
+                    +  sum((sameas(herds,&quot;sows&quot;),feedregime,m) $  (actHerds(&quot;sows&quot;,breeds,feedRegime,t,m)
+                                   $ p_feedReqPig%l%(&quot;sows&quot;,feedRegime,&quot;energ&quot;)),
+                             p_feedReqPig(&quot;sows&quot;,feedRegime,&quot;energ&quot;) * 1000  * v_herdsize(&quot;sows&quot;,breeds,feedRegime,t,nCur,m) * p_YM(&quot;sows&quot;,&quot;&quot;))
+   $$endif.sows
+                    )/(100 * 55.65)
+
+        ]   $ ( sameas(emissions,&quot;CH4&quot;) $ sameas(source,&quot;entFerm&quot;)  )
+</code></pre>
+<h3 id="methane-emissions-from-manure-storage">Methane Emissions from Manure Storage</h3>
+<p>CH4 emissions stemming from manure storage are included among other emissions <em>v_emiOther</em> and they are calculated according to the volume in the different storage systems, <em>v_volInStorageType</em>. The amount of volatile solids in the slurry is estimated based on the stored volume using the average dry matter, <em>p_avDmMan</em>, and the share of volatile solids in the dry matter, <em>p_oTSMan</em>. The effect of different slurry cover types on emissions is incorporated via different methane conversion factors, <em>p_MCF</em>, in percentage of volatile solids. Furthermore, different manure types are considered in the maximum methane producing capacity, <em>p_BO</em>. The emission factor is divided by 12 according to the monthly resolution.</p>
+<pre><code class="language-GAMS">emiOther_(curChain,source,emissions,t_n(t,nCur)) $ (tCur(t)  $ envAcc $source_emissions(source,emissions) $chain_source(curChain,source))  ..
+
+   v_emiOther(curChain,source,emissions,t,nCur)
+
+     =E=
+     $$iftheni.man %manureStorage% == true
+
+*  --- Calculation of CH4 from storage according to Haenel et al. (2018) p. 42 No. 3.28 and 3.29 Following IPCC, 2006, eq. 10.23;  in kg CH4 per month
+         +   [  sum( (sameas(curManChain,curChain),manStorage,m),   v_volInStorageType(curManChain,manStorage,t,nCur,m)
+                         *  1000 * p_avDmMan(curManChain) * p_oTSMan(curManChain) * p_BO(curManChain)
+                         * p_densM * p_MCF(Manstorage,curManChain)
+                         /12)
+             ] $ ( sameas(emissions,&quot;CH4&quot;) $ sameas(source,&quot;staSto&quot;)  )
+</code></pre>
+<h3 id="methane-emissions-from-excreta-on-pastures">Methane emissions from excreta on pastures</h3>
+<p>Excreta on pastures also emits CH4. The calculation of those emissions is conducted analog to the emissions from storage with a specific methane conversion factor, <em>p_MCFPast</em> and using the volume of manure excreted on pastures. Emissions from excreta on pastures are considered among the emissions directly related to crop production:</p>
+<pre><code class="language-GAMS">emicrops_(curCrops,chain_source(curChain,source),emissions,t_n(t,nCur)) $ (tCur(t) $ source_emiCrops(source,emissions)  $ envAcc )  ..
+
+   v_emiCrops(curCrops,curChain,source,emissions,t,nCur)
+
+   =E=
+
+*  --- Calculation of CH4 from storage according to Haenel et al. (2018) p. 42 No. 3.28 and 3.29 Following IPCC, 2006, eq. 10.23;
+*      in kg CH4 per month
+*   Pasture:
+*
+   $$iftheni.ch %cattle% == true
+
+        + [  sum( (c_p_t_i(curCrops,plot,till,&quot;graz&quot;),curManChain,m),  v_manQuantPast(curCrops,plot,till,&quot;graz&quot;,curManChain,t,nCur,m)
+                   *  1000 * p_avDmMan(curManchain) * p_oTSMan(curManChain) * p_BO(curManchain)
+                   * p_densM * p_MCFPast)
+          ] $ ( sameas(emissions,&quot;CH4&quot;) $ sameas(source,&quot;past&quot;) $ grasCrops(curCrops))
+</code></pre>
+<h3 id="n-emissions-from-stable-and-storage">N Emissions from Stable and Storage</h3>
+<p>N-emissions are calculated using a mass-flow approach starting with the N excretion by farm animals. Three N-pools are considered, N-TAN, N-Org and total N. The correction of the N pools by previous losses are not part of the <em>env_acc_module</em> but are considered in the <em>manure_module</em>.  The considered N flows and emissions are depicted in the figure below :</p>
+<p><img alt="" src="../../../../media/praesentation1.png" style="width:100%" /></p>
+<p>Figure 1: N mass flow approach with considered stages and emissions in FarmDyn</p>
+<p>NH3 emissions at the stable stage are calculated according to the N-TAN in manure as excreted by the animals, <em>v_nut2ManureM</em>. NH3 emissions from storage are calculated based on the N-TAN pool in storage, <em>v_nutPoolInStorage</em>. The emission factors differentiate between cattle and pig slurry.
+While NH3 emissions are based only on the N-TAN pool, other N emissions are based on the total N pool as depicted in <em>v_nut2manureM</em>. Considered emissions are N2O and NOx. N2 is generally not considered as an emission. For the completeness of the N-flow model, N losses in the form of N2 are still calculated in the environmental accounting. Indirect N2O emissions (N2Oind) are determined based on prior emissions of reactive N species, namely NH3 and NOx. For the sake of simplicity, the stages stable and storage are summarized in the calculation of emissions. Compared to total N2O and NOx emissions on farm the emissions at this stage are rather small and the generalisation is not expected to distort the results. N emissions from stable and storage are calculated based on IPCC (2019) and EMEP (2016) and included in the emissions directly related to the herds <em>v_emiherds</em>.</p>
+<pre><code class="language-GAMS">*     --- Calculation of NH3, N2O, NOx, N2, N2Oind from stable and storage (staSto) Haenel et al. 55
+
+  +    [
+
+
+         sum((sameas(curManChain,curChain),m) $ sum(actherds(herds,breeds,feedregime,t,m),1),
+                  (v_nut2ManureHerds(herds,breeds,curManChain,&quot;NTAN&quot;,t,nCur,m)  $ (not sameas(curmanchain,&quot;LiquidBiogas&quot;))
+                                              * (p_EFSta(&quot;NH3&quot;,curManChain) + p_EFSto(&quot;NH3&quot;,curManChain)))) $( sameas(emissions,&quot;NH3&quot;))
+
+        + sum((sameas(curManChain,curChain),m) $ sum(actherds(herds,breeds,feedregime,t,m),1),
+                                            (v_nut2ManureHerds(herds,breeds,curManChain,&quot;NTAN&quot;,t,nCur,m)$ (not sameas(curmanchain,&quot;LiquidBiogas&quot;))
+                                          +  v_nut2ManureHerds(herds,breeds,curManChain,&quot;NOrg&quot;,t,nCur,m)$ (not sameas(curmanchain,&quot;LiquidBiogas&quot;)))
+                                          *  ( p_EFStaSto(&quot;N2O&quot;,curManChain)    $ sameas(emissions,&quot;N2O&quot;)
+                                             + p_EFStaSto(&quot;NOx&quot;,curManChain)    $ sameas(emissions,&quot;NOx&quot;)
+                                             + p_EFStaSto(&quot;N2&quot;,curManChain)     $ sameas(emissions,&quot;N2&quot;)
+                                             ))
+
+        + (sum(sameas(curManChain,curChain), v_emiHerds(herds,breeds,curChain,&quot;stasto&quot;,&quot;NOx&quot;,t,nCur)
+                                            + v_emiHerds(herds,breeds,curChain,&quot;stasto&quot;,&quot;NH3&quot;,t,nCur)
+                                            ) * p_EFN2Oind ) $ sameas(emissions,&quot;N2Oind&quot;)
+      ]  $ sameas(source,&quot;staSto&quot;)
+</code></pre>
+<h3 id="n-emissions-from-pasture">N Emissions from Pasture</h3>
+<p>The calculation of N emissions from pastures follows the same logic as the calculation of emissions from the stable and storage stage. The emission factors, <em>p_EFpasture</em>, represent the conditions of manure excreted on pastures. The source of the applied methodology can be found in EMEP (2016, p. 20f) and Klein (2006, p.6 f). As for methane emissions nitrogen emissions from pasture are included in <em>v_emiCrops</em>.</p>
+<pre><code class="language-GAMS">*     --- Calculation of NH3, N2O, NO and N2 losses from manure excretion on pasture for cattle according to Haenel et al. (2018)p.55 and p.332 and IPCC(2006)-11.6 ff
+*         in kg NH3-N, N2O-N, NO-N and N2 per month
+
+        + [
+              + sum((c_p_t_i(curCrops,plot,till,intens),m)
+                         $ ( (p_grazMonth(curCrops,m)&gt;0) $ sum(actHerds(possHerds,breeds,grazRegime,t,m)
+                          $ sum(nut2,p_nutExcreDueV(possHerds,grazRegime,nut2)),1)),
+
+                     v_nut2ManurePast(curCrops,plot,till,intens,&quot;NTAN&quot;,t,nCur,m)
+                      * (  p_EFPasture(&quot;NH3&quot;)       $ sameas(emissions,&quot;NH3&quot;)  )
+
+                  +  (   v_nut2ManurePast(curCrops,plot,till,intens,&quot;NTAN&quot;,t,nCur,m)
+                       + v_nut2ManurePast(curCrops,plot,till,intens,&quot;Norg&quot;,t,nCur,m))
+                      * (  p_EFPasture(&quot;N2O&quot;)        $ sameas(emissions,&quot;N2O&quot;)
+                         + p_EFPasture(&quot;NOx&quot;)        $ sameas(emissions,&quot;NOx&quot;)
+                         + p_EFPasture(&quot;N2&quot;)         $ sameas(emissions,&quot;N2&quot;)
+                         ))
+
+*     --- Calculation of N2Oind from manure excretion on grassCropsure for cattle
+*         in kg N2O-N per month
+                + (( v_emiCrops(curCrops,&quot; &quot;,&quot;past&quot;,&quot;NH3&quot;,t,nCur) + v_emiCrops(curCrops,&quot; &quot;,&quot;past&quot;,&quot;NOx&quot;,t,nCur))
+                     * p_EFN2Oind ) $ sameas(emissions,&quot;N2Oind&quot;)
+
+          ] $ (sameas(source,&quot;past&quot;) $ grasCrops(curCrops))
+</code></pre>
+<h3 id="n-emissions-from-manure-application">N Emissions from Manure Application</h3>
+<p>NH3 emissions from the application of manure are calculated based on the N-TAN pool in the slurry leaving the storage stage. The amount is estimated using the total amount of slurry in cubic meter <em>v_manDist</em> and of nutrients in the slurry as determined by <em>p_nut2inMan</em> in kg N-TAN. The emission factors vary between grassland and arable land, different application devices and pig and cattle slurry. N2O, NOx and N2 emissions are calculated based on the total N pool at the application stage, <em>v_nut2manApplied</em>. The emission factor (<em>p_EFAPpplMin </em>) is equal to the emission factors for the application of synthetic fertilisers, as proposed by IPCC (2019). The calculation of N2O emission follows Klein (2006, p.7ff), the calculation of NOx EMEP (2016) and N2 from Roesemann (2015, p. 317). Indirect N2O emissions are based on prior emissions of NH3 and NOx.</p>
+<pre><code class="language-GAMS">*     --- Calculation of NH3, N2O, NOx, N2 from manure application
+*         NH3 losses depending on technology, source EMEP (2016)p.22ff for NH3; IPCC (2006)-11.7 for N2O; EMEP (2016)-3.D-11 for NOx
+*         in kg NH3-N, N2O-N, NO-N and N2 per month:
+
+     + [   sum( (c_p_t_i(curCrops,plot,till,intens),manApplicType_manType(ManApplicType,curManType),m)
+                           $ (sum(sameas(curChain,curManChain) $ manChain_type(curManChain,curManType),1)
+                           $ (not catchcrops(curcrops))),
+              v_manDist(curCrops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                      * sum(manChain,p_nut2inMan(&quot;NTAN&quot;,curManType,manChain))
+                  * p_EFapplMan(curCrops,curManType,manApplicType,&quot;NTAN&quot;,m)) $ sameas(emissions,&quot;NH3&quot;)
+
+         + sum((sameas(curManChain,curChain),nut2,m) $ (not sameas(nut2,&quot;P&quot;)),
+                    v_nut2ManApplied(curCrops,curManChain,nut2,t,nCur,m)
+                         * (    p_EFApplMin(&quot;N2O&quot;) $ sameas(emissions,&quot;N2O&quot;)
+                              + p_EFApplMin(&quot;NOx&quot;) $ sameas(emissions,&quot;NOx&quot;)
+                              + p_EFApplMin(&quot;N2&quot;)  $ sameas(emissions,&quot;N2&quot;)))
+
+         + (sum(sameas(curManChain,curChain) ,  v_emiCrops(curCrops,curChain,&quot;manAppl&quot;,&quot;NH3&quot;,t,nCur)
+                                              + v_emiCrops(curCrops,curChain,&quot;manAppl&quot;,&quot;NOx&quot;,t,nCur))
+                               * p_EFN2Oind ) $ sameas(emissions,&quot;N2Oind&quot;)
+
+       ] $ sameas(source,&quot;manAppl&quot;)
+</code></pre>
+<h3 id="n-emissions-from-mineral-fertiliser-application">N Emissions from Mineral Fertiliser Application</h3>
+<p>N-emissions from the application of mineral fertiliser, except for NH3, follow the same logic as from the application of manure. In synthetic fertiliser all N is present as N-TAN. The emission factor for NH3 emissions distinguishes between different fertiliser types, according to EMEP (2016, p.161). For the calculation of emissions, only the emission factor changes from <em>p_EFApplMinNH3</em> to <em>p_EFApplMin</em>. The pool of applied N from mineral fertiliser is determined by the total amount of applied fertiliser <em>v_syntDist</em> in kg multiplied by the share of N in the fertiliser, <em>p_nutInSynt</em></p>
+<pre><code class="language-GAMS">*    --- Calculation of NH3, N2O, NOx, N2 from mineral fertilizer application
+*        Based on IPCC (2006)-11.7 for N2O; EMEP (2016)-3.D-11 for NOx, Roesemann et al. 2015, pp. 316-317 for N2
+*         in kg NH3-N, N2O-N, NO-N and N2 per month
+
+     + [sum( (c_p_t_i(curcrops,plot,till,intens),curInputs(syntFertilizer),m),
+                      v_syntDist(curCrops,plot,till,intens,syntFertilizer,t,nCur,m)  * p_nutInSynt(syntFertilizer,&quot;N&quot;)
+                 * (    p_EFApplMinNH3(syntFertilizer) $ sameas(emissions,&quot;NH3&quot;)
+                      + p_EFApplMin(&quot;N2O&quot;) $ sameas(emissions,&quot;N2O&quot;)
+                      + p_EFApplMin(&quot;NOx&quot;) $ sameas(emissions,&quot;NOx&quot;)
+                      + p_EFApplMin(&quot;N2&quot;)  $ sameas(emissions,&quot;N2&quot;)))
+
+             + (( v_emiCrops(curCrops,&quot; &quot;,&quot;minAppl&quot;,&quot;NH3&quot;,t,nCur) + v_emiCrops(curCrops,&quot; &quot;,&quot;minAppl&quot;,&quot;NOx&quot;,t,nCur))
+                           * p_EFN2Oind ) $ sameas(emissions,&quot;N2Oind&quot;)
+       ] $  sameas(source,&quot;minAppl&quot;)
+</code></pre>
+<h3 id="n-emissions-from-crop-residues">N Emissions from Crop Residues</h3>
+<p>The calculation of N2O emissions from crop residues is divided into three parts: At first the above and below ground N pool from crop residues are determined. Then the removal of N in crop residues through the harvest of straw is deducted. In a last step, the remaining N pool is multiplied with an emission factor. The methodology is adapted from Klein (2006, p.11 ff). The parameter <em>p_cropResi</em> inherits all further information needed for the derivation of the amount of N in crop residues. The different information is controlled through the set <em>resiEle</em>. The parameter includes information about the duration of the cropped system (“duration”), the frequency of harvesting (“freqHarv”), the dry matter content of the fresh matter yield (“DMyield”), the dry matter content of above ground residues (“DMresi”), the ratio of above ground crop residues to yield (“aboveRat”), the nitrogen content of the above-ground crop residues (“aboveN”), the ratio of below ground crop residues to above ground biomass (“belowRat”), and the nitrogen content of below ground crop residues (“belowN”). At first, the above ground N from organic material is calculated based on the main output, which is determined by the cropped area <em>v_cropHa</em> (in ha), multiplied by the main output of the respective crop <em>p_OCoeffC</em> in t fresh matter per ha of the respective crop:</p>
+<pre><code class="language-GAMS">*  --- Calculation of N2O emissions from crop residues on field in kg N2O-N per month; devided by 12 to account for monthly resolution; IPCC(2006)-11.11 ff
+
+    + [(  sum(c_p_t_i(curcrops,plot,till,intens),
+*     --- arable land residues abvove ground
+           + v_cropHa(curCrops,plot,till,intens,t,nCur)
+            * sum( (plot_soil(plot,soil),curProds) $ p_OCoeffC%l%(curCrops,soil,till,intens,curProds,t), p_OCoeffC(curCrops,soil,till,intens,curProds,t) * 1000)
+             * p_cropResi(curCrops,&quot;duration&quot;) * p_cropResi(curCrops,&quot;freqHarv&quot;) *  p_cropResi(curCrops,&quot;aboveRat&quot;) * p_cropResi(curCrops,&quot;aboveN&quot;)
+
+*     --- arable land residues below ground
+           + v_cropHa(curCrops,plot,till,intens,t,nCur) *  sum( (plot_soil(plot,soil),curProds) $ p_OCoeffC%l%(curCrops,soil,till,intens,curProds,t) ,
+              p_OCoeffC(curCrops,soil,till,intens,curProds,t) * 1000)
+              * p_cropResi(curCrops,&quot;duration&quot;) * p_cropResi(curCrops,&quot;freqHarv&quot;)
+              * ( p_cropResi(curCrops,&quot;DMyield&quot;)$(not sameas(curCrops,&quot;potatoes&quot;) and not sameas(curCrops,&quot;sugarBeet&quot;))
+               + p_cropResi(curCrops,&quot;aboveRat&quot;) * p_cropResi(curCrops,&quot;DMresi&quot;))
+               * p_cropResi(curCrops,&quot;belowRat&quot;) * p_cropResi(curCrops,&quot;belowN&quot;)  )
+
+*      --- deduction for straw removal
+            -sum( c_p_t_i(curcrops,plot,till,intens) $ cropsResidueRemo(curCrops),  v_residuesRemoval(curCrops,plot,till,intens,t,nCur)
+                * sum( (plot_soil(plot,soil),prodsResidues), 10 * p_OCoeffResidues(curCrops,soil,till,intens,prodsResidues,t)
+                                                                   * p_nutContent(curCrops,prodsResidues,&quot;conv&quot;,&quot;N&quot;)))
+
+      )  * p_EFApplMin(&quot;N2O&quot;)
+     ] $ ( sameas (emissions,&quot;N2O&quot;) $ sameas (source,&quot;field&quot;))
+</code></pre>
+<h3 id="co2-emissions-from-liming">CO2 Emissions from Liming</h3>
+<p>Lime is commonly used in agriculture to manage soil acidity. CO2 emissions stemming from lime application are introduced in the cropping related section. The amount of applied lime is paired with a simple emission factor <em>p_EFLime</em>,  and it is determined from the bought inputs, <em>v_buy</em> in t.</p>
+<pre><code class="language-GAMS">* --- Calculation of CO2 emissions from liming in kg CO2 per month; devided by 12 for monthly resolution; IPCC (2006) 11.27
+
++  [  sum(c_p_t_i(curcrops,plot,till,intens) $ (p_costQuant(curCrops,till,intens,&quot;lime&quot;)),
+         v_cropHa(curCrops,plot,till,intens,t,nCur) * p_costQuant(curCrops,till,intens,&quot;lime&quot;) /
+           (p_inputPrices(&quot;lime&quot;,&quot;conv&quot;)  $ (not sameas(till,&quot;org&quot;))
+            + p_inputPrices(&quot;lime&quot;,&quot;org&quot;) $ (    sameas(till,&quot;org&quot;))) * v_costQuant(curCrops,&quot;lime&quot;)) 
+           *  p_EFLime(&quot;lime&quot;)
+   ] $ ( sameas (emissions,&quot;CO2&quot;) $ sameas (source,&quot;field&quot;))
+</code></pre>
+<h3 id="emissions-from-production-of-external-inputs-and-services">Emissions from Production of External Inputs and Services</h3>
+<p>Up-stream emissions stemming from the production of farm inputs and services are included to gain insides on the environmental outcome of production beyond the farm boundaries. Emissions are considered via the ecoinvent database (Wernet et al. 2016). Due to licensing fees the data base is not part of the main model code but may be forwarded if requested. Therefore, the calculation of emissions is restricted through conditional assignments triggered by a checkbox in the interface.</p>
+<p>Emissions from production of mineral fertilizers are considered based on the amount of applied fertilizers <em>v_syntDist</em>.</p>
+<ul>
+<li>
+<p>--- Calculation of emissions stemming from synthetic fertilizer production</p>
+</li>
+<li>
+<p>[  sum( (c_p_t_i(curcrops,plot,till,intens),sameas(inputs,syntFertilizer),m),
+              v_syntDist(curCrops,plot,till,intens,syntFertilizer,t,nCur,m) * p_EFInput(syntFertilizer,emissions))
+      ] $sameas(source,"input")</p>
+</li>
+</ul>
+<p>Other crop specific inputs are estimated based on the bought quantity or costs as specified in <em>p_costQuant</em>.</p>
+<pre><code>+ [ sum( (c_p_t_i(curCrops,plot,till,intens),inputs) $ p_costQuant(curcrops,till,intens,inputs),
+      v_cropHa(curCrops,plot,till,intens,t,nCur)
+        *( p_costQuant(curCrops,till,intens,inputs) * v_costQuant(curCrops,inputs)) $(not sameas(inputs,"seed"))
+          * p_EFInputCrops(curCrops,till,intens,inputs,emissions))
+  ] $sameas(source,"input")
+</code></pre>
+<p>Emissions from field operations include the production, use and transportation of machines as well as diesel and pesticides. They are calculated using
+<em>p_crop_op_per_till</em>. For manure application emissions are calculated based on the amount of applied manure <em>v_manDist</em>.</p>
+<pre><code>+  [
+</code></pre>
+<ul>
+<li>
+<p>--- crops times their need for field operations, yield depression effect is missing here
+        sum((c_p_t_i(curcrops,plot,till,intens),operation),
+            v_cropHa(curCrops,plot,till,intens,t,nCur)
+               * sum(labPeriod, p_crop_op_per_till(curCrops,Operation,labPeriod,till,intens)
+                                    * p_EFoperations(curCrops,plot,till,intens,operation,emissions,t)/12 ))</p>
+</li>
+<li>
+<p>---- machine need for the application of manure
+           $$iftheni.man %manure% == true</p>
+<pre><code>    + sum( (c_p_t_i(curCrops,plot,till,intens),manApplicType_manType(ManApplicType,curManType),m)
+             $ (v_manDist.up(curCrops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+               v_manDist(curCrops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                 * sum(sameas(operation,"manDist"), p_EFoperations(curCrops,plot,till,intens,operation,emissions,t)) )
+   $$endif.man
+</code></pre>
+<p>] $sameas(source,"machine")</p>
+</li>
+</ul>
+<p>Emissions from machine use and production in stables is calculated based on the machine need <em>p_machNeed</em> and the herd size <em>v_herdSize</em>  </p>
+<pre><code>  * --- Calculation of emissions from machine provision and use related to herds
+
+       +  [  sum((machtype,machLifeUnit) $ p_lifeTimeM(machType,machLifeUnit),
+
+                sum(actHerds(herds,breeds,feedRegime,t,m) $ p_prodLength(herds,breeds),
+                   v_herdSize(herds,breeds,feedRegime,t,nCur,m)
+                    * p_machNeed(herds,"plough","normal",machType,machLifeUnit)
+                                * 1/min(12,p_prodLength(herds,breeds)))
+
+                    * (p_machAttr(machType,"diesel_h") * p_EFInput("diesel",emissions) ) $(sameas(machType,"tractorSmall") $sameas(machLifeUnit,"hour"))
+                    )
+          ] $sameas(source,"machine")$((not sum(sameas(sumherds,herds),1)) or sum(sameas(calvsRais,herds),1) )
+</code></pre>
+<p>Emissions from bought feedstuff and straw for bedding in stables is calculated based on the bought amounts in <em>v_feedusebuy</em> and <em>v_buy</em></p>
+<pre><code>   +  [
+                sum(sys$ p_inputPrice%l%("straw",sys,t),     v_buy("straw",sys,t,nCur)  *  p_EFInput("straw",emissions))
+      ]$sameas(source,"straw")
+
+   +  [ sum((sameas(feeds,inputs)) $ sum(sys $p_inputPrice%l%(inputs,sys,t),1),
+                      v_feedusebuy(feeds,t,nCur)  *  p_EFInput(inputs,emissions))
+
+      ]$sameas(source,"input")
+</code></pre>
+<h2 id="particulate-matter-formation">Particulate Matter Formation</h2>
+<p>Particulate matter emissions are categorised into three compartments depending on the size of the particles: particulate matter smaller than 2.5 μm (PM2.5), particulate matter smaller than 10 μm (PM2.5) (PM10) and total suspended particles (TSP) according to EMEP (2016).
+Although all compartments are calculated in FarmDyn only the smallest particles (PM2.5) enter the later characterization step according to Huijbregts et al. (2016). Indirect emissions can form from prior NH3, NO3 and NOX emissions (WHO 2003).</p>
+<p>Direct emissions of particulate matter from animal husbandry are calculated according to EMEP (2013) using a tier 2 approach considering different animal types, stable systems and the time animals spend in the stable. As stable systems are considered as an exogenous decision in the model, an emission factor (<em>p_EFpmfHerds</em>) is linked to the variable <em>v_herdsize</em>.</p>
+<pre><code class="language-GAMS">* --- Calculation of particulate matter emission from animal husbandry EMEP(2013)
+*     3.3(“Tier 2 technology-specific approach“), Haenel et al (2018) p.66
+
+   +  [ sum((actHerds(herds,breeds,feedRegime,t,m),sameas(curmanchain,curChain))
+            $ (p_manQuantMonth(herds,curManChain) $ p_prodLength(herds,breeds)),
+                  v_herdSize(herds,breeds,feedRegime,t,nCur,m)  *  p_EFpmfHerds(herds,feedregime,curmanchain,emissions)/12 )
+      ]   $ sameas(source,&quot;staSto&quot;)
+</code></pre>
+<p>Similarly, direct emissions of particulate matter from crop cultivation, harvesting and processing are calculated according to EMEP (2016, p.19) considering the type of crop, the crop specific cultivation operations, harvesting operations and the storage and processing of harvested goods (drying and cleaning). The activity data entering the equation is the cropped area per crop, <em>v_cropHa</em> and the emission factor <em>p_EFpmfCrops</em>.</p>
+<pre><code class="language-GAMS">* --- Calculation of particulate matter emission from cropping EMEP(2016) 3D p.19,
+*     if upstream emissions are considered this is included in machine operations
+
+$$iftheni.eco  not &quot;%upstreamEF%&quot; == &quot;true&quot;
+   +  [  sum(c_p_t_i(curcrops,plot,till,intens),
+            v_cropHa(curCrops,plot,till,intens,t,nCur)
+                  * sum((operation,labperiod), p_crop_op_per_till(curCrops,Operation,labPeriod,till,intens)
+                             * p_EFpmfCrops(curCrops,operation,emissions) ))
+      ]   $ sameas(source,&quot;field&quot;)
+</code></pre>
+<h2 id="nitrate-leaching-losses">Nitrate Leaching Losses</h2>
+<p>In FarmDyn, an advanced N balance, i.e. the model Salca NO3, is used to calculate N leaching losses based on the methodology of Richner (2014). Conceptually, the underlying assumption of the model is that inputs of N from mineralization of soil-organic-N, fertilisation, or excretion of grazing animals is either taken up by plants or leached. The total loss of N through leaching on farm-level therefore is calculated as the sum of N inputs into the soil after gaseous N losses from fertilisation, from mineralization and from excreta of grazing animals. The inputs are deducted by the amount of N taken up by plants. The remaining N is then the leaching loss which is finally filtered for positive values only (negative emissions not possible):</p>
+<pre><code class="language-GAMS">* --- Calculation of leaching on farm level adapted from SALCA NO3 (Richner (2014)) in kg NO3-N per year
+*     (only for crops with a nutrient need, exempts idling land, flowerstripes etc.)
+*
+ leachCrops_(curCrops,t_n(tCur(t),nCur)) $( sum((c_p_t_i(curCrops,plot,till,intens),plot_soil(plot,soil)),p_nutNeed(curCrops,soil,till,intens,&quot;N&quot;,t))
+                                          $ envAcc ) ..
+
+    v_leachCrops(curCrops,t,ncur) =e=
+
+*    --- leached N from applied manure
+    $$iftheni.h %herd% ==true
+        sum( (plot,till,intens,manApplicType_manType(ManApplicType,curManType),m)
+                 $ (manApplicType_manType(ManApplicType,curManType)
+                 $ (v_manDist.up(curCrops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)
+                 $ ( not catchcrops(curcrops) ) $c_p_t_i(curCrops,plot,till,intens)),
+            v_manDist(curCrops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                 * sum(curManChain, p_nut2inMan(&quot;NTAN&quot;,curManType,curManChain))  * p_EfLeachFert(curCrops,m)  )
+
+                 -  sum( (curChain,NiEmissions(Emissions)) $ chain_source(curChain,&quot;manAppl&quot;),
+                       v_emiCrops(curCrops,curChain,&quot;manAppl&quot;,emissions,t,nCur) )
+    $$endif.h
+
+*    --- leached N from applied mineral fertilizer
+      + sum( (plot,till,intens,syntFertilizer,m)$c_p_t_i(curCrops,plot,till,intens),
+            v_syntDist(curCrops,plot,till,intens,syntFertilizer,t,nCur,m) * p_nutInSynt(syntFertilizer,&quot;N&quot;)  * p_EfLeachFert(curCrops,m) )
+
+            -  sum( (curChain,NiEmissions(Emissions)) $ chain_source(curChain,&quot;minAppl&quot;),
+                  v_emiCrops(curCrops,curChain,&quot;minAppl&quot;,emissions,t,nCur) )
+
+*    --- leached N from mineralization
+
+     +  sum((plot,till,intens,m)$c_p_t_i(curCrops,plot,till,intens), p_LeachNorm(m) * v_cropHa(curCrops,plot,till,intens,t,nCur))
+
+*    ---  correction of mineralisation for longterm effects of organic fertilization (+10% per DGVE per ha; 1DGVE = 110kgN/h and a)
+
+  $$iftheni.h %herd% ==true
+    +  sum( m,p_LeachNorm(m)) * 0.1
+      *  [sum( (plot,till,intens,manApplicType_manType(ManApplicType,curManType),m)
+              $ ( (v_manDist.up(curCrops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0)
+                  $( not catchcrops(curcrops) )  $c_p_t_i(curCrops,plot,till,intens)),
+
+                 v_manDist(curCrops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                   * (sum(manChain,p_nut2inMan(&quot;NORG&quot;,curManType,manChain))
+                   +  sum(manChain,p_nut2inMan(&quot;NTAN&quot;,curManType,manChain)) )   )
+
+                  -  sum( (curChain,NiEmissions(Emissions)) $ chain_source(curChain,&quot;manAppl&quot;),
+                        v_emiCrops(curCrops,curChain,&quot;manAppl&quot;,emissions,t,nCur)) -110  ]/110
+  $$endif.h
+
+*    --- additional mineralization in month with intensive cultivation operation
+
+   +  sum( (plot,till,intens,m)$(c_p_t_i(curCrops,plot,till,intens) $sum(arabCrops(crops)$sameas(crops,arabcrops),1)),
+          p_CfIntensTill(m,curCrops)* p_CfNLeachTill(m) * v_cropHa(curCrops,plot,till,intens,t,nCur) )
+
+*      --- correction for reduced mineralization under grassland
+  -  sum[ (plot,till,intens) $(c_p_t_i(curCrops,plot,till,intens) $ sum(grasCrops(crops)$sameas(crops,grascrops),1)),
+         v_cropHa(curCrops,plot,till,intens,t,nCur) * p_CfNLeachGrass(curCrops) ]
+
+*     --- plant removal deduction
+    -   sum ( (plot_soil(plot,soil),till,intens) $c_p_t_i(curCrops,plot,till,intens),
+                  p_nutNeed(curCrops,soil,till,intens,&quot;N&quot;,t) * v_cropHa(curCrops,plot,till,intens,t,nCur))
+
+*     --- leaching from grazed pastures
+
+    $$iftheni.ch %cattle% == true
+ +
+          sum((plot,till,intens,m)
+                      $ ( (p_grazMonth(curCrops,m)&gt;0) $ sum(actHerds(possHerds,breeds,grazRegime,t,m)
+                      $ sum(nut2,p_nutExcreDueV(possHerds,grazRegime,nut2)),1)
+                      $c_p_t_i(curCrops,plot,till,intens)),
+                (   v_nut2ManurePast(curCrops,plot,till,intens,&quot;NTAN&quot;,t,nCur,m)
+                  + v_nut2ManurePast(curcrops,plot,till,intens,&quot;NORG&quot;,t,nCur,m)
+
+                  - sum((curChain,NiEmissions(Emissions)) $ (chain_source(curChain,&quot;past&quot;)) ,
+                           v_emiCrops(curCrops,curChain,&quot;past&quot;,emissions,t,nCur))/12
+
+                )*p_leachPast(m)
+            )$sum(grasCrops(crops)$sameas(crops,grascrops),1)
+
+    $$endif.ch
+;
+
+* --- equations to filter for positive values only, negative emissions are not possible in this case
+
+slackLeach_(curCrops,t_n(tCur(t),nCur)) $ (sum((c_p_t_i(curCrops,plot,till,intens),plot_soil(plot,soil)),p_nutNeed(curCrops,soil,till,intens,&quot;N&quot;,t))
+                                             $ envAcc) ..
+
+  v_leachCrops(curCrops,t,nCur) - v_leachpositive(curCrops,t,nCur)+ v_leachnegative(curCrops,t,nCur) =E= 0;
+
+finalLeach_(curCrops,t_n(tCur(t),nCur)) $ (sum((c_p_t_i(curCrops,plot,till,intens),plot_soil(plot,soil)),p_nutNeed(curCrops,soil,till,intens,&quot;N&quot;,t))
+                                             $ envAcc)..
+
+ 2* v_leachpositive(curCrops,t,nCur) =e= v_leachCrops(curCrops,t,nCur) + v_leachpositive(curCrops,t,nCur) + v_leachnegative(curCrops,t,nCur) ;
+
+leachTotal_(t_n(t,nCur))  $ (tCur(t) $ envAcc) ..
+
+        v_leach(t,nCur) =e=
+
+      Sum(curCrops $ sum((c_p_t_i(curCrops,plot,till,intens),plot_soil(plot,soil)),p_nutNeed(curCrops,soil,till,intens,&quot;N&quot;,t)),
+          v_leachpositive(curCrops,t,nCur));
+</code></pre>
+<h2 id="phosphorus-losses">Phosphorus Losses</h2>
+<p>In the model “SALCA Phosphor” from Prasuhn (2006) was utilised to calculate phoshorus losses. The model comprises losses for the mentioned pathways above: erosion, leaching  and runoff. The total loss of P, is determined through the sum of the single compartments.
+The underlying principle is to apply default loss factors for all pathways that are adapted to local management and pedo-climatic conditions. The advantage of the approach is the possibility to dynamically adjust the level of detail depending on the data availability.</p>
+<p>P loss through soil erosion, in kg P, is calculated using a default value for the eroded soil, <em>p_erosion</em>, the share of the eroded soil that reaches water pathways,<em>p_lossfactor</em>, the P content of the eroded soil, <em>p_PContSoil</em>, and a factor taking into account the particle size and texture of the eroded soil P, <em>p_PAccuSoil</em>.</p>
+<p>P lost through leaching, EP,Leaching in kg P, is calculated considering soil properties (included int the parameter <em>p_soilFactLeach</em>), effects of fertilisation with slurry, and the P content of the soil. The default values for P losses, <em>p_PLossLeach</em>, are depending on the land use. The factor <em>p_PSoilClass</em> is based on Walther et al. (2001).</p>
+<p>The P loss through runoff, is calculated considering a default value, depending on the land use, a soil factor, a slope factor, a factor for the P content of the top soil and a factor considering effects of fertilisation.</p>
+<pre><code class="language-GAMS">*  --- Calculation of phosphorus losses through erosion, leaching and runoff according to SALCA P (Prasuhn 2006)
+*
+
+lossPhosCrops_(curCrops(crops),t,nCur) $ (tCur(t) $ t_n(t,nCur) $ envAcc  )  ..
+
+   v_lossPhosCrops(curCrops,t,nCur) =e=
+
+*    --- Loss through erosion
+
+      sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), v_cropHa(curCrops,plot,till,intens,t,nCur) * p_erosion * p_lossfactor * p_PContSoil * p_PAccuSoil  )
+
+*    --- Loss through leaching grassland
+$$iftheni.ch %cattle% == true
+
+      + [sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), p_PLossLeach(&quot;grass&quot;) * p_soilFactLeach * p_PSoilClass * v_cropHa(curCrops,plot,till,intens,t,nCur))
+
+         + p_PLossLeach(&quot;grass&quot;) * p_soilFactLeach * p_PSoilClass *
+            sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens)$(not sameas (ManApplicType,&quot;applSolidSpread&quot;))),
+                     p_PLossFert(&quot;low&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+        ]$sum(grasCrops(crops)$sameas(crops,grascrops),1)
+$$endif.ch
+
+*    --- Loss through leaching arable land
+
+    +[ sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), p_PLossLeach(&quot;arable&quot;) * p_soilFactLeach * p_PSoilClass * v_cropHa(curCrops,plot,till,intens,t,nCur))
+  $$iftheni.man %manure% == true
+
+      + p_PLossLeach(&quot;arable&quot;) * p_soilFactLeach * p_PSoilClass * sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens)$(not sameas (ManApplicType,&quot;applSolidSpread&quot;))),
+                        p_PLossFert(&quot;low&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+
+  $$endif.man
+     ]$sum(arabCrops(crops)$sameas(crops,arabcrops),1)
+
+*    --- loss thorugh runoff grassland
+$$iftheni.ch %cattle% == true
+
+      +[ sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), p_PLossRun(&quot;grass&quot;) * p_soilFactRun * p_PSoilClass * p_slopeFactor * v_cropHa(curCrops,plot,till,intens,t,nCur) )
+
+            + p_PLossRun(&quot;grass&quot;) * p_soilFactRun * p_PSoilClass * p_slopeFactor *
+
+                 ( sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens)$(not sameas (ManApplicType,&quot;applSolidSpread&quot;))),
+                     p_PLossFert(&quot;high&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+
+                 + sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens)$sameas (ManApplicType,&quot;applSolidSpread&quot;)),
+                     p_PLossFert(&quot;medium&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+
+                 + sum((plot,till,intens,curInputs(syntFertilizer),m)$c_p_t_i(curCrops,plot,till,intens),
+                     p_PLossFert(&quot;low&quot;) * v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * p_nutInSynt(syntFertilizer,&quot;P&quot;))  )
+      ]$sum(grasCrops(crops)$sameas(crops,grascrops),1)
+$$endif.ch
+*    --- loss through runoff arable land
+
+      +[ sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), p_PLossRun(&quot;arable&quot;) * p_soilFactRun * p_PSoilClass * p_slopeFactor * v_cropHa(curCrops,plot,till,intens,t,nCur) )
+
+         + p_PLossRun(&quot;arable&quot;) * p_soilFactRun * p_PSoilClass * p_slopeFactor *  (
+
+            $$iftheni.man %manure% == true
+              sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens)$(not sameas (ManApplicType,&quot;applSolidSpread&quot;))),
+                 p_PLossFert(&quot;high&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+
+            + sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m) $(c_p_t_i(curCrops,plot,till,intens) $sameas (ManApplicType,&quot;applSolidSpread&quot;)),
+                 p_PLossFert(&quot;medium&quot;) * v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * sum((manChain),p_nut2inMan(&quot;P&quot;,curManType,manChain)))
+            $$endif.man
+            + sum((plot,till,intens,syntFertilizer,m)$c_p_t_i(curCrops,plot,till,intens),
+                 p_PLossFert(&quot;low&quot;) * v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * p_nutInSynt(syntFertilizer,&quot;P&quot;))  )
+       ]$sum(arabCrops(crops)$sameas(crops,arabcrops),1)
+  ;
+
+  lossphos_(t_n(t,nCur))  $ (tCur(t) $ envAcc) ..
+
+          v_lossphos(t,nCur) =e= Sum(curCrops$ ( not (sameas(curCrops,&quot;idle&quot;) or sameas (curCrops,&quot;idlegras&quot;))), v_lossphosCrops(curCrops,t,nCur));
+</code></pre>
+<h2 id="humus-balance">Humus Balance</h2>
+<p>Humus balancing is a methodology often applied by practitioners to assess management effects on Soil Organic Matter (SOM). Most tools are designed for farmers in order to maintain SOM levels that sustain high yield levels. As a consequence, these methods, from a methodological point of view, cannot quantify SOM changes but rather assess the relative impact of different management scenarios. To counteract those shortcomings, the inclusion of side specific data, can improve the prediction accuracy (Brock 2016).</p>
+<p>This module applies the balancing method from Ebertseder et al. (2014).
+The change in soil carbon, is calculated through the C removal through harvesting of the grown plants,the  C input from humification of incorporated crop residues, the removal of C through the harvest of crop residues, and the C input through organic fertilisation.</p>
+<pre><code class="language-GAMS">*   ---   Humus balance according to VDLUFA(2010) only for arable
+*
+
+  humBalCrops_(curCrops(arabCrops),t_n(t,nCur))  $ (tCur(t) $ envAcc) ..
+
+          v_humBalCrops(arabCrops,t,nCur) =e=
+
+*  ---  C removal thorugh harvested products
+
+                        - sum((plot,till,intens)$c_p_t_i(curCrops,plot,till,intens), v_cropHa(arabCrops,plot,till,intens,t,nCur) * p_humCrop(arabCrops) )
+
+*  --- Additional humification if crop residues are incorporated
+
+                        + sum( (plot,till,intens) $c_p_t_i(curCrops,plot,till,intens),  (v_cropHa(arabCrops,plot,till,intens,t,nCur) -v_residuesRemoval(arabCrops,plot,till,intens,t,nCur))
+                               * sum( (plot_soil(plot,soil)),  p_resiCrop(arabCrops,soil,till,intens,t)) * p_resiInc(arabCrops))
+
+*  ---  Deduction for straw removal
+
+                        - sum( (plot,till,intens) $ (cropsResidueRemo(arabCrops)$c_p_t_i(curCrops,plot,till,intens)),  v_residuesRemoval(arabCrops,plot,till,intens,t,nCur)
+                               * sum( (plot_soil(plot,soil),curProds), 10 * p_OCoeffResidues(arabCrops,soil,till,intens,curProds,t)) * p_resiInc(arabCrops))
+
+* --- Addition through organic fertilizer inputs
+
+$$iftheni.man %manure% == true
+   + sum((plot,till,intens,manApplicType_manType(manApplicType,curMantype),m)$c_p_t_i(curCrops,plot,till,intens),
+                                         v_manDist(arabCrops,plot,till,intens,ManApplicType,curManType,t,nCur,m) * p_humfact(ManApplicType) )
+$endif.man
+;
+   humBal_(t_n(t,nCur))  $ (tCur(t) $ envAcc) ..
+
+           v_humBal(t,nCur) =e= Sum(curCrops(arabCrops), v_humBalCrops(arabCrops,t,nCur));
+</code></pre>
+<p>To ease the calculation of the emissions along the N mass flow N-emissions are calculated according to their N-weight. The equation <em>emissionsMass_</em> converts the weight into the actual mass of the molecule as a preliminary step for further calculations, characterisations and weightings.</p>
+<pre><code class="language-GAMS">*  --- Calculation of actual weight of N-emissions in kg NH3, N2O, NO and N2 per month
+*
+    emissionsMass_(chain_source(curChain,source),emissions,t_n(t,nCur)) $ (tCur(t) $ source_emissions(source,emissions)  $ envAcc  )   ..
+
+         v_emissionsMass(curChain,source,emissions,t,nCur)  =e=
+
+                       v_emissions(curchain,source,emissions,t,nCur) * p_corMass(emissions)
+        ;
+</code></pre>
+<h2 id="impact-assessment">Impact Assessment</h2>
+<p>The impact assessment phase of a LCA typically involves assigning the inventory data to impact categories, the modelling of the inventory data within impact categories and, in specific cases, the aggregation of results. For the impact assessment, we use the ReCiPe method for impact assessment at mid-point level (Huijbregts et al. 2016). The yearly aggregated emissions from the inventory analysis are related to the impact categories via characterization factors that transform the emissions into impact scores. The categorized emissions are summarized in the variable <em>v_emissionsCat</em>. The categorization is conducted using the characterization factors <em>p_emCat</em> and the yearly emissions, <em>v_emissionsYear</em>.</p>
+<pre><code class="language-GAMS">* --- Different emissions and sources per year, includes calculation of soil surface balance and N leaching
+*     since monthly values do not make sense
+*
+
+  emissionsYear_(chain_source(curChain,source),emissions,t_n(t,nCur)) $ (tCur(t) $ source_emissions(source,emissions)  $ envAcc  )  ..
+
+    v_emissionsYear(curChain,source,emissions,t,nCur)
+        =e=  v_emissionsMass(curChain,source,emissions,t,nCur)
+
+
+            +   (v_leach(t,nCur) * p_corMass(&quot;NO3&quot;))  $ ( sameas(emissions,&quot;NO3&quot;) $ sameas(source,&quot;field&quot;) )
+*    --- Calculation of indirect N2O emissions based on leached N based on Haenel et al. (2018) , p. 365 and IPCC (2006) Table 11.24 table 11.3)
+
+            + [ v_leach(t,nCur) * p_EFN2OindLeach * p_corMass(&quot;N2Oind&quot;)] $ ( sameas(emissions,&quot;N2Oind&quot;) $ sameas(source,&quot;field&quot;) )
+
+
+            +   v_lossPhos(t,nCur)   $ ( sameas(emissions,&quot;P&quot;) $ sameas(source,&quot;field&quot;) )  ;
+*
+*  --- Characterization of emission via ReCiPe 2016 in kg eq per year
+*
+   emissionsCat_(chain_source(curChain,source),emCat,t_n(t,nCur))$ (tCur(t) $ t_n(t,nCur) $ envAcc )..
+
+       v_emissionsCat(curChain,source,emCat,t,ncur)  =e=
+                     sum(source_emissions(source,emissions),
+                           v_emissionsYear(curChain,source,emissions,t,nCur)  *  p_emCat(emCat,emissions));
+</code></pre>
+<p>Buendia, Eduardo; Tanabe, Kiyoto; Kranjc, Andrej; Jamsranjav, Baasansuren; Fukuda, Maya; Ngarize, Sekai et al. (2019): 2019 Refinement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories. Available online at https://www.ipcc-nggip.iges.or.jp/public/2019rf/index.html.</p>
+<p>Brock, C.; Oltmanns, M.; Leithold, G. (2016): What do humus balances really tell about soil organic matter?. Acta Fytotechnica et Zootechnica, 18(5), 50-52.</p>
+<p>Dong, H.; Mangino, J.; McAllister, T. A. (2006): EMISSIONS FROM LIVESTOCK AND MANURE MANAGEMENT. In IPCC (Ed.): 2006 IPCC Guidelines for national Greenhouse Gas Inventories, pp. 10.1-10.87.</p>
+<p>Ebertseder, Engels, Heyn, Reinhold, Brock, Fürstenfeld, Hülsbergen, Isermann, Kolbe, Leithold, Schmid, Schweitzer, Willms, Zimme (2014). Humusbilanzierung - Eine Methode zur Analyse und Bewertung der Humusversorgung von Ackerland. Bonn: VDLUFA.</p>
+<p>EEA (2013): EMEP/EEA air pollutant emission inventory guidebook 2013. Technical guidance to prepare national emission inventories Eur. Environ. Agency, Tech. Rep. 12.</p>
+<p>EEA (2016): EMEP/EEA air pollutant emission inventory guidebook 2016. Technical guidance to prepare national emission inventories Eur. Environ. Agency, Tech. Rep. 21.</p>
+<p>Haenel, H. D., Rösemann, C., Dämmgen, U., Döring, U., Wulf, S., Eurich-Menden, B., ... &amp; Osterburg, B. (2018). Calculations of gaseous and particulate emissions from German agriculture 1990-2016: Report on methods and data (RMD) Submission 2018 (No. 57). Thünen Report.</p>
+<p>Huijbregts, Mark A. J.; Steinmann, Zoran J. N.; Elshout, Pieter M. F.; Stam, Gea; Verones, Francesca; Vieira, Marisa et al. (2017): ReCiPe2016: a harmonised life cycle impact assessment method at midpoint and endpoint level. In Int J Life Cycle Assess 22 (2), pp. 138–147. DOI: 10.1007/s11367-016-1246-y.</p>
+<p>Klein, C. de; Novoa, R.S.A.; Ogle, S.; Smith, K. A.; Rochette, P.; Wirth, T. C. (2006): N2O EMISSIONS FROM MANAGED SOILS, AND CO2 EMISSIONS FROM LIME AND UREA APPLICATION. In IPCC (Ed.): 2006 IPCC Guidelines for national Greenhouse Gas Inventories, pp. 11.1-11.54.</p>
+<p>Prasuhn, Volker (2006): Erfassung der PO4-Austräge für die Ökobilanzierung. In Salca-Phosphor. Agroscope, Switzerland.</p>
+<p>Richner, W.; Oberholzer, H. R.; Freiermuth Knuchel, R.; Huguenin, O.; Ott, S.; Nemecek, T.; Walther, U. (2014): Modell zur Beurteilung der Nitratauswaschung in Ökobilanzen‐SALCA-NO3. Version 2.</p>
+<p>Rösemann, C.; Haenel, H.-D.; Dämmgen, U.; Freibauer, A.; Wulf, S.; Eurich-Menden, B. et al. (2015): Berechnung von gas- und partikelförmigen Emissionen aus der deutschen Landwirtschaft 1990 - 2013. Report zu Methoden und Daten (RMD) Berichterstattung 2015. Johann Heinrich von Thünen-Institut. Braunschweig (Thünen Report, 27).</p>
+<p>Walther, U., Rieser, J. P.; Fliesch, R. (2001): "Grundlagen für die Düngung im Futter-und Ackerbau (GRUDAF)." FAL Agroscope Reckenholz. Zürich.</p>
+<p>Wernet, Gregor; Bauer, Christian; Steubing, Bernhard; Reinhard, Jürgen; Moreno-Ruiz, Emilia; Weidema, Bo (2016): The ecoinvent database version 3 (part I): overview and methodology. In: Int J Life Cycle Assess 21 (9), S. 1218-1230. DOI: 10.1007/s11367-016-1087-8.</p>
+<p>World Health Organization. (2003). Health aspects of air pollution with particulate matter, ozone and nitrogen dioxide: report on a WHO working group, Bonn, Germany 13-15 January 2003 (No. EUR/03/5042688). Copenhagen: WHO Regional Office for Europe.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

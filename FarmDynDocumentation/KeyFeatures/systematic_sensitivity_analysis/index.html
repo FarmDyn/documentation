@@ -1,0 +1,2167 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/KeyFeatures/systematic_sensitivity_analysis/">
+      
+      
+        <link rel="prev" href="../popsimu/">
+      
+      
+        <link rel="next" href="../../TR/overview_technical_realisation/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Systematic Sensitivity Analysis - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#systematic-sensitivity-analysis-based-on-design-of-experiments" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Systematic Sensitivity Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="false">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModelDescription/PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="true">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Systematic Sensitivity Analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Systematic Sensitivity Analysis
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="systematic-sensitivity-analysis-based-on-design-of-experiments">Systematic sensitivity analysis based on Design of Experiments</h1>
+<p>FarmDyn offers the option to perform a systematic sensitivity analysis based on Design of Experiments. To execute a sensitivity analysis one has to generate a large number of farm instances to either analyze distributions of key indicators or to develop a meta-model. In the past, this feature was used intensively for publications including  e.g. Lengers et al. (2014), Kuhn et al. (2019), Seidel et al. (2020). In order to establish a meta-model such as used in the aforementioned papers, one has to follow the following steps:</p>
+<ol>
+<li>
+<p>Setting up of appropriate sensitivity experiments which cover the distribution of farm attributes in an appropriate sample (such as     the farm structure survey for North-Rhine-Westphalia). Consequently, this requires the use of an efficient and space filling random sampling design to lower the necessary sample size for the derivation of a meta-model. At the same time, it has to be ensured that the randomised factor level combinations are smoothly distributed over the range of factor level permutations. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+</li>
+<li>
+<p>Running the single farm model on these experiments and collecting key results.</p>
+</li>
+<li>
+<p>Deriving a meta model from these experiments.</p>
+</li>
+</ol>
+<p>In the following the technical aspects and their implementation are presented.</p>
+<p>The overall strategy consists of combining a Java based package for
+interface generation and result exploitation which also comprises a
+machine learning package with GAMS code. For the definition of
+representative sensitivity experiments a sampling routine, <em>lhs_0.10</em>
+implemented in <em>R version 2.6.1</em>, is combined with the GAMS code to
+generate sample farms under recognition of correlations between factors.</p>
+<p>The GAMS code <em>(gams\scen_gen.gms</em>) modifies settings entered via the interface
+to define attributes for each experiment. A single
+farm run is then executed as a child process with these settings. The
+user is able to define upper and lower bounds for single factors to
+define a solution room in which factor levels can vary between scenarios
+for different production specific attributes of the farm. The interface also allows defining if correlations between
+selected variables should be recognized during the sample randomization
+procedure. Furthermore, depending on the number of draws and the
+complexity of the assumed correlation matrix a maximum number of
+sampling repetitions can be selected <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p>Only the factors for which the selected maximum value differs from the
+minimum value are varied between model runs. Hence, the user is able to
+fix factor levels for single factors over all experiments by defining
+the minimum and maximum factor level. The upper and lower bounds of the
+variables define the solution space of possible factor level
+combinations of different factors. If the chosen minimum and maximum
+values are equal, the factor level of the specific attribute is holding
+constant during the scenario definitions. For the definition of wage
+rates and prices for concentrates, the user is able to select constant
+differences to the full time wage rate or the concentrate type 1.</p>
+<p>With increasing number of factors that can vary between scenarios and
+increasing possible factor levels per factor, the number of possible
+scenarios (factor level permutations) will increase exponentially (up to
+a few thousands). Hence, to create model outputs representative for all
+admissible scenarios, a large number of scenario runs would have to be
+processed to get reliable outputs for the derivation of a meta-model.</p>
+<p>As this would cause long computing time also on a multi-core processor
+(several days), the number of scenario runs have to be restricted to a
+manageable number while at the same time being representative for the
+real life distribution of farm attributes.</p>
+<p>Therefore, the scenario definition is done by Latin Hypercube Sampling
+(LHS) to create an efficient sample with a small sample size (to lower
+computing time) while guaranteeing a space filling sample design over
+the full range of admissible scenarios (McKay et al. 1979, Iman and
+Conover 1980). This is done, using a bridge from GAMS to the statistical
+software R. Therefore the LHS package of R has to be installed for being
+able to create LHS samples for a defined number of draws <em>n</em> and factors
+<em>k</em> (in our case taking the command "<em>improvedLHS(n,k</em>)"). LHS sampling
+creates a sample matrix of size n*k incorporating random values between
+0 and 1, which are interpretable as percentages. These are drawn
+assuming an uniform distribution between 0 and 1. Further on, LHS
+sampling outputs ensure orthogonality of the output matrix and that
+factor level combinations evenly distributed over the possible
+permutation area.</p>
+<p>The GAMS side of the technical implementation is shown in the following:</p>
+<pre><code class="language-GAMS">* Use R to define the DOE
+*
+*------------------------------------------------------------------------------
+*
+ file rIncFile / &quot;%curDir%/rBridge/incFile.r&quot; /;
+ put rIncFile;
+ $$setglobal outputFileD  &quot;%scrdir%/fromR&quot;
+ $$setglobal inputFile    &quot;%scrdirR%/toR.gdx&quot;
+
+ put ' plotFile    &lt;- &quot;%resdirR%/scenGen/lhs_%scenDes%.pdf&quot;; '/;
+ put ' outputFile  &lt;- &quot;%outputFile%&quot;; '/;
+ put ' inputFile   &lt;- &quot;%inputFile%&quot;; '/;
+ put ' useCorr     &lt;- &quot;%useCorr%&quot;; '/;
+ put ' useColors   &lt;- &quot;true&quot;; '/;
+ put ' maxRunTime  &lt;- %maxRunTime%; '/;
+    putclose;
+</code></pre>
+<p>The maximal run time for finding a sample can be defined, <em>maxRunTime.</em>
+If correlations between variables are known and should be recognised
+within the sampling procedure, the command <em>useCorr</em> has to be set to
+<em>"true"</em>. Then the correlation matrix can be defined specifically.</p>
+<pre><code class="language-GAMS">*    --- set correlation matrix
+*
+*        correlation coefficients are derived from data collections from AMI for prices and
+*        from LWK-NRW (Milchviehreport NRW, verschiedene Jahrg�nge, 2007 bis 2011)as well as
+*        a data collection of the LKV-NRW in 2012 for 5000 dairy farms in NRW. Correlation between
+*        nCows and CowsPerAK stem from the Forschungsdatenzentrum des Bundes und der L�nder after
+*        analysis on the &quot;Landwirtschaftsz�hlung 2010&quot;, results were aligned with results derived
+*        from KTBL (2010,p.541).
+
+     table p_cor1(*,*)
+
+                          WinterCerePrice SummerCerePrice MaizCornPrice WinterRapePrice SummerBeansPrice SummerPeasPrice PotatoesPrice SugarBeetPrice SummerTriticalePrice
+     WinterCerePrice                            0.8            0.7            0.5            0.5                0.5          0.5             0.5             0.7
+     SummerCerePrice                                           0.7            0.5            0.5                0.5          0.5             0.5             0.8
+     MaizCornPrice                                                            0.5            0.5                0.5          0.5             0.5             0.7
+     WinterRapePrice                                                                         0.5                0.5          0.5             0.5             0.5
+     SummerBeansPrice                                                                                           0.7          0.5             0.5             0.5
+     SummerPeasPrice                                                                                                         0.5             0.5             0.5
+     PotatoesPrice                                                                                                                           0.5             0.5
+     SugarBeetPrice                                                                                                                                          0.5
+     SummerTriticalePrice
+     ;
+</code></pre>
+<p>The names of the set of varying factors, the factor names, the scenario name, the desired number of draws and, if activated, also the correlation matrix are send to R. Then the R file "<em>rbridge\lhs.r</em>" is executed.</p>
+<pre><code class="language-GAMS">set factor_name(*,*) / name.factors /;
+     set scen_name(*,*) / name.&quot;%scendes%&quot;/;
+
+     execute_unload &quot;%inputFile%&quot; p_n,factor_name,scen_name,factors,p_cor;
+     $$setglobal rFile &quot;%curDir%/rbridge/lhs.r&quot;
+
+     $$if exist &quot;%outputFileD%_doe.gdx&quot; execute &quot;rm %outputFileD%_doe.gdx&quot;
+     $$batinclude 'util/title.gms' &quot;'execute %rexe% %rFile%'&quot;;
+     $$if exist %rexe% execute &quot;%rexe% %rFile% %curDir%/rBridge/incFile.r&quot;;
+
+$endif.onlyCollect
+
+*
+* --- read output from LHS sampling provided by R
+*
+ parameter p_doe(*,*);
+ execute_load &quot;%outputFile%_doe&quot; p_doe;
+ if ( card(p_doe) eq 0, abort &quot;Error generating doe, no data found&quot;;);
+ display p_doe;
+
+ parameter p_testDoe &quot;Check for mean of draws&quot;;
+ p_testDoe(factors) = sum(draws, p_doe(draws,factors))/card(draws);
+ display p_testDoe;
+</code></pre>
+<p>The R-bridge is hence activated (R side). Therefore, several packages are
+installed in R from the R library to be able to do the LHS sampling:</p>
+<pre><code class="language-R">#install.packages(&quot;d:\r\R-2.15.1\library\mc2d_0.1-13.zip&quot;,repos=NULL);
+#install.packages(&quot;d:\r\R-2.15.1\library\mvtnorm_0.9-9992.zip&quot;,repos=NULL);
+#install.packages(&quot;d:\r\R-2.15.1\library\lhs_0.10.zip&quot;,repos=NULL);
+#install.packages(&quot;d:\\temp\\gclus_1.3.1.zip&quot;,repos=NULL);
+# install.packages(&quot;t:\\britz\\gdxrrw_0.0-2.zip&quot;,repos=NULL);
+# install.packages(&quot;D:\\temp\\gdxrrw_1.0.2.zip&quot;, repos = NULL, type=&quot;source&quot;);
+ library(lhs);
+ library(gdxrrw);
+ igdx(&quot;N:/soft/gams24.7new/24.7&quot;);
+ library(mc2d);
+ library(mvtnorm);
+ library(Matrix);
+ library(gclus);
+ library(reshape2);
+</code></pre>
+<p>The parameter <em>p_n</em> denotes the number of draws defined via the GUI which is equivalent to the number of scenarios resulting from the sampling routine. <em>Sys.getenv(....)</em> asks for commands or
+information given by the environment (for example if correlations have
+to be recognised or not).</p>
+<pre><code class="language-R">#useCorr    &lt;- Sys.getenv(&quot;useCorr&quot;)
+#useColors  &lt;- Sys.getenv(&quot;useColors&quot;)
+#inputFile  &lt;- Sys.getenv(&quot;inputFile&quot;);
+#plotFile   &lt;- Sys.getenv(&quot;plotFile&quot;)
+#outputFile &lt;- Sys.getenv(&quot;outputFile&quot;);
+#maxRunTime &lt;- as.numeric(Sys.getenv(&quot;maxRunTime&quot;))
+</code></pre>
+<p>We decided to use the "<em>improvedLHS"</em> type for randomisation <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> which
+produces a sample matrix of <em>n</em> rows and <em>k</em> columns (n = number of
+draws, k = number of factors). This leads to a quite efficient sample
+generation in R:</p>
+<pre><code class="language-R">out1 &lt;- improvedLHS(n,k);
+</code></pre>
+<p>Usually, input variables for sensitivity analysis in computer models are assumed to be independent from each other (Iman et al., 1981a;b). LHS sampling was also designed to create a sample of factor level combinations for different factors avoiding correlations between factors in random draws to ensure a space filling output. But, for our purposes, it is important to incorporate as much information about the multivariate input distribution as possible to get more realistic sample scenarios and exclude factor combinations which are rather impossible in reality. Hence, following Iman and Conover (1982:p.331-332) correlation structure information among input variables should be recognised within
+the sampling process, if available. Otherwise "the theoretical properties of the statistics formed from the output may no longer be valid." (Iman and Conover 1982:p.331)</p>
+<p>To also incorporate information about dependencies between interesting variables during the sampling procedure we expanded the sampling method by an approach of Iman and Conover (1982) designing a swapping algorithm which shuffles observations for single factors between the draws to mimic given <em>k*k</em> correlation matrix (therefore the R package <em>MC2d</em>
+including the routine <em>cornode</em> is necessary).</p>
+<pre><code class="language-R">#   --- load correlation matrix from GAMS
+#
+    t &lt;- rgdx.param(inputFile,&quot;p_cor&quot;,names=c(&quot;f1&quot;,&quot;f2&quot;),compress=&quot;true&quot;);
+    t
+    t&lt;-acast(t, f1~f2, value.var=&quot;value&quot;)
+    t&lt;-as.matrix(t);
+</code></pre>
+<p>To increase the possibility to randomise a sample which offers a correlation matrix of factors near the proposed one, the routine allows to repeat the random sampling of demanded <em>n</em> draws (yielding <em>n</em> experiment scenarios) for a maximal given computing time ("<em>maxRunTime</em>" e.g. 300 seconds.). The sample (incorporating <em>n</em> draws for <em>k</em> factors) with the smallest mean percentage deviation (<em>meanDev</em>) between the given and the randomised correlation matrix is then selected and send back to GAMS as the random sample representing the possible population. Alternatively, the repetition of <em>n</em> draws (<em>n</em> x <em>k</em> sampling matrix) will be stopped by a threshold value (<em>if meanDev \&lt; 1</em>) for the deviation between the assumed and the randomised sample correlation matrix.</p>
+<pre><code class="language-R">bestFit &lt;- 10;
+    iDraw &lt;- 0;
+
+
+    while( runTime &lt; maxRunTime ){
+
+       iDraw &lt;- iDraw + 1;
+
+       if ( LHSType == &quot;optimumLHS&quot; ) {
+          out1 &lt;- optimumLHS(n,k,2,0.01);
+
+          print(&quot;shit&quot;);
+
+       } else {
+          out1 &lt;- improvedLHS(n,k);
+       }
+</code></pre>
+<pre><code class="language-R"># --- use cornode to apply Iman &amp; conover 1982 to impose correlation
+#     t on the LHS matrix out
+#
+       out1  &lt;- cornode(out1,target=t)
+       c &lt;- cor(out1);
+
+       fit = 0;
+       for ( i in 1:k )
+            for ( j in 1:k )
+                if ( fit &lt; bestFit )
+
+       if ( fit &lt; bestFit )
+       {
+          out     &lt;-out1;
+          bestFit &lt;-fit;
+
+          meanDev = sqrt(fit/k)*100;
+       };
+
+       if ( iDraw %% reportDraws == 0){
+          curTime &lt;- as.numeric(Sys.time(),units=&quot;seconds&quot;);
+          runTime &lt;- curTime - begTime;
+          print(paste(&quot; draw :&quot;,iDraw,&quot; runTime &quot;,round(runTime),&quot; of &quot;,maxRunTime,&quot;seconds, mean sqrt of squared diff between given corr and best draw: &quot;,round(meanDev,2),&quot;%&quot;));
+       }
+</code></pre>
+<p>For the case that the correlations between factors are given by the
+user, leading to an undefined correlation matrix, the program adjusts
+the correlation matrix to the nearest one possible:</p>
+<pre><code class="language-R">#   --- find nearest positive definite matrix
+#
+
+    t1&lt;-nearPD(t);
+
+    t &lt;- as.matrix(t1$mat);
+</code></pre>
+<p>As mentioned above the LHS sampling defines random value combinations between all factors in each single draw. Therefore, uniform distributed random values between 0 and 1 are drawn. The total set of draws defines one random sample of n single experiments (factor level combinations (in this stage of the sampling still between 0 and 1)). The routine
+implemented into the LHS-module now tries to find the best fitting sample which corresponds to the demanded correlation matrix most properly. Sampling outputs of the LHS draws show efficiency characteristics, also under recognition of correlations. This means that the mean of drawn random values is still 0.5 (as LHS draws lie between 0 and 1). And if the number of draws is large enough (greater than 30), quantiles as well as the mean of the distribution of LHS random values show that we are still consistent with the assumption of an uniform distribution function of the random draws (between 0 and 1), as necessary for efficient LHS outputs, also under recognition of factor correlations. The best fitting sample with the minimal average percentage deviation of correlations between the defined and the randomised correlation matrix is then selected and stored by the program and automatically printed as a PDF-document for visualisation. The PDF gives also information about average percentage bias of the randomised correlation matrix as well as the number of total draws which define the number of resulting sample experiments:</p>
+<p><img alt="../" src="../../../media/TechnicalRealisation/Bild_2.png" style="width:100%" />
+:   Figure 12: Scatter plot matrices for different LHS
+    samples. With and without the recognition of factor correlations</p>
+<p>On the left hand side one can see the scatter plot matrix without any correlations between factors. In contrast, a clear difference in sampled values is visualised by the right hand side matrix. For example, a correlation between <em>nCows</em> and <em>milkYield</em> was assumed to be 0.8. The best fitting matrix lead to the same correlation between these two factors. The correlation coefficients within brackets are the correlations predefined by the operator. The values in front of the brackets are the correlation coefficients fitted by the sampling matrix. The average mean percentage deviation of the randomised correlation matrix and the assumed correlation matrix is quantified by 7.34 %, meaning, that on average, the randomised correlations deviate by 7.34 % from the predefined ones. The distribution function in the diagonal shows that the sampled values of each factor still  ensure a uniform distribution.</p>
+<p>The random values for the scenarios are transformed by GAMS to the real factor levels following the distribution functions of single variables. A uniform distribution of factor levels for the relevant variables is assumed. These are easily to define by the minimal value <em>a</em> and the maximum value <em>b</em>. A uniform distribution function can be defined by the
+following density function (left graph, Figure 13):</p>
+<p>(1) <span class="arithmatex">\(f(x) = \frac{1}{b-a},a \leq b\)</span></p>
+<p>Values below <em>a</em> or above <em>b</em> have a probability of 0. The anti-derivative expresses the cumulative distribution function of the random variable whose values lie within the interval <span class="arithmatex">\([0; 1]\)</span> (right graph, Figure 13):</p>
+<p>(2) <span class="arithmatex">\(f(x) = \frac{x-a}{b-a},a \leq x \leq b\)</span></p>
+<p><img alt="../" src="/media/TechnicalRealisation/Bild_3.png" style="width:100%" />
+:   Figure 13: Density function and cumulative
+    distribution function of an uniform distributed variable</p>
+<p>From the left hand side density function one can easily derive the right hand side cumulative distribution function. The <em>y</em> value of the distribution function equals the integral
+<span class="arithmatex">\(\int_a^x f(x)\)</span> below the density function (cumulative probabilities below x).</p>
+<p>The given random values of the R-routine (<em>F(x)</em>) enable the allocation of corresponding factor levels (between <em>a</em> and <em>b</em>) to this random percentage values from the cumulative distribution function. A random cumulative probability value <em>y</em> corresponds to the factor level <em>x</em> which lies within the real value domain of the interesting factor. Hence
+this random sampling procedure produces random values by transforming uniform distributed random percentages (between 0 and 1) to factor levels which are conform to the assumed distribution function of the variable. So far a uniform distribution function is assumed for the real factor levels (this can be adjusted to other functions if, for example, a
+known population has to be simulated).</p>
+<p>For an assumed uniform distribution function of factor levels this is done following the formula:</p>
+<p>(3) <span class="arithmatex">\(f(x) \cdot (b-a) + a = x\)</span></p>
+<p>The randomised value <em>y</em> is transformed to the factor level room concerning the given distribution function of the factor. Hence, for each single random draw a value is generated for the interesting variable corresponding to its assumed probability distribution. If a different distribution is assumed, formula 3 changes.</p>
+<p>In GAMS code the formula (3) has to be applied for each factor to calculate the sample values whereat <em>p_doe(draws,"factor")</em> is equivalent to F(x). The random percentage <em>p_doe(*,*)</em> has to be multiplied by the difference between the possible maximum and minimum value of the factor <em>(%factorMax% - %factorMin%)</em>. Afterwards the min value <em>(%factorMin%)</em> has to be added to the product to yield the factor level <em>x</em> for the specific factor and scenario. This is illustrated for some parameters in the following.</p>
+<pre><code class="language-GAMS">* --- result related declaration
+*
+  PARAMETER p_res(*,*,*,*,*,*)
+           p_meta;
+  set resItems / mac,mean,cows,levl,margArab,margGras,margLand,herdRand,cropRand,ProfitDiff,manExportVol,profit/;
+
+
+  parameter p_scenParam(draws,allFactors) &quot;Numerical values for the scenario specific items&quot;;
+
+*
+* --- standard setting for aks
+*
+  p_scenParam(draws,&quot;Aks&quot;) = %aks%;
+*
+* --- general mapping from DOE to factor ranges as defined on interface
+*
+  p_scenParam(draws,factors)   = p_doe(draws,factors) * (p_ranges(factors,&quot;max&quot;)-p_ranges(factors,&quot;min&quot;))+p_ranges(factors,&quot;min&quot;);
+
+$iftheni.obDist %useObsDistr% == true
+</code></pre>
+<p><em>p_scenParam(draws,factor)</em> gives the scenario parameter one factor defined by the random values given by the LHS sampling routine. The combination of factor levels of the different factors for one single draw defines one single sensitivity scenario.</p>
+<p>The set <em>scenItems</em> defines which settings are (possibly) defined specificly for each scenario:</p>
+<pre><code class="language-GAMS">file scenFile / &quot;incgen/curScen.gms&quot; /;
+</code></pre>
+<pre><code class="language-GAMS">alias(scenItems,allFactors);
+</code></pre>
+<p>Nevertheless, correlations between factors are able to be recognised during the sample generation to avoid factor level combinations within scenarios which conflict with common statistical knowledge. The model code enables the user to specifically exclude factor level combinations which seem to be implausible - for example high labour input per cow and
+low milk yield levels or high numbers of cows per farm and only very low yielding phenotypes.</p>
+<p><img alt="" src="../../../media/TechnicalRealisation/Bild_4.png" style="width:100%" /></p>
+<p>These scenario settings must be stored in a GAMS file which is then picked up by the child processes. To keep the system extendable, firstly, all settings inputted via the GUI are copied over to the specific scenario:</p>
+<pre><code class="language-GAMS">*  --- copy content of current scen file into new one
+*      via OS command
+*
+   execute &quot;cp %curDir%/incgen/expinc.gms %curDir%/incgen/curScen.gms&quot;
+</code></pre>
+<p>Secondly, the modifications defining the specific sensitivity
+experiment, i.e. the scenario, are appended with GAMS file output
+commands (see <em>gams\scenGen\gen_inc_file.gms</em>):</p>
+<pre><code class="language-GAMS">*  --- put statements will append to the new scen file
+*      and overwrite standard setting
+*
+   put scenFile;
+</code></pre>
+<p>Finally, the content is copied to a specific scenario input file:</p>
+<pre><code class="language-GAMS">put_utility batch 'shell' / &quot;cp %curDir%/incgen/curScen.gms %curDir%/incgen/&quot;scen.tl&quot;.gms&quot;;
+</code></pre>
+<p>The code to build and optimise the single farm model is realised in GAMS and uses CPLEX 12.6 in parallel mode as the MIP solver. Automatic tuning is used to let CPLEX use appropriate solver setting on the problem. The model instances are set up to avoid any conflicts with I/O operations to allow for parallel execution.</p>
+<p>A single instance has a load of about 1.8 cores on average. In a multi-core machine it seems promising to execute several such processes in parallel. This is realised by a GAMS program which starts each model on its own set of input parameters:</p>
+<pre><code class="language-GAMS">*     --- execute exp_starter as a seperate program, no wait, program will delete a flag at the end to signal that it is ready
+*
+
+      put_utility  batch  'msglog'  / '%GAMSPATH%/gams.exe %CURDIR%/exp_starter.gms --scen='allScen.tl
+                           ' --iScen='iLoop:0:0' -maxProcDir=255 -output='allScen.tl'.lst'
+                          ' --seed=',uniform(0,1000):0:0,
+                          ' -maxProcDir=255 -output='allScen.tl:0'.lst %gamsarg% lo=3'
+                          ' --pgmName=&quot;'allScen.tl' (',iLoop:0:0,' of ',card(allScen):0:0,')&quot;';
+</code></pre>
+<p>The name of the scenario, <em>allScen.tl</em> is passed as an argument to the process which will lead a specific include file comprising the definition of the scenario.</p>
+<p>The GAMS process will use its own commando processors and run asynchronously to the GAMS thread which has started it. The calling mother process has to wait until all child processes have terminated. That is achieved by generating a child process specific flag file before starting the child process:</p>
+<pre><code class="language-GAMS">put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f &quot;../results/expFarms/res_',scen.tl,'_until_' p_scenParam(scen,&quot;lastYear&quot;):0:0,'.gdx&quot;';
+      put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f &quot;%curdir%/incgen/'scen.tl'.gms&quot;';
+      put_utility batch 'shell'    / ' %GAMSPATH%gbin/rm  -f &quot;%curdir%/'scen.tl'.lst&quot;';
+</code></pre>
+<p>This flag file will be deleted by the child process when it finalises:</p>
+<p><img alt="" src="../../../media/TechnicalRealisation/Bild_5.png" style="width:100%" /></p>
+<p>A simple DOS script waits until all flags are deleted:</p>
+<pre><code class="language-GAMS">set /a _trys=0
+:again
+IF %_Mode% EXIST %_FlagFiles% (
+  set /a _trys+=1
+  if %_trys%.==%_MaxTrys%. goto errorexit
+  sleep.exe %_seconds%
+  goto again
+)
+</code></pre>
+<p>Using that set-up would spawn for each scenario a GAMS process which would then execute all in parallel. The mother process would wait until all child processes have deleted their flag files before collecting their results. As several dozen or even hundredth of scenarios might be executed, that might easily block the machine completely, e.g. by
+exceeding the available memory.</p>
+<p>It is hence necessary to expand the set-up by a mechanism which ensures that only a pre-defined number of child processes are active in parallel. This is established by a second simple DOS script which waits until the number of flag files drops below a predefined threshold:</p>
+<pre><code class="language-GAMS">set /a _trys=0
+:again
+
+set _count=1
+
+for %%x in (%_FlagFiles%) do set /a _count+=1
+
+REM @echo %_count% %_nFiles% &gt;&gt; d:\temp\test.txt
+
+if %_count% gtr %_nFiles% (
+
+  set /a _trys+=1
+
+  if %_trys%.==%_MaxTrys%. goto errorexit
+
+REM @echo %_trys% %_maxTrys% %_seconds% &gt;&gt; d:\temp\test.txt
+
+
+  sleep.exe %_seconds%
+
+  goto again
+
+)
+</code></pre>
+<p>Finally, the results from individual runs are collected and stored. A GAMS facility is used to define the name of a GDX file to read at run time:</p>
+<pre><code class="language-GAMS">put_utilities batch 'gdxin' / ' ../results/expFarms/res_',scen.tl,'_until_' p_scenParam(scen,&quot;lastYear&quot;):0:0,'.gdx';
+</code></pre>
+<p>We now transformed all MAC estimates which are 0 due to an exit decision of a farm to be able to select these cases for our meta-modeling estimation (Heckman two-stage selection, described in the technical documentation: "R routine to estimate Heckman two stage regression procedure on marginal abatement costs of dairy farms, based on large scale outputs of the model DAIRYDYN" by Britz and Lengers (2012)).</p>
+<pre><code class="language-GAMS">*        --- load the result
+*
+              execute_load p_res;
+              p_dummy = sleep(.01);
+              if ( execerror eq 0,
+*
+*               --- filter out results of interest (so far only macs, avAcs and totACs)
+*
+                $$ifi &quot;%scentype%&quot;==&quot;MAC&quot;     $include 'scengen/scen_load_res_mac.gms'
+
+                $$ifi &quot;%scentype%&quot;==&quot;PROFITS&quot; $include 'scengen/scen_load_res_profits.gms'
+                $$ifi &quot;%scentype%&quot;==&quot;Fertilizer directive&quot; $include 'scengen/scen_load_res_profits.gms'
+         $$ifi &quot;%scentype%&quot;==&quot;Multi indicator&quot; $include 'scengen/scen_load_res_multi_indicator.gms'
+
+             );
+</code></pre>
+<p>Further on, the scenario specific settings which can be used as explanatory variables for later regressions are stored, see for example:</p>
+<pre><code class="language-GAMS">*     --- add scen variables to store explanatory vars
+*
+      p_meta(actInds,redLevl,scenItems,actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,&quot;mac&quot;,actInds1,&quot;mean&quot;)) = p_scenParam(scen,scenItems);
+
+      p_meta(actInds,redLevl,actInds,actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,&quot;mac&quot;,actInds1,&quot;mean&quot;)) = 1;
+
+      p_meta(actInds,redLevl,&quot;redLevl&quot;,actInds1,scen)
+       $ sum(redlevl1, p_res(actInds,redLevl1,&quot;mac&quot;,actInds1,&quot;mean&quot;)) =
+                                                                         p_res(actInds,redLevl,&quot;redlevl&quot;,actInds1,&quot;mean&quot;);
+</code></pre>
+<p>In a next step, the results are stored in a GDX container</p>
+<pre><code class="language-GAMS">*   --- Store to disk
+*
+    execute_unload '../results/scenGen/meta_%scenDes%.gdx' s_meta,p_meta=p_res;
+</code></pre>
+<p>The major challenge consists in ensuring that the child processes do not execute write operation on shared files. In the given example, that relates to the GAMS listing, the GDX container with the results and the option files generated by the CPLEX tuning step. For the latter, two options are available: (1) set up child specific directory, copy the
+option files into it and use the <em>optdir</em> setting in GAMS, or (2) label the option files accordingly. That latter option was chosen which restricts the number of scenarios to 450:</p>
+<p><a href="#" title="N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/scen_gen.gms GAMS /\*.*?Store/ /;/">^Comment</a>:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/model/def_run.gms GAMS /*.*?opt3/ /$else.iScen/)</p>
+<pre><code class="language-GAMS">* --- opt3 file will by replaced by ###
+*     that allows for 300 parallel threads
+*
+$iftheni.iScen not &quot;%iScen%&quot;==&quot;&quot;
+
+$evalGlobal op3 round(%iScen%+100)
+$evalGlobal op4 round(%iScen%+400)
+$evalGlobal op5 round(%iScen%+700)
+
+
+$setglobal scenWithoutIncgen  %scen%
+$set       scen  incgen/%scen%
+
+$else.iScen
+</code></pre>
+<p>In the case of normal single farm run, the standard option files will be used.</p>
+<h2 id="references">References</h2>
+<p>LENGERS, B., BRITZ, W., HOLM-MÜLLER, K. (2014): <a href="http://dx.doi.org/10.1111/1477-9552.12057">What drives marginal abatement costs of greenhouse gases on dairy farms? A meta-modeling approach</a>, Journal of Agricultural Economics 65(3): 579–599.</p>
+<p>KUHN, T., SCHÄFER, D., HOLM-MÜLLER, K., BRITZ, W. (2019): <a href="https://www.sciencedirect.com/science/article/abs/pii/S0308521X18310631?via%3Dihub">On-farm compliance costs with the EU-Nitrates Directive: A modelling approach for specialized livestock production in northwest Germany</a>, Agricultural Systems 173: 233-243.</p>
+<p>SEIDEL, C., BRITZ, W. (2020): <a href="https://oaj.fupress.net/index.php/bae/article/view/8147">Estimating a Dual Value Function as a Meta-Model of a Detailed Dynamic Mathematical Programming Model</a>, Bio-Based and Applied Economics, 8(1), 75-99.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>This assures also under the restricted number of random values
+for each factor the components are still represented in a fully
+stratified manner over the entire range, each variable has the
+opportunity to show up as important, if it indeed is important
+(Iman, 2008).&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>This is necessary to restrict sampling time but also guarantees to
+find a random sample that appropriately implies the correlation
+structure as proposed by the user (more detailed explanation of this
+later in this paper)&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Another possible routine for LHS sampling is
+"optimumLHS(***)". But during our test runs it did not lead to
+more smooth space filling random draws, but increased the runtime of
+the sampling process. For optimal-LHS see also Park (1994).&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../javascripts/init.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

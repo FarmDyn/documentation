@@ -1,0 +1,2403 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/BuildingsAndMachines/machinery/">
+      
+      
+        <link rel="prev" href="../../EconomicsAndManagement/labour/">
+      
+      
+        <link rel="next" href="../stables/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Machines - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#farm-machinery-and-field-operations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Machines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="true">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Machines
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#machinery-and-machine-attributes" class="md-nav__link">
+    Machinery and Machine Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-operations-machinery-needs-and-related-costs" class="md-nav__link">
+    Field Operations: Machinery Needs and Related Costs
+  </a>
+  
+    <nav class="md-nav" aria-label="Field Operations: Machinery Needs and Related Costs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-database" class="md-nav__link">
+    Default Database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ktbl-database" class="md-nav__link">
+    KTBL Database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-requirements-in-crop-production" class="md-nav__link">
+    Labour Requirements in Crop Production
+  </a>
+  
+    <nav class="md-nav" aria-label="Labour Requirements in Crop Production">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#depreciation-of-machines-included-in-ktbl-database" class="md-nav__link">
+    Depreciation of Machines Included in KTBL-Database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#investments-in-new-machinery" class="md-nav__link">
+    Investments in new machinery
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endogenous-machine-inventory" class="md-nav__link">
+    Endogenous Machine Inventory
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#machinery-and-machine-attributes" class="md-nav__link">
+    Machinery and Machine Attributes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#field-operations-machinery-needs-and-related-costs" class="md-nav__link">
+    Field Operations: Machinery Needs and Related Costs
+  </a>
+  
+    <nav class="md-nav" aria-label="Field Operations: Machinery Needs and Related Costs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-database" class="md-nav__link">
+    Default Database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ktbl-database" class="md-nav__link">
+    KTBL Database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#labour-requirements-in-crop-production" class="md-nav__link">
+    Labour Requirements in Crop Production
+  </a>
+  
+    <nav class="md-nav" aria-label="Labour Requirements in Crop Production">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#depreciation-of-machines-included-in-ktbl-database" class="md-nav__link">
+    Depreciation of Machines Included in KTBL-Database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#investments-in-new-machinery" class="md-nav__link">
+    Investments in new machinery
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endogenous-machine-inventory" class="md-nav__link">
+    Endogenous Machine Inventory
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="farm-machinery-and-field-operations">Farm Machinery and Field Operations</h1>
+<blockquote>
+<p><strong><em>Abstract</em></strong><br />
+Field operations and associated machinery needs are depicted in high detail. For each crop required field operations and related machinery applications are included. The machinery requirements are based on the level of mechanisation selected in the GUI. Based on the mechanisation level and information on plot sizes and farm to field distances resource requirements and variable costs are calculated.</p>
+</blockquote>
+<p>Different types of machines and field operations are implemented in FarmDyn, using data from two different databases: The <em>default-database</em> is manually implemented in FarmDyn. The data reports required field operations and related machine applications for grassland management, fertilization operations as well as specific crops for policy implementations (e.g. flowerstrips). In addition, it includes data for ~20 default crops. Based on the crop-data selection in the Graphical User Interface (GUI), data on field operations and machinery needs can further be imported from a large scale <em>KTBL-database</em>. The <em>KTBL-database</em> includes more than 400 machines and 1500 field operations for ~145 crops. It distinguishes between conventional and organic farming systems, reflecting system specific field operations.
+Both databases consider different types of tillage and are differentiated by mechanisation levels, which reflect substitution possibilities between labor and capital. Labour and resource requirements related to machine applications are further conditional on plot sizes and farm to field distances.</p>
+<h2 id="machinery-and-machine-attributes">Machinery and Machine Attributes</h2>
+<p>The models default farm machinery includes various different machines (see <em>tech.gms</em>).
+An extraction is shown in the following:</p>
+<pre><code class="language-GAMS">set set_machType /tractor
+                      tractorSmall
+                      plough                  &quot;Pflug&quot;
+                      chiselPlough            &quot;Schwergrubber&quot;
+                      sowMachine              &quot;Saemaschine&quot;
+                      directSowMachine        &quot;Direktsaemaschine&quot;
+                      seedBedCombi            &quot;Saatbeetkombination&quot;
+                      circHarrow              &quot;Scheibenegge&quot;
+                      springTineHarrow        &quot;Federzinkenegge&quot;
+                      fingerHarrow            &quot;Hackstriegel&quot;
+                      combine                 &quot;Maehdrescher&quot;
+                      cuttingUnitCere         &quot;Getreideschneidwerk&quot;
+                      cuttingAddRape          &quot;Zusatzausruestung Rapsernte&quot;
+                      cuttingUnitMaiz         &quot;Maispflueckeinrichtung fuer Maehdrescher&quot;
+                      rotaryHarrow            &quot;Kreiselegge&quot;
+                      mulcher                 &quot;Mulcher&quot;
+</code></pre>
+<p>Based on the crop-data selection in the GUI, further machines are imported from the <em>KTBL-database</em>. Here, each machine is assigned a machine type and an unique ID:</p>
+<pre><code class="language-GAMS">sets
+     set_machType                                         &quot;name of a machine&quot;
+     set_machTypeID                                       &quot;unique ID of a machine&quot;
+     set_machTypeID_machType(set_machTypeID,set_machType) &quot;crossset between machType and machTypeID&quot;
+     machineType                                          &quot;Type of a machine, e.g. tractor, plough&quot;
+     set_machType_machineType(set_machType,machineType)       &quot;assigns a machineType to each machine&quot;
+   ;
+</code></pre>
+<p>Each machinery type is characterised by the set of attributes <em>p_machAttr</em>, for example:</p>
+<pre><code class="language-GAMS">table p_machAttr(machType,machAttr)
+
+*
+* --- Data from KTBL 2014/2015, if not otherwise stated
+*
+*
+* --- KTBL. 82, 4 Schare, 140 cm
+*
+                      price        hour       ha       m3     t     varCost_ha  varCost_t  varCost_h  diesel_h  fixCost_h  fixCost_t years varCost_m3
+ Plough               13000                 2000                        12.0
+*
+* --- KTBL. 84, Schwergrubber, angebaut, 2.5m
+*
+ ChiselPlough          5600                 2600                         5.0
+</code></pre>
+<h2 id="field-operations-machinery-needs-and-related-costs">Field Operations: Machinery Needs and Related Costs</h2>
+<h3 id="default-database">Default Database</h3>
+<p>The models <em>default-database</em> includes different field operations (see <em>cropop_de.gms</em>). An extraction is shown in the following:</p>
+<pre><code class="language-GAMS">set operation &quot;Field operators as defined by KTBL&quot;
+
+             /
+                      soilSample              &quot;Bodenprobe&quot;
+                      manDist                 &quot;Guelleausbringung&quot;
+                      basFert                 &quot;P und K Duengung, typischerweise Herbst&quot;
+                      plow                    &quot;Pfluegen&quot;
+                      chiselPlow              &quot;Tiefengrubber&quot;
+                      seedBedCombi            &quot;Saatbettkombination&quot;
+                      herb                    &quot;Herbizidmassnahme&quot;
+                      sowMachine              &quot;Saemaschine&quot;
+                      directSowMachine        &quot;Direktsaatmaschine&quot;
+                      circHarrowSow           &quot;Kreiselegge u. Drillmaschine Kombination&quot;
+                      springTineHarrow        &quot;Federzinkenegge&quot;
+                      weedValuation           &quot;Unkrautbonitur&quot;
+                      weederLight             &quot;Striegeln&quot;
+                      weederIntens            &quot;Hacken&quot;
+                      plantvaluation          &quot;Bestandsbonitur
+</code></pre>
+<p>For each field operation required machinery is stated, for example:</p>
+<pre><code class="language-GAMS">set op_machType(operation,machType) &quot;Links the operations to machinery&quot;;
+* was ist mit dem Trecker? muss nicht f�r jeden Arbeitsgang auch noch der Traktor zu den
+* Arbeitsg�ngen verlinkt werden? oder ist das woanders schon mit Treckeranspr�chen pro ha und Frucht abgegolten?
+* Die Kosten f�r Trecker in den Arbeitsg�ngen sind ja durch KTBL Angaben zu var und fixCost schon abgegolten, aber die
+* Treckerstunden evtl. nicht die die Nutzungsdauer beeinflussen (BL 10.02.2014)
+
+ op_machType(&quot;plow&quot;,&quot;plough&quot;)                                  = yes;
+ op_machType(&quot;chiselplow&quot;,&quot;chiselPlough&quot;)                      = yes;
+ op_machType(&quot;stubble_shallow&quot;,&quot;chiselPlough&quot;)                 = yes;
+ op_machType(&quot;stubble_deep&quot;,&quot;chiselPlough&quot;)                    = yes;
+ op_machType(&quot;seedBedCombi&quot;,&quot;seedBedCombi&quot;)                    = yes;
+ op_machType(&quot;springTineHarrow&quot;,&quot;springTineHarrow&quot;)            = yes;
+ op_machType(&quot;circHarrowSow&quot;,&quot;circHarrow&quot;)                     = yes;
+ op_machType(&quot;circHarrowSow&quot;,&quot;sowMachine
+</code></pre>
+<p>The performance of field operations involves labour and diesel requirements as well as variable and fixed machinery costs.
+An extraction is shown in the following:</p>
+<pre><code class="language-GAMS">table op_attr(operation,machVar,rounded_plotsize,opAttr) &quot;resource requirements of operations&quot;
+
+                                                labTime         diesel      fixCost      varCost   nPers  amount
+    soilSample                .67kw.&quot;2&quot;          0.2              0.5          1.05         0.30
+    manDist                   .67kw.&quot;2&quot;          1.7              6.7         20.20        24.65
+    basFert                   .67kw.&quot;2&quot;          0.25             0.9          2.04         2.11
+*
+*   --- page 153, KTBL 2010/2011
+*
+    plow                      .67kw.&quot;2&quot;          1.89            23.0         20.39        40.76
+    chiselPlow                .67kw.&quot;2&quot;          1.09            15.1          9.02        22.92
+    SeedBedCombi              .67kw.&quot;2&quot;          0.58             6.0          7.98        12.05
+    sowMachine                .67kw.&quot;2&quot;          0.84             4.9          9.44        10.62
+    directSowMachine          .67kw.&quot;2&quot;          0.71             6.5         23.01        22.59
+    circHarrowSow             .67kw.&quot;2&quot;          1.29            12.9         16.96        27.16
+    springTineHarrow          .67kw.&quot;2&quot;          0.75             7.3          6.56        13.60
+    weedValuation             .67kw.&quot;2&quot;          0.16             0.3          1.59         0.35
+    herb                      .67kw.&quot;2&quot;          0.28             1.0          4.37         3.25
+    weederLight               .67kw.&quot;2&quot;          0.42             2.6          3.93         6.22
+    weederIntens              .67kw.&quot;2&quot;          0.73             3.8         13.10         9.70
+    plantValuation            .67kw.&quot;2&quot;          0.13             0.1          0.91         0.18
+</code></pre>
+<p>Per hectare resource requirements and costs of field operations are conditional on plot sizes and mechanisation level.
+The <em>default-database</em> considers these effect for four different plot sizes and three mechanisation levels. Farm-plot distances are not considered. Thereby, idle serves as placeholder for all crops in the <em>default-database</em>:</p>
+<pre><code class="language-GAMS">table p_plotSizeEffect(crops,machVar,opAttr,rounded_plotSize)
+
+                            &quot;1&quot;    &quot;2&quot;   &quot;5&quot;  &quot;20&quot;
+
+     idle. 67kw .labTime    12.4   10.5   9.3   8.0
+     idle. 67kw .diesel       90     83    78    73
+     idle. 67kw .varCost     205    188   176   168
+     idle. 67kw .fixCost     282    258   241   231
+
+     idle.102kw .labTime    11.1    9.1   7.6   6.8
+     idle.102kw .diesel       95     86    78    74
+     idle.102kw .varCost     209    188   172   164
+     idle.102kw .fixCost     315    284   262   249
+
+     idle.200kw .labTime    11.9    8.6   6.3   4.9
+     idle.200kw .diesel      118     99    84    75
+     idle.200kw .varCost     240    201   173   157
+     idle.200kw .fixCost     396    334   292   267
+  ;
+</code></pre>
+<p>FarmDyn distinguishes in total seven different mechanisation levels. As the <em>default-database</em> does not report input requirements for all mechanisation levels, data of similar mechanisation is used:</p>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,&quot;45kW&quot;,opAttr,rounded_plotSize)=p_plotSizeEffect(&quot;idle&quot;,&quot;67kW&quot;,opAttr,rounded_plotSize);
+</code></pre>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,&quot;83kW&quot;,opAttr,rounded_plotSize)=p_plotSizeEffect(&quot;idle&quot;,&quot;67kW&quot;,opAttr,rounded_plotSize);
+</code></pre>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,&quot;120kW&quot;,opAttr,rounded_plotSize)=p_plotSizeEffect(&quot;idle&quot;,&quot;102kW&quot;,opAttr,rounded_plotSize);
+</code></pre>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,&quot;230kW&quot;,opAttr,rounded_plotSize)=p_plotSizeEffect(&quot;idle&quot;,&quot;200kW&quot;,opAttr,rounded_plotSize);
+</code></pre>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,machVar,&quot;nPers&quot;,rounded_plotSize) = 1;
+</code></pre>
+<pre><code class="language-GAMS">p_plotSizeEffect(&quot;idle&quot;,machVar,&quot;amount&quot;,rounded_plotSize) = 1;
+</code></pre>
+<p>Subsequentely, the effect of plot size is assigned to all crops included in the <em>default-dataset</em>, for example:</p>
+<pre><code class="language-GAMS">p_plotSizeEffect(crops,&quot;67kW&quot;,opAttr,rounded_plotSize) $ ((not p_plotSizeEffect(crops,&quot;67kW&quot;,opAttr,rounded_plotSize)) $ (not sum(till, c_p_t_i_GDX(crops,&quot;plot&quot;,till,&quot;normal&quot;))))
+     =  (sum( crops1,  p_plotSizeEffect(crops1,&quot;67kW&quot;,opAttr,rounded_plotSize))
+       / sum( crops1 $ p_plotSizeEffect(crops1,&quot;67kW&quot;,opAttr,rounded_plotSize),1)) $sum(crops1, p_plotSizeEffect(crops1,&quot;67kW&quot;,opAttr,rounded_plotSize));
+</code></pre>
+<p>The plot size effect is used to scale resource requirements of machines and field operations that are not included in <em>KTBL-database</em>:</p>
+<pre><code class="language-GAMS">p_machAttr(machType,&quot;diesel_h&quot;) $ (sum(op_machType(operation,machType),1) or sameas(machType,&quot;Tractor&quot;))
+   =  p_machAttr(machType,&quot;diesel_h&quot;)
+        *  sum( (curCrops(crops),actMachVar,act_rounded_plotsize)
+           $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+              $ (not sum(till, c_p_t_i_GDX(crops,&quot;plot&quot;,till,&quot;normal&quot;)))
+           $$endif.data
+            ,p_plotSizeEffect(crops,actMachVar,&quot;diesel&quot;,act_rounded_plotsize)
+                                               /p_plotSizeEffect(crops,&quot;67Kw&quot;,&quot;diesel&quot;,&quot;2&quot;))
+         / sum( (curCrops(crops),actMachVar,act_rounded_plotsize) $ p_plotSizeEffect(crops,actMachVar,&quot;diesel&quot;,act_rounded_plotsize),1);
+
+
+  op_attr(operation,actmachVar,rounded_plotsize,&quot;diesel&quot;) $ op_attr(operation,actMachVar,rounded_plotsize,&quot;diesel&quot;)
+   = op_attr(operation,actmachVar,rounded_plotsize,&quot;diesel&quot;)
+        *  sum( (curCrops(crops),act_rounded_plotsize)
+           $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+              $ (not sum(till, c_p_t_i_GDX(crops,&quot;plot&quot;,till,&quot;normal&quot;)))
+           $$endif.data
+           ,p_plotSizeEffect(crops,actMachVar,&quot;diesel&quot;,act_rounded_plotsize)
+                                               /p_plotSizeEffect(crops,&quot;67Kw&quot;,&quot;diesel&quot;,&quot;2&quot;))
+         / sum( (curCrops(crops),act_rounded_plotsize) $ p_plotSizeEffect(crops,actMachVar,&quot;diesel&quot;,act_rounded_plotsize),1);
+
+
+  set techEval_c_t_i
+</code></pre>
+<p>The field operations are linked to monthly cropping activities, considering the frequency of a field operation in the production (below an example for potatoes):</p>
+<pre><code class="language-GAMS">table p_crop_op_per_tilla(crops,operation,labPeriod,till)
+                                                              plough     minTill   noTill          org  silo  bales  hay      graz
+
+ potatoes     .    soilSample          .  AUG1                   0.2         0.2                   0.2
+ potatoes     .    basFert             .  AUG1                   1.0         1.0                   1.0
+ potatoes     .    solidManDist        .  AUG2                                                     1.0
+ potatoes     .    plow                .  AUG2                                                     1.0
+ potatoes     .    chiselPlow          .  AUG2                   1.0         1.0
+ potatoes     .    sowmachine          .  AUG2                   1.0         1.0
+ potatoes     .    mulcher             .  NOV1                   1.0         1.0                   1.0
+ potatoes     .    plow                .  NOV1                   1.0                               1.0
+ potatoes     .    chiselPlow          .  NOV1                               1.0
+ potatoes     .    NminTesting         .  FEB1                   1.0         1.0
+ potatoes     .    NFert320            .  MAR1                   1.0         1.0                   1.0
+ potatoes     .    chitting            .  MAR1                                                     1.0
+ potatoes     .    seedBedCombi        .  MAR2                   1.0
+ potatoes     .    rotaryHarrow        .  MAR2                               1.0                   1.0
+ potatoes     .    seedPotatoTransp    .  APR1                   1.0         1.0                   1.0
+ potatoes     .    potatoLaying        .  APR1                   1.0         1.0                   1.0
+ potatoes     .    rakingHoeing        .  APR2                                                     1.0
+ potatoes     .    earthingUp          .  APR2                   1.0         1.0
+ potatoes     .    weedValuation       .  MAY1                   1.0         1.0                   1.0
+ potatoes     .    earthingUP          .  MAY1
+ potatoes     .    plantvaluation      .  JUN1                   1.0                               1.0
+ potatoes     .    herb                .  JUN1                                                     1.0
+ potatoes     .    plantValuation      .  JUN2                   2.0         2.0                   1.0
+ potatoes     .    herb                .  JUN2                   2.0         2.0                   2.0
+ potatoes     .    plantValuation      .  JUL1                   2.0         2.0
+ potatoes     .    herb                .  JUL1                   2.0         2.0                   1.0
+ potatoes     .    plantValuation      .  JUL2                   1.0         1.0
+ potatoes     .    herb                .  JUL2                   1.0         1.0                   1.0
+ potatoes     .    plantValuation      .  AUG1                   1.0         1.0
+ potatoes     .    herb                .  AUG1                   1.0         1.0                   1.0
+ potatoes     .    plantValuation      .  AUG2                   1.0         1.0
+ potatoes     .    herb                .  AUG2                   1.0         1.0
+ potatoes     .    knockOffHaulm       .  AUG2                                                     1.0
+ potatoes     .    killingHaulm        .  AUG2                   1.0         1.0
+ potatoes     .    potatoHarvest       .  SEP1                   0.5         0.5                   0.5
+ potatoes     .    potatoTransport     .  SEP1                   0.5         0.5                   0.5
+ potatoes     .    potatoStoring       .  SEP1                   0.5         0.5                   0.5
+ potatoes     .    potatoHarvest       .  SEP2                   0.5         0.5                   0.5
+ potatoes     .    potatoTransport     .  SEP2                   0.5         0.5                   0.5
+ potatoes     .    potatoStoring       .  SEP2                   0.5         0.5                   0.5
+ potatoes     .    lime_fert           .  OCT1                 0.333
+</code></pre>
+<h3 id="ktbl-database">KTBL Database</h3>
+<p>Further field operations can be included from the <em>KTBL-database</em>. Here, each operation is assigned to an operation type and receives an unique ID. Field operations are linked to cropping activities, <em>p_crops_operationID</em>, on a monthly resolution, considering the frequency of a field operation in the production. Data distinguish between different types of tillage and conventional and organic farming systems, reflecting system specific field operations. Further, different soil types and amounts (e.g. transport volumes, application quantities) are considered, reflecting their impact on resource requirements of field operations.Field operations are reported for seven mechanisation levels between 45 and 230 kW.
+ Details on resource requirements and costs of each operation are expressed as function of plot sizes and farm to field distances, building on a polynomial regression function. For each operation and resource/cost <em>item</em>, regression coefficients <strong>p_RegCoeff</strong> are specified.  For field operations that are independent of plot sizes and distances (e.g. loading and cleaning operations), constant values <strong>p_noRegCoeff</strong> are reported. Based on information on soil type, mechanisation, plot sizes and distances entered in the GUI, resource requirement are calculated. Plot sizes of up to 40 ha and farm to field distances up to 30 km are considered.</p>
+<pre><code class="language-GAMS">p_opIDInputReq(curCrops,till,items,operationID) = sum((crops_operationID(curCrops,sys,till,operationID,labperiod,amount,actMachVar),amountUnit,
+              Soil) $ sum(soil_plot(soil,plot),c_p_t_i(curCrops,plot,till,&quot;normal&quot;))
+              ,
+             (
+              p_noRegCoeff(operationID,amount,soil,items)
+                 $ (not p_regCoeff(operationID,amount,&quot;m&quot;,&quot;time&quot;,&quot;intercept&quot;))
+      +
+              Max(p_RegCoeff(operationID,amount,Soil,items,&quot;minvalue&quot;),
+              Min(p_regCoeff(operationID,Amount,soil,items,&quot;maxvalue&quot;),
+          ((
+               p_regCoeff(operationID,amount,Soil,items,&quot;intercept&quot;)
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;size_linear&quot;)   * p_actPlotSize
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;size_sqr&quot;)      * sqr(p_actPlotSize)
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;sqroot_size&quot;)   * sqrt(p_actPlotSize)
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;size_distance&quot;) * p_actPlotSize * p_actPlotDist
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;dist_linear&quot;)   * p_actPlotDist
+            +  p_regCoeff(operationID,amount,Soil,items,&quot;dist_sqr&quot;)      * sqr(p_actPlotDist)
+             ) $ p_regCoeff(operationID,amount,&quot;m&quot;,&quot;time&quot;,&quot;intercept&quot;))
+             )))
+             * p_crops_operationID(curCrops,sys,till,operationID,labperiod,amount,amountUnit,actMachVar)
+           );
+</code></pre>
+<p>These information on required field operation and related resource requirements and cost in crop production determine:</p>
+<ol>
+<li>
+<p>The <strong>number of necessary field working days</strong> and <em>monthly labour
+    need</em> per ha (excluding the time used for fertilisation, which is
+    determined endogenously)</p>
+</li>
+<li>
+<p>The <strong>machinery need</strong> for the different crops</p>
+</li>
+<li>
+<p>Related <strong>variable costs</strong></p>
+</li>
+</ol>
+<h2 id="labour-requirements-in-crop-production">Labour Requirements in Crop Production</h2>
+<p>The labour needs per month are determined by summing up over all farm
+operations, considering the labour period, the effect of plot size and
+mechanisation (<em>coeffgen\labour.gms</em>):</p>
+<pre><code class="language-GAMS">p_cropLab(c_t_i(curCrops,till,intens),m)
+
+     =
+*
+* --- crops included in KTBL database
+*
+$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+   sum((operation),
+          p_opInputReq(curCrops,till,&quot;labTime&quot;,operation)
+          $ (sum((amount,labperiod),  p_crop_op_per_tillaKTBL(curCrops,operation,labperiod,till,amount)
+          $ labPeriod_to_month(labPeriod,m))))
+$endif.data
+*
+* --- crops not included in KTBL database
+*
++     sum( (curOperation(operation),actmachVar,act_rounded_plotsize,labPeriod_to_month(labPeriod,m))
+                  $((not contractOperation(operation)
+                  $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+                  $(not (sum(operationID $operationID_operation(operationID,operation),1)))
+                  $$endif.data
+                  )),
+              p_crop_op_per_till(curCrops,operation,labPeriod,till,intens)
+                     * op_attr(operation,&quot;67kW&quot;,&quot;2&quot;,&quot;labTime&quot;)
+*
+*                    -- effect of plot size and mechanisation on labour time
+*
+                         * p_plotSizeEffect(curCrops,actMachVar,&quot;labTime&quot;,act_rounded_plotsize)
+                          /p_plotSizeEffect(curCrops,&quot;67kW&quot;,&quot;labTime&quot;,&quot;2&quot;)
+               )
+               $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+               $ (not c_p_t_i_GDX(curCrops,&quot;plot&quot;,till,&quot;normal&quot;))
+               $$endif.data
+ ;
+</code></pre>
+<h3 id="depreciation-of-machines-included-in-ktbl-database">Depreciation of Machines Included in <em>KTBL-Database</em></h3>
+<p>Deprecation cost of machine applications in the <em>KTBL-database</em> are calculated at the level of a field operations. Field operations, however, often require more than one machine such that deprecation costs refer to multiple machines. To draw conclusions about the value of the machine park and necessary new acquisitions, data on cost of depreciation are required on level of a single machine. Therefore, total depreciation costs are allocated to individual machines, considering the respective depreciation type and usage. An extraction is shown in the following (at the example of machines depreciated by area use).</p>
+<p>First, total depreciation costs are assigned to <em>p_physDepr</em>.</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;cost&quot;)
+       = p_opInputReq(curCrops,till,&quot;deprec&quot;,operation);
+</code></pre>
+<p>For each machine of a field operation that is depreciated by area use, depreciation costs per hectare are calculated:</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,op_machType(operation,machType),&quot;&quot;,&quot;areaCost&quot;)
+      $ (p_machAttr(machType,&quot;ha&quot;) $ p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;cost&quot;))
+      = p_machAttr(machType, &quot;price&quot;)/p_machAttr(machType,&quot;ha&quot;) + eps;
+</code></pre>
+<p>The total depreciation costs allocated to area use are summarised for each operation:   </p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;areaCost&quot;)
+       $ p_opInputReq(curCrops,till,&quot;deprec&quot;,operation)
+     = sum(op_machType(operation,machType)
+           $ p_machAttr(machType,&quot;ha&quot;),
+                p_physDepr(curCrops,till,operation,machType,&quot;&quot;,&quot;areaCost&quot;));
+</code></pre>
+<p>In case the total depreciation allocated to area use costs exceed the total deprecation costs of a field operation, the depreciation costs of each machine are scaled</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,op_machType(operation,machType),&quot;&quot;,&quot;areaCost&quot;)
+      $ (p_machAttr(machType,&quot;ha&quot;) $ p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;cost&quot;))
+      = p_machAttr(machType, &quot;price&quot;)/p_machAttr(machType,&quot;ha&quot;) + eps;
+</code></pre>
+<p>The depreciation costs allocated to area use are subtracted from total deprecation costs of a field operation:</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,op_machType(operation,machType),&quot;&quot;,&quot;areaCost&quot;)
+      $ (p_machAttr(machType,&quot;ha&quot;) $ p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;cost&quot;))
+      = p_machAttr(machType, &quot;price&quot;)/p_machAttr(machType,&quot;ha&quot;) + eps;
+</code></pre>
+<p>The same procedure is repeated to allocate the remaining depreciation costs to machines depreciated over time and mass use and to machines which are not depreciated over specific use but have fixed annual depreciation costs.</p>
+<p>For each field operation, the total depreciation costs allocated to machine applications are summed to check for any remaining depreciation costs not allocated to any machine.</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;totCost&quot;)
+       = sum((op_machType(operation,machType),depCost),
+               p_physDepr(curCrops,till,operation,machType,&quot;&quot;,depCost));
+</code></pre>
+<p>Any remaining depreciation costs are allocated to all machines of a field operation.</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,operation,machType,&quot;&quot;,depCost));
+</code></pre>
+<p>Some field operations are not associated with any machine applications (e.g. drying and storing; covering of silo). Here, remaining depreciation costs can not be distributed to machines but reflect depreciation of associated buildings and facilities (storage facility, silo):</p>
+<pre><code class="language-GAMS">p_physDepr(curCrops,till,operation,&quot;Buildings and Facilities&quot;,&quot;&quot;,&quot;totcost&quot;)
+       $ (abs(p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;error&quot;)) gt 1)
+      = abs(p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;error&quot;));
+</code></pre>
+<p>Total depreciation costs of a machine per hectare crop production are calculated over all field operations that are required to produce a crop under a specific production system and all deprecation types, as some machines are depreciated by more than one deprecation type (e.g. area and mass use):</p>
+<p>Comment<a href="#" title="N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/general_herd_module.gms GAMS /machInvStable_\(c/ /;/">embedmd</a>:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/tech.gms GAMS /Report.*?machType/ /;/)</p>
+<pre><code class="language-GAMS">*
+*    --- sum depreciation of a machType over all field operations of a crop (sys,till)
+*
+     p_physDepr(curCrops,till,&quot;mach_crop&quot;,machType,&quot;&quot;,depCost)
+       =sum(op_machType(operation,machType) $ p_physDepr(curCrops,till,operation,&quot;&quot;,&quot;&quot;,&quot;cost&quot;),
+          p_physDepr(curCrops,till,operation,machType,&quot;&quot;,depCost));
+*
+*   --- total depreciation of a machine over all deprec types for a crop,sys,till
+*
+    p_physDepr(curCrops,till,&quot;mach_crop&quot;,machType,&quot;&quot;,&quot;totCost&quot;)
+       = sum(depCost,p_physDepr(curCrops,till,&quot;mach_crop&quot;,machType,&quot;&quot;,depCost));
+
+</code></pre>
+<p>The depreciation costs per hectare are assigned to the machinery requirements by each crop per hectare</p>
+<pre><code class="language-GAMS">p_machNeed(crops,till,&quot;normal&quot;,machType,&quot;invCost&quot;)
+       = p_physDepr(crops,till,&quot;mach_crop&quot;,machType,&quot;&quot;,&quot;totCost&quot;);
+</code></pre>
+<h2 id="investments-in-new-machinery">Investments in new machinery</h2>
+<p>Depending on the depreciation type, investments in new machines are either depicted continuously, where <em>v_buyMachFlex</em> is the fractional investment according to actual machine needs (e.g. operation hours, mass flows) or using a binary variable <em>v_buyMach</em> for machines where lifetime is declared in years.</p>
+<pre><code class="language-GAMS">machBuyFlex_(curMachines(machType),machLifeUnit,tFull(t),nCur)
+        $ (   (v_machInv.up(machType,machLifeUnit,t,nCur) ne 0)
+            $ v_buyMachFlex.up(machType,t,nCur)  $ p_lifeTimeM(machType,machLifeUnit)
+            $ (not sameas(machLifeUnit,&quot;years&quot;)) $ p_priceMach(machType,t) $ t_n(t,nCur))  ..
+
+        v_buyMachFlex(machType,t,nCur) * p_lifeTimeM(machType,MachLifeUnit)
+            =L= v_machNeed(machType,machLifeUnit,t,nCur) $ tCur(t)
+
+              + [sum( (t_n(t1,nCur1)) $ ( tCur(t1) $ isNodeBefore(nCur,nCur1)),
+                                 v_machNeed(machType,machLifeUnit,t1,nCur1))/card(tCur)
+                 ]  $ ( (not tCur(t)) and p_prolongCalc);
+</code></pre>
+<pre><code class="language-GAMS">buyMachLifeTimeT_(curMachines(machType),t_n(tCur(t),nCur)) $ ((v_buyMach.up(machType,tCur,nCur) ne 0) $ p_lifeTimeM(machType,&quot;years&quot;)
+                                                                   $ ( mod(t.pos,p_lifeTimeM(machType,&quot;years&quot;)) eq 1) $ (Card(tCur) gt 1) ) ..
+
+         sum( (tFull(t1),nCur1) $ ( t_n(t1,nCur1)
+                                    $ (p_year(t1) + p_lifeTimeM(machType,&quot;years&quot;) lt p_year(t))
+                                    $ (v_buyMach.up(machType,t1,nCur1) ne 0)),
+
+                  v_buyMach(machType,t1,nCur1)) =L= 1;
+</code></pre>
+<h2 id="endogenous-machine-inventory">Endogenous Machine Inventory</h2>
+<p>The inventory equation for machinery is shown in <em>machInv_</em>, where
+<em>v_machInv</em> is the available inventory by type and <em>machType,</em> in
+operation hours. <em>v_machNeed</em> is the machinery need of the farm in
+operating hours and <em>v_buyMach</em> are investments in new machines.</p>
+<pre><code class="language-GAMS">machInv_(curMachines(machType),machLifeUnit,tFull(t),nCur)
+         $ (     (v_machInv.up(machType,machLifeUnit,t,nCur) ne 0)
+               $ p_lifeTimeM(machType,machLifeUnit)  $ p_priceMach(machType,t)
+               $ (not sameas(machLifeUnit,&quot;years&quot;))  $ t_n(t,nCur) )  ..
+*
+*      --- inventory end of current year (in operating hours, hectares etc.)
+*
+       v_machInv(machType,machLifeUnit,t,nCur)
+
+             =e=
+*
+*        --- inventory end of last year (in operating hours)
+*
+          sum(t_n(t-1,nCur1) $ anc(nCur,nCur1), v_machInv(machType,machLifeUnit,t-1,nCur1))
+*
+*        --- new machines, converted in operation time
+*
+        + (v_buyMach(machType,t,nCur)+v_buyMachFlex(machType,t,nCur)) * p_lifeTimeM(machType,MachLifeUnit)
+*
+*        --- minus operating hours in current year if in normal planning period
+*
+        - v_machNeed(machType,machLifeUnit,t,nCur)  $ tCur(t)
+*
+*        --- minus operating hours of weighted average over normal planning period
+*            if beyond the normal planning period
+*
+        - [sum( (t_n(t1,nCur1)) $ ( tCur(t1) $ isNodeBefore(nCur,nCur1)),
+                          v_machNeed(machType,machLifeUnit,t1,nCur1))/card(tCur)
+           ]
+                       $ ( (not tCur(t)) and p_prolongCalc)
+       ;
+</code></pre>
+<p>The last expression is used when the farm program for the simulated
+period is used to estimate the machinery needs for all years until the
+stables are fully depreciated.</p>
+<p>Machinery need is also linked to activities in livestock production (e.g. small tractors):</p>
+<pre><code class="language-GAMS">machNeedHerds_(curMachines(machType),machLifeUnit,t_n(tCur(t),nCur))
+        $ sum(actHerds(sumHerds,breeds,feedRegime,t,m),
+               p_machNeed(sumHerds,&quot;plough&quot;,&quot;normal&quot;,machType,machLifeUnit)) ..
+
+       v_machNeedHerds(machType,machLifeUnit,t,nCur)
+
+         =e=
+*
+*      --- herd sizes times their request for specific machine type
+*
+          sum(actHerds(sumHerds,breeds,feedRegime,t,m) $ p_prodLength(sumHerds,breeds),
+             v_herdSize(sumHerds,breeds,feedRegime,t,nCur,m)
+              * p_machNeed(sumHerds,&quot;plough&quot;,&quot;normal&quot;,machType,machLifeUnit)
+                          * 1/min(12,p_prodLength(sumHerds,breeds)));
+</code></pre>
+<p>The total machinery need in each year is defined as sum from activities or processes requiring machinery:</p>
+<pre><code class="language-GAMS">machines_(curMachines(machType),machLifeUnit,t_n(tCur(t),nCur))     $ p_lifeTimeM(machType,machLifeUnit) ..
+*
+*    --- less than total machinery need
+*
+       v_machNeed(machType,machLifeUnit,t,nCur) =G=
+*
+*      --- crops times their request for specific machine type
+*          crops and machines not included in the KTBL Regression in ha/ha: hour/ha ...
+*          machines inclueded in KTBL Regression: EUR depreciation costs
+       sum( c_p_t_i(curCrops(crops),plot,till,intens),
+           v_cropHa(crops,plot,till,intens,t,nCur)
+            * p_machNeed(crops,till,intens,machType,machLifeUnit))
+*
+*             --- yield depression effects (increase plant protection cost)
+*
+
+     $$iftheni.pmp &quot;%pmp%&quot;==&quot;true&quot;
+      + sum( (curCrops(Crops),sys) $ [sum(c_p_t_i(crops,plot,till,intens) $ (sys_till(sys,till)
+                                       $ p_critShare(crops,sys,&quot;dep1&quot;) $ (p_machNeed(crops,till,intens,machType,machLifeUnit) gt 0)),1)
+                                                                                  $ sameas(machType,&quot;sprayer&quot;)],
+            sqr(v_sumCrop(crops,sys,t,nCur))
+                                         /[  (  p_nArabLand  $ (not grassCrops(crops))
+                                              + (p_nGrasLand+p_nPastLand) $ grassCrops(crops))
+                                                * smax((sys_till(sys,till),cropShareLevl),p_critShare(crops,sys,cropShareLevl))
+                                                ]
+     $$else.pmp
+
+        + sum( (curCrops(Crops),sys,cropShareLevl) $ (sum(c_p_t_i(crops,plot,till,intens) $ sys_till(sys,till),
+                                                        p_machNeed(crops,till,intens,machType,machLifeUnit))
+                                                                                   $ sameas(machType,&quot;sprayer&quot;)),
+              v_cropShareEffect(crops,sys,cropShareLevl,t,nCur)*p_cropShareLevl(crops,sys,cropShareLevl)
+
+     $$endif.pmp
+
+             *    sum(c_p_t_i(crops,plot,till,intens) $ sys_till(sys,till),p_machNeed(crops,till,intens,machType,machLifeUnit))
+                / sum(c_p_t_i(crops,plot,till,intens) $ (sys_till(sys,till) $ p_machNeed(crops,till,intens,machType,machLifeUnit)),1))
+
+*        ---- machine need for the application of N (syntfert)
+
+     + sum( (c_p_t_i(curCrops(crops),plot,till,intens),curInputs(syntFertilizer),m),
+               v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * (1 + m.pos*1.E-3)
+                  * p_machNeed(syntFertilizer,till,&quot;normal&quot;,machType,machLifeUnit))
+
+*        ---- machine need for the application of manure
+
+     $$iftheni.man &quot;%manure%&quot;==&quot;true&quot;
+
+        + sum((c_p_t_i(curCrops(crops),plot,till,intens),manApplicType_manType(ManApplicType,curManType),m)
+              $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+                v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                  * p_machNeed(ManApplicType,&quot;plough&quot;,&quot;normal&quot;,machType,machLifeUnit))
+
+     $$endif.man
+
+     $$iftheni.herd &quot;%herd%&quot;==&quot;true&quot;
+
+      + v_machNeedHerds(machType,machLifeUnit,t,nCur)
+           $ sum(actHerds(sumHerds,breeds,feedRegime,t,m),
+                 p_machNeed(sumHerds,&quot;plough&quot;,&quot;normal&quot;,machType,machLifeUnit))
+     $$endif.herd
+    ;
+</code></pre>
+<p>A small set of machinery, such as the front loader, dung grab, shear
+grab or fodder mixing vehicles are depreciated by time and not by use:</p>
+<pre><code class="language-GAMS">machInvT_(curMachines(machType),tFull(t),nCur)
+        $ (      (v_machInv.up(machType,&quot;years&quot;,t,nCur) ne 0)
+                $ p_lifeTimeM(machType,&quot;years&quot;)
+                $ p_priceMach(machType,t) $ t_n(t,nCur)  )  ..
+*
+*      --- inventory end of current year (in operating hours)
+*
+       v_machInv(machType,&quot;years&quot;,t,nCur)
+
+     +  sum( t_n(t1,nCur1) $ (  (p_year(t1) gt smax( tOld $ p_iniMachT(machType,told),
+                                                     p_year(tOld) + p_lifeTimeM(machType,&quot;years&quot;)))
+                             $  (p_year(t1)+p_prolongLen gt p_year(t))
+                             $ tCur(t1)  $ isNodeBefore(nCur,nCur1)),
+                 v_machInv(machType,&quot;years&quot;,t1,nCur1)/p_proLongLen)
+                                                $ ( (not tCur(t)) and p_prolongCalc)
+
+          =L=
+*
+*         --- old machines according to investment dates
+*             (will drop out of equation if too old)
+*
+          sum( tOld $ (   ((p_year(tOld) + p_lifeTimeM(machType,&quot;years&quot;)) gt p_year(t))
+                              $ ( p_year(told)                            le p_year(t))),
+                                 p_iniMachT(machType,tOld))
+
+*
+*         --- plus (old) investments - de-investments
+*
+       +  sum( t_n(t1,nCur1) $ (  ((p_year(t1)  + p_lifeTimeM(machType,&quot;years&quot;) ) gt p_year(t))
+                                $ ( p_year(t1)                                    le p_year(t))
+                                $ isNodeBefore(nCur,nCur1)),
+                                                v_buyMach(machType,t1,nCur1));
+</code></pre>
+<p>The aforementioned set of machinery, depreciated by time and not usage, are linked to the existence of stables, i.e. stables cannot be used if machinery is not present:</p>
+<pre><code class="language-GAMS">machInvStable_(curMachines(machType),stables,tCur(t),nCur)
+       $ ( (v_machInv.up(machType,&quot;years&quot;,t,nCur) ne 0)
+           $  (   sum( (t_n(t1,nCur1),hor) $ ( (isNodeBefore(nCur,nCur1) or sameas(nCur,nCur1)) and (p_year(t1) le p_year(t))),
+                      (v_buyStables.up(stables,hor,t1,nCur1) ne 0))
+              or  sum( tOld, p_iniStables(stables,&quot;long&quot;,tOld)))
+           $ sum(stables_to_mach(stables,machType),1)
+           $ (p_lifeTimeM(machType,&quot;years&quot;))  $ p_priceMach(machType,t)  $ t_n(t,nCur))  ..
+
+       sum(stables_to_mach(stables,machType), v_stableUsed(stables,t,nCur)
+           -sum(m $ (p_stableLab(stables,m) gt eps),v_stableNotUsed(stables,t,nCur,m))/card(m))
+          =L= v_machInv(machType,&quot;years&quot;,t,nCur);
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

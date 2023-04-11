@@ -1,0 +1,2165 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/Biogas/biogas/">
+      
+      
+        <link rel="prev" href="../../AnimalProduction/pigs/">
+      
+      
+        <link rel="next" href="../../EnvironmentalAccounting/environmental_accounting/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Biogas - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#biogas-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Biogas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="false">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/plant_nutrition/" class="md-nav__link">
+        Plant Nutrition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CropProduction/fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Biogas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Biogas
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-economic-part" class="md-nav__link">
+    Biogas Economic Part
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-inventory" class="md-nav__link">
+    Biogas Inventory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-technology" class="md-nav__link">
+    Production Technology
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restrictions-related-to-the-renewable-energy-act" class="md-nav__link">
+    Restrictions Related to the Renewable Energy Act
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-disgestates" class="md-nav__link">
+    Biogas Disgestates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-economic-part" class="md-nav__link">
+    Biogas Economic Part
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-inventory" class="md-nav__link">
+    Biogas Inventory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-technology" class="md-nav__link">
+    Production Technology
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#restrictions-related-to-the-renewable-energy-act" class="md-nav__link">
+    Restrictions Related to the Renewable Energy Act
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biogas-disgestates" class="md-nav__link">
+    Biogas Disgestates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="biogas-module">Biogas Module</h1>
+<div class="admonition danger">
+<p class="admonition-title">Information:</p>
+<p>The biogas module has not been tested under the current FarmDyn version, therefore run time errors are very likely to occur when it is used.</p>
+</div>
+<p>The biogas module defines the economic and technological relations between components of a biogas plant with a monthly resolution, as well as links to the farm. Thereby, it includes the statutory payment structure and their respective restrictions according to the German Renewable Energy Acts (EEGs) from 2004 up to 2014. The biogas module differentiates between three different sizes of biogas plants and accounts for three different life spans of investments connected to the biogas plant. Data for the technological and economic parameters used in the model are derived from KTBL (2013) and FNR (2013). The equations within the template model related to the biogas module are presented in the following section.</p>
+<h2 id="biogas-economic-part">Biogas Economic Part</h2>
+<p>The economic part describes on the one hand the revenues stemming from
+the heat and electricity production of the biogas plant, and on the
+other hand investment and operation costs. The guaranteed feed-in tariff
+paid to the electricity producer per kWh, <em>p_priceElec</em>, and underlying
+the revenues, is constructed as a sliding scale price and is exemplary
+shown in the next equation.</p>
+<pre><code class="language-GAMS">p_priceElec(bhkw,eeg,tCur(t))$(eegRated(eeg)) = (p_priceElecBase(&quot;150kW&quot;,eeg) * (150/p_powRate(bhkw,eeg))
+                                                          + p_priceElecBase(bhkw,eeg) * ((p_powRate(bhkw,eeg) - 150)/p_powRate(bhkw,eeg)))
+                                                         ;
+</code></pre>
+<pre><code class="language-GAMS">p_priceElecE2004(&quot;150kW&quot;,&quot;E2004&quot;)= 0.08;
+</code></pre>
+<p><em>p_priceElecBase</em>, used to calculate the guaranteed feed-in tariff
+differentiated by size, includes the base rate and additional
+bonuses <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> according to the legislative texts of the EEGs. For the EEG
+2012 it only contains the base rate. In addition, the guaranteed feed-in
+tariff is subject to a degressive relative factor, <em>p_priceElecDeg</em>
+which differs between EEGs and describes price reductions over time. The
+<em>p_priceElecBase</em> is then used to calculate the electricity based
+revenue of the biogas operator by multiplying it with the produced
+electricity, <em>v_prodElec</em>. In order to assure a correct representation
+of the EEG 2012 payment, the biogas module differentiates the
+electricity output by input source <em>v_prodElecCrop</em> and
+<em>v_prodElecManure</em> and multiplies it with its respective bonus tariffs
+<em>p_priceElecInputclass</em> which are added to the base rate.</p>
+<pre><code class="language-GAMS">bioGasObje_(tCur(t),nCur) $ t_n(t,nCur) ..
+       v_salRevBioGas(t,nCur)
+
+        =e=
+
+*            --- Revenue stemming from electricity production with degression depending on EEG (excluding direct marketing)
+                 sum( (curBhkw(bhkw),curEeg(eeg),m) $ (not(eegDM(eeg))),
+                                    v_prodElec(bhkw,eeg,t,nCur,m) *  p_priceElec(bhkw,eeg,t)   )
+
+*            --- Revenue stemming from electricity production for EEG E2012 differentiated by input class
+               + sum( (curBhkw(bhkw),curEeg(eeg),m) $ (eegDif(eeg)) ,
+                                        v_prodElecCrop(bhkw,eeg,t,nCur,m)   * p_priceElecInputclass(bhkw,eeg,&quot;inputCl1&quot;)
+                                      + v_prodElecManure(bhkw,eeg,t,nCur,m) * p_priceElecInputclass(bhkw,eeg,&quot;inputCl2&quot;) )
+
+*            --- Revenue stemming from heat
+               + sum( curEeg(eeg),  v_sellHeat(eeg,t,nCur) * p_priceHeat(t) )
+
+*            --- Revenue specification for EEG with direct marketing and flexible biogas production
+               + sum( (curBhkw(bhkw),curEeg(eeg),m)$(eegDM(eeg)),
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * p_shareEPEX(bhkw) )
+                                       * (p_dmMP(bhkw,eeg,t,m) + p_dmsellPriceHigh(m) )
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * (1 - p_shareEPEX(bhkw) ) )
+                                       * (p_dmMP(bhkw,eeg,t,m) + p_dmsellPriceLow(m) )
+                                   + (v_prodElec(bhkw,eeg,t,nCur,m) * p_flexPrem(bhkw,eeg) ) )
+
+*            --- Revenue stemming from scenario premium
+               + sum( (curBhkw(bhkw), curEeg(eeg),m)$(eegScen(eeg)),
+                                      v_prodElec(bhkw,eeg,t,nCur,m) * p_scenPremium(eeg)$(eegScen(eeg)))
+;
+</code></pre>
+<p>In addition to the <em>traditional</em> guaranteed feed-in tariff, the biogas
+module comprises the payment structure for the so-called <em>direct</em>
+<em>marketing</em> <em>option</em> which was implemented in the EEG 2012. The calculation
+of the revenue with a direct marketing option is defined as the product
+of the produced electricity, <em>v_prodElec</em>, the sum of the market
+premium, <em>p_dmMP</em>, and the price at the electricity spot exchange EPEX
+Spot, <em>p_dmsellPriceHigh/Low.</em> The latter depends on the amount of
+electricity sold during high and low stock market prices. Additionally,
+it is accounted for a flexibility premium, <em>p_flexPrem</em>.</p>
+<p>Furthermore, the revenue stemming from heat is accounted for and is
+included as the product of sold heat, <em>v_sellHeat</em>, times the price of
+heat, <em>p_priceHeat</em>, which is set to two cents per kWh. The amount of
+head sold is set exogenously and depends on the biogas plant type.</p>
+<p>The detailed steps of the construction of prices can be seen in the following file:
+<em>gams\coeffgen\prices_eeg.gms.</em></p>
+<h2 id="biogas-inventory">Biogas Inventory</h2>
+<p>The biogas plant inventory differentiates biogas plants by size (set
+<em>bhkw</em>), which determines the engine capacity, the investment costs and
+the labour use. Three size classes are currently depicted.</p>
+<pre><code class="language-GAMS">set bhkw &quot;different bhkw sizes&quot; /
+                                 150KW       &quot;150kW engine&quot;
+                                 250kW       &quot;250kW engine&quot;
+                                 500KW       &quot;500kW engine&quot;
+                                /;
+</code></pre>
+<p>Moreover, in order to use a biogas plant, different components need to be present which differ by lifetime
+(investment horizon <em>ih</em>). For example, to keep using the original biogas
+plant, the decision maker has to re-invest every seventh year in a new
+engine but only every twentieth year in a new fermenter.</p>
+<pre><code class="language-GAMS">iH              &quot;investment horizon&quot;       /
+                                                  iH7      &quot;reinvestment after seven years&quot;,
+                                                  iH10     &quot;reinvestment after ten years&quot;,
+                                                  iH20     &quot;reinvestment after twenty years&quot;
+</code></pre>
+<p>The biogas plant and their respective parts can either be bought,
+<em>v_buyBiogasPlant(Parts)</em>, or an already existing biogas plant can be
+used, <em>p_iniBioGas</em>. Both define the size of the inventory of the
+biogas plant, <em>v_invBioGas(Parts).</em> The model currently limits the
+number of biogas plants present on farm to unity.</p>
+<pre><code class="language-GAMS">invBioGasTot_(tCur(t),nCur) $ t_n(t,nCur) ..
+
+       sum( (curBhkw(bhkw),curEeg(eeg)), v_invBioGas(bhkw,eeg,t,nCur)) =L=  1;
+</code></pre>
+<pre><code class="language-GAMS">invBioGas_(curBhkw(bhkw),curEeg(eeg),ih,tFull(t),nCur) $ (ih20(ih) $ t_n(t,nCur))   ..
+
+       v_invBioGas(bhkw,eeg,t,nCur)
+
+           =L=
+                 sum( (tCur(t1),nCur1)  $ (t_n(t1,nCur1) $ isNodeBefore(nCur,nCur1)
+                       $  (p_year(t1) + p_ih(ih)+1 ge p_year(t)+1 )
+                      and (p_year(t1)+1 le p_year(t)+1 ) ),
+
+                                       v_buyBioGasPlant(bhkw,eeg,ih,t1,nCur1) )
+
+                 + sum( tOld $ ( (p_year(tOld) + p_ih(ih) ge p_year(t) ) and (p_year(tOld) le p_year(t) ) ),
+
+                                       p_iniBioGas(bhkw,eeg,ih,tOld) );
+</code></pre>
+<pre><code class="language-GAMS">invBioGasTotParts_(curBhkw(bhkw),ih,tCur(t),nCur) $ (t_n(t,nCur) $ (not ih20(ih)))..
+
+           v_invBioGasParts(bhkw,ih,t,nCur) =G= sum(curEeg(eeg), v_invBioGas(bhkw,eeg,t,nCur));
+</code></pre>
+<p>Furthermore, the inventory <em>v_invBioGas</em> stores the information under
+which EEG the plant was original erected, either by externally setting
+the EEG for an existing biogas plant or the initial EEG is endogenously
+determined by the year of investment. In addition, the module provides
+the plant operator the option to switch from the EEG under which its
+plant was original erected to newer EEGs endogenously, such that the
+electricity and heat price of the newer legislation determines the
+revenues of the plant. For this purpose, the variable <em>v_switchBioGas</em>
+transfers the current EEG from <em>v_invBioGas</em> to the variable
+<em>v_useBioGasPlant</em>. Hence, the <em>v_invBioGas</em> is used to represent the
+inventory while <em>v_useBioGasPlant</em> is used to determine the actual EEG
+under which a plant is used, i.e. payment structures and feedstock
+restrictions.</p>
+<pre><code class="language-GAMS">switchBioGas_(curBhkw(bhkw),curEeg(eeg1),tCur(t),nCur) $ t_n(t,nCur) ..
+
+       v_invBioGas(bhkw,eeg1,t,nCur)
+
+          =G= sum(newEeg_oldEeg(eeg,eeg1) $ curEeg(eeg), v_switchBioGas(bhkw,eeg1,eeg,t,nCur));
+</code></pre>
+<pre><code class="language-GAMS">useBioGas_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur) $ t_n(t,nCur) ..
+
+       v_useBioGasPlant(bhkw,eeg,t,nCur)
+
+          =L= sum(newEeg_oldEeg(eeg,eeg1) $ curEeg(eeg1), v_switchBioGas(bhkw,eeg1,eeg,t,nCur));
+</code></pre>
+<h2 id="production-technology">Production Technology</h2>
+<p>The production technology describes not only the production process, but
+also defines the limitations set by technological components such as the
+engine capacity, fermenter volume and fermentation process. As heat is
+only a by-product of the electricity production and therefore the
+production equations do not differ from those for electricity, the heat
+production is not explicitly described.</p>
+<p>The size of the engine restricts with <em>p_fixElecMonth</em> the maximal
+output of electricity in each month. According to the available size
+classes, the maximal outputs are 150kW, 250kW and 500kW, respectively,
+at 8.000 operating hours per year. This number of hours stems from the assumption that the biogas plant is not operating for 9 % of the available time due to maintenance, etc. .</p>
+<pre><code class="language-GAMS">fixkWel_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) and (v_prodElec.up(bhkw,eeg,t,nCur,m) ne 0)) ..
+
+       v_prodElec(bhkw,eeg,t,nCur,m)
+
+          =l= v_useBioGasPlant(bhkw,eeg,t,nCur) * p_fixElecMonth(bhkw,m) * p_scenRed(eeg);
+</code></pre>
+<p>The production process of electricity, <em>v_prodElec,</em> is constructed in
+a two-stage procedure. First, biogas <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, <em>v_methCrop/Manure,</em> is
+produced in the fermenter as the product of crops and manure,
+<em>v_usedCrop/Manure,</em> and the amount of methane content per ton fresh
+matter of the respective input. Second, the produced methane is
+combusted in the engine in which the electricity-output,
+<em>v_prodElecCrop/Manure,</em> is calculated by the energy content of
+methane, <em>p_ch4Con,</em> and the conversion efficiency of the respective
+engine, <em>p_bhkwEffic</em>.</p>
+<pre><code class="language-GAMS">methCrop_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_methCrop(bhkw,eeg,t,nCur,m)
+
+          =e= sum(crM(biogasFeedM), v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m) * p_crop(crM) );
+</code></pre>
+<pre><code class="language-GAMS">methManure_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_methManure(bhkw,eeg,t,nCur,m)
+
+          =e= sum(curmaM,     v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m) * p_manure(curmaM) );
+</code></pre>
+<pre><code class="language-GAMS">kWel_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) and (v_prodElec.up(bhkw,eeg,t,nCur,m) ne 0)) ..
+
+       v_prodElec(bhkw,eeg,t,nCur,m)
+
+          =l= v_useBioGasPlant(bhkw,eeg,t,nCur) * p_fixElecMonth(bhkw,m) * p_scenRed(eeg);
+</code></pre>
+<pre><code class="language-GAMS">kWelCrop_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_prodElecCrop(bhkw,eeg,t,nCur,m)
+
+         =e= v_methCrop(bhkw,eeg,t,nCur,m) * p_ch4Con * p_bhkwEffic(bhkw,&quot;el&quot;) * p_transLosses;
+</code></pre>
+<pre><code class="language-GAMS">kWelManure_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_prodElecManure(bhkw,eeg,t,nCur,m)
+
+         =e= v_methManure(bhkw,eeg,t,nCur,m) * p_ch4Con * p_bhkwEffic(bhkw,&quot;el&quot;) * p_transLosses;
+</code></pre>
+<p>The bonus structure of the EEG 2012 requires a differentiation between
+the two input classes: crop and manure. Thus, the production process is
+separated in methane produced from the <em>Crop</em> input class and the
+<em>Manure</em> input class.</p>
+<p>The production technology imposes a second bound by connecting a
+specific fermenter volume, <em>p_volFermMonthly,</em> to each engine size. The
+fermenter volume is exogenously given under the assumption of a 90-day
+hydraulic retention time and an input mix of 70 % maize silage and
+30 % manure. Hence, the input quantity derived from crops,
+<em>v_usedCropBiogas,</em> and manure, <em>v_usedManBiogas,</em> is bound by the
+fermenter size, <em>v_totVolFermMonthly.</em></p>
+<pre><code class="language-GAMS">fixKW_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_totVolFermMonthly(bhkw,eeg,t,nCur,m)
+
+         =l= v_useBioGasPlant(bhkw,eeg,t,nCur) *  p_volFermMonthly(bhkw) * p_scenred(eeg);
+</code></pre>
+<pre><code class="language-GAMS">totVolFerm_(curBhkw(bhkw),curEeg(eeg),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_totVolFermMonthly(bhkw,eeg,t,nCur,m)  =g=
+
+                                          sum(crM(biogasFeedM), v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m))
+
+                                        + sum(curmaM, v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m) );
+</code></pre>
+<p>The inputs for the fermentation process can be either externally
+purchased, <em>v_purchCrop/Manure,</em> or produced on farm,
+<em>v_feedBiogas/v_volManBiogas</em>. Additionally, the module accounts for
+silage losses for purchased crops, as crops from own production already
+includes silage losses in the production pattern of the farm.</p>
+<pre><code class="language-GAMS">usedCropBioGas_(curBhkw(bhkw),curEeg(eeg),crM(biogasFeedM),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m)
+
+          =e= (    v_purchCrop(bhkw,eeg,crM,t,nCur,m)  $ selPurchInputs(crM) * p_silageLoss)
+                 + v_feedBioGas(bhkw,eeg,crM,t,nCur,m) $ SUM(sameas(curProds,crM),1);
+</code></pre>
+<pre><code class="language-GAMS">    manureTot_(curBhkw(bhkw), curEeg(eeg),curmaM,tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+       v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m)
+          =e=
+               v_purchManure(bhkw,eeg,curmaM,t,nCur,m) $ selPurchInputs(curmaM)
+$ifi %herd%==true            + sum(curmanchain $ (not sameas (curmanChain,&quot;LiquidBiogas&quot;)) , v_volManBiogas(curmanchain,bhkw,eeg,curmaM,t,nCur,m))
+    ;
+</code></pre>
+<pre><code class="language-GAMS">volManBioGas_(curmanchain, tCur(t),nCur) $ (t_n(t,nCur) $ (not sameas (curmanchain,&quot;LiquidBiogas&quot;))) ..
+
+      v_manQuant(curManChain,t,nCur) $ (not sameas (curmanchain,&quot;LiquidBiogas&quot;))
+
+          =G= sum( (manchain_mam(curmanchain,curmam),curbhkw(bhkw),curEeg(eeg),m) $(not sameas (curmanchain,&quot;liquidBiogas&quot;)), v_volManBiogas(curmanchain,bhkw,eeg,curmaM,t,nCur,m)) ;
+</code></pre>
+<p>The third bound imposed by the production technology is the so called
+digestion load (<em>Faulraumbelastung</em>). The digestion load, <em>p_digLoad,</em>
+restricts the amount of organic dry matter within the fermenter to
+ensure a healthy bacteria culture. The recommended digestion load of the
+three different fermenter sizes ranges from 2.5 to 3
+<span class="arithmatex">\(\frac{\text{kg oDM}}{m^3 \cdot d}\)</span> <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> and is converted into a monthly
+limit.</p>
+<pre><code class="language-GAMS">fixdigLoad_(curBhkw(bhkw),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+      v_digLoad(bhkw,t,nCur,m)   =l= sum(curEeg(eeg),  v_useBioGasPlant(bhkw,eeg,t,nCur) * p_digLoad(bhkw,m))  ;
+</code></pre>
+<pre><code class="language-GAMS">digLoad_(curBhkw(bhkw),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+      v_digLoad(bhkw,t,nCur,m)   =l= sum(curEeg(eeg),  v_useBioGasPlant(bhkw,eeg,t,nCur) * p_digLoad(bhkw,m))  ;
+</code></pre>
+<p>The data used for the fermenter technology can be seen in the following file:
+<em>gams\coeffgen\fermenter_tech.gms</em></p>
+<h2 id="restrictions-related-to-the-renewable-energy-act">Restrictions Related to the Renewable Energy Act</h2>
+<p>Within the legislative text of the different Renewable Energy Acts
+different restrictions were imposed in order to receive certain bonuses
+or to receive any payment at all. In the biogas module most bonuses for
+the EEG 2004 and EEG 2009 are inherently included such as the KWK-Bonus
+and NawaRo-Bonus, i.e. the plant is already defined such that these
+additional subsidies on top of the basic feed-in tariff can be claimed.
+Additionally, the biogas operator has the option to receive the
+Manure-Bonus, if he ensures that 30 % of his input quantity is
+manure based, as can be seen in the following code.</p>
+<pre><code class="language-GAMS">manureRes_(curBhkw(bhkw),eegMan(eeg),tCur(t),nCur,m) $ (t_n(t,nCur) $ curEeg(eeg)) ..
+
+       sum(curmaM,  v_usedManBiogas(bhkw,eeg,curmaM,t,nCur,m)) =g= v_totVolFermMonthly(bhkw,eeg,t,nCur,m)*0.3 ;
+</code></pre>
+<p>Furthermore, the EEG 2012 imposes two requirements which have to be met
+by the plant operator to receive any statutory payment at all. First,
+the operator must ensure that not more than 60 % of the used
+fermenter volume, <em>v_totVolFermMonthly,</em> is used for maize. Second,
+under the assumption that the operator uses 25 % of the heat
+emitted by the combustion engine for the fermenter itself, he has to
+sell at least 35 % of the generated heat externally;</p>
+<pre><code class="language-GAMS">maizeRes_(curBhkw(bhkw),eegDif(eeg),biogasFeedM,tCur(t),nCur,m) $ (curEeg(eeg) $ t_n(t,nCur)) ..
+
+        v_usedCropBiogas(bhkw,eeg,biogasFeedM,t,nCur,m) $sum(sameas(biogasFeedM,maizSilage),1)
+             =l=  0.6 * v_totVolFermMonthly(bhkw,eeg,t,nCur,m);
+</code></pre>
+<pre><code class="language-GAMS">heatRes_(curBhkw(bhkw),eegDif(eeg),tCur(t),nCur,m) $ (curEeg(eeg) $ t_n(t,nCur)) ..
+
+       v_sellHeat(eeg,t,nCur) =g= p_minHeatSold * v_prodHeat(eeg,t,nCur);
+</code></pre>
+<p>Changes made in EEG 2014 and the amendment of 2016 has not been included
+in the model yet.</p>
+<h2 id="biogas-disgestates">Biogas Disgestates</h2>
+<p>Biogas production involves the production of digestates. Four feed sources
+can be differentiated depending on their origin: use of
+manure produced on farm, manure imported to the farm, crops grown on
+farm and crops imported to the farm. Manure produced on farm is treated as not fermented manure, as though it is not entering the biogas plant.</p>
+<p>For digestates from imported manure and from crops, volume of digestates
+in cubic meter is calculated in the <em>biogas_module.gms</em> by multiplying
+amount of used feed stock, <em>v_usedCropBiogas</em> and <em>v_purchManure</em>, and
+a fugal factor. The latter represents the decrease of volume during the
+fermentation process.</p>
+<pre><code class="language-GAMS">biogasVolCropDigestate_(crm(biogasfeedM),tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+        v_volDigCrop(crM,t,nCur,m) =E= sum( (curBhkw(bhkw), curEeg(eeg)),
+                                        v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m)* p_fugCrop(crM));
+</code></pre>
+<pre><code class="language-GAMS">biogasVolManDigestate_(tCur(t),nCur,m) $ t_n(t,nCur) ..
+
+        v_volDigMan(t,nCur,m) =E= sum( (curBhkw(bhkw), curEeg(eeg), curmaM) ,
+                                        v_purchManure(bhkw,eeg,curmaM,t,nCur,m) $ selPurchInputs(curmaM)   * p_fugMan);
+</code></pre>
+<p>The amount of nutrients produced in the biogas plant and entering the
+manure storage is computed by multiplying the amount of feed stock and
+the corresponding nutrient content. It is assumed, that N and P is not
+lost during fermentation. Furthermore, nutrients from crop inputs are
+calculated as an annual average since no short term changes are common.</p>
+<pre><code class="language-GAMS">nutCropBiogasY_(curmanchain,nut2,tCur(t),nCur) $ (t_n(t,nCur) $ sameas(curmanchain,&quot;LiquidBiogas&quot;)) ..
+
+        v_nutCropBiogasY(curmanchain,nut2,t,nCur) =E=
+             sum( ( crM(biogasFeedM),m,curBhkw(bhkw), curEeg(eeg) ),
+                                         v_usedCropBiogas(bhkw,eeg,crM,t,nCur,m)
+                                               * p_nutDigCrop(curmanchain,nut2,crM));
+</code></pre>
+<pre><code class="language-GAMS">nutCropBiogasM_(curmanchain,nut2,tCur(t),nCur,m) $(t_n(t,nCur) $ sameas(curmanchain,&quot;LiquidBiogas&quot;)) ..
+
+        v_nutCropBiogasM(&quot;LiquidBiogas&quot;,nut2,t,nCur,m) =E=  v_nutCropBiogasY(&quot;LiquidBiogas&quot;, nut2,t,nCur) / card(m);
+</code></pre>
+<pre><code class="language-GAMS">nut2ManurePurch_(curmanchain,nut2,curmaM,tCur(t),nCur,m) $( t_n(t,nCur) $ sameas(curmanchain,&quot;LiquidBiogas&quot;))  ..
+
+         v_nut2ManurePurch(curmanchain,nut2,curmaM,t,nCur,m)
+            =E=    sum ( (curBhkw(bhkw), curEeg(eeg)),
+                        v_purchManure(bhkw,eeg,curmaM,t,nCur,m) * p_nut2manPurch(&quot;LiquidBiogas&quot;,nut2,curmaM)  )    ;
+</code></pre>
+<h2 id="references">References</h2>
+<p>KTBL (2013): Faustzahlen Biogas. 3. Ausgabe, Kuratorium für Technik und Bauwesen in der Landwirtschaft e.V., Darmstadt</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>For the EEG 2004: NawaRo-Bonus, KWK-Bonus; For the EEG 2009:
+Nawaro-Bonus, KWK-Bonus <strong>or</strong> NawaRo-Bonus, KWK-Bonus and
+Manure-Bonus&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Biogas is a mixture of methane (CH<sub>4</sub>), carbon dioxide (CO<sub>2</sub>),
+water vapor (H<sub>2</sub>O) and other minor gases. The gas component
+containing the energy content of biogas is methane. Thus, the code
+with respect to production refers to the methane production rather
+than the production of biogas.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>oDM = organic dry matter; m<sup>3</sup> = cubic meter; d = day&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

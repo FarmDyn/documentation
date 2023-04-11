@@ -1,0 +1,2221 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A highly detailed template model for dynamic optimization of farms">
+      
+      
+        <meta name="author" content="ILR - Economic Modeling of Agricultural Systems">
+      
+      
+        <link rel="canonical" href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm/FarmDynDocumentation/ModelDescription/CropProduction/plant_nutrition/">
+      
+      
+        <link rel="prev" href="../cropping_land_and_land_use/">
+      
+      
+        <link rel="next" href="../fertilizer_application/">
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Plant Nutrition - FarmDyn</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/farmdyn.css">
+    
+      <link rel="stylesheet" href="../../../../css/github-gist.css">
+    
+      <link rel="stylesheet" href="../../../../css/timeline.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue-grey">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plant-nutrition" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="FarmDyn" class="md-header__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FarmDyn
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plant Nutrition
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Data/data_flow/" class="md-tabs__link md-tabs__link--active">
+        Documentation
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-tabs__link">
+        User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Team/team/" class="md-tabs__link">
+        About Us
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../publications/publications/" class="md-tabs__link">
+        Publications
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../Contact/contact/" class="md-tabs__link">
+        Contact
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="FarmDyn" class="md-nav__button md-logo" aria-label="FarmDyn" data-md-component="logo">
+      
+  <img src="../../../../media/icon.png" alt="logo">
+
+    </a>
+    FarmDyn
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="http://www.ilr.uni-bonn.de/em/rsrch/farmdyn/farmdyn_e.htm" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Universität Bonn - ILR - FarmDyn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1" tabindex="0" aria-expanded="false">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="true">
+          Documentation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Documentation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Documentation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" tabindex="0" aria-expanded="false">
+          Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_flow/" class="md-nav__link">
+        Data flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/Data_Collection/" class="md-nav__link">
+        Collection and raw data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/data_processing/" class="md-nav__link">
+        Data processing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Data/database/" class="md-nav__link">
+        Database and model setup
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" tabindex="0" aria-expanded="true">
+          Model Description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Model Description" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Model Description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" tabindex="0" aria-expanded="false">
+          Economics and Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Economics and Management" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Economics and Management
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/objective/" class="md-nav__link">
+        Objective
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/household_income_and_cash_flow/" class="md-nav__link">
+        Household Income and Cash Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/investment_and_financing/" class="md-nav__link">
+        Investment and Financing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EconomicsAndManagement/labour/" class="md-nav__link">
+        Labour
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" tabindex="0" aria-expanded="false">
+          Buildings and Machines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Buildings and Machines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Buildings and Machines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/machinery/" class="md-nav__link">
+        Machines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/stables/" class="md-nav__link">
+        Stables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/manure_storage/" class="md-nav__link">
+        Manure Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BuildingsAndMachines/other_buildings/" class="md-nav__link">
+        Other Buildings
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3" tabindex="0" aria-expanded="true">
+          Crop Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Crop Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Crop Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cropping_land_and_land_use/" class="md-nav__link">
+        Cropping, Land and Land Use
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Plant Nutrition
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Plant Nutrition
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fertilizer_application/" class="md-nav__link">
+        Fertilizer application
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4" tabindex="0" aria-expanded="false">
+          Animal Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animal Production" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Animal Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/herd_dynamics/" class="md-nav__link">
+        Herd Dynamics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/cattle/" class="md-nav__link">
+        Cattle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AnimalProduction/pigs/" class="md-nav__link">
+        Pigs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Biogas/biogas/" class="md-nav__link">
+        Biogas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EnvironmentalAccounting/environmental_accounting/" class="md-nav__link">
+        Environmental Accounting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_7" type="checkbox" id="__nav_2_2_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_7" tabindex="0" aria-expanded="false">
+          Biodiversity Assessment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Biodiversity Assessment" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Biodiversity Assessment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/abstract_biodiversity_assessment/" class="md-nav__link">
+        Biodiversity Assessment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/paracchini_britz_score/" class="md-nav__link">
+        Paracchini-Britz-Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/smart_score/" class="md-nav__link">
+        SMART Score
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../BiodiversityAssessment/salca_method/" class="md-nav__link">
+        SALCA-BD Method
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_2_8" type="checkbox" id="__nav_2_2_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_8" tabindex="0" aria-expanded="false">
+          Policy Measures
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Policy Measures" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Policy Measures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/abstract_policy_measures/" class="md-nav__link">
+        Abstract
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/fertilisation_ordinance/" class="md-nav__link">
+        Fertilisation Ordinance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/CAP_firstPillar/" class="md-nav__link">
+        CAP First Pillar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PolicyMeasures/AES/" class="md-nav__link">
+        Agri-Environmental Schemes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" tabindex="0" aria-expanded="false">
+          Key Features
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Key Features" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Key Features
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/modularity/" class="md-nav__link">
+        Modularity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/dynamics/" class="md-nav__link">
+        Dynamic Character
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/risk/" class="md-nav__link">
+        Risk and Risk Behavior
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/calibration/" class="md-nav__link">
+        Calibration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/popsimu/" class="md-nav__link">
+        Farm populations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../KeyFeatures/systematic_sensitivity_analysis/" class="md-nav__link">
+        Systematic Sensitivity Analysis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Technical Realisation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Technical Realisation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Technical Realisation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/overview_technical_realisation/" class="md-nav__link">
+        Overview of Technical Realisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/MIP_solution_strategy/" class="md-nav__link">
+        MIP Solution Strategy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../TR/reporting/" class="md-nav__link">
+        Reporting
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DownloadDocumentation/" class="md-nav__link">
+        Download Documentation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Gui/" class="md-nav__link">
+        Graphical User Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/CodeDevelopment/" class="md-nav__link">
+        Programming
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../WorkingWithFarmDyn/Videos/" class="md-nav__link">
+        Training Videos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          About Us
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About Us" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          About Us
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/team/" class="md-nav__link">
+        Team
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/collaboration_partners/" class="md-nav__link">
+        Collaboration Partners
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Team/projects/" class="md-nav__link">
+        Current and Past Projects
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Publications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Publications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Publications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../publications/publicationsCode/" class="md-nav__link">
+        Publication Specific Code
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          Contact
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contact" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Contact
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Contact/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="plant-nutrition">Plant Nutrition</h1>
+<p>Crops in FarmDyn require nitrogen (N) and phosphate (P2O5) to grow. Conceptually, the nutrient need is opposed by different nutrient sources such as chemical fertilizer, manure, mineralization or deposition. In addition, nutrient losses such as ammonia volatilization are accounted.
+FarmDyn supports two differently detailed ways to calculate the plant nutrient need. The default approach and an approach in line with the fertilizing planning of the German Fertilization Ordinance. They differ amongst other by the calculation of the plant need, loss factors and accounted sources. In addition, different N fertilizing intensities and corresponding yield levels can be additionally used.</p>
+<p>The fertilization is mainly reflected in two equations in the file general_cropping_module.gms. Nutrient need, sources and losses are listed in the equation NutBalCropSour and opposed in NutBalCrop_. This allows to clearly specify different elements of the fertilization and facilitates the validation.</p>
+<p>The nutrient need p_nutNeed and the N fertilizing intensities are defined in the file cropping_nutNeed.gms. In the default fertilization approach, the nutrient need equals the nutrient content of the plants.</p>
+<pre><code class="language-GAMS">p_nutNeed(c_ss_t_i(curCrops(crops),soil,till,intens),nut,t)
+         = sum( prods $ p_OCoeffC(crops,soil,till,intens,prods,t), p_OCoeffC(crops,soil,till,intens,prods,t)/p_storageLoss(prods)
+             * (  p_nutContent(crops,prods,&quot;conv&quot;,nut) $ (not sameas(till,&quot;org&quot;))
+                + p_nutContent(crops,prods,&quot;org&quot;,nut)  $      sameas(till,&quot;org&quot;) )*10);
+</code></pre>
+<p>In the approach following the Fertilization Ordinance, the nutrient need is defined by the legislation.</p>
+<pre><code class="language-GAMS">p_nutNeed(c_ss_t_i(curCrops(crops),soil,till,&quot;normal&quot;),nut,t)
+                 = p_NneedFerPlan(crops,soil,till,&quot;normal&quot;,nut,t) ;
+</code></pre>
+<p>When switched on at the graphical user interface, the nutrient need for the different N fertilizing intensities is defined. Here, the calculation using the findings from Heyn and Olfs (2018) is exemplary shown. The underlying data can be found in the crop data file.</p>
+<p>xxx</p>
+<p>Beside the nutrient need, the variable v_nutOverNeed is introduced into the equation NutBalCropSour_ to allow manure application over plant need.</p>
+<pre><code class="language-GAMS">v_nutBalCropSour(fertSour,crops,plot,till,intens,nut,t,nCur)
+
+       =E=
+
+* --- N and P need of crops which needs to be met.
+
+         [
+            sum(plot_soil(plot,soil),
+
+                       p_nutNeed(crops,soil,till,intens,nut,t)
+
+            ) * v_cropHa(crops,plot,till,intens,t,nCur)
+
+         ] $sameas(fertSour,&quot;NBcropNeed&quot;)
+
+*  ---  Application over plant need of fertilizer is possible (e.g. if mineralisation
+*        plus atmospheric deposition exceed crop needs, or in case too much nutrients
+*        from manure are available on farm)
+
+         + v_nutOverNeed(crops,plot,till,intens,nut,t,nCur) $sameas(fertSour,&quot;NBOverNeed&quot;)
+</code></pre>
+<p>Mineralization and deposition are further N sources of plants. Under the default setting, FarmDyn accounts N mineralization in spring and deposition. Following the fertilizer planning of the Fertilization Ordinance, only mineralization in spring is accounted.</p>
+<pre><code class="language-GAMS">+  [ sum( plot_soil(plot,soil),
+                 $$iftheni.fert %Fertilization% == Default
+*                    Default - p_basNut, refelct Nmin in spring and N depostion from atmosphere
+                     sum(soilNutSour,p_basNut(crops,soil,till,soilNutSour,nut,t))
+                 $$else.fert
+*                   Fertilization Ordinance - Nmin in spring
+                    p_NutFromSoil(crops,soil,till,nut,t)
+                 $$endif.fert
+              ) * v_cropHa(crops,plot,till,intens,t,nCur)
+            ] $sameas(fertSour,&quot;NBbasNut&quot;)
+</code></pre>
+<p>Chemical fertilizer application is summarized in the following part of the equation. In the case of the default setting, also losses from fertilizer application are included (not shown here).</p>
+<pre><code class="language-GAMS">+ [ sum ((curInputs(syntFertilizer),m),
+                 v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m) * p_nutInSynt(syntFertilizer,nut))
+           ] $ sameas(fertSour,&quot;NBminFert&quot;)
+</code></pre>
+<p>Manure spreading and excretion on pasture (the latter not shown here) are other sources for N and P2O5. As illustrated exemplary for manure spreading, the amount of applied nutrients results from the volume of manure applied and the nutrient content.</p>
+<pre><code class="language-GAMS">+  [ sum ( (manApplicType_manType(ManApplicType,curManType),m)
+                      $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+                         v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+
+                   * sum( (manChain_applic(curManChain,ManApplicType),nut2_nut(nut2,nut)),
+                           p_nut2inMan(nut2,curManType,curManChain))
+                )
+              ] $sameas(fertSour,&quot;NBmanure&quot;)
+</code></pre>
+<p>N losses following manure application are calculated, using different emission factors for the two calculation schemes.</p>
+<pre><code class="language-GAMS">+ [  sum ( (manApplicType_manType(ManApplicType,curManType),m)
+                    $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+                       v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+
+                   $$iftheni.fert %Fertilization% == FertilizationOrdinance
+
+*                        Fertilization Ordinance - standard loss factors provided by ordinance (N and P)
+                          * sum( (manChain_applic(curManChain,ManApplicType),nut2_nut(nut2,nut)),
+                              p_nut2inMan(nut2,curManType,curManChain)
+                                 * (1 - p_nutEffFOPlan(curManType,crops,m,nut)))
+
+                  $$else.fert
+*                        Default - different N losses from env accounting module
+
+                         * sum( (manChain_type(curManChain,curManType),nut2N),
+                                      p_nut2inMan(nut2N,curManType,curManChain)
+                                         * (     p_EFapplMan(curCrops,curManType,manApplicType,nut2N,m) $ sameas(nut2N,&quot;NTAN&quot;)
+                                              +  p_EFApplMin(&quot;N2O&quot;)
+                                              +  p_EFApplMin(&quot;NOx&quot;)
+                                              +  p_EFApplMin(&quot;N2&quot;)   )
+                              ) $ sameas(nut,&quot;N&quot;)
+                  $$endif.fert
+                )
+              ] $sameas(fertSour,&quot;NBmanureloss&quot;)
+</code></pre>
+<p>Finally, N fixation from legumes and N supply from vegetable residues are included.</p>
+<pre><code class="language-GAMS">$$iftheni.fert %Fertilization% ==  Default
+
+     + [
+           v_cropHa(crops,plot,till,intens,t,nCur) *   (  p_NfromLegumes(Crops,&quot;org&quot;)  $ sameas(till,&quot;org&quot;)
+                                                        + p_NfromLegumes(Crops,&quot;conv&quot;) $ (not sameas(till,&quot;org&quot;))
+                                                       ) $ (sameas (nut,&quot;N&quot;) )
+        ]  $sameas(fertSour,&quot;NBlegumes&quot;)
+
+       $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+    + [
+          v_cropHa(crops,plot,till,intens,t,nCur) *   (  p_NfromVegetables(Crops)
+                                                      ) $ (sameas (nut,&quot;N&quot;) )
+       ]  $sameas(fertSour,&quot;NBvegetables&quot;)
+       $$endif.data
+    $$endif.fert
+   ;
+</code></pre>
+<p>The equation NutBalCrop_ opposes the described nutrient need, nutrient sources and losses.</p>
+<pre><code class="language-GAMS">NutBalCrop_(c_p_t_i(curCrops(crops),plot,till,intens),nut,t_n(tCur(t),nCur))
+         $ ( (v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0)  $ fertCrops(Crops) ) ..
+
+* --- Equation which oppons nutrient need, sources and losses based on the
+*     definition in NutBalCropSour_
+
+* --- Nutrient need
+          v_nutBalCropSour(&quot;NBcropNeed&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* --- Nutrient application over plant need with manure
+         + v_nutBalCropSour(&quot;NBOverNeed&quot;,crops,plot,till,intens,nut,t,nCur)
+
+            =E=
+
+* --- Nutrient delivered from soil and air
+          v_nutBalCropSour(&quot;NBbasNut&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* --- Nutrient from chemical fertilizer
+        + v_nutBalCropSour(&quot;NBminFert&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* --- Losses from chemical fertilizer application
+        - v_nutBalCropSour(&quot;NBminFertLoss&quot;,crops,plot,till,intens,nut,t,nCur)
+
+        $$iftheni.man &quot;%manure%&quot; == &quot;true&quot;
+* --- Nutrients from manure application
+        + v_nutBalCropSour(&quot;NBmanure&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* --- Losses from manure application
+        - v_nutBalCropSour(&quot;NBmanureloss&quot;,crops,plot,till,intens,nut,t,nCur)
+        $$endif.man
+
+        $$iftheni.dh &quot;%cattle%&quot; == &quot;true&quot;
+* --- Nutrients on pasture from grazing
+        + v_nutBalCropSour(&quot;NBpasture&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* --- Losses on pasture from grazing
+        - v_nutBalCropSour(&quot;NBpastureLoss&quot;,crops,plot,till,intens,nut,t,nCur)
+
+        $$endif.dh
+* ---- Nutrients from legumes
+        + v_nutBalCropSour(&quot;NBlegumes&quot;,crops,plot,till,intens,nut,t,nCur)
+
+* ---- Nutrients from vegetables
+        $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+        + v_nutBalCropSour(&quot;NBvegetables&quot;,crops,plot,till,intens,nut,t,nCur)
+        $$endif.data
+;
+</code></pre>
+<!--
+
+The template supports two differently detailed ways to account for plant
+nutrition need.
+
+1.  A **fixed factor approach** with yearly nutrient balances per crop
+
+    a.  Using N response curves
+
+    b.  Using planning data
+
+2.  Using data output of the crop modeling framework SIMPLACE
+
+*p\_nutNeed* is the nutrient need for different crops tat enters the
+equation for fixed factor approach and the flow model. For the fixed
+factor approach, nutrient need can be calculated based on N response
+curves and alternatively based on planning data. In the detailed flow
+model, nutrient need is calculated based on N response curves.
+All relevant calculations can be found in *coeffgen\\cropping.gms*.
+
+## The fixed factor approach
+
+The fixed factor approach is used in combination with the use of N response curves
+and planning data. Generally, the plant need in *p\_nutneed* has to be met with manure and
+synthetic fertiliser. There is the option to allow manure application over plant need as
+manure nutrients on livestock farms with high stocking densities partly treated as waste.
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/model/templ.gms GAMS /NutBalCrop_\(c_/ /;/)
+
+<pre><code class="language-GAMS">NutBalCrop_(c_s_t_i(curCrops(crops),plot,till,intens),nut,tCur(t),nCur)
+       $ ((v_cropHa.up(crops,plot,till,intens,t,nCur) ne 0) $ t_n(t,nCur) $( not sameas (crops,&quot;catchCrop&quot;)) ) ..
+
+*               ---  crop need based on plant uptake and calculated further need
+
+                sum(plot_soil(plot,soil),
+                         p_nutNeed(crops,soil,till,intens,nut,t) * v_cropHa(crops,plot,till,intens,t,nCur)
+                                * (1 + p_nutLossUnavoidable(soil,till,intens,nut)))
+
+               $$iftheni.man %manure% == true
+*               ---  application over plant need of organic fertilizer is possible
+                + v_nutOrganicOverNeed(crops,plot,till,intens,nut,t,nCur)
+               $$endif.man
+
+               =E=
+
+              $$iftheni.dh &quot;%cattle%&quot; == &quot;true&quot;
+*
+*                 --- manure excreted during grazing on pasture: N , different calculation of losses [TK 01.03.16 revised]
+*
+                 [sum( (nut2,m) $ ( sameas(nut2,&quot;norg&quot;) or sameas(nut2,&quot;ntan&quot;) ),
+*
+*                        --- excretion by herds which graze only for a part of the year
+*
+                         v_nut2ManurePast(crops,plot,till,intens,nut2,t,nCur,m)
+                     )
+                  $$iftheni.NorgAcc &quot;%NorgAccounting%&quot; == &quot;Interface&quot;
+                                     *   %NOrgAccountedInt%
+                  $$elseifi.NorgAcc &quot;%NorgAccounting%&quot; == &quot;PlanningDueV16&quot;
+                                      *  0.8
+                  $$else.NorgAcc
+*
+*                           WB: here, something needs to change ... cannot work with several pasture options
+                            - v_niEmissionsPast(crops,plot,till,intens,t,nCur)
+
+                      $$ontext
+                               *  p_nutEffectivPastDueVNv
+                      $$offtext
+                  $$endif.NorgAcc
+
+                  ] $  (past(crops) and sameas(nut,&quot;N&quot;))
+
+*                  --- manure excreted during grazing pasture: P [TK 01.03.16 revised]
+
+                   + sum(m,v_nut2ManurePast(crops,plot,till,intens,&quot;P&quot;,t,nCur,m)) $ (past(Crops) and sameas(nut,&quot;P&quot;))
+
+              $$endif.dh
+
+
+              $$iftheni.man &quot;%manure%&quot; == &quot;true&quot;
+
+*
+*               -- application of N and P with organic fertilizer [TK 09.02.15 revised]
+*
+*                + sum( (nut2_nut(nut2,nut),manApplicType_manType(ManApplicType,curManType),m)
+*                         $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0),
+*                       v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+*                          * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan(nut2,curManType,manChain))
+*                               * p_nut2UsableShare(crops,curManType,ManApplicType,nut2,m))
+
+
+                    + sum( (nut2_nut(nut2,nut),manApplicType_manType(ManApplicType,curManType),m)
+                             $(not sameas(plot,&quot;plot7&quot;) $ (v_manDist.up(crops,plot,till,intens,manApplicType,curManType,t,nCur,m) ne 0 )),
+                           v_manDist(crops,plot,till,intens,ManApplicType,curManType,t,nCur,m)
+                              * sum(manChain_applic(manChain,ManApplicType), p_nut2inMan(nut2,curManType,manChain))
+                                   * p_nut2UsableShare(crops,curManType,ManApplicType,nut2,m))
+
+
+              $$endif.man
+
+*               -- mineral N application
+
+                + sum ((syntFertilizer,m)$(not sameas(plot,&quot;plot7&quot;)),
+                      v_syntDist(crops,plot,till,intens,syntFertilizer,t,nCur,m)
+                                                       * p_nutInSynt(syntFertilizer,nut) )
+ ;
+</code></pre>
+
+
+## N response curves
+
+The yield level of different crops is chosen in the GUI. The following
+equations show that the yield,
+*p\_OCoeffC*, equals the yield given by the GUI, *p\_cropYieldInt* , and
+takes a growth rate given by the GUI into account.
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/cropping.gms GAMS /p\_OCoeffC(c\_ss\_t\_i\(curCrops\(arabCrops\)\,soil\,till\,intens\)\,prods\,t\)/ /;/)
+
+<pre><code class="language-GAMS">p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,intens),prods,t)
+             $(sameas(arabCrops,prods) $ (not sameas(till,&quot;org&quot;)))
+   =  p_cropYieldInt(arabCrops,&quot;conv&quot;)
+        $$iftheni.data &quot;%database%&quot; == &quot;KTBL_database&quot;
+        *  ((1.00 + p_cropYieldInt(arabCrops,'Change,conv % p.a.')/100)**t.pos)
+        $$endif.data
+        ;
+</code></pre>
+
+
+Further, two different intensities and their related nutrient needs in *N* are available as options.
+First, the nutrient needs for the different intensities are based on nitrogen
+response functions from field trials. The intensity can be reduced from
+100 % to an N fertiliser application of 80 %, 60 %, 40 % and 20 %. The
+yield level, *p\_OCoeffC*, is reduced to 96 %, 90 %, 82 % and 73 %, respectively. These
+steps reflect the diminishing yield increases from increased N
+fertiliser application.
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/cropping_intens.gms GAMS /\*/ /;/)
+
+<pre><code class="language-GAMS">*
+    p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,&quot;fert80p&quot;),prods,t) $ (not sameas(till,&quot;org&quot;))
+     = p_oCoeffC(arabCrops,soil,till,&quot;normal&quot;,prods,t) * 0.96;
+    p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,&quot;fert60p&quot;),prods,t) $ (not sameas(till,&quot;org&quot;))
+     = p_oCoeffC(arabCrops,soil,till,&quot;normal&quot;,prods,t) * 0.90;
+    p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,&quot;fert40p&quot;),prods,t) $ (not sameas(till,&quot;org&quot;))
+     = p_oCoeffC(arabCrops,soil,till,&quot;normal&quot;,prods,t) * 0.82;
+    p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,&quot;fert20p&quot;),prods,t) $ (not sameas(till,&quot;org&quot;))
+     = p_oCoeffC(arabCrops,soil,till,&quot;normal&quot;,prods,t) * 0.73;
+</code></pre>
+
+
+The second option relates to the paper by Heyn,J. and Olfs, H.-W. (2018) where a yield reduction, *p_yieldReducN*,
+based on nitrogen application levels is estimated. The calculation can be seen in the following equation:
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/dat/crops_de.gms GAMS // /;/)
+
+<pre><code class="language-GAMS">
+      p_yieldReducN(crops,intens) $ ( (not sameas (intens,&quot;normal&quot;)) $ p_intens(crops,intens))
+                                      =   p_NrespFunct(crops,&quot;a&quot;) * sqr(p_intens(crops,intens)*100)
+                                        + p_NrespFunct(crops,&quot;b&quot;) * p_intens(crops,intens)*100
+                                        + p_NrespFunct(crops,&quot;c&quot;) ;
+</code></pre>
+
+
+Similar to the first option, the crop yield is then reduced by the calculated yield reduction level.
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/cropping_intens.gms GAMS // /;/)
+
+<pre><code class="language-GAMS">
+  p_OCoeffC(c_ss_t_i(curCrops(arabCrops),soil,till,intens),prods,t)
+             $ sum(  soil_plot(soil,plot),c_p_t_i(arabCrops,plot,till,intens) )
+                 =   p_OCoeffC(arabCrops,soil,till,&quot;normal&quot;,prods,t)  * p_yieldReducN(arabCrops,intens)/100 ;
+</code></pre>
+
+
+The output coefficient, *p\_OCoeffC*, represents the yields per hectare.
+It is used to define the nutrient uptake by the crops, *p\_nutNeed,*
+based on the nutrient content, *p\_nutContent*. Values for
+*p\_nutContent* are taken from the German Fertiliser Directive
+(DüV 2007, Appendix 1).
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/gams/coeffgen/cropping.gms GAMS /* --- nutrient need, taking into that output coefficient are measured in t and not dt, therefore * 10./ /;/)
+
+<pre><code class="language-GAMS">* --- nutrient need, taking into that output coefficient are measured in t and not dt, therefore * 10.
+
+  p_nutNeed(c_ss_t_i(curCrops(crops),soil,till,intens),nut,t)
+         = sum( prods $ p_OCoeffC(crops,soil,till,intens,prods,t), p_OCoeffC(crops,soil,till,intens,prods,t)/p_storageLoss(prods)
+             * (  p_nutContent(crops,prods,&quot;conv&quot;,nut) $ (not sameas(till,&quot;org&quot;))
+                + p_nutContent(crops,prods,&quot;org&quot;,nut)  $      sameas(till,&quot;org&quot;) )*10);
+</code></pre>
+
+
+For different intensities, the corresponding amount of nutrient applied
+has to fulfil the need *p\_nutNeed*.
+
+The parameter *p\_basNut* defines the amount of nutrients coming from
+other sources than directly applied fertilizer, for example mineralization and atmospheric deposition:
+
+[^Comment][embedmd]:# (N:/em/work1/Pahmeyer/FarmDyn/FarmDynDoku/FarmDyn_Docu/dat/crops_de.gms /\* --- Nutrient provided from atmospheric deposition/ /;/)
+
+<pre><code class="language-GAMS">* --- Nutrient provided from atmospheric deposition
+
+   p_basNut(crops,soil,till,&quot;NAtmos&quot;,&quot;N&quot;,t) $ sum(prods, p_OCoeffC(crops,soil,till,&quot;normal&quot;,prods,t))  =  18;
+
+* --- Nutrient provided from N mineralization in spring based on LWK NRW [updated 2/2021]
+
+   p_basNut(crops,soil,till,&quot;Nmin&quot;,&quot;N&quot;,t)       $ sum(prods, p_OCoeffC(crops,soil,till,&quot;normal&quot;,prods,t))     = p_Nmin(crops);
+
+</code></pre>
+
+[DO NOT FIND p_nutApplied is there already a corrected version of plant nutrition?]
+The amount of nutrients applied, *p\_nutApplied,* is estimated as shown
+in the following equation. It is assumed that at least 20% of the
+default leaching and NH<sub>3</sub> losses will occur.
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutApplied.*?"fert20p"/ /;/)
+
+<pre><code class="language-GAMS">p_nutApplied(crops,soil,till,&quot;fert20p&quot;,&quot;N&quot;,t) $ sum(soil_plot(soil,plot),c_s_t_i(crops,plot,till,&quot;fert20p&quot;))
+    = p_nutNeed(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)*(1 + p_FracGaseF + p_FracLeach)*0.2;
+</code></pre>
+
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutApplied.*?"fert40p"/ /;/)
+
+<pre><code class="language-GAMS">p_nutApplied(crops,soil,till,&quot;fert40p&quot;,&quot;N&quot;,t) $ sum(soil_plot(soil,plot),c_s_t_i(crops,plot,till,&quot;fert40p&quot;))
+    = p_nutNeed(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)*(1 + p_FracGaseF + p_FracLeach)*0.2 * 1.5;
+</code></pre>
+
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutApplied.*?"fert60p"/ /;/)
+
+<pre><code class="language-GAMS">p_nutApplied(crops,soil,till,&quot;fert60p&quot;,&quot;N&quot;,t) $ sum(soil_plot(soil,plot),c_s_t_i(crops,plot,till,&quot;fert60p&quot;))
+    = p_nutNeed(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)*(1 + p_FracGaseF + p_FracLeach)*0.2 * 2;
+</code></pre>
+
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutApplied.*?"fert80p"/ /;/)
+
+<pre><code class="language-GAMS">p_nutApplied(crops,soil,till,&quot;fert80p&quot;,&quot;N&quot;,t) $ sum(soil_plot(soil,plot),c_s_t_i(crops,plot,till,&quot;fert80p&quot;))
+    = p_nutNeed(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)*(1 + p_FracGaseF + p_FracLeach)*0.2 * 2.5;
+</code></pre>
+
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutApplied.*?"normal"/ /;/)
+
+<pre><code class="language-GAMS">p_nutApplied(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)  $ sum(soil_plot(soil,plot),c_s_t_i(crops,plot,till,&quot;normal&quot;) )
+    = p_nutNeed(crops,soil,till,&quot;normal&quot;,&quot;N&quot;,t)*(1 + p_FracGaseF + p_FracLeach)*0.2 * 3;
+</code></pre>
+
+
+The nutrient application, *p\_nutApplied,* in combination with the basis
+delivery from soil and air, *p\_basNut,* allows defining the loss rates
+for each intensity level, *p\_nutLossUnavoidable,* as the difference
+between the deliveries and the nutrient uptake, *p\_nutNeed,* by the
+plants:
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /\s\sp_nutLossUnavoidable\(s.*?nut/ /;/)
+
+<pre><code class="language-GAMS">  p_nutLossUnavoidable(soil,till,intens,nut)
+     $ (sum( (crops,t) $ p_nutNeed(crops,soil,till,intens,nut,t), 1))
+      =  sum( (crops,t) $ p_nutNeed(crops,soil,till,intens,nut,t),
+           max(0,Min(50, p_nutApplied(crops,soil,till,intens,nut,t)
+                 + p_basNut(crops,soil,till,nut,t) - p_nutNeed(crops,soil,till,intens,nut,t)))
+              / p_nutNeed(crops,soil,till,intens,nut,t))
+
+        /sum( (crops,t) $ p_nutNeed(crops,soil,till,intens,nut,t), 1);
+</code></pre>
+
+
+*p\_nutLossUnavoidable* enters the Standard Nutrient Fate Model (see
+chapter 2.11.2). It represents the factor that has to be applied over
+the plant removal, *p\_nutNeed*, to reach a certain yield level. It
+indicates the nutrient efficiency of the fertiliser management.
+
+## Planning Data
+
+The nutrient need can also be derived from planning data from the revised
+Fertiliser Directive (BMEL 2015). The proposed directive includes
+compulsory fertiliser planning to increase N use efficiency on farms.
+This measure is included in FarmDyn. When fertiliser management follows
+the planning data, different intensities do not exist, and yield levels
+are fixed, i.e. cannot be changed by the GUI.
+
+The yield level *p\_OCoeffC* is fixed in the following equation, showing
+the example of winter cereals.
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /\s\s[^\n]\sp_OCoeffC\("winterW/ /;/)
+
+<pre><code class="language-GAMS">
+   p_OCoeffC(&quot;winterWheat&quot;,soil,till,intens,&quot;winterWheat&quot;,t)   $ sum(soil_plot(soil,plot),c_s_t_i(&quot;winterWheat&quot;,plot,till,intens))      =  8   ;
+</code></pre>
+
+
+The yield corresponds to a certain amount of needed N, *p\_nutNeed*,
+given by the directive.
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /p_nutNeed\("winter/ /;/)
+
+<pre><code class="language-GAMS">p_nutNeed(&quot;winterWheat&quot;,soil,till,intens,&quot;N&quot;,t)   $ sum(soil_plot(soil,plot), c_s_t_i(&quot;winterWheat&quot;,plot,till,intens))  =   230 - p_basNut(&quot;winterWheat&quot;,soil,till,&quot;N&quot;,t)  ;
+</code></pre>
+
+
+In the case of P, it is assumed that the nutrient need corresponds to
+the nutrients removed by the harvested product.
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /\s\sp_nutNeed\(c.*?"P"/ /;/)
+
+<pre><code class="language-GAMS">  p_nutNeed(crops,soil,till,intens,&quot;P&quot;,t) $ sum(soil_plot(soil,plot), c_s_t_i(crops,plot,till,intens))
+        = sum( prods, p_OCoeffC(crops,soil,till,intens,prods,t) * (p_nutContent(crops,prods,&quot;P&quot;)*10));
+</code></pre>
+
+
+The directive prescribes that nutrients delivered from soil and air have
+to be taken into account. This reduces the amount of fertiliser that
+needs to be applied, i.e. p_nutNeed is lowered.
+`
+
+[^Comment][embedmd]:# (N:/em/work1/FarmDyn/FarmDyn_QM/gams/coeffgen/cropping.gms GAMS /\s[^\n]\sp_basNut\(c.*?[^\$]"N"/ /p_NfromLegumes\(crops\);/)
+
+<pre><code class="language-GAMS">   p_basNut(crops,soil,till,&quot;N&quot;,t) $ arableCrops(crops) =  50 ;
+   p_basNut(crops,soil,till,&quot;N&quot;,t) $ grassCrops(crops)  =  10 + p_NfromLegumes(crops);
+</code></pre>
+
+
+-->
+
+<h2 id="references">References</h2>
+<p>Heyn, J. and Olfs, H.-W. (2018):  Wirkungen reduzierter N-Düngung auf Produktivität, Bodenfruchtbarkeit und N-Austragsgefährdung – Beurteilung anhand mehrjähriger Feldversuche. VDLUFA. Schriftenreihe 72.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:4">
+<p>QIP solvers do not allow for equality conditions which are by
+   definition non-convex&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2010 - 2021 Universität Bonn - ILR - Economic Modeling of Agricultural Systems Group
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.top"], "search": "../../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+        <script src="../../../../javascripts/highlight.pack.js"></script>
+      
+        <script src="https://use.typekit.net/bkt6ydm.js"></script>
+      
+        <script src="../../../../javascripts/init.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
